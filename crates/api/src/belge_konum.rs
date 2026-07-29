@@ -254,9 +254,27 @@ pub fn hucreler(satir: &Satir, koridorlar: &[f32]) -> Vec<String> {
 }
 
 /// Sayfayı HÜCRE IZGARASINA çevirir: her satır, hücre listesi.
+///
+/// **Koridorlar SAYFA BAŞINA hesaplanır.** Eskiden tüm sayfaların kelimeleri birlikte
+/// izdüşürülüyordu; `satirlar()` sayfayı ayırıyor ama `sutun_koridorlari()` ayırmıyordu.
+/// Sonuç: 1. sayfası iki sütunlu başlık bloğu, 2. sayfası tam genişlik kalem tablosu olan
+/// bir belgede, 2. sayfanın geniş satırları 1. sayfanın boşluk koridorunu DOLDURUYOR ve
+/// koridor listesi boşalıyordu. Izgara tek hücreye düşüyor, yan sütun değere karışıyordu —
+/// yani `yan_sutun_degere_karismaz` testinin koruduğu davranış çok sayfalı belgede
+/// sessizce kayboluyordu.
 pub fn izgara(kelimeler: &[Kelime]) -> Vec<Vec<String>> {
-    let k = sutun_koridorlari(kelimeler);
-    satirlar(kelimeler).iter().map(|s| hucreler(s, &k)).collect()
+    let mut sayfalar: Vec<usize> = kelimeler.iter().map(|k| k.sayfa).collect();
+    sayfalar.sort_unstable();
+    sayfalar.dedup();
+
+    let mut cikti = Vec::new();
+    for s in sayfalar {
+        let sayfa_kelimeleri: Vec<Kelime> =
+            kelimeler.iter().filter(|k| k.sayfa == s).cloned().collect();
+        let koridorlar = sutun_koridorlari(&sayfa_kelimeleri);
+        cikti.extend(satirlar(&sayfa_kelimeleri).iter().map(|r| hucreler(r, &koridorlar)));
+    }
+    cikti
 }
 
 /// Hücre sınırları KORUNARAK metin. Hücreler arasına ayraç konur ki aşağı akıştaki
@@ -479,6 +497,32 @@ mod izgara_testleri {
         assert!(kalem.len() > baslik.len(),
             "kalem satırı başlıktan daha çok hücreye bölünmeliydi: kalem={kalem:?} başlık={baslik:?}");
         assert!(kalem.len() >= 4, "kalem tablosu yeterince bölünmedi: {kalem:?}");
+    }
+
+    /// **B-06 — koridorlar SAYFA BAŞINA hesaplanır.**
+    /// 1. sayfa iki sütunlu başlık, 2. sayfa tam genişlik metin. Koridorlar tüm sayfalardan
+    /// birlikte hesaplanınca 2. sayfanın geniş satırı 1. sayfanın boşluğunu dolduruyor ve
+    /// koridor kayboluyordu — ızgara tek hücreye düşüp yan sütun değere karışıyordu.
+    #[test]
+    fn koridorlar_sayfa_basina_hesaplanir() {
+        let w = |m: &str, x0: f32, y: f32, g: f32, sf: usize| Kelime {
+            metin: m.into(), x0, y0: y, x1: x0 + g, y1: y + 10.0, sayfa: sf,
+        };
+        let kelimeler = vec![
+            // 1. sayfa: sol sütun x<200, sağ sütun x>330 — arada geniş koridor
+            w("SAYIN:", 48.0, 130.0, 34.0, 1), w("Ayse", 86.0, 130.0, 30.0, 1),
+            w("Irsaliye", 330.0, 130.0, 38.0, 1), w("10.02.2006", 372.0, 130.0, 50.0, 1),
+            // 2. sayfa: TAM GENİŞLİK tek satır — 1. sayfanın koridorunu kaplıyor
+            w("ACIKLAMA", 45.0, 90.0, 60.0, 2), w("ORTA", 200.0, 90.0, 40.0, 2),
+            w("METIN", 260.0, 90.0, 40.0, 2), w("SAGDA", 350.0, 90.0, 40.0, 2),
+        ];
+        let g = izgara(&kelimeler);
+        let baslik = g.iter().find(|r| r.iter().any(|c| c.contains("Ayse")))
+            .expect("1. sayfa başlık satırı yok");
+        assert!(baslik.len() >= 2,
+            "1. sayfanın sütun koridoru 2. sayfa yüzünden kayboldu — satır tek hücreye düştü: {baslik:?}");
+        assert!(baslik[0].contains("Ayse") && !baslik[0].contains("Irsaliye"),
+            "yan sütun sol hücreye karıştı: {:?}", baslik[0]);
     }
 
     #[test]

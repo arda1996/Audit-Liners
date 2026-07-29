@@ -594,3 +594,21 @@ async fn sinanamayan_denklem_dogrulandi_diye_raporlanmaz() {
     assert!(coz(&t, "/bulgular").as_array().unwrap().iter().any(|x| x["kod"] == "A24"),
         "doğrulanmadı uyarısı yok");
 }
+
+/// **B-10 — takvim doğrulaması.** Eskiden 8 rakamlı HER dizi geçerli tarih sayılıyordu.
+/// Tarih denklemle kanıtlanmayan bir alan olduğu için tek adaylıysa OTOMATİK onaylanıyor —
+/// yani kullanıcı geçersiz tarihi hiç görmeden fişe gidiyordu.
+#[tokio::test]
+async fn gecersiz_tarih_kabul_edilmez() {
+    basla("FATURA", "MANUEL", "", "ALM-TARIH").await;
+    for kotu in ["12.34.5678", "31.02.2026", "00.01.2026", "32.01.2026", "29.02.2026"] {
+        let d = deger("ALM-TARIH", "tarih", kotu, "MANUEL").await;
+        let b = coz(&d, "/bulgular");
+        assert!(b.as_array().map(|x| x.iter().any(|y| y["onem"] == "ENGEL")).unwrap_or(false),
+            "geçersiz tarih '{kotu}' kabul edildi: {b:?}");
+    }
+    // Artık yıl GEÇERLİ olmalı — aşırı katı da olmamalı.
+    let d = deger("ALM-TARIH", "tarih", "29.02.2024", "MANUEL").await;
+    assert!(!coz(&d, "/bulgular").as_array().map(|x| x.iter().any(|y| y["onem"] == "ENGEL")).unwrap_or(false),
+        "29.02.2024 artık yıldır, reddedilmemeliydi");
+}

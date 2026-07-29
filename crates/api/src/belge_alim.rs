@@ -111,7 +111,23 @@ fn deger_coz(tip: &str, ham: &str, dil: &str) -> Option<i64> {
             let r: String = ham.chars().filter(|c| c.is_ascii_digit()).collect();
             // gg.aa.yyyy → yyyyaagg. Yalnız 8 haneli tam tarih kabul edilir; kısa biçim
             // (2 haneli yıl) belirsizdir ve muhasebede belirsiz tarih kabul edilemez.
-            if r.len() == 8 { format!("{}{}{}", &r[4..8], &r[2..4], &r[0..2]).parse().ok() } else { None }
+            if r.len() != 8 { return None; }
+            let (g, a, y): (u32, u32, i32) =
+                (r[0..2].parse().ok()?, r[2..4].parse().ok()?, r[4..8].parse().ok()?);
+            // TAKVİM DOĞRULAMASI. Eskiden 8 rakamlı HER dizi geçerli tarih sayılıyordu:
+            // OCR fatura numarasını "1234.5678" okuduğunda tarih adayı oluyor ve fişe
+            // "12.34.5678" diye yazılabiliyordu. Kullanıcının elle girdiği 31.02.2026 da
+            // aynı şekilde kabul ediliyordu. Tarih denklemle kanıtlanmayan bir alan
+            // olduğu için tek adaylıysa OTOMATİK ONAYLANIYOR — yani kullanıcı hiç görmüyor.
+            if !(1..=12).contains(&a) || g == 0 || !(1900..=2200).contains(&y) { return None; }
+            let artik = (y % 4 == 0 && y % 100 != 0) || y % 400 == 0;
+            let ayin_gunu = match a {
+                1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,
+                4 | 6 | 9 | 11 => 30,
+                _ => if artik { 29 } else { 28 },
+            };
+            if g > ayin_gunu { return None; }
+            format!("{y:04}{a:02}{g:02}").parse().ok()
         }
         // SECENEK: sayısal karşılığı yok; geçerlilik `secenek_gecerli` ile ayrıca sınanır.
         "SECENEK" => None,
