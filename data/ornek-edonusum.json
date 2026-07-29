@@ -1,0 +1,106 @@
+{
+  "_aciklama": "SİMÜLASYON örnek veritabanı — e-Fatura (UBL-TR alanları) → tahakkuk fişi → banka hareketi → tahsis/açık kalem. 'Aklımızdaki yapının nasıl göründüğü' için. Tutarlar kuruş. Gerçek entegratör/banka gelince aynı model canlı veriyle dolar.",
+  "mukellef": { "vkn": "1234567890", "unvan": "ACME TEKSTİL SAN. TİC. A.Ş." },
+
+  "faturalar": [
+    {
+      "uuid": "e3b0c442-98fc-1c14-b39f-0800200c9a66",
+      "no": "ACM2026000000045",
+      "tarih": "12.03.2026",
+      "yon": "SATIS",
+      "senaryo": "TICARIFATURA",
+      "karsi": { "vkn": "9876543210", "unvan": "BEYAZ MAĞAZACILIK A.Ş." },
+      "satirlar": [
+        { "ad": "Kumaş A (pamuklu)", "miktar": 100, "birim": "MTR", "birim_fiyat": 80000, "tutar": 8000000, "kdv_oran": 20 },
+        { "ad": "Kumaş B (keten)", "miktar": 50, "birim": "MTR", "birim_fiyat": 120000, "tutar": 6000000, "kdv_oran": 20 },
+        { "ad": "İplik", "miktar": 200, "birim": "KGM", "birim_fiyat": 15000, "tutar": 3000000, "kdv_oran": 20 },
+        { "ad": "Düğme", "miktar": 5000, "birim": "ADET", "birim_fiyat": 400, "tutar": 2000000, "kdv_oran": 20 },
+        { "ad": "Fermuar", "miktar": 2000, "birim": "ADET", "birim_fiyat": 500, "tutar": 1000000, "kdv_oran": 20 }
+      ],
+      "matrah": 20000000,
+      "kdv": 4000000,
+      "toplam": 24000000,
+      "tahakkuk_fis": {
+        "tip": "Mahsup", "tarih": "12.03.2026",
+        "satirlar": [
+          { "hesap": "120.001", "ad": "Beyaz Mağazacılık", "borc": 24000000, "alacak": 0 },
+          { "hesap": "600.01", "ad": "Yurtiçi Satışlar", "borc": 0, "alacak": 20000000 },
+          { "hesap": "391.20", "ad": "Hesaplanan KDV %20", "borc": 0, "alacak": 4000000 }
+        ]
+      },
+      "vade_plani": [
+        { "no": 1, "vade": "15.04.2026", "tutar": 8000000, "durum": "ODENDI" },
+        { "no": 2, "vade": "15.05.2026", "tutar": 8000000, "durum": "ODENDI" },
+        { "no": 3, "vade": "15.06.2026", "tutar": 8000000, "durum": "BEKLIYOR" }
+      ],
+      "tahsisler": [
+        { "banka_islem_ref": "REF0000000101", "tarih": "15.04.2026", "tutar": 8000000, "taksit_no": 1 },
+        { "banka_islem_ref": "REF0000000102", "tarih": "16.05.2026", "tutar": 8000000, "taksit_no": 2 }
+      ],
+      "acik_bakiye": 8000000
+    },
+    {
+      "uuid": "a1b2c3d4-0000-1111-2222-333344445555",
+      "no": "TED2026000000912",
+      "tarih": "05.03.2026",
+      "yon": "ALIS",
+      "senaryo": "TEMELFATURA",
+      "karsi": { "vkn": "5556667770", "unvan": "GÜNEŞ İPLİK SAN. LTD." },
+      "satirlar": [
+        { "ad": "Ham iplik", "miktar": 500, "birim": "KGM", "birim_fiyat": 18000, "tutar": 9000000, "kdv_oran": 20 }
+      ],
+      "matrah": 9000000,
+      "kdv": 1800000,
+      "toplam": 10800000,
+      "tahakkuk_fis": {
+        "tip": "Mahsup", "tarih": "05.03.2026",
+        "satirlar": [
+          { "hesap": "153.01", "ad": "Ham iplik (stok)", "borc": 9000000, "alacak": 0 },
+          { "hesap": "191.20", "ad": "İndirilecek KDV %20", "borc": 1800000, "alacak": 0 },
+          { "hesap": "320.005", "ad": "Güneş İplik", "borc": 0, "alacak": 10800000 }
+        ]
+      },
+      "vade_plani": [
+        { "no": 1, "vade": "05.04.2026", "tutar": 10800000, "durum": "ODENDI" }
+      ],
+      "tahsisler": [
+        { "banka_islem_ref": "REF0000000201", "tarih": "04.04.2026", "tutar": 10800000, "taksit_no": 1 }
+      ],
+      "acik_bakiye": 0
+    },
+    {
+      "uuid": "f9f9f9f9-aaaa-bbbb-cccc-dddddddddddd",
+      "no": "ACM2026000000046",
+      "tarih": "20.03.2026",
+      "yon": "SATIS",
+      "senaryo": "TEMELFATURA",
+      "karsi": { "vkn": "1112223330", "unvan": "MERT PERAKENDE A.Ş." },
+      "satirlar": [
+        { "ad": "Hazır giyim parti", "miktar": 1, "birim": "ADET", "birim_fiyat": 6000000, "tutar": 6000000, "kdv_oran": 20 }
+      ],
+      "matrah": 6000000,
+      "kdv": 1200000,
+      "toplam": 7200000,
+      "tahakkuk_fis": {
+        "tip": "Mahsup", "tarih": "20.03.2026",
+        "satirlar": [
+          { "hesap": "120.002", "ad": "Mert Perakende", "borc": 7200000, "alacak": 0 },
+          { "hesap": "600.01", "ad": "Yurtiçi Satışlar", "borc": 0, "alacak": 6000000 },
+          { "hesap": "391.20", "ad": "Hesaplanan KDV %20", "borc": 0, "alacak": 1200000 }
+        ]
+      },
+      "vade_plani": [
+        { "no": 1, "vade": "20.04.2026", "tutar": 7200000, "durum": "GECIKMIS" }
+      ],
+      "tahsisler": [],
+      "acik_bakiye": 7200000
+    }
+  ],
+
+  "banka_hareketleri": [
+    { "ref": "REF0000000101", "tarih": "15.04.2026", "yon": "GIRIS", "tutar": 8000000, "aciklama": "HAVALE GELEN - BEYAZ MAĞAZACILIK", "eslesme": "ACM2026000000045 / taksit 1" },
+    { "ref": "REF0000000102", "tarih": "16.05.2026", "yon": "GIRIS", "tutar": 8000000, "aciklama": "FAST GELEN - BEYAZ MAĞAZACILIK", "eslesme": "ACM2026000000045 / taksit 2" },
+    { "ref": "REF0000000201", "tarih": "04.04.2026", "yon": "CIKIS", "tutar": 10800000, "aciklama": "EFT GIDEN - GÜNEŞ İPLİK", "eslesme": "TED2026000000912 / taksit 1" },
+    { "ref": "REF0000000777", "tarih": "18.05.2026", "yon": "GIRIS", "tutar": 4500000, "aciklama": "HAVALE GELEN - BİLİNMEYEN", "eslesme": null }
+  ]
+}

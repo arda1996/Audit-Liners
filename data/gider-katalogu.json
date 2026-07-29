@@ -1,0 +1,546 @@
+{
+  "surum": 1,
+  "aciklama": "Gider hesapları katalogu — hangi gider hangi hesapta izlenir (7/A · 7/B), sektöre göre uygulanabilirlik, indirilebilirlik ve KKEG durumu. Program bunu hesap önerisi + KKEG uyarısı için kullanır.",
+  "kkeg_muavin_eki": "99",
+  "kkeg_not": "KKEG için MSUGT'de AYRI ANA HESAP YOKTUR. Gider normal hesabına yazılır, KKEG kısmı '.99' muavininde izlenir (ör. 770.99). Beyannamede matraha GERİ EKLENİR; yevmiyede ters kayıt YAPILMAZ.",
+  "maliyet_secenegi": {
+    "7A": {
+      "ad": "Gider yeri esaslı",
+      "kimler": "Bilanço esasına göre defter tutan ve haddi aşan işletmeler (üretim/inşaat ağırlıklı)",
+      "hesaplar": [
+        "710",
+        "720",
+        "730",
+        "740",
+        "750",
+        "760",
+        "770",
+        "780"
+      ],
+      "dogrulandi": true
+    },
+    "7B": {
+      "ad": "Gider çeşidi esaslı",
+      "kimler": "Küçük işletmeler; gider çeşidine göre izler, dönem sonunda 798 → 799 ile dağıtır",
+      "hesaplar": [
+        "790",
+        "791",
+        "792",
+        "793",
+        "794",
+        "795",
+        "796",
+        "797"
+      ],
+      "dogrulandi": true
+    },
+    "yok": {
+      "ad": "Maliyet muhasebesi yok",
+      "kimler": "Ticaret ve serbest meslek — üretim maliyeti oluşmaz, giderler doğrudan 6xx'e",
+      "hesaplar": [],
+      "dogrulandi": true
+    },
+    "had_notu": "7/A zorunluluk haddi yıllık tebliğle belirlenir — DOĞRULANMADI, tebliğden teyit edilmeli."
+  },
+  "yansitma": [
+    {
+      "gider": "710",
+      "yansitma": "711",
+      "hedef": "151",
+      "ad": "Direkt ilk madde ve malzeme → Yarı mamul"
+    },
+    {
+      "gider": "720",
+      "yansitma": "721",
+      "hedef": "151",
+      "ad": "Direkt işçilik → Yarı mamul"
+    },
+    {
+      "gider": "730",
+      "yansitma": "731",
+      "hedef": "151",
+      "ad": "Genel üretim giderleri → Yarı mamul"
+    },
+    {
+      "gider": "740",
+      "yansitma": "741",
+      "hedef": "622",
+      "ad": "Hizmet üretim maliyeti → Satılan hizmet maliyeti"
+    },
+    {
+      "gider": "750",
+      "yansitma": "751",
+      "hedef": "630",
+      "ad": "Ar-Ge → Ar-Ge giderleri"
+    },
+    {
+      "gider": "760",
+      "yansitma": "761",
+      "hedef": "631",
+      "ad": "Pazarlama satış dağıtım → PSD giderleri"
+    },
+    {
+      "gider": "770",
+      "yansitma": "771",
+      "hedef": "632",
+      "ad": "Genel yönetim → Genel yönetim giderleri"
+    },
+    {
+      "gider": "780",
+      "yansitma": "781",
+      "hedef": "660",
+      "ad": "Finansman → Kısa vadeli borçlanma giderleri"
+    },
+    {
+      "gider": "79x",
+      "yansitma": "798",
+      "hedef": "799",
+      "ad": "7/B gider çeşitleri → Üretim maliyeti, oradan 6xx/15x"
+    }
+  ],
+  "gider_turleri": [
+    {
+      "kod": "HAMMADDE",
+      "ad": "Hammadde / ilk madde ve malzeme",
+      "a": "710",
+      "b": "790",
+      "sektorler": [
+        "URT",
+        "TAR",
+        "ENR",
+        "GID"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "Üretime sevk edilince gidere; stokta kaldığı sürece 150'de durur."
+    },
+    {
+      "kod": "DIREKT_ISCILIK",
+      "ad": "Direkt işçilik (üretimde çalışan)",
+      "a": "720",
+      "b": "791",
+      "sektorler": [
+        "URT",
+        "TAR",
+        "ENR",
+        "INS"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "Ücret + SGK işveren payı. Bordro tahakkuku 335/360/361."
+    },
+    {
+      "kod": "GENEL_URETIM",
+      "ad": "Genel üretim gideri (fabrika enerji, bakım, amortisman)",
+      "a": "730",
+      "b": "790,793,796",
+      "sektorler": [
+        "URT",
+        "ENR",
+        "GID"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1"
+    },
+    {
+      "kod": "HIZMET_MALIYET",
+      "ad": "Hizmet üretim maliyeti (danışman/yazılımcı ücreti, proje gideri)",
+      "a": "740",
+      "b": "791,793",
+      "sektorler": [
+        "HIZ",
+        "LOJ",
+        "SRB"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "Hizmet işletmesinde maliyet burada toplanır, 622'ye yansır."
+    },
+    {
+      "kod": "ARGE",
+      "ad": "Araştırma ve geliştirme",
+      "a": "750",
+      "b": "794",
+      "sektorler": [
+        "URT",
+        "HIZ",
+        "ENR"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1 · 5746 Ar-Ge teşviki",
+      "not": "5746 kapsamındaysa ayrıca Ar-Ge İNDİRİMİ doğar (beyannamede matrahtan düşülür)."
+    },
+    {
+      "kod": "PAZARLAMA",
+      "ad": "Pazarlama, satış ve dağıtım",
+      "a": "760",
+      "b": "793,794",
+      "sektorler": [
+        "TIC",
+        "ETIC",
+        "URT",
+        "GID"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1"
+    },
+    {
+      "kod": "KARGO",
+      "ad": "Kargo / nakliye (satışa ilişkin)",
+      "a": "760",
+      "b": "793",
+      "sektorler": [
+        "ETIC",
+        "TIC",
+        "LOJ"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "E-ticarette en büyük kalemlerden; alışa ilişkin nakliye MALİYETE girer (VUK 262), satışa ilişkin gidere."
+    },
+    {
+      "kod": "PLATFORM_KOMISYON",
+      "ad": "Pazaryeri / platform komisyonu",
+      "a": "760",
+      "b": "793",
+      "sektorler": [
+        "ETIC"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "Yurt dışı platformda KDV sorumluluğu (2 No.lu KDV) doğabilir."
+    },
+    {
+      "kod": "GENEL_YONETIM",
+      "ad": "Genel yönetim (ofis, muhasebe, yönetici ücreti)",
+      "a": "770",
+      "b": "792,793,794",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1"
+    },
+    {
+      "kod": "KIRA",
+      "ad": "İşyeri kirası",
+      "a": "770",
+      "b": "793",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "Stopaj var (GVK 94) — brüt/net dönüşümü için /api/hesapla/stopaj."
+    },
+    {
+      "kod": "ELEKTRIK_SU_DOGALGAZ",
+      "ad": "Elektrik, su, doğalgaz",
+      "a": "730 veya 770",
+      "b": "793",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "Üretim tesisine aitse 730, ofise aitse 770."
+    },
+    {
+      "kod": "SMMM_AVUKAT",
+      "ad": "Serbest meslek hizmeti (SMMM, avukat, danışman)",
+      "a": "770",
+      "b": "793",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1",
+      "not": "Stopaj var (GVK 94) — 360'a."
+    },
+    {
+      "kod": "AMORTISMAN",
+      "ad": "Amortisman ve tükenme payları",
+      "a": "730/760/770 (kullanım yerine göre)",
+      "b": "796",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "VUK 313+",
+      "not": "Haddin altındaki demirbaş DOĞRUDAN gider yazılır (VUK 313) — had parametrede."
+    },
+    {
+      "kod": "SIGORTA",
+      "ad": "Sigorta primleri (işyeri, araç, nakliyat)",
+      "a": "730/760/770",
+      "b": "793",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 40/1"
+    },
+    {
+      "kod": "FINANSMAN",
+      "ad": "Kredi faizi, komisyon, BSMV",
+      "a": "780",
+      "b": "797",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": "KISMEN",
+      "dayanak": "GVK 41/9 · KVK 11/1-i",
+      "not": "FİNANSMAN GİDER KISITLAMASI: yabancı kaynakları öz kaynağı aşan işletmelerde aşan kısma isabet eden finansman giderinin bir oranı KKEG. Oran DOĞRULANMADI — tebliğden teyit."
+    },
+    {
+      "kod": "KUR_FARKI",
+      "ad": "Kur farkı gideri",
+      "a": "780",
+      "b": "797",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "VUK 280",
+      "not": "Alış faturasına ilişkin kur farkı stok MALİYETİNE girebilir (dönem içi)."
+    },
+    {
+      "kod": "VERGI_RESIM_HARC",
+      "ad": "Vergi, resim ve harçlar (emlak, damga, MTV*)",
+      "a": "770",
+      "b": "795",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": "KISMEN",
+      "dayanak": "GVK 40/6",
+      "not": "MTV: I ve IV sayılı listedeki taşıtların MTV'si KKEG'dir (binek oto dahil). Ticari araç (II sayılı liste) MTV'si indirilebilir."
+    },
+    {
+      "kod": "BAGIS",
+      "ad": "Bağış ve yardım",
+      "a": "770 (veya 689)",
+      "b": "794",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": "KISMEN",
+      "dayanak": "KVK 10/1-c",
+      "not": "Kurum kazancının %5'ini aşan kısım KKEG. Eğitim/sağlık tesisleri ve bazı bağışlarda %100 indirim — ayrı değerlendirilir."
+    },
+    {
+      "kod": "BINEK_YAKIT_BAKIM",
+      "ad": "Binek otomobil yakıt, bakım, onarım",
+      "a": "760/770",
+      "b": "793",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": "ORANSAL",
+      "kkeg_oran": 30,
+      "dayanak": "GVK 40/5",
+      "not": "Giderlerin %70'i indirilebilir → %30 KKEG. İSTİSNA: faaliyeti binek oto kiralama/işletme olanlarda kısıt UYGULANMAZ."
+    },
+    {
+      "kod": "BINEK_KIRA",
+      "ad": "Binek otomobil kiralama",
+      "a": "770",
+      "b": "793",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": "HADDI_ASAN",
+      "dayanak": "GVK 40/1",
+      "not": "Aylık kira haddini aşan kısım KKEG. Had DOĞRULANMADI — yıllık tebliğden. İSTİSNA: araç kiralama faaliyeti."
+    },
+    {
+      "kod": "BINEK_AMORTISMAN",
+      "ad": "Binek otomobil amortismanı",
+      "a": "770",
+      "b": "796",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": "HADDI_ASAN",
+      "dayanak": "GVK 40/7",
+      "not": "Amortismana esas bedel haddi aşarsa aşan kısma isabet eden amortisman KKEG. ÖTV+KDV maliyete eklendiyse ayrı had. Hadler DOĞRULANMADI."
+    },
+    {
+      "kod": "OZEL_ILETISIM",
+      "ad": "Özel iletişim vergisi (ÖİV)",
+      "a": "770",
+      "b": "795",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "6802 sayılı Kanun 39",
+      "not": "ÖİV gider yazılamaz — KKEG."
+    },
+    {
+      "kod": "CEZA_GECIKME",
+      "ad": "Vergi cezası, gecikme zammı/faizi, para cezası",
+      "a": "689",
+      "b": "794",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "KVK 11/1-d · GVK 41/6",
+      "not": "Kaydı yapılır ama TAMAMI KKEG. Gecikme FAİZİ de dahil."
+    },
+    {
+      "kod": "KURUMLAR_VERGISI",
+      "ad": "Kurumlar vergisi ve benzeri vergiler",
+      "a": "691",
+      "b": "-",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "KVK 11/1-d",
+      "not": "Vergi karşılığı gider değildir; 691'de izlenir, matrahtan düşülmez."
+    },
+    {
+      "kod": "ORTULU_SERMAYE_FAIZ",
+      "ad": "Örtülü sermaye üzerinden ödenen faiz / kur farkı",
+      "a": "780",
+      "b": "797",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "KVK 11/1-b",
+      "not": "Ortak/ilişkili kişiden alınan ve öz sermayenin 3 katını aşan borçlanmaya isabet eden kısım."
+    },
+    {
+      "kod": "TRANSFER_FIYAT",
+      "ad": "Transfer fiyatlandırması yoluyla örtülü kazanç dağıtımı",
+      "a": "-",
+      "b": "-",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "KVK 11/1-c",
+      "not": "İlişkili kişiyle emsale aykırı bedel — fark KKEG."
+    },
+    {
+      "kod": "FAALIYET_DISI_TASIT",
+      "ad": "Esas faaliyetle ilgisiz deniz/hava taşıtı gideri ve amortismanı",
+      "a": "770",
+      "b": "793,796",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "KVK 11/1-f",
+      "not": "Yat, tekne, uçak, helikopter — işletmenin esas faaliyeti bunlar değilse."
+    },
+    {
+      "kod": "BASIN_TAZMINAT",
+      "ad": "Basın yoluyla işlenen fiillerden doğan tazminat",
+      "a": "689",
+      "b": "794",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "KVK 11/1-g"
+    },
+    {
+      "kod": "ALKOL_TUTUN_REKLAM",
+      "ad": "Alkollü içki ve tütün ürünleri ilan/reklam gideri",
+      "a": "760",
+      "b": "793",
+      "sektorler": [
+        "URT",
+        "TIC",
+        "GID"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "GVK 41/7",
+      "not": "Sektörel: yalnız alkol/tütün üretici ve satıcılarını ilgilendirir."
+    },
+    {
+      "kod": "INDIRILEMEYEN_KDV",
+      "ad": "İndirilemeyen KDV (zayi mal, binek oto alış KDV'si)",
+      "a": "770 veya maliyet",
+      "b": "795",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": true,
+      "kkeg": "KISMEN",
+      "dayanak": "KDVK 30",
+      "not": "Gider/maliyete yazılır. KKEG'e ilişkin harcamanın KDV'si de KKEG olur."
+    },
+    {
+      "kod": "YASAK_ODEME",
+      "ad": "Kanunen yasaklanmış fiil nedeniyle yapılan ödeme (rüşvet vb.)",
+      "a": "689",
+      "b": "794",
+      "sektorler": [
+        "*"
+      ],
+      "indirilebilir": false,
+      "kkeg": "TAMAMI",
+      "dayanak": "GVK 41/9 · KVK 11/1-d"
+    },
+    {
+      "kod": "INSAAT_MALIYET",
+      "ad": "Yıllara yaygın inşaat ve onarım maliyeti",
+      "a": "170-178",
+      "b": "-",
+      "sektorler": [
+        "INS"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 42-44",
+      "not": "Gider yazılmaz — işin bittiği yıla kadar 17x'te BEKLETİLİR, hakediş 350'de. Kâr/zarar işin bitiminde doğar."
+    },
+    {
+      "kod": "SM_MESLEKI",
+      "ad": "Serbest meslek mesleki giderleri (büro, mesleki kitap, oda aidatı)",
+      "a": "770",
+      "b": "793,794",
+      "sektorler": [
+        "SRB"
+      ],
+      "indirilebilir": true,
+      "kkeg": null,
+      "dayanak": "GVK 68",
+      "not": "Serbest meslekte TAHSİL esası geçerlidir — ödenmemiş gider yazılamaz."
+    }
+  ]
+}

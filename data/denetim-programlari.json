@@ -1,0 +1,81 @@
+{
+  "surum": 1,
+  "aciklama": "Sektörel denetim programları. Motor kodda (M1-M12), program veride. Kullanıcı katmanı: kopyala-düzenle/kapat/ekle — bkz docs/tasarim/denetime-giden-yol.md",
+  "sektorler": [
+    {
+      "kod": "TIC",
+      "ad": "Ticaret (toptan/perakende)",
+      "calismalar": [
+        { "id": "TIC-01", "ad": "Brüt kâr marjı aylık analitiği", "bds": "BDS 520", "motor": "M1", "hesaplar": ["600", "610", "621"], "parametre": { "seri": "aylik", "esik_sapma_pct": 15 }, "siddet": "orta", "anlatim": "Marj serisinde ±%15 üstü sapan aylar detay incelemeye düşer." },
+        { "id": "TIC-02", "ad": "Stok–SMM zinciri tutarlılığı", "bds": "BDS 520", "motor": "M11", "hesaplar": ["153", "621"], "parametre": { "zincir": "153->621" }, "siddet": "yuksek", "anlatim": "621 hareketi 153 çıkışlarıyla eşleşmeli; 153 ters (alacak) bakiyeye düşen günler = satılandan fazla stok çıkışı." },
+        { "id": "TIC-03", "ad": "Alıcı yaşlandırma + şüpheli alacak eksikliği", "bds": "BDS 540", "motor": "M2", "hesaplar": ["120"], "parametre": { "dilimler_gun": [30, 90, 180, 365] }, "siddet": "yuksek", "anlatim": "180+ gün bakiye varken 128/129 hareketi yoksa VUK 323 karşılık eksikliği bulgusu." },
+        { "id": "TIC-04", "ad": "Kasa doğa ihlali ve nakit yoğunluğu", "bds": "BDS 240", "motor": "M7", "hesaplar": ["100"], "parametre": { "nakit_hasilat_esik_pct": 30 }, "siddet": "yuksek", "anlatim": "100 alacak bakiye günleri (MSUGT: kasa alacak bakiyesi vermez) + nakit tahsilat/toplam hasılat > eşik." },
+        { "id": "TIC-05", "ad": "KDV oran tutarlılığı", "bds": "BDS 520", "motor": "M11", "hesaplar": ["391", "600", "191", "153"], "parametre": { "zincir": "kdv-oran" }, "siddet": "orta", "anlatim": "391 alt hesap dağılımı satış hacmiyle, 191 alışlarla oransal uyumlu mu." },
+        { "id": "TIC-06", "ad": "Dönem sonu hasılat kesme testi", "bds": "BDS 240", "motor": "M9", "hesaplar": ["600", "610"], "parametre": { "pencere_gun": 5 }, "siddet": "yuksek", "anlatim": "Dönem sınırı ±5 gün satış/iade fişleri listelenir; ertesi dönem iadeye dönen dönem sonu satışları işaretlenir." },
+        { "id": "TIC-07", "ad": "Mükerrer satıcı faturası", "bds": "BDS 240", "motor": "M4", "hesaplar": ["320"], "parametre": { "tip": "tutar+karsi+tarih" }, "siddet": "orta", "anlatim": "Aynı satıcıya yakın tarihli eş tutarlı çift kayıt taraması (belge no kontrolü kayıtta zaten var)." },
+        { "id": "TIC-08", "ad": "Tedarikçi/müşteri konsantrasyonu", "bds": "BDS 315", "motor": "M10", "hesaplar": ["120", "320"], "parametre": { "esik_pct": 40 }, "siddet": "dusuk", "anlatim": "Tek carinin payı > %40 ise süreklilik/bağımlılık riski notu." },
+        { "id": "TIC-09", "ad": "Benford + yuvarlak tutar", "bds": "BDS 240", "motor": "M3", "hesaplar": ["600", "770"], "parametre": { "min_tutar": 1000, "yuvarlak": 1000 }, "siddet": "dusuk", "anlatim": "İlk hane dağılımı sapması ve 000 ile biten tutar yoğunluğu (M6 ile birlikte koşar)." }
+      ]
+    },
+    {
+      "kod": "ETIC",
+      "ad": "E-ticaret",
+      "devralir": "TIC",
+      "calismalar": [
+        { "id": "ETIC-01", "ad": "POS/aracı platform mutabakatı", "bds": "BDS 505", "motor": "M11", "hesaplar": ["108", "102"], "parametre": { "askida_gun": 7 }, "siddet": "yuksek", "anlatim": "108'de 7 günden uzun askıda kalan bakiye + 108→102 geçiş süreleri; platform kesintileri (komisyon 760/780) oranı." },
+        { "id": "ETIC-02", "ad": "İade yoğunluğu ve zamanlaması", "bds": "BDS 240", "motor": "M1", "hesaplar": ["610", "600"], "parametre": { "seri": "aylik", "esik_sapma_pct": 20 }, "siddet": "orta", "anlatim": "610/600 oranı trendi; dönem sonu iade yığılması hasılat manipülasyonu işareti." },
+        { "id": "ETIC-03", "ad": "Kargo gideri / satış korelasyonu", "bds": "BDS 520", "motor": "M1", "hesaplar": ["760", "600"], "parametre": { "seri": "aylik", "esik_sapma_pct": 25 }, "siddet": "dusuk", "anlatim": "Kargo/satış oranı sabit kalmalı; kopan aylarda kayıt dışı satış veya gider şişirme sorgusu." },
+        { "id": "ETIC-04", "ad": "Gece/hafta sonu kayıt deseni", "bds": "BDS 240", "motor": "M5", "hesaplar": ["*"], "parametre": { "saat": "22-06", "hafta_sonu": true }, "siddet": "dusuk", "anlatim": "Otomatik satış kaydı normaldir; manuel mahsupların gece/hafta sonu yığılması incelenir. NOT: kullanıcı+zaman damgası (B) eklenmeden kısıtlı çalışır." }
+      ]
+    },
+    {
+      "kod": "HIZ",
+      "ad": "Hizmet (danışmanlık/yazılım/ajans)",
+      "calismalar": [
+        { "id": "HIZ-01", "ad": "Avans → hasılat dönüşümü", "bds": "BDS 240", "motor": "M11", "hesaplar": ["340", "600"], "parametre": { "zincir": "340->600" }, "siddet": "yuksek", "anlatim": "340 bakiyesi fatura kesilmeden 600'e dönmüş mü (erken hasılat); uzun süre 340'ta bekleyen avans." },
+        { "id": "HIZ-02", "ad": "Dönemsellik: 180/280–380/480 kullanımı", "bds": "BDS 520", "motor": "M11", "hesaplar": ["180", "280", "380", "480"], "parametre": { "zincir": "donemsellik" }, "siddet": "orta", "anlatim": "Yıllık sözleşme varken 380/480 hiç çalışmıyorsa hasılat/gider dönemselliği bozuktur." },
+        { "id": "HIZ-03", "ad": "Personel gideri / hasılat oranı", "bds": "BDS 520", "motor": "M1", "hesaplar": ["770", "760", "600"], "parametre": { "seri": "aylik", "esik_sapma_pct": 20 }, "siddet": "orta", "anlatim": "Hizmette ana maliyet iş gücü; oran kopması kayıt dışı personel veya hasılat işareti." },
+        { "id": "HIZ-04", "ad": "Cari başına marj (muavin)", "bds": "BDS 520", "motor": "M10", "hesaplar": ["120", "600"], "parametre": { "esik_pct": 50 }, "siddet": "dusuk", "anlatim": "Müşteri konsantrasyonu + müşteri bazlı hasılat dağılımı." }
+      ]
+    },
+    {
+      "kod": "URT",
+      "ad": "Üretim / imalat",
+      "calismalar": [
+        { "id": "URT-01", "ad": "7/A yansıtma denkliği", "bds": "BDS 520", "motor": "M11", "hesaplar": ["710", "711", "720", "721", "730", "731"], "parametre": { "zincir": "7xx<->7x1" }, "siddet": "yuksek", "anlatim": "Dönem sonunda 7xx ↔ 7x1 farkları sıfır olmalı (kapanış motorumuz üretir, kontrol modu doğrular)." },
+        { "id": "URT-02", "ad": "Maliyet akış zinciri 150→151→152→620", "bds": "BDS 520", "motor": "M11", "hesaplar": ["150", "151", "152", "620"], "parametre": { "zincir": "uretim-akis" }, "siddet": "yuksek", "anlatim": "Zincirde denklik; 152'ye girmeden 620'ye düşen maliyet = kayıt hatası." },
+        { "id": "URT-03", "ad": "Fire / verimlilik trendi", "bds": "BDS 520", "motor": "M1", "hesaplar": ["710", "152"], "parametre": { "seri": "aylik", "esik_sapma_pct": 15 }, "siddet": "orta", "anlatim": "DİMM/üretilen mamul oranı; kopan aylarda fire veya kayıt dışı üretim." },
+        { "id": "URT-04", "ad": "Boş kapasite GÜG kontrolü", "bds": "TMS 2", "motor": "M11", "hesaplar": ["730", "680"], "parametre": { "zincir": "bos-kapasite" }, "siddet": "orta", "anlatim": "TMS 2: boş kapasiteye düşen GÜG stok maliyetine değil 680 Çalışılmayan Kısım Gider ve Zararları'na gider." },
+        { "id": "URT-05", "ad": "Stok sayımı çalışma kağıdı (BDS 501)", "bds": "BDS 501", "motor": "M2", "hesaplar": ["150", "151", "152", "153", "197"], "parametre": { "dilimler_gun": [] }, "siddet": "yuksek", "anlatim": "Sayım katılım tutanağı + 197 sayım farkları takibi. NOT: stok MİKTAR takibi (A bölümü yeni tespit) önkoşul." }
+      ]
+    },
+    {
+      "kod": "INS",
+      "ad": "İnşaat / taahhüt (yıllara yaygın)",
+      "calismalar": [
+        { "id": "INS-01", "ad": "Proje eşlemesi 170↔350", "bds": "BDS 520", "motor": "M11", "hesaplar": ["170", "350"], "parametre": { "zincir": "proje-muavin" }, "siddet": "yuksek", "anlatim": "Aynı proje muavin kodunda maliyet (170.xx) ve hakediş (350.xx) birikmeli; eşleşmeyen proje bulgudur." },
+        { "id": "INS-02", "ad": "Hakediş stopajı kontrolü", "bds": "GVK 42", "motor": "M11", "hesaplar": ["350", "193", "295"], "parametre": { "stopaj_pct": 5 }, "siddet": "yuksek", "anlatim": "Hakediş tahsilatında %5 tevkifat 193/295'e işlenmiş mi." },
+        { "id": "INS-03", "ad": "İş bitiminde kâr aktarım zamanlaması", "bds": "BDS 240", "motor": "M9", "hesaplar": ["350", "600"], "parametre": { "pencere_gun": 30 }, "siddet": "orta", "anlatim": "Geçici kabul tarihi çevresinde 170/350→sonuç aktarımı; erteleme = vergi öteleme işareti." },
+        { "id": "INS-04", "ad": "Ortak gider dağıtım tutarlılığı", "bds": "BDS 520", "motor": "M1", "hesaplar": ["740", "170"], "parametre": { "seri": "proje", "esik_sapma_pct": 20 }, "siddet": "orta", "anlatim": "740'tan projelere dağıtım anahtarı dönemler arası tutarlı mı." }
+      ]
+    },
+    {
+      "kod": "LOJ",
+      "ad": "Taşımacılık / lojistik",
+      "calismalar": [
+        { "id": "LOJ-01", "ad": "Araç muavini akaryakıt makullüğü", "bds": "BDS 520", "motor": "M1", "hesaplar": ["740", "760"], "parametre": { "seri": "muavin", "esik_sapma_pct": 25 }, "siddet": "orta", "anlatim": "Araç başına akaryakıt gideri filoya göre sapıyorsa özel kullanım/fiktif gider sorgusu." },
+        { "id": "LOJ-02", "ad": "Aktifleştirme ayrımı (VUK 272)", "bds": "VUK 272", "motor": "M6", "hesaplar": ["740", "254"], "parametre": { "min_tutar": 50000, "yuvarlak": 0 }, "siddet": "yuksek", "anlatim": "Büyük tutarlı bakım-onarım doğrudan gidere yazılmışsa: ömrü/değeri artıran harcama aktifleştirilmeli." },
+        { "id": "LOJ-03", "ad": "Amortisman doğruluğu", "bds": "BDS 540", "motor": "M11", "hesaplar": ["254", "257"], "parametre": { "zincir": "amortisman" }, "siddet": "yuksek", "anlatim": "257/254 oranı faydalı ömürle uyumlu mu; tam ayrılmış varlıkta amortisman devamı bulgudur. NOT: değerleme modülü (A) önkoşul." },
+        { "id": "LOJ-04", "ad": "Şoför avansları yaşlandırma", "bds": "BDS 520", "motor": "M2", "hesaplar": ["196"], "parametre": { "dilimler_gun": [30, 90] }, "siddet": "dusuk", "anlatim": "90+ gün kapanmayan personel avansı ücret/zimmet sorgusu." }
+      ]
+    },
+    {
+      "kod": "GID",
+      "ad": "Restoran / gıda perakende",
+      "calismalar": [
+        { "id": "GID-01", "ad": "Nakit yoğunluk + Z raporu mutabakatı", "bds": "BDS 240", "motor": "M5", "hesaplar": ["100", "600"], "parametre": { "gunluk": true }, "siddet": "yuksek", "anlatim": "Günlük hasılat kaydı ↔ POS/Z raporu; kayıtsız gün ve nakit oranı sapması hasılat gizleme işareti." },
+        { "id": "GID-02", "ad": "Fire / zayi KDV düzeltmesi", "bds": "KDVK 30", "motor": "M11", "hesaplar": ["153", "689", "191"], "parametre": { "zincir": "zayi-kdv" }, "siddet": "orta", "anlatim": "Zayi mal varsa yüklenilen KDV indirimden çıkarılmalı (191 düzeltme); 689'a atılan fire KDV'siz kalmışsa bulgu." }
+      ]
+    }
+  ]
+}

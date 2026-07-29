@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "site-kesif": {
+      "command": "node",
+      "args": ["tools/site-kesif-mcp/dist/index.js"]
+    }
+  }
+}

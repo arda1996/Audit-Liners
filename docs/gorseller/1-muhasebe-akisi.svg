@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 820" width="1240" height="820" font-family="Helvetica, Arial, sans-serif">
+<defs>
+  <marker id="ok" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#64748b"/></marker>
+  <marker id="okr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#dc2626"/></marker>
+</defs>
+<rect width="1240" height="820" fill="#fbfaf8"/>
+<text x="40" y="52" font-size="27" font-weight="700" fill="#16191d">1 · Muhasebe Akışı — belgeden beyannameye</text>
+<text x="40" y="78" font-size="14" fill="#64748b">Her kayıt bir BELGEYE dayanır (VUK 227). Kayıt silinmez; düzeltme ters kayıtla yapılır (VUK 219).</text>
+
+<!-- ana zincir -->
+<g>
+  <rect x="40" y="112" width="180" height="72" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="130" y="140" font-size="15" font-weight="600" text-anchor="middle" fill="#312e81">BELGE</text>
+  <text x="130" y="160" font-size="11.5" text-anchor="middle" fill="#4338ca">e-Fatura · dekont</text>
+  <text x="130" y="175" font-size="11.5" text-anchor="middle" fill="#4338ca">makbuz · ekstre</text>
+
+  <rect x="264" y="112" width="180" height="72" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="354" y="140" font-size="15" font-weight="600" text-anchor="middle" fill="#16191d">FİŞ</text>
+  <text x="354" y="160" font-size="11.5" text-anchor="middle" fill="#475569">Tahsil · Tediye</text>
+  <text x="354" y="175" font-size="11.5" text-anchor="middle" fill="#475569">Mahsup · Açılış</text>
+
+  <rect x="488" y="112" width="180" height="72" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="578" y="140" font-size="15" font-weight="600" text-anchor="middle" fill="#16191d">YEVMİYE</text>
+  <text x="578" y="162" font-size="11.5" text-anchor="middle" fill="#475569">müteselsil · kronolojik</text>
+  <text x="578" y="177" font-size="11.5" text-anchor="middle" fill="#475569">geriye tarihlenemez</text>
+
+  <rect x="712" y="112" width="180" height="72" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="802" y="140" font-size="15" font-weight="600" text-anchor="middle" fill="#16191d">KEBİR</text>
+  <text x="802" y="162" font-size="11.5" text-anchor="middle" fill="#475569">hesap bazında</text>
+  <text x="802" y="177" font-size="11.5" text-anchor="middle" fill="#475569">yürüyen bakiye</text>
+
+  <rect x="936" y="112" width="180" height="72" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="1026" y="140" font-size="15" font-weight="600" text-anchor="middle" fill="#065f46">MİZAN</text>
+  <text x="1026" y="164" font-size="12" text-anchor="middle" font-weight="600" fill="#047857">Σborç = Σalacak</text>
+
+  <line x1="220" y1="148" x2="258" y2="148" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+  <line x1="444" y1="148" x2="482" y2="148" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+  <line x1="668" y1="148" x2="706" y2="148" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+  <line x1="892" y1="148" x2="930" y2="148" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+</g>
+
+<!-- iki çıkış -->
+<line x1="1026" y1="184" x2="1026" y2="228" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+<rect x="880" y="232" width="290" height="86" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="1025" y="257" font-size="14" font-weight="600" text-anchor="middle" fill="#16191d">MALİ TABLOLAR</text>
+<text x="1025" y="278" font-size="11.5" text-anchor="middle" fill="#475569">Bilanço · Gelir tablosu</text>
+<text x="1025" y="298" font-size="11.5" text-anchor="middle" fill="#475569">600 − 610 − 611 = Net satış</text>
+
+<line x1="1026" y1="318" x2="1026" y2="360" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+<rect x="880" y="364" width="290" height="104" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="1025" y="389" font-size="14" font-weight="600" text-anchor="middle" fill="#92400e">BEYANNAME</text>
+<text x="1025" y="410" font-size="11.5" text-anchor="middle" fill="#a16207">KDV1 · Geçici · Kurumlar</text>
+<text x="1025" y="432" font-size="11" text-anchor="middle" fill="#a16207">defter = TİCARİ kâr</text>
+<text x="1025" y="450" font-size="11" text-anchor="middle" fill="#a16207">beyanname = MALİ kâr</text>
+
+<!-- doktrin kutuları -->
+<text x="40" y="238" font-size="16" font-weight="700" fill="#16191d">Kaydı belirleyen üç kural</text>
+
+<rect x="40" y="256" width="264" height="150" rx="10" fill="#fff" stroke="#dc2626" stroke-width="1.5"/>
+<text x="58" y="282" font-size="13.5" font-weight="700" fill="#b91c1c">İPTAL, İADE DEĞİLDİR</text>
+<text x="58" y="306" font-size="11.5" fill="#334155">İPTAL: belge hüküm doğurmadı</text>
+<text x="58" y="324" font-size="11.5" fill="#334155">» ters kayıt (storno), 600 geri döner</text>
+<text x="58" y="348" font-size="11.5" fill="#334155">İADE: mal teslim oldu, geri geldi</text>
+<text x="58" y="366" font-size="11.5" fill="#334155">» <tspan font-weight="700">610</tspan> Satıştan İadeler kullanılır</text>
+<text x="58" y="390" font-size="11" fill="#dc2626">600 TERS ÇEVRİLMEZ — iade oranı</text>
+<text x="58" y="404" font-size="11" fill="#dc2626">denetim göstergesidir</text>
+
+<rect x="320" y="256" width="264" height="150" rx="10" fill="#fff" stroke="#0891b2" stroke-width="1.5"/>
+<text x="338" y="282" font-size="13.5" font-weight="700" fill="#0e7490">KAYIT SİLİNMEZ</text>
+<text x="338" y="306" font-size="11.5" fill="#334155">VUK 219 · TTK 65</text>
+<text x="338" y="330" font-size="11.5" fill="#334155">Asıl kayıt <tspan font-weight="700">İPTAL</tspan> işaretlenir,</text>
+<text x="338" y="348" font-size="11.5" fill="#334155">karşısına <tspan font-weight="700">STORNO</tspan> açılır</text>
+<text x="338" y="366" font-size="11.5" fill="#334155">(borç/alacak yer değiştirir)</text>
+<text x="338" y="390" font-size="11" fill="#0891b2">Net etki sıfır · ikisi de defterde</text>
+<text x="338" y="404" font-size="11" fill="#0891b2">Düzeltme KAYIT tarihine atılır</text>
+
+<rect x="600" y="256" width="264" height="150" rx="10" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="618" y="282" font-size="13.5" font-weight="700" fill="#6d28d9">KDV ORAN KIRILIMI</text>
+<text x="618" y="306" font-size="11.5" fill="#334155">Muavin ARDIŞIK: 391.01 · 391.02 …</text>
+<text x="618" y="324" font-size="11.5" fill="#334155">Oran koddan OKUNMAZ, katalogdan</text>
+<text x="618" y="342" font-size="11.5" fill="#334155">çözülür (%1 · %10 · %20 · istisna)</text>
+<text x="618" y="366" font-size="11" fill="#7c3aed">Oran defterde taşınmazsa beyanname</text>
+<text x="618" y="380" font-size="11" fill="#7c3aed">matrahı tek orandan hesaplanır</text>
+<text x="618" y="398" font-size="11" font-weight="600" fill="#dc2626">» YANLIŞ BEYAN</text>
+
+<!-- örnek kayıt -->
+<text x="40" y="452" font-size="16" font-weight="700" fill="#16191d">Örnek — satış faturası ve iptali</text>
+<rect x="40" y="470" width="400" height="150" rx="10" fill="#fff" stroke="#cbd5e1"/>
+<text x="60" y="495" font-size="12.5" font-weight="700" fill="#16191d">TAHAKKUK (asıl)</text>
+<text x="60" y="522" font-size="12" font-family="Courier, monospace" fill="#334155">120 Alıcılar</text><text x="420" y="522" font-size="12" font-family="Courier, monospace" text-anchor="end" fill="#16191d">B 12.000</text>
+<text x="60" y="546" font-size="12" font-family="Courier, monospace" fill="#334155">600 Yurtiçi Satışlar</text><text x="420" y="546" font-size="12" font-family="Courier, monospace" text-anchor="end" fill="#16191d">A 10.000</text>
+<text x="60" y="570" font-size="12" font-family="Courier, monospace" fill="#334155">391.06 Hesaplanan KDV %20</text><text x="420" y="570" font-size="12" font-family="Courier, monospace" text-anchor="end" fill="#16191d">A  2.000</text>
+<line x1="60" y1="584" x2="420" y2="584" stroke="#cbd5e1"/>
+<text x="60" y="604" font-size="11.5" fill="#059669">Σborç 12.000 = Σalacak 12.000</text>
+
+<rect x="470" y="470" width="400" height="150" rx="10" fill="#fef2f2" stroke="#fca5a5"/>
+<text x="490" y="495" font-size="12.5" font-weight="700" fill="#b91c1c">STORNO (iptal — ters kayıt)</text>
+<text x="490" y="522" font-size="12" font-family="Courier, monospace" fill="#334155">600 Yurtiçi Satışlar</text><text x="850" y="522" font-size="12" font-family="Courier, monospace" text-anchor="end" fill="#16191d">B 10.000</text>
+<text x="490" y="546" font-size="12" font-family="Courier, monospace" fill="#334155">391.06 Hesaplanan KDV %20</text><text x="850" y="546" font-size="12" font-family="Courier, monospace" text-anchor="end" fill="#16191d">B  2.000</text>
+<text x="490" y="570" font-size="12" font-family="Courier, monospace" fill="#334155">120 Alıcılar</text><text x="850" y="570" font-size="12" font-family="Courier, monospace" text-anchor="end" fill="#16191d">A 12.000</text>
+<line x1="490" y1="584" x2="850" y2="584" stroke="#fca5a5"/>
+<text x="490" y="604" font-size="11.5" fill="#b91c1c">Net etki 0 · asıl kayıt defterde KALIR</text>
+
+<!-- ÖTV zinciri -->
+<text x="40" y="666" font-size="16" font-weight="700" fill="#16191d">Bağlı değişken zinciri — ÖTV, KDV matrahına DAHİLDİR (ÖTVK 11 · KDVK 24/b)</text>
+<g>
+  <rect x="40" y="684" width="150" height="52" rx="8" fill="#fff" stroke="#cbd5e1"/><text x="115" y="706" font-size="12" text-anchor="middle" fill="#475569">bedel</text><text x="115" y="724" font-size="13" font-weight="700" text-anchor="middle" fill="#16191d">100.000</text>
+  <line x1="190" y1="710" x2="222" y2="710" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+  <rect x="226" y="684" width="150" height="52" rx="8" fill="#fff" stroke="#cbd5e1"/><text x="301" y="706" font-size="12" text-anchor="middle" fill="#475569">+ ÖTV %50</text><text x="301" y="724" font-size="13" font-weight="700" text-anchor="middle" fill="#16191d">50.000</text>
+  <line x1="376" y1="710" x2="408" y2="710" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+  <rect x="412" y="684" width="180" height="52" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/><text x="502" y="706" font-size="12" text-anchor="middle" fill="#6d28d9">= KDV MATRAHI</text><text x="502" y="724" font-size="13" font-weight="700" text-anchor="middle" fill="#5b21b6">150.000</text>
+  <line x1="592" y1="710" x2="624" y2="710" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+  <rect x="628" y="684" width="150" height="52" rx="8" fill="#fff" stroke="#cbd5e1"/><text x="703" y="706" font-size="12" text-anchor="middle" fill="#475569">+ KDV %20</text><text x="703" y="724" font-size="13" font-weight="700" text-anchor="middle" fill="#16191d">30.000</text>
+  <line x1="778" y1="710" x2="810" y2="710" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+  <rect x="814" y="684" width="150" height="52" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/><text x="889" y="706" font-size="12" text-anchor="middle" fill="#047857">TOPLAM</text><text x="889" y="724" font-size="13" font-weight="700" text-anchor="middle" fill="#065f46">180.000</text>
+</g>
+<text x="40" y="762" font-size="12" fill="#dc2626">! KDV yalnız bedelden hesaplansaydı 20.000 çıkardı — 10.000 EKSİK BEYAN. Sıra bozulamaz.</text>
+<text x="40" y="792" font-size="11.5" fill="#94a3b8">Audit-Liners · muhasebe motoru · kurallar: docs/learnings/iptal-iade-muhasebesi.md</text>
+</svg>

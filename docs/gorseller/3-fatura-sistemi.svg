@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 820" width="1240" height="820" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ok" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#64748b"/></marker>
+<marker id="okr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#dc2626"/></marker>
+<marker id="okg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#059669"/></marker></defs>
+<rect width="1240" height="820" fill="#fbfaf8"/>
+<text x="40" y="52" font-size="27" font-weight="700" fill="#16191d">3 · Fatura Sistemi — e-Belge yaşam döngüsü</text>
+<text x="40" y="78" font-size="14" fill="#64748b">Belge daima UBL-TR 1.2 XML. e-Belge durumu, ÖDEME durumundan AYRI bir boyuttur.</text>
+
+<!-- yönlendirme -->
+<rect x="40" y="106" width="250" height="112" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+<text x="165" y="132" font-size="14" font-weight="600" text-anchor="middle" fill="#312e81">OTOMATİK YÖNLENDİRME</text>
+<text x="60" y="156" font-size="11.5" fill="#334155">Karşı taraf e-Fatura mükellefi mi?</text>
+<text x="60" y="180" font-size="12" font-weight="600" fill="#4338ca">EVET » e-Fatura</text>
+<text x="60" y="200" font-size="12" font-weight="600" fill="#4338ca">HAYIR » e-Arşiv</text>
+
+<!-- durum makinesi -->
+<text x="330" y="100" font-size="16" font-weight="700" fill="#16191d">Durum makinesi — hangi durum kayıt doğurur?</text>
+<rect x="330" y="112" width="150" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="405" y="136" font-size="13" font-weight="600" text-anchor="middle" fill="#475569">TASLAK</text>
+<text x="405" y="156" font-size="10.5" text-anchor="middle" fill="#64748b">henüz belge değil</text>
+<line x1="480" y1="140" x2="514" y2="140" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+<rect x="518" y="112" width="150" height="56" rx="8" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="593" y="136" font-size="13" font-weight="600" text-anchor="middle" fill="#16191d">GÖNDERİLDİ</text>
+<text x="593" y="156" font-size="10.5" text-anchor="middle" fill="#64748b">GİB zarfı yolda</text>
+<line x1="668" y1="140" x2="702" y2="140" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+
+<rect x="706" y="86" width="150" height="52" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text x="781" y="108" font-size="13" font-weight="600" text-anchor="middle" fill="#065f46">KABUL / ALINDI</text>
+<text x="781" y="127" font-size="10.5" text-anchor="middle" fill="#047857">hüküm doğurdu</text>
+<rect x="706" y="146" width="150" height="52" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+<text x="781" y="168" font-size="13" font-weight="600" text-anchor="middle" fill="#b91c1c">RED / İPTAL</text>
+<text x="781" y="187" font-size="10.5" text-anchor="middle" fill="#dc2626">hüküm doğurmadı</text>
+
+<line x1="856" y1="112" x2="890" y2="112" stroke="#059669" stroke-width="2" marker-end="url(#okg)"/>
+<rect x="894" y="86" width="306" height="52" rx="8" fill="#ecfdf5" stroke="#059669"/>
+<text x="914" y="108" font-size="12" font-weight="600" fill="#065f46">+ Tahakkuk fişi · cari borç doğar</text>
+<text x="914" y="127" font-size="11" fill="#047857">120 B / 600 + 391.xx A</text>
+
+<line x1="856" y1="172" x2="890" y2="172" stroke="#dc2626" stroke-width="2" marker-end="url(#okr)"/>
+<rect x="894" y="146" width="306" height="52" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+<text x="914" y="168" font-size="12" font-weight="600" fill="#b91c1c">x Tahakkuk + STORNO çifti</text>
+<text x="914" y="187" font-size="11" fill="#dc2626">cari borç YOK · tahsilat tahsis edilemez</text>
+
+<text x="330" y="192" font-size="11" fill="#dc2626">TASLAK hiç kayıt üretmez</text>
+
+<!-- net borç hesabı -->
+<text x="40" y="252" font-size="17" font-weight="700" fill="#16191d">Faturanın gerçek borcu — tahsis motorunun kapatacağı tutar</text>
+<rect x="40" y="270" width="1160" height="128" rx="10" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="62" y="300" font-size="14" font-family="Courier, monospace" fill="#16191d">
+  <tspan font-weight="700" fill="#5b21b6">NET BORÇ</tspan>  =  toplam  −  tevkifat  −  iade  −  iskonto
+</text>
+<text x="62" y="330" font-size="11.5" fill="#475569">• <tspan font-weight="600">tevkifat</tspan> (KDVK 9): alıcı KDV'nin bir kısmını sorumlu sıfatıyla vergi dairesine öder — satıcıya ÖDEMEZ, 391'e yalnız kalan pay yazılır</text>
+<text x="62" y="352" font-size="11.5" fill="#475569">• <tspan font-weight="600">iade</tspan> (610): mal geri geldi — 600 ters çevrilmez, 610'a yazılır, 191 BORÇLANIR (KDVK 35 matrah düzeltmesi)</text>
+<text x="62" y="374" font-size="11.5" fill="#475569">• <tspan font-weight="600">iskonto</tspan> (611): fatura sonrası ciro primi / erken ödeme iskontosu</text>
+<text x="62" y="392" font-size="11" fill="#7c3aed">Hükümsüz belgede (taslak/iptal/red) NET BORÇ = 0 · negatife düşemez</text>
+
+<!-- KDV oran kırılımı -->
+<text x="40" y="440" font-size="17" font-weight="700" fill="#16191d">KDV oranı ve muavin — beyannameye giden yol</text>
+<rect x="40" y="458" width="560" height="160" rx="10" fill="#fff" stroke="#cbd5e1"/>
+<text x="62" y="484" font-size="12.5" font-weight="700" fill="#16191d">Muavin kodları ARDIŞIK (TDHP kuralı)</text>
+<g font-size="12" font-family="Courier, monospace">
+<text x="62" y="510" fill="#334155">391.01 / 191.01</text><text x="240" y="510" fill="#475569">%0  istisna (ihracat » 601)</text>
+<text x="62" y="532" fill="#334155">391.02 / 191.02</text><text x="240" y="532" fill="#475569">%1  temel gıda</text>
+<text x="62" y="554" fill="#94a3b8">391.03 / 191.03</text><text x="240" y="554" fill="#94a3b8">%8  TARİHÎ — 10.07.2023'te %10 oldu</text>
+<text x="62" y="576" fill="#334155">391.04 / 191.04</text><text x="240" y="576" fill="#475569">%10 indirimli</text>
+<text x="62" y="598" fill="#334155">391.06 / 191.06</text><text x="240" y="598" fill="#475569">%20 genel</text>
+</g>
+
+<rect x="620" y="458" width="580" height="160" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="642" y="484" font-size="12.5" font-weight="700" fill="#92400e">Oran defterde taşınmazsa ne olur?</text>
+<text x="642" y="512" font-size="11.5" fill="#334155">KDV1 formu <tspan font-weight="600">oran bazlı satır</tspan> ister. Düz "391" yazılırsa</text>
+<text x="642" y="532" font-size="11.5" fill="#334155">motor hepsini %20 sayar ve matrahı geri hesaplar.</text>
+<rect x="642" y="546" width="540" height="58" rx="8" fill="#fff" stroke="#fbbf24"/>
+<text x="660" y="568" font-size="11.5" fill="#b91c1c">ÖNCE: %20 matrah 10.714.926 (tek satır — geri hesap)</text>
+<text x="660" y="590" font-size="11.5" fill="#065f46">SONRA: %1 » 967.479 · %10 » 3.773.092 · %20 » 8.780.006</text>
+
+<!-- e-fatura entegrasyon -->
+<text x="40" y="660" font-size="17" font-weight="700" fill="#16191d">Entegrasyon — üç yol, tek belge formatı</text>
+<rect x="40" y="678" width="370" height="88" rx="10" fill="#fef2f2" stroke="#fca5a5"/>
+<text x="62" y="702" font-size="12.5" font-weight="700" fill="#b91c1c">GİB Portal</text>
+<text x="62" y="724" font-size="11.5" fill="#475569">Resmî API'si YOK</text>
+<text x="62" y="746" font-size="11.5" fill="#dc2626">» üretimde kullanılmaz</text>
+
+<rect x="430" y="678" width="370" height="88" rx="10" fill="#fffbeb" stroke="#fbbf24"/>
+<text x="452" y="702" font-size="12.5" font-weight="700" fill="#92400e">Doğrudan (EF-VAP)</text>
+<text x="452" y="724" font-size="11.5" fill="#475569">SOAP/zarf · mali mühür · XAdES</text>
+<text x="452" y="746" font-size="11.5" fill="#b45309">» BİS raporu + 7/24 yükümlülük, ağır</text>
+
+<rect x="820" y="678" width="380" height="88" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text x="842" y="702" font-size="12.5" font-weight="700" fill="#065f46">Özel Entegratör + bizim yol</text>
+<text x="842" y="724" font-size="11.5" fill="#475569">5 fiil: login » send » list » get » status</text>
+<text x="842" y="746" font-size="11.5" fill="#047857">» iç API tek, her entegratöre adapter</text>
+
+<text x="40" y="792" font-size="11.5" fill="#94a3b8">Audit-Liners · fatura sistemi · docs/tasarim/efatura-entegrasyon.md</text>
+</svg>

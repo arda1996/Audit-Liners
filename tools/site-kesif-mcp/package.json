@@ -1,0 +1,20 @@
+{
+  "name": "site-kesif-mcp",
+  "version": "0.1.0",
+  "description": "Audit-Liners dış veri katmanı için site keşif MCP sunucusu — kendi Chrome'una CDP ile bağlanıp ağ trafiğini dinler, endpoint'leri çıkarır, çağrıları taklit eder.",
+  "type": "module",
+  "bin": { "site-kesif-mcp": "dist/index.js" },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "playwright-core": "^1.49.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

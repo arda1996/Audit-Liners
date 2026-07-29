@@ -1,0 +1,51 @@
+{
+  "surum": 1,
+  "aciklama": "Duran varlık envanteri — her muhasebe alt hesabının KİMLİĞİ. 'Kayıt en ince ayrıntısına kadar açıklanmalı' ilkesi: 253.01 Üretim hattı tek satır değil, onu oluşturan 10 bileşenin her biri ayrı hesap + kimlik kartı. Amortisman/GUD/değer düşüklüğü çalışmaları varlık bazında koşar. tamamlayici: ana varlığa bağlı bütünleyici parça (ayrı hesap ama ana varlıkla birlikte değerlenir/elden çıkarılır).",
+  "varliklar": [
+    { "kod": "252.01.001", "ad": "Depo binası — ana yapı", "grup": "252.01", "marka_model": "Betonarme, 4.200 m²", "seri_plaka": "Tapu: Ada 1204 Parsel 7", "edinim": "15.03.2019", "maliyet_kurus": 150000000, "vuk_omur": 50, "tfrs_omur": 40 },
+    { "kod": "252.01.901", "ad": "Depo raf sistemi (tamamlayıcı)", "grup": "252.01", "tamamlayici_of": "252.01.001", "marka_model": "Dexion selektif raf, 1.800 palet göz", "seri_plaka": "DX-2019-4471", "edinim": "20.04.2019", "maliyet_kurus": 20000000, "vuk_omur": 10, "tfrs_omur": 12 },
+    { "kod": "252.01.902", "ad": "Yangın söndürme sistemi (tamamlayıcı)", "grup": "252.01", "tamamlayici_of": "252.01.001", "marka_model": "Sprinkler + hidrant hattı", "seri_plaka": "YS-2019-88", "edinim": "20.04.2019", "maliyet_kurus": 10000000, "vuk_omur": 10, "tfrs_omur": 15 },
+
+    { "kod": "252.02.001", "ad": "İdari bina", "grup": "252.02", "marka_model": "Betonarme, 3 kat, 900 m²", "seri_plaka": "Tapu: Ada 1204 Parsel 8", "edinim": "15.03.2019", "maliyet_kurus": 110000000, "vuk_omur": 50, "tfrs_omur": 40 },
+    { "kod": "252.02.901", "ad": "İklimlendirme (VRF) sistemi (tamamlayıcı)", "grup": "252.02", "tamamlayici_of": "252.02.001", "marka_model": "Daikin VRV IV, 12 iç ünite", "seri_plaka": "DK-VRV-2019-115", "edinim": "01.06.2019", "maliyet_kurus": 10000000, "vuk_omur": 10, "tfrs_omur": 12 },
+
+    { "kod": "253.01.001", "ad": "CNC torna tezgahı", "grup": "253.01", "marka_model": "Mazak QT-250MY", "seri_plaka": "MZ-QT250-19A045", "edinim": "10.05.2019", "maliyet_kurus": 18000000, "vuk_omur": 10, "tfrs_omur": 12 },
+    { "kod": "253.01.002", "ad": "CNC dik işleme merkezi", "grup": "253.01", "marka_model": "Haas VF-4SS", "seri_plaka": "HS-VF4-19B112", "edinim": "10.05.2019", "maliyet_kurus": 15000000, "vuk_omur": 10, "tfrs_omur": 12 },
+    { "kod": "253.01.003", "ad": "Hidrolik pres", "grup": "253.01", "marka_model": "Durma HP-160", "seri_plaka": "DR-HP160-2019", "edinim": "10.05.2019", "maliyet_kurus": 9000000, "vuk_omur": 10, "tfrs_omur": 15 },
+    { "kod": "253.01.004", "ad": "Robot kaynak hücresi", "grup": "253.01", "marka_model": "Fanuc ARC Mate 100iD", "seri_plaka": "FN-AM100-20C77", "edinim": "12.02.2020", "maliyet_kurus": 12000000, "vuk_omur": 10, "tfrs_omur": 10 },
+    { "kod": "253.01.005", "ad": "Konveyör bant hattı", "grup": "253.01", "marka_model": "Interroll, 42 m modüler", "seri_plaka": "IR-CV-2019-330", "edinim": "10.05.2019", "maliyet_kurus": 6000000, "vuk_omur": 10, "tfrs_omur": 12 },
+    { "kod": "253.01.006", "ad": "Vidalı hava kompresörü", "grup": "253.01", "marka_model": "Atlas Copco GA-45", "seri_plaka": "AC-GA45-19D201", "edinim": "10.05.2019", "maliyet_kurus": 4000000, "vuk_omur": 10, "tfrs_omur": 12 },
+    { "kod": "253.01.007", "ad": "Kalite kontrol ölçüm istasyonu", "grup": "253.01", "marka_model": "Zeiss CONTURA CMM", "seri_plaka": "ZS-CT-20E018", "edinim": "12.02.2020", "maliyet_kurus": 3000000, "vuk_omur": 5, "tfrs_omur": 8 },
+    { "kod": "253.01.008", "ad": "Otomasyon panosu ve PLC", "grup": "253.01", "marka_model": "Siemens S7-1500", "seri_plaka": "SM-S71500-19F09", "edinim": "10.05.2019", "maliyet_kurus": 1500000, "vuk_omur": 5, "tfrs_omur": 8 },
+    { "kod": "253.01.901", "ad": "Kalıp ve aparat seti (tamamlayıcı)", "grup": "253.01", "tamamlayici_of": "253.01.003", "marka_model": "Özel imalat, 24 parça", "seri_plaka": "KLP-2019-24", "edinim": "10.05.2019", "maliyet_kurus": 1000000, "vuk_omur": 5, "tfrs_omur": 5 },
+    { "kod": "253.01.902", "ad": "Kesici takım seti (tamamlayıcı)", "grup": "253.01", "tamamlayici_of": "253.01.001", "marka_model": "Sandvik Coromant", "seri_plaka": "SV-CT-2019", "edinim": "10.05.2019", "maliyet_kurus": 500000, "vuk_omur": 5, "tfrs_omur": 3 },
+
+    { "kod": "253.02.001", "ad": "Otomatik dolum makinesi", "grup": "253.02", "marka_model": "Krones Volumetric 12-head", "seri_plaka": "KR-VF12-20G455", "edinim": "05.08.2020", "maliyet_kurus": 20000000, "vuk_omur": 10, "tfrs_omur": 12 },
+    { "kod": "253.02.002", "ad": "Etiketleme makinesi", "grup": "253.02", "marka_model": "Herma 400", "seri_plaka": "HM-400-20H88", "edinim": "05.08.2020", "maliyet_kurus": 9000000, "vuk_omur": 10, "tfrs_omur": 10 },
+    { "kod": "253.02.003", "ad": "Shrink paketleme makinesi", "grup": "253.02", "marka_model": "Smipack BP-802", "seri_plaka": "SP-BP802-20J12", "edinim": "05.08.2020", "maliyet_kurus": 6000000, "vuk_omur": 10, "tfrs_omur": 10 },
+
+    { "kod": "253.03.001", "ad": "Forklift (dizel, 3 ton)", "grup": "253.03", "marka_model": "Toyota 8FD30", "seri_plaka": "TY-8FD30-19K334", "edinim": "18.06.2019", "maliyet_kurus": 9000000, "vuk_omur": 5, "tfrs_omur": 8 },
+    { "kod": "253.03.002", "ad": "Transpalet (akülü)", "grup": "253.03", "marka_model": "Jungheinrich EJE-120", "seri_plaka": "JH-EJE120-19L77", "edinim": "18.06.2019", "maliyet_kurus": 3000000, "vuk_omur": 5, "tfrs_omur": 7 },
+    { "kod": "253.03.901", "ad": "Forklift ataşmanları (tamamlayıcı)", "grup": "253.03", "tamamlayici_of": "253.03.001", "marka_model": "Kaydırma tablası + varil tutucu", "seri_plaka": "ATS-2019-2", "edinim": "18.06.2019", "maliyet_kurus": 3000000, "vuk_omur": 5, "tfrs_omur": 8 },
+
+    { "kod": "254.01.001", "ad": "Binek oto — Genel Müdür", "grup": "254.01", "marka_model": "Audi A6 2.0 TDI", "seri_plaka": "34 ABC 123", "edinim": "10.01.2022", "maliyet_kurus": 12000000, "vuk_omur": 5, "tfrs_omur": 6 },
+    { "kod": "254.01.002", "ad": "Binek oto — Mali İşler Müdürü", "grup": "254.01", "marka_model": "VW Passat 1.5 TSI", "seri_plaka": "34 DEF 456", "edinim": "10.01.2022", "maliyet_kurus": 9000000, "vuk_omur": 5, "tfrs_omur": 6 },
+    { "kod": "254.01.003", "ad": "Binek oto — Satış Müdürü", "grup": "254.01", "marka_model": "Skoda Superb 1.5 TSI", "seri_plaka": "34 GHI 789", "edinim": "15.03.2022", "maliyet_kurus": 8500000, "vuk_omur": 5, "tfrs_omur": 6 },
+    { "kod": "254.01.004", "ad": "Binek oto — Bölge sorumlusu (İzmir)", "grup": "254.01", "marka_model": "Renault Megane 1.3 TCe", "seri_plaka": "35 JKL 012", "edinim": "20.06.2022", "maliyet_kurus": 6500000, "vuk_omur": 5, "tfrs_omur": 6 },
+    { "kod": "254.01.005", "ad": "Binek oto — Bölge sorumlusu (Ankara)", "grup": "254.01", "marka_model": "Toyota Corolla 1.8 Hybrid", "seri_plaka": "06 MNO 345", "edinim": "20.06.2022", "maliyet_kurus": 7000000, "vuk_omur": 5, "tfrs_omur": 7 },
+    { "kod": "254.01.006", "ad": "Binek oto — Havuz aracı", "grup": "254.01", "marka_model": "Fiat Egea 1.4", "seri_plaka": "34 PRS 678", "edinim": "05.09.2023", "maliyet_kurus": 5000000, "vuk_omur": 5, "tfrs_omur": 6 },
+    { "kod": "254.01.901", "ad": "Kış lastik + jant setleri (tamamlayıcı)", "grup": "254.01", "tamamlayici_of": "254.01.001", "marka_model": "6 araç için takım", "seri_plaka": "LST-2022-6", "edinim": "01.11.2022", "maliyet_kurus": 1500000, "vuk_omur": 5, "tfrs_omur": 4 },
+    { "kod": "254.01.902", "ad": "Araç takip ve donanım seti (tamamlayıcı)", "grup": "254.01", "tamamlayici_of": "254.01.001", "marka_model": "Arvento GPS, 6 araç", "seri_plaka": "AR-GPS-2022", "edinim": "01.11.2022", "maliyet_kurus": 500000, "vuk_omur": 5, "tfrs_omur": 5 },
+
+    { "kod": "254.02.001", "ad": "Ticari araç — dağıtım kamyoneti", "grup": "254.02", "marka_model": "Ford Transit 350L", "seri_plaka": "34 TRN 901", "edinim": "12.04.2021", "maliyet_kurus": 14000000, "vuk_omur": 5, "tfrs_omur": 8 },
+    { "kod": "254.02.002", "ad": "Ticari araç — panelvan", "grup": "254.02", "marka_model": "Mercedes Vito 111 CDI", "seri_plaka": "34 VTO 234", "edinim": "12.04.2021", "maliyet_kurus": 11000000, "vuk_omur": 5, "tfrs_omur": 8 },
+    { "kod": "254.02.901", "ad": "Soğutma ünitesi (tamamlayıcı)", "grup": "254.02", "tamamlayici_of": "254.02.001", "marka_model": "Thermo King V-300", "seri_plaka": "TK-V300-21", "edinim": "12.04.2021", "maliyet_kurus": 5000000, "vuk_omur": 5, "tfrs_omur": 8 },
+
+    { "kod": "255.01.001", "ad": "Ofis mobilyası — çalışma istasyonları", "grup": "255.01", "marka_model": "Bürotime, 24 istasyon", "seri_plaka": "BT-2019-24", "edinim": "01.06.2019", "maliyet_kurus": 9000000, "vuk_omur": 5, "tfrs_omur": 10 },
+    { "kod": "255.01.002", "ad": "Toplantı odası donanımı", "grup": "255.01", "marka_model": "Masa + 12 koltuk + projeksiyon", "seri_plaka": "TO-2019-1", "edinim": "01.06.2019", "maliyet_kurus": 6000000, "vuk_omur": 5, "tfrs_omur": 8 },
+
+    { "kod": "255.02.001", "ad": "Sunucu ve ağ altyapısı", "grup": "255.02", "marka_model": "Dell PowerEdge R740 ×2 + switch", "seri_plaka": "DL-R740-19N01/02", "edinim": "01.06.2019", "maliyet_kurus": 12000000, "vuk_omur": 4, "tfrs_omur": 5 },
+    { "kod": "255.02.002", "ad": "Dizüstü bilgisayarlar (28 adet)", "grup": "255.02", "marka_model": "Lenovo ThinkPad T14", "seri_plaka": "LN-T14-2026 seri listesi ekte", "edinim": "10.03.2026", "maliyet_kurus": 15000000, "vuk_omur": 4, "tfrs_omur": 4 },
+    { "kod": "255.02.901", "ad": "Kesintisiz güç kaynağı (tamamlayıcı)", "grup": "255.02", "tamamlayici_of": "255.02.001", "marka_model": "APC Smart-UPS 10kVA", "seri_plaka": "APC-10K-19", "edinim": "01.06.2019", "maliyet_kurus": 3000000, "vuk_omur": 4, "tfrs_omur": 6 }
+  ]
+}

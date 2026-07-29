@@ -1,0 +1,113 @@
+{
+  "_aciklama": "Banka ekstresi açıklaması → işlem tipi → TASLAK fiş şablonu + vergi kuralı. Ekstre→fiş üretici motorun (D.10) beyni. Her satır 'açıklama'ya anahtar-kelime deseniyle sınıflandırılır (tr_katla ile normalize: İ/I, büyük/küçük). Eşleşen tip fiş şablonunu, güven skorunu ve vergi kuralını verir. YÜKSEK güven → otomatik taslak; ORTA/DÜŞÜK → SMMM onayı (maker-checker). Fiş tipi daima 'mahsup' (banka=102 hareketi). Motor deftere ASLA doğrudan kesin yazmaz; taslak üretir, muhasebeci kesinleştirir. Hesap kodları örnek/ana koddur; muavin (102.01) mükellefin banka hesabına, cari (120/320) isim eşleşmesine göre çözülür.",
+  "_meta": {
+    "versiyon": "0.1",
+    "tarih": "2026-07-19",
+    "durum": "TASLAK — SMMM incelemesi bekliyor; oranlar vergi-parametreleri.json'dan okunur",
+    "kaynak": "docs/analiz/07-acik-bankacilik-isbank.md §1c-§2 (2 ajan analizi); mevzuat: 6802 BSMV, KKDF, VUK 262",
+    "guven_seviyeleri": ["yuksek", "orta", "dusuk"],
+    "not": "guven=yuksek → otomatik taslak fiş; orta/dusuk → gri bölge, kullanıcı onayı ister. dayanak_zorunlu=true olan tipler ekstre satır referansı/dekont olmadan kesinleştirilemez."
+  },
+  "tipler": [
+    {
+      "tip": "havale_eft_fast_tahsilat", "ad": "Havale/EFT/FAST ile tahsilat", "yon": "giris",
+      "anahtar": ["HAVALE", "EFT", "FAST", "GELEN TRANSFER", "GONDEREN"],
+      "sablon": [{"hesap": "102", "taraf": "B", "aciklama": "Banka girişi"}, {"hesap": "120", "taraf": "A", "aciklama": "Müşteriden tahsilat", "cozum": "cari_isim_eslesme"}],
+      "alternatif": "Karşı taraf cari'de yoksa 340 (alınan avans) veya 679 adayı — kullanıcı seçer",
+      "guven": "orta", "dayanak_zorunlu": true, "dogrulandi": false
+    },
+    {
+      "tip": "havale_eft_fast_odeme", "ad": "Havale/EFT/FAST ile ödeme", "yon": "cikis",
+      "anahtar": ["HAVALE", "EFT", "FAST", "GIDEN TRANSFER", "ALICI"],
+      "sablon": [{"hesap": "320", "taraf": "B", "aciklama": "Satıcıya ödeme", "cozum": "cari_isim_eslesme"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "guven": "orta", "dayanak_zorunlu": true, "dogrulandi": false
+    },
+    {
+      "tip": "banka_masrafi", "ad": "Banka masrafı/komisyon (BSMV dahil)", "yon": "cikis",
+      "anahtar": ["MASRAF", "KOMISYON", "UCRET", "HESAP ISLETIM", "ISLETIM UCRETI", "EFT UCRETI", "HAVALE UCRETI"],
+      "sablon": [{"hesap": "770", "taraf": "B", "aciklama": "Banka masrafı", "hesap_secenek": ["770", "780"], "not": "770 (genel yönetim) veya 780 (finansman gideri) — mükellef tercihi; 7/A'da 632/660'a yansır"}, {"hesap": "780", "taraf": "B", "aciklama": "BSMV (masrafa dahil ise ayrıştır)", "kosul": "bsmv_gomulu", "hesap_secenek": ["770", "780"], "alt_hesap_oner": "780.BSMV", "not": "BSMV 780'de de izlenebilir (kullanıcı kararı 2026-07-19)"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "vergi": {"bsmv": "6802 — %5; masrafa GÖMÜLÜ (X×1,05) veya AYRI satır olabilir. İNDİRİLEMEZ maliyet → 191'e ASLA gitmez. Alt hesap 770.BSMV veya 780.BSMV (mükellef tercihi) — denetimde tek sorguda görünür", "gomulu_sezgi": "tutar/1,05 tam sayıya yakınsa BSMV gömülü olabilir → güven düşür"},
+      "guven": "yuksek", "dayanak_zorunlu": false, "dogrulandi": false
+    },
+    {
+      "tip": "bsmv_ayri_satir", "ad": "Ayrı satır BSMV / Gider Vergisi", "yon": "cikis",
+      "anahtar": ["BSMV", "B.S.M.V", "GIDER VERGISI", "GID.VER", "BANKA VE SIGORTA MUAM"],
+      "sablon": [{"hesap": "780", "taraf": "B", "aciklama": "BSMV", "hesap_secenek": ["770", "780"], "alt_hesap_oner": "780.BSMV"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "vergi": {"bsmv": "6802 — indirilemez; aynı gün + tutar≈ana×0,05 ile ANA işleme bağlanmalı; 770/780 mükellef tercihi", "191_yasak": true},
+      "guven": "orta", "dayanak_zorunlu": false, "dogrulandi": false
+    },
+    {
+      "tip": "kkdf", "ad": "KKDF (Kaynak Kullanımı Destekleme Fonu)", "yon": "cikis",
+      "anahtar": ["KKDF"],
+      "sablon": [{"hesap": "153", "taraf": "B", "aciklama": "İthalat maliyetine (VUK 262) — ya da 770 gider", "cozum": "baglam"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "vergi": {"kkdf": "Tüketici kredisi faizi %15, vadeli ithalat %6, TİCARİ KREDİ %0. SMMM mükellefinde tipik: ithalat transferi → maliyet"},
+      "guven": "dusuk", "dayanak_zorunlu": true, "dogrulandi": false,
+      "not": "DÜZELTME: banka işleminde 'ÖİV' oluşmaz (ÖİV telekom vergisidir). İkinci kesinti KKDF'dir."
+    },
+    {
+      "tip": "kredi_kullanim", "ad": "Kredi kullanımı (anapara girişi)", "yon": "giris",
+      "anahtar": ["KREDI KULLANIM", "KREDI TAHSIS", "SPOT KREDI", "ROTATIF"],
+      "sablon": [{"hesap": "102", "taraf": "B", "aciklama": "Kredi girişi"}, {"hesap": "300", "taraf": "A", "aciklama": "Banka kredisi", "not": "vade>1yıl ise 400"}],
+      "guven": "orta", "dayanak_zorunlu": true, "dogrulandi": false
+    },
+    {
+      "tip": "kredi_taksit_odeme", "ad": "Kredi taksiti (anapara+faiz+BSMV)", "yon": "cikis",
+      "anahtar": ["KREDI TAKSIT", "TAKSIT ODEME", "KREDI GERI ODEME", "ANAPARA"],
+      "sablon": [{"hesap": "300", "taraf": "B", "aciklama": "Anapara", "kosul": "odeme_plani"}, {"hesap": "780", "taraf": "B", "aciklama": "Faiz + BSMV", "kosul": "odeme_plani"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "vergi": {"bsmv": "kredi faizinde BSMV %5 — faizle birlikte 780'e"},
+      "guven": "dusuk", "dayanak_zorunlu": true, "dogrulandi": false,
+      "bayrak": "ayristirma_bekliyor", "not": "Anapara/faiz ayrımı ödeme planından gelir; tek satırla yapılamaz → gri bölge"
+    },
+    {
+      "tip": "mevduat_faizi", "ad": "Mevduat/vadeli faizi (net giriş)", "yon": "giris",
+      "anahtar": ["FAIZ", "VADELI FAIZ", "MEVDUAT FAIZI", "TEMETTU"],
+      "sablon": [{"hesap": "102", "taraf": "B", "aciklama": "Net faiz girişi"}, {"hesap": "193", "taraf": "B", "aciklama": "Stopaj (brütleştirmede)", "kosul": "dekont_var"}, {"hesap": "642", "taraf": "A", "aciklama": "Faiz geliri (brüt)"}],
+      "vergi": {"stopaj": "GVK geç.67 — mevduat faizi net yatar; brüt/stopaj faiz dekontundan. Stopaj oranı vergi-parametreleri.json'a eklenmeli (bugün YOK)"},
+      "guven": "dusuk", "dayanak_zorunlu": true, "dogrulandi": false,
+      "bayrak": "brutlestirme_bekliyor"
+    },
+    {
+      "tip": "vergi_sgk_odeme", "ad": "Vergi/SGK ödemesi (borç kapama)", "yon": "cikis",
+      "anahtar": ["GIB", "VERGI DAIRESI", "GELIR IDARESI", "SGK", "SOSYAL GUVENLIK", "MTV", "GECICI VERGI", "KDV ODEME", "MUHTASAR"],
+      "sablon": [{"hesap": "360", "taraf": "B", "aciklama": "Vergi borcu kapama (SGK ise 361)", "cozum": "tahakkuk_eslesme"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "guven": "orta", "dayanak_zorunlu": false, "dogrulandi": false,
+      "not": "ÖNEMLİ: gider DEĞİL, borç kapamadır (tahakkuk fişi gideri zaten yazdı). Çifte gider koruması."
+    },
+    {
+      "tip": "damga_odeme", "ad": "Damga vergisi ödemesi", "yon": "cikis",
+      "anahtar": ["DAMGA"],
+      "sablon": [{"hesap": "360", "taraf": "B", "aciklama": "Damga borcu kapama", "cozum": "tahakkuk_eslesme"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "vergi": {"damga": "488 — kredi işlemleri istisna. Beyanname damgası tahakkuktan gelir → ekstre satırı GİDER değil BORÇ KAPAMA (çifte gider riski!)"},
+      "guven": "dusuk", "dayanak_zorunlu": false, "dogrulandi": false
+    },
+    {
+      "tip": "maas_odemesi", "ad": "Maaş/ücret ödemesi", "yon": "cikis",
+      "anahtar": ["MAAS", "UCRET ODEME", "TOPLU MAAS", "PERSONEL ODEME", "BORDRO"],
+      "sablon": [{"hesap": "335", "taraf": "B", "aciklama": "Personele ödeme"}, {"hesap": "102", "taraf": "A", "aciklama": "Banka çıkışı"}],
+      "guven": "orta", "dayanak_zorunlu": false, "dogrulandi": false, "capraz": "bordro (E.6)"
+    },
+    {
+      "tip": "kendi_hesap_virman", "ad": "Kendi hesapları arası virman", "yon": "her",
+      "anahtar": ["VIRMAN", "HESABIMA", "KENDI HESAP", "VADELI ACILIS", "VADELI KAPANIS"],
+      "sablon": [{"hesap": "102.hedef", "taraf": "B", "aciklama": "Banka virman (giriş)"}, {"hesap": "102.kaynak", "taraf": "A", "aciklama": "Banka virman (çıkış)"}],
+      "guven": "orta", "dayanak_zorunlu": false, "dogrulandi": false,
+      "not": "Karşı IBAN mükellefin kendi hesabıysa: ÇİFT SAYIM riski — iki bankada da göründüğünden dedup kritik (hareket_anahtari)"
+    },
+    {
+      "tip": "pos_yatis", "ad": "POS/sanal POS net yatışı", "yon": "giris",
+      "anahtar": ["POS", "SANAL POS", "UYE ISYERI", "KREDI KARTI HAKEDIS"],
+      "sablon": [{"hesap": "102", "taraf": "B", "aciklama": "POS net yatış"}, {"hesap": "760", "taraf": "B", "aciklama": "POS komisyonu + BSMV"}, {"hesap": "108", "taraf": "A", "aciklama": "Diğer hazır değerler / 120 kart alacağı", "cozum": "baglam"}],
+      "vergi": {"bsmv": "POS komisyonunda BSMV — komisyonla birlikte 760"},
+      "guven": "dusuk", "dayanak_zorunlu": true, "dogrulandi": false,
+      "not": "Brüt/net farkı = komisyon; ayrıştırma POS hakediş raporundan"
+    },
+    {
+      "tip": "doviz_kur_farki", "ad": "Döviz hesap kur farkı", "yon": "her",
+      "anahtar": ["DOVIZ", "USD", "EUR", "KUR FARKI", "ARBITRAJ"],
+      "sablon": [{"hesap": "646", "taraf": "A", "aciklama": "Kambiyo kârı (lehte)", "kosul": "lehte"}, {"hesap": "656", "taraf": "B", "aciklama": "Kambiyo zararı (aleyhte)", "kosul": "aleyhte"}],
+      "vergi": {"kur": "İşlem anı kuru vs kayıt kuru. Girdi: J.3 TCMB kur adaptörü. Dönem sonu değerleme (VUK 280) AYRI motor"},
+      "guven": "dusuk", "dayanak_zorunlu": true, "dogrulandi": false,
+      "bayrak": "sema_belirsiz", "not": "islemler yanıtında işlem kuru/orijinal döviz tutarı geliyor mu bilinmiyor (07-...md açık soru #3) — şema yakalanmadan tasarlanamaz"
+    }
+  ]
+}

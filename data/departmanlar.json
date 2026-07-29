@@ -1,0 +1,68 @@
+{
+  "surum": 1,
+  "aciklama": "Departman → görünür MODÜLLER (görünürlük/kapsam ekseni). Kullanıcı yalnız departmanının modüllerini görür; NAV bununla süzülür (Y3). moduller: NAV/GERCEK id'leriyle eşleşir; ['*'] = tümü. Tasarım: docs/tasarim/yetkilendirme-departman-hiyerarsi.md",
+  "departmanlar": [
+    {
+      "kod": "MUHASEBE",
+      "ad": "Muhasebe",
+      "moduller": [
+        "dashboard",
+        "muhasebe",
+        "banka",
+        "belgeler",
+        "hesaplar"
+      ],
+      "aciklama": "Fiş/defter/mizan, banka, belge, hesap planı"
+    },
+    {
+      "kod": "VERGI",
+      "ad": "Vergi",
+      "moduller": [
+        "dashboard",
+        "vergi",
+        "analiz"
+      ],
+      "aciklama": "KDV/geçici vergi/takvim/parametre + mali tablolar"
+    },
+    {
+      "kod": "BORDRO",
+      "ad": "Bordro / İK",
+      "moduller": [
+        "dashboard",
+        "bordro",
+        "muhtasar"
+      ],
+      "aciklama": "Ücret tahakkuku, SGK, muhtasar (E fazı — modüller yakında)"
+    },
+    {
+      "kod": "CARI",
+      "ad": "Cari / Tahsilat",
+      "moduller": [
+        "dashboard",
+        "cari",
+        "banka",
+        "belgeler"
+      ],
+      "aciklama": "Cari kartlar, tahsilat/ödeme, banka mutabakat"
+    },
+    {
+      "kod": "DENETIM",
+      "ad": "Denetim",
+      "moduller": [
+        "dashboard",
+        "denetim",
+        "ufrs",
+        "analiz"
+      ],
+      "aciklama": "Sektörel çalışma programları/kağıtları + UFRS WorkSheet + analiz"
+    },
+    {
+      "kod": "YONETIM",
+      "ad": "Yönetim",
+      "moduller": [
+        "*"
+      ],
+      "aciklama": "Tüm modüller + kullanıcı/yetki yönetimi"
+    }
+  ]
+}

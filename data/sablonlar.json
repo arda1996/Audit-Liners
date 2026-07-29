@@ -1,0 +1,63 @@
+{
+  "surum": 1,
+  "aciklama": "Fiş şablonları — sektör etiketli. `sektorler`: ['*']=tüm sektörler, ['TIC','ETIC']=yalnız o sektörler. Frontend aktif mükellefin sektörüne göre filtreler. Tutarları kullanıcı girer; şablon yalnız DOĞRU hesapları ve tarafı belirler. Hesaplar MSUGT/TDHP'ye göre denetlendi (docs/learnings/ornek-kayitlar.md + hesap-isleyis-kurallari.md).",
+  "sablonlar": [
+    { "ad": "Müşteriden tahsilat (banka)", "tip": "Tahsil", "sektorler": ["*"], "satirlar": [
+      { "kod": "102", "aciklama": "Havale/EFT tahsilatı", "taraf": "B" }, { "kod": "120", "aciklama": "Müşteriden tahsilat", "taraf": "A" }] },
+    { "ad": "Müşteriden tahsilat (nakit)", "tip": "Tahsil", "sektorler": ["*"], "satirlar": [
+      { "kod": "100", "aciklama": "Nakit tahsilat", "taraf": "B" }, { "kod": "120", "aciklama": "Müşteriden tahsilat", "taraf": "A" }] },
+    { "ad": "Satıcıya ödeme (banka)", "tip": "Tediye", "sektorler": ["*"], "satirlar": [
+      { "kod": "320", "aciklama": "Satıcıya ödeme", "taraf": "B" }, { "kod": "102", "aciklama": "Havale/EFT ödemesi", "taraf": "A" }] },
+    { "ad": "Kasadan bankaya", "tip": "Mahsup", "sektorler": ["*"], "satirlar": [
+      { "kod": "102", "aciklama": "Bankaya yatırılan", "taraf": "B" }, { "kod": "100", "aciklama": "Kasadan bankaya yatırma", "taraf": "A" }] },
+
+    { "ad": "Peşin mal alışı", "tip": "Tediye", "sektorler": ["TIC", "ETIC", "GID"], "satirlar": [
+      { "kod": "153", "aciklama": "Ticari mal alışı", "taraf": "B" }, { "kod": "191", "aciklama": "İndirilecek KDV", "taraf": "B", "kdvOran": 20 }, { "kod": "100", "aciklama": "Nakit ödeme", "taraf": "A" }] },
+    { "ad": "Veresiye mal alışı", "tip": "Mahsup", "sektorler": ["TIC", "ETIC", "GID"], "satirlar": [
+      { "kod": "153", "aciklama": "Ticari mal alışı", "taraf": "B" }, { "kod": "191", "aciklama": "İndirilecek KDV", "taraf": "B", "kdvOran": 20 }, { "kod": "320", "aciklama": "Kredili alış", "taraf": "A" }] },
+    { "ad": "Peşin satış", "tip": "Tahsil", "sektorler": ["TIC", "ETIC", "GID", "HIZ"], "satirlar": [
+      { "kod": "100", "aciklama": "Nakit tahsilat", "taraf": "B" }, { "kod": "600", "aciklama": "Yurtiçi satış", "taraf": "A" }, { "kod": "391", "aciklama": "Hesaplanan KDV", "taraf": "A", "kdvOran": 20 }] },
+    { "ad": "Veresiye satış", "tip": "Mahsup", "sektorler": ["TIC", "ETIC", "GID", "HIZ", "URT"], "satirlar": [
+      { "kod": "120", "aciklama": "Kredili satış", "taraf": "B" }, { "kod": "600", "aciklama": "Yurtiçi satış", "taraf": "A" }, { "kod": "391", "aciklama": "Hesaplanan KDV", "taraf": "A", "kdvOran": 20 }] },
+    { "ad": "Satılan malın maliyeti (SMM)", "tip": "Mahsup", "sektorler": ["TIC", "ETIC", "GID"], "satirlar": [
+      { "kod": "621", "aciklama": "Satılan ticari malın maliyeti", "taraf": "B" }, { "kod": "153", "aciklama": "Stoktan çıkış", "taraf": "A" }] },
+    { "ad": "Satış iadesi (alınan)", "tip": "Mahsup", "sektorler": ["TIC", "ETIC", "GID"], "satirlar": [
+      { "kod": "610", "aciklama": "Satıştan iade", "taraf": "B" }, { "kod": "391", "aciklama": "Hesaplanan KDV düzeltmesi", "taraf": "B", "kdvOran": 20 }, { "kod": "120", "aciklama": "Alıcıya iade", "taraf": "A" }] },
+
+    { "ad": "Hammadde/ilk madde alışı", "tip": "Mahsup", "sektorler": ["URT", "TAR"], "satirlar": [
+      { "kod": "150", "aciklama": "İlk madde ve malzeme alışı", "taraf": "B" }, { "kod": "191", "aciklama": "İndirilecek KDV", "taraf": "B", "kdvOran": 20 }, { "kod": "320", "aciklama": "Satıcıya borç", "taraf": "A" }] },
+    { "ad": "Üretime sevk (ilk madde)", "tip": "Mahsup", "sektorler": ["URT", "TAR"], "satirlar": [
+      { "kod": "710", "aciklama": "Direkt ilk madde ve malzeme gideri", "taraf": "B" }, { "kod": "150", "aciklama": "Depodan üretime", "taraf": "A" }] },
+    { "ad": "Direkt işçilik tahakkuku", "tip": "Mahsup", "sektorler": ["URT", "TAR"], "satirlar": [
+      { "kod": "720", "aciklama": "Direkt işçilik gideri (brüt)", "taraf": "B" }, { "kod": "720", "aciklama": "SGK işveren payı gideri", "taraf": "B" }, { "kod": "335", "aciklama": "Net ücret", "taraf": "A" }, { "kod": "360", "aciklama": "Gelir vergisi + damga stopajı", "taraf": "A" }, { "kod": "361", "aciklama": "SGK kesintileri (işçi+işveren)", "taraf": "A" }] },
+    { "ad": "Genel üretim gideri (amortisman)", "tip": "Mahsup", "sektorler": ["URT", "TAR", "ENR"], "satirlar": [
+      { "kod": "730", "aciklama": "Genel üretim gideri — amortisman", "taraf": "B" }, { "kod": "257", "aciklama": "Birikmiş amortisman", "taraf": "A" }] },
+    { "ad": "Yansıtma → yarı mamul", "tip": "Mahsup", "sektorler": ["URT"], "satirlar": [
+      { "kod": "151", "aciklama": "Yarı mamullere devir", "taraf": "B" }, { "kod": "711", "aciklama": "İlk madde yansıtma", "taraf": "A" }, { "kod": "721", "aciklama": "İşçilik yansıtma", "taraf": "A" }, { "kod": "731", "aciklama": "GÜG yansıtma", "taraf": "A" }] },
+    { "ad": "Mamule alma / satış maliyeti", "tip": "Mahsup", "sektorler": ["URT"], "satirlar": [
+      { "kod": "620", "aciklama": "Satılan mamul maliyeti", "taraf": "B" }, { "kod": "152", "aciklama": "Mamul stoğundan çıkış", "taraf": "A" }] },
+
+    { "ad": "Hizmet maliyeti (personel)", "tip": "Mahsup", "sektorler": ["HIZ", "LOJ"], "satirlar": [
+      { "kod": "740", "aciklama": "Hizmet üretim maliyeti — ücret (brüt)", "taraf": "B" }, { "kod": "740", "aciklama": "SGK işveren payı gideri", "taraf": "B" }, { "kod": "335", "aciklama": "Net ücret", "taraf": "A" }, { "kod": "360", "aciklama": "Gelir vergisi + damga stopajı", "taraf": "A" }, { "kod": "361", "aciklama": "SGK kesintileri (işçi+işveren)", "taraf": "A" }] },
+    { "ad": "Hizmet maliyeti yansıtma", "tip": "Mahsup", "sektorler": ["HIZ", "LOJ"], "satirlar": [
+      { "kod": "622", "aciklama": "Satılan hizmet maliyeti", "taraf": "B" }, { "kod": "741", "aciklama": "Hizmet maliyeti yansıtma", "taraf": "A" }] },
+    { "ad": "Alınan avans (sipariş)", "tip": "Tahsil", "sektorler": ["HIZ", "INS", "URT"], "satirlar": [
+      { "kod": "102", "aciklama": "Avans tahsilatı", "taraf": "B" }, { "kod": "340", "aciklama": "Alınan sipariş avansı", "taraf": "A" }] },
+    { "ad": "Avans → hasılat (fatura)", "tip": "Mahsup", "sektorler": ["HIZ", "INS", "URT"], "satirlar": [
+      { "kod": "340", "aciklama": "Avansın hasılata dönüşü", "taraf": "B" }, { "kod": "600", "aciklama": "Yurtiçi satış", "taraf": "A" }, { "kod": "391", "aciklama": "Hesaplanan KDV", "taraf": "A", "kdvOran": 20 }] },
+
+    { "ad": "Ücret tahakkuku (genel yönetim)", "tip": "Mahsup", "sektorler": ["TIC", "ETIC", "HIZ", "SRB", "GID", "LOJ"], "satirlar": [
+      { "kod": "770", "aciklama": "Brüt ücret gideri", "taraf": "B" }, { "kod": "770", "aciklama": "SGK işveren payı gideri", "taraf": "B" }, { "kod": "335", "aciklama": "Net ücret", "taraf": "A" }, { "kod": "360", "aciklama": "Gelir vergisi + damga stopajı", "taraf": "A" }, { "kod": "361", "aciklama": "SGK kesintileri (işçi+işveren)", "taraf": "A" }] },
+    { "ad": "Amortisman (genel yönetim)", "tip": "Mahsup", "sektorler": ["TIC", "ETIC", "HIZ", "SRB", "GID"], "satirlar": [
+      { "kod": "770", "aciklama": "Amortisman gideri (yönetim)", "taraf": "B" }, { "kod": "257", "aciklama": "Birikmiş amortisman", "taraf": "A" }] },
+    { "ad": "Kira ödemesi (GVK 94 stopajlı)", "tip": "Mahsup", "sektorler": ["*"], "satirlar": [
+      { "kod": "770", "aciklama": "Kira gideri (brüt)", "taraf": "B" }, { "kod": "191", "aciklama": "İndirilecek KDV", "taraf": "B", "kdvOran": 20 }, { "kod": "102", "aciklama": "Net ödeme (banka)", "taraf": "A" }, { "kod": "360", "aciklama": "GV stopajı (%20)", "taraf": "A" }] },
+    { "ad": "Ay sonu gider yansıtması (7→6)", "tip": "Mahsup", "sektorler": ["*"], "satirlar": [
+      { "kod": "631", "aciklama": "Pazarlama SDG (761 yansıtma)", "taraf": "B" }, { "kod": "632", "aciklama": "Genel yönetim gideri (771 yansıtma)", "taraf": "B" }, { "kod": "761", "aciklama": "Pazarlama SDG yansıtma", "taraf": "A" }, { "kod": "771", "aciklama": "Genel yönetim gid. yansıtma", "taraf": "A" }] },
+
+    { "ad": "İnşaat maliyeti (yıllara yaygın)", "tip": "Mahsup", "sektorler": ["INS"], "satirlar": [
+      { "kod": "170", "aciklama": "Yıllara yaygın inşaat maliyeti", "taraf": "B" }, { "kod": "191", "aciklama": "İndirilecek KDV", "taraf": "B", "kdvOran": 20 }, { "kod": "320", "aciklama": "Taşerona/satıcıya borç", "taraf": "A" }] },
+    { "ad": "Hakediş (inşaat)", "tip": "Mahsup", "sektorler": ["INS"], "satirlar": [
+      { "kod": "120", "aciklama": "Hakediş alacağı", "taraf": "B" }, { "kod": "295", "aciklama": "Hakediş stopajı (%5)", "taraf": "B" }, { "kod": "350", "aciklama": "Yıllara yaygın hakediş", "taraf": "A" }, { "kod": "391", "aciklama": "Hesaplanan KDV", "taraf": "A", "kdvOran": 20 }] }
+  ]
+}

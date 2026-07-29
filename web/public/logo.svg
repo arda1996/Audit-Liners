@@ -1,0 +1,8 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Audit-Liners">
+  <!-- Liners: defter/mizan çizgileri -->
+  <line x1="9" y1="15" x2="39" y2="15" stroke="#16191D" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="9" y1="23" x2="39" y2="23" stroke="#16191D" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="9" y1="31" x2="27" y2="31" stroke="#16191D" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- Audit: kırmızı denetim tik'i -->
+  <path d="M26 30.5 L31 35.5 L41 20.5" stroke="#E23A32" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

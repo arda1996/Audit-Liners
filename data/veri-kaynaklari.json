@@ -1,0 +1,94 @@
+{
+  "surum": 1,
+  "aciklama": "Dış veri kaynak kaydı — 'program devasa bir API' doktrininin iskeleti. Her kaynak bir adaptörle (crates/ingest, J.2) normalize edilir; HAM YANIT kanıt olarak arşivlenir (tarih+URL — BDS 500 denetim kanıtı + yeniden üretilebilirlik). Değerler programda daima {deger, kaynak, alinma_tarihi} üçlüsüyle taşınır. Kaynak çökerse manuel override katmanı devreye girer (beyanname doktrini: izli, dayanaklı).",
+  "kaynaklar": [
+    {
+      "kod": "tcmb-gunluk-kur",
+      "ad": "TCMB günlük döviz kurları (bülten)",
+      "eksen": "ortak",
+      "erisim": { "yontem": "xml", "url": "https://www.tcmb.gov.tr/kurlar/today.xml", "kimlik": "yok", "dogrulandi": true, "canli_test": "03.07.2026 bülten 2026/122 — USD ForexBuying 46.6337 (bu oturumda çekildi)" },
+      "veri": ["Kod", "Unit", "ForexBuying/Selling (döviz alış/satış)", "BanknoteBuying/Selling (efektif)", "Bulten_No", "Tarih"],
+      "guncelleme": "iş günü ~15:30",
+      "kullanim": ["VUK 280 işlem günü kuru (yabancı para kayıt)", "analiz sayfası kur bağlamı (örnek seriyi değiştirecek)", "TMS 21 işlem kuru"]
+    },
+    {
+      "kod": "tcmb-arsiv-kur",
+      "ad": "TCMB tarihli kur arşivi",
+      "eksen": "ortak",
+      "erisim": { "yontem": "xml", "url": "https://www.tcmb.gov.tr/kurlar/{YYYYMM}/{ggAAyyyy}.xml", "kimlik": "yok", "dogrulandi": true, "canli_test": "02012026.xml bülten 2026/1 — USD 42.8810 (bu oturumda çekildi)" },
+      "veri": ["günlük bülten ile aynı şema"],
+      "guncelleme": "arşiv (değişmez)",
+      "kullanim": ["geçmiş tarihli değerleme/denetim yeniden hesabı", "iptal/düzeltme fişlerinde işlem günü kuru", "kur denetim çalışması (M-motor kanıtı)"],
+      "not": "Tatil/hafta sonu günlerde dosya yok — bir önceki iş günü bülteni geçerli (adaptör geriye yürür)"
+    },
+    {
+      "kod": "tcmb-evds",
+      "ad": "TCMB EVDS (Elektronik Veri Dağıtım Sistemi)",
+      "eksen": "ortak",
+      "erisim": { "yontem": "rest-api", "url": "https://evds2.tcmb.gov.tr/service/evds/", "kimlik": "api-key (ücretsiz kayıt — kullanıcı alacak)", "dogrulandi": false },
+      "veri": ["kur serileri", "TÜFE/Yİ-ÜFE endeksleri", "DİBS faiz/verim serileri", "ticari kredi ağırlıklı ort. faiz", "politika faizi"],
+      "guncelleme": "seriye göre günlük/haftalık/aylık",
+      "kullanim": ["TMS 29 endeksleme (TÜFE)", "VUK mük.298 (Yİ-ÜFE)", "TMS 19 iskonto (uzun vadeli DİBS verimi)", "TFRS 16 alternatif borçlanma oranı (ticari kredi faizi)", "toplu kur serisi (analiz)"],
+      "not": "TEK KAPI stratejisi: TÜİK/Hazine verilerinin çoğu EVDS'te seri olarak var — ayrı TÜİK adaptörü yerine önce EVDS denenir"
+    },
+    {
+      "kod": "tcmb-reeskont-avans",
+      "ad": "TCMB reeskont ve avans faiz oranları",
+      "eksen": "vergi",
+      "erisim": { "yontem": "scrape", "url": "https://www.tcmb.gov.tr (reeskont-avans sayfası; RG ilanı)", "kimlik": "yok", "dogrulandi": false },
+      "veri": ["reeskont oranı", "avans faiz oranı", "yürürlük tarihi"],
+      "guncelleme": "TCMB kararıyla (yılda birkaç kez)",
+      "kullanim": ["VUK 281/285 reeskont hesabı (avans oranı esas) — D′ değerleme sihirbazının girdisi"],
+      "not": "Nadir değiştiğinden scrape yerine parametre dosyası + değişiklik uyarısı da yeterli olabilir (rota kararı J.5)"
+    },
+    {
+      "kod": "damodaran-erp-crp",
+      "ad": "Damodaran (NYU Stern) — ERP + ülke risk primi",
+      "eksen": "bagimsiz-denetim",
+      "erisim": { "yontem": "dosya-indir/scrape", "url": "https://pages.stern.nyu.edu/~adamodar/ (ctryprem + implied ERP)", "kimlik": "yok", "dogrulandi": false },
+      "veri": ["implied ERP (ABD)", "Türkiye CRP (CDS/rating esaslı)", "ülke default spread"],
+      "guncelleme": "Ocak tam + yıl içi güncellemeler (CRP genelde Oca/Tem)",
+      "kullanim": ["TMS 36 değer düşüklüğü (WACC)", "TFRS 13 gerçeğe uygun değer", "TFRS 9 beklenen zarar iskontoları — bağımsız denetim değerleme kağıtları (I.4 uzman raporu değerlendirme çalışmasının kıyas verisi)"],
+      "not": "Big4 pratiğinde fiilî referans; Kroll ile çapraz doğrulanır"
+    },
+    {
+      "kod": "kroll-erp",
+      "ad": "Kroll (Duff & Phelps) — önerilen ERP + normalize risksiz oran",
+      "eksen": "bagimsiz-denetim",
+      "erisim": { "yontem": "scrape (duyuru sayfası) / manuel", "url": "https://www.kroll.com (cost of capital resources)", "kimlik": "kısmen abonelik", "dogrulandi": false },
+      "veri": ["recommended US ERP", "normalized risk-free rate"],
+      "guncelleme": "değişiklik duyurusuyla",
+      "kullanim": ["Damodaran çapraz kontrolü — denetim kağıdında 'yönetimin oranı makul mü' kıyası"],
+      "not": "Tam seri abonelik ister — MANUEL OVERRIDE katmanı asıl yol (SMMM duyurudan girer, izli)"
+    },
+    {
+      "kod": "gib-hadler-takvim",
+      "ad": "GİB — vergi takvimi + had/tutar tebliğleri + yıl sonu değerleme kurları",
+      "eksen": "vergi",
+      "erisim": { "yontem": "scrape", "url": "https://www.gib.gov.tr (takvim + tebliğ duyuruları)", "kimlik": "yok", "dogrulandi": false },
+      "veri": ["beyanname son günleri", "yıllık had/tutarlar (VUK tebliğleri)", "yıl sonu değerleme kurları tebliği (VUK 280 dönem sonu KUR BU TEBLİĞDEN — TCMB alış yedek)"],
+      "guncelleme": "yıllık + değişiklik tebliğleri",
+      "kullanim": ["vergi-parametreleri.json güncelleme akışı", "vergi takvimi sekmesi", "D′ kur değerlemesinin resmi kuru"]
+    },
+    {
+      "kod": "bist-tlref",
+      "ad": "BIST TLREF (TL gecelik referans faiz)",
+      "eksen": "bagimsiz-denetim",
+      "erisim": { "yontem": "scrape/dosya", "url": "https://www.borsaistanbul.com (TLREF sayfası)", "kimlik": "yok", "dogrulandi": false },
+      "veri": ["TLREF günlük", "TLREF endeks"],
+      "guncelleme": "iş günü",
+      "kullanim": ["TFRS 16/finansal araç iskonto bileşeni", "değerleme kağıtlarında piyasa faiz kıyası"],
+      "not": "Öncelik DÜŞÜK — EVDS ticari kredi faizi çoğu ihtiyacı karşılar"
+    },
+    {
+      "kod": "banka-pdf-ekstre",
+      "ad": "Banka PDF ekstreleri (yerel dosya)",
+      "eksen": "ortak",
+      "erisim": { "yontem": "dosya", "url": "kullanıcı yükler — profil: data/banka-profilleri.json", "kimlik": "yok", "dogrulandi": true },
+      "veri": ["ekstre hareketleri (D.5)"],
+      "guncelleme": "kullanıcı yükledikçe",
+      "kullanim": ["mutabakat motoru", "M13 bakiye zinciri"],
+      "not": "Dış veri katmanıyla AYNI ingest sözleşmesini kullanır — kaynak ha web ha dosya, adaptör arayüzü tek"
+    }
+  ]
+}

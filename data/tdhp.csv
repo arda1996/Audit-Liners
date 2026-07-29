@@ -1,0 +1,334 @@
+kod,ad
+1,DÖNEN VARLIKLAR
+10,HAZIR DEĞERLER
+100,Kasa
+101,Alınan Çekler
+102,Bankalar
+103,Verilen Çekler ve Ödeme Emirleri (-)
+108,Diğer Hazır Değerler
+11,MENKUL KIYMETLER
+110,Hisse Senetleri
+111,Özel Kesim Tahvil Senet ve Bonoları
+112,Kamu Kesimi Tahvil Senet ve Bonoları
+118,Diğer Menkul Kıymetler
+119,Menkul Kıymetler Değer Düşüklüğü Karşılığı (-)
+12,TİCARİ ALACAKLAR
+120,Alıcılar
+121,Alacak Senetleri
+122,Alacak Senetleri Reeskontu (-)
+124,Kazanılmamış Finansal Kiralama Faiz Gelirleri (-)
+126,Verilen Depozito ve Teminatlar
+127,Diğer Ticari Alacaklar
+128,Şüpheli Ticari Alacaklar
+129,Şüpheli Ticari Alacaklar Karşılığı (-)
+13,DİĞER ALACAKLAR
+131,Ortaklardan Alacaklar
+132,İştiraklerden Alacaklar
+133,Bağlı Ortaklıklardan Alacaklar
+135,Personelden Alacaklar
+136,Diğer Çeşitli Alacaklar
+137,Diğer Alacak Senetleri Reeskontu (-)
+138,Şüpheli Diğer Alacaklar
+139,Şüpheli Diğer Alacaklar Karşılığı (-)
+15,STOKLAR
+150,İlk Madde ve Malzeme
+151,Yarı Mamuller - Üretim
+152,Mamuller
+153,Ticari Mallar
+157,Diğer Stoklar
+158,Stok Değer Düşüklüğü Karşılığı (-)
+159,Verilen Sipariş Avansları
+17,YILLARA YAYGIN İNŞAAT VE ONARIM MALİYETLERİ
+170,Yıllara Yaygın İnşaat ve Onarım Maliyetleri
+178,Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı
+179,Taşeronlara Verilen Avanslar
+18,GELECEK AYLARA AİT GİDERLER VE GELİR TAHAKKUKLARI
+180,Gelecek Aylara Ait Giderler
+181,Gelir Tahakkukları
+19,DİĞER DÖNEN VARLIKLAR
+190,Devreden Katma Değer Vergisi
+191,İndirilecek Katma Değer Vergisi
+192,Diğer Katma Değer Vergisi
+193,Peşin Ödenen Vergiler ve Fonlar
+195,İş Avansları
+196,Personel Avansları
+197,Sayım ve Tesellüm Noksanları
+198,Diğer Çeşitli Dönen Varlıklar
+199,Diğer Dönen Varlıklar Karşılığı (-)
+2,DURAN VARLIKLAR
+22,TİCARİ ALACAKLAR
+220,Alıcılar
+221,Alacak Senetleri
+222,Alacak Senetleri Reeskontu (-)
+226,Verilen Depozito ve Teminatlar
+229,Şüpheli Alacaklar Karşılığı (-)
+23,DİĞER ALACAKLAR
+231,Ortaklardan Alacaklar
+232,İştiraklerden Alacaklar
+233,Bağlı Ortaklıklardan Alacaklar
+235,Personelden Alacaklar
+236,Diğer Çeşitli Alacaklar
+237,Diğer Alacak Senetleri Reeskontu (-)
+239,Şüpheli Diğer Alacaklar Karşılığı (-)
+24,MALİ DURAN VARLIKLAR
+240,Bağlı Menkul Kıymetler
+241,Bağlı Menkul Kıymetler Değer Düşüklüğü Karşılığı (-)
+242,İştirakler
+243,İştiraklere Sermaye Taahhütleri (-)
+244,İştirakler Sermaye Payları Değer Düşüklüğü Karşılığı (-)
+245,Bağlı Ortaklıklar
+246,Bağlı Ortaklıklara Sermaye Taahhütleri (-)
+247,Bağlı Ortaklıklar Sermaye Payları Değer Düşüklüğü Karşılığı (-)
+248,Diğer Mali Duran Varlıklar
+249,Diğer Mali Duran Varlıklar Değer Düşüklüğü Karşılığı (-)
+25,MADDİ DURAN VARLIKLAR
+250,Arazi ve Arsalar
+251,Yeraltı ve Yerüstü Düzenleri
+252,Binalar
+253,Tesis, Makine ve Cihazlar
+254,Taşıtlar
+255,Demirbaşlar
+256,Diğer Maddi Duran Varlıklar
+257,Birikmiş Amortismanlar (-)
+258,Yapılmakta Olan Yatırımlar
+259,Verilen Avanslar
+26,MADDİ OLMAYAN DURAN VARLIKLAR
+260,Haklar
+261,Şerefiye
+262,Kuruluş ve Örgütlenme Giderleri
+263,Araştırma ve Geliştirme Giderleri
+264,Özel Maliyetler
+267,Diğer Maddi Olmayan Duran Varlıklar
+268,Birikmiş Amortismanlar (-)
+269,Verilen Avanslar
+27,ÖZEL TÜKENMEYE TABİ VARLIKLAR
+271,Arama Giderleri
+272,Hazırlık ve Geliştirme Giderleri
+277,Diğer Özel Tükenmeye Tabi Varlıklar
+278,Birikmiş Tükenme Payları (-)
+279,Verilen Avanslar
+28,GELECEK YILLARA AİT GİDERLER VE GELİR TAHAKKUKLARI
+280,Gelecek Yıllara Ait Giderler
+281,Gelir Tahakkukları
+29,DİĞER DURAN VARLIKLAR
+291,Gelecek Yıllarda İndirilecek Katma Değer Vergisi
+292,Diğer Katma Değer Vergisi
+293,Gelecek Yıllar İhtiyacı Stoklar
+294,Elden Çıkarılacak Stoklar ve Maddi Duran Varlıklar
+295,Peşin Ödenen Vergiler ve Fonlar
+297,Diğer Çeşitli Duran Varlıklar
+298,Stok Değer Düşüklüğü Karşılığı (-)
+299,Birikmiş Amortismanlar (-)
+3,KISA VADELİ YABANCI KAYNAKLAR
+30,MALİ BORÇLAR
+300,Banka Kredileri
+303,Uzun Vadeli Kredilerin Anapara Taksitleri ve Faizleri
+304,Tahvil Anapara Borç Taksit ve Faizleri
+305,Çıkarılmış Bonolar ve Senetler
+306,Çıkarılmış Diğer Menkul Kıymetler
+308,Menkul Kıymetler İhraç Farkı (-)
+309,Diğer Mali Borçlar
+32,TİCARİ BORÇLAR
+320,Satıcılar
+321,Borç Senetleri
+322,Borç Senetleri Reeskontu (-)
+326,Alınan Depozito ve Teminatlar
+329,Diğer Ticari Borçlar
+33,DİĞER BORÇLAR
+331,Ortaklara Borçlar
+332,İştiraklere Borçlar
+333,Bağlı Ortaklıklara Borçlar
+335,Personele Borçlar
+336,Diğer Çeşitli Borçlar
+337,Diğer Borç Senetleri Reeskontu (-)
+34,ALINAN AVANSLAR
+340,Alınan Sipariş Avansları
+349,Alınan Diğer Avanslar
+35,YILLARA YAYGIN İNŞAAT VE ONARIM HAKEDİŞLERİ
+350,Yıllara Yaygın İnşaat ve Onarım Hakediş Bedelleri
+358,Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı
+36,ÖDENECEK VERGİ VE DİĞER YÜKÜMLÜLÜKLER
+360,Ödenecek Vergi ve Fonlar
+361,Ödenecek Sosyal Güvenlik Kesintileri
+368,Vadesi Geçmiş Ertelenmiş veya Taksitlendirilmiş Vergi ve Diğer Yükümlülükler
+369,Ödenecek Diğer Yükümlülükler
+37,BORÇ VE GİDER KARŞILIKLARI
+370,Dönem Kârı Vergi ve Diğer Yasal Yükümlülük Karşılıkları
+371,Dönem Kârının Peşin Ödenen Vergi ve Diğer Yükümlülükleri (-)
+372,Kıdem Tazminatı Karşılığı
+373,Maliyet Giderleri Karşılığı
+379,Diğer Borç ve Gider Karşılıkları
+38,GELECEK AYLARA AİT GELİRLER VE GİDER TAHAKKUKLARI
+380,Gelecek Aylara Ait Gelirler
+381,Gider Tahakkukları
+39,DİĞER KISA VADELİ YABANCI KAYNAKLAR
+391,Hesaplanan Katma Değer Vergisi
+392,Diğer Katma Değer Vergisi
+393,Merkez ve Şubeler Cari Hesabı
+397,Sayım ve Tesellüm Fazlaları
+399,Diğer Çeşitli Yabancı Kaynaklar
+4,UZUN VADELİ YABANCI KAYNAKLAR
+40,MALİ BORÇLAR
+400,Banka Kredileri
+405,Çıkarılmış Tahviller
+407,Çıkarılmış Diğer Menkul Kıymetler
+408,Menkul Kıymetler İhraç Farkı (-)
+409,Diğer Mali Borçlar
+42,TİCARİ BORÇLAR
+420,Satıcılar
+421,Borç Senetleri
+422,Borç Senetleri Reeskontu (-)
+426,Alınan Depozito ve Teminatlar
+429,Diğer Ticari Borçlar
+43,DİĞER BORÇLAR
+431,Ortaklara Borçlar
+432,İştiraklere Borçlar
+433,Bağlı Ortaklıklara Borçlar
+436,Diğer Çeşitli Borçlar
+437,Diğer Borç Senetleri Reeskontu (-)
+438,Kamuya Olan Ertelenmiş veya Taksitlendirilmiş Borçlar
+44,ALINAN AVANSLAR
+440,Alınan Sipariş Avansları
+449,Alınan Diğer Avanslar
+47,BORÇ VE GİDER KARŞILIKLARI
+472,Kıdem Tazminatı Karşılığı
+479,Diğer Borç ve Gider Karşılıkları
+48,GELECEK YILLARA AİT GELİRLER VE GİDER TAHAKKUKLARI
+480,Gelecek Yıllara Ait Gelirler
+481,Gider Tahakkukları
+49,DİĞER UZUN VADELİ YABANCI KAYNAKLAR
+492,Gelecek Yıllara Ertelenen veya Terkin Edilecek Katma Değer Vergisi
+493,Tesise Katılma Payları
+499,Diğer Çeşitli Uzun Vadeli Yabancı Kaynaklar
+5,ÖZ KAYNAKLAR
+50,ÖDENMİŞ SERMAYE
+500,Sermaye
+501,Ödenmemiş Sermaye (-)
+52,SERMAYE YEDEKLERİ
+520,Hisse Senetleri İhraç Primleri
+521,Hisse Senedi İptal Kârları
+522,Maddi Duran Varlık Yeniden Değerleme Artışları
+523,İştirakler Yeniden Değerleme Artışları
+529,Diğer Sermaye Yedekleri
+54,KÂR YEDEKLERİ
+540,Yasal Yedekler
+541,Statü Yedekleri
+542,Olağanüstü Yedekler
+548,Diğer Kâr Yedekleri
+549,Özel Fonlar
+57,GEÇMİŞ YILLAR KÂRLARI
+570,Geçmiş Yıllar Kârları
+58,GEÇMİŞ YILLAR ZARARLARI
+580,Geçmiş Yıllar Zararları (-)
+59,DÖNEM NET KÂRI (ZARARI)
+590,Dönem Net Kârı
+591,Dönem Net Zararı (-)
+6,GELİR TABLOSU HESAPLARI
+60,BRÜT SATIŞLAR
+600,Yurtiçi Satışlar
+601,Yurtdışı Satışlar
+602,Diğer Gelirler
+61,SATIŞ İNDİRİMLERİ (-)
+610,Satıştan İadeler (-)
+611,Satış İskontoları (-)
+612,Diğer İndirimler (-)
+62,SATIŞLARIN MALİYETİ (-)
+620,Satılan Mamuller Maliyeti (-)
+621,Satılan Ticari Mallar Maliyeti (-)
+622,Satılan Hizmet Maliyeti (-)
+623,Diğer Satışların Maliyeti (-)
+63,FAALİYET GİDERLERİ (-)
+630,Araştırma ve Geliştirme Giderleri (-)
+631,Pazarlama Satış ve Dağıtım Giderleri (-)
+632,Genel Yönetim Giderleri (-)
+64,DİĞER FAALİYETLERDEN OLAĞAN GELİR VE KÂRLAR
+640,İştiraklerden Temettü Gelirleri
+641,Bağlı Ortaklıklardan Temettü Gelirleri
+642,Faiz Gelirleri
+643,Komisyon Gelirleri
+644,Konusu Kalmayan Karşılıklar
+645,Menkul Kıymet Satış Kârları
+646,Kambiyo Kârları
+647,Reeskont Faiz Gelirleri
+649,Diğer Olağan Gelir ve Kârlar
+65,DİĞER FAALİYETLERDEN OLAĞAN GİDER VE ZARARLAR (-)
+653,Komisyon Giderleri (-)
+654,Karşılık Giderleri (-)
+655,Menkul Kıymet Satış Zararları (-)
+656,Kambiyo Zararları (-)
+657,Reeskont Faiz Giderleri (-)
+659,Diğer Olağan Gider ve Zararlar (-)
+66,FİNANSMAN GİDERLERİ (-)
+660,Kısa Vadeli Borçlanma Giderleri (-)
+661,Uzun Vadeli Borçlanma Giderleri (-)
+67,OLAĞANDIŞI GELİR VE KÂRLAR
+671,Önceki Dönem Gelir ve Kârları
+679,Diğer Olağandışı Gelir ve Kârlar
+68,OLAĞANDIŞI GİDER VE ZARARLAR (-)
+680,Çalışmayan Kısım Gider ve Zararları (-)
+681,Önceki Dönem Gider ve Zararları (-)
+689,Diğer Olağandışı Gider ve Zararlar (-)
+69,DÖNEM NET KÂRI (ZARARI)
+690,Dönem Kârı veya Zararı
+691,Dönem Kârı Vergi ve Diğer Yasal Yükümlülük Karşılıkları (-)
+692,Dönem Net Kârı veya Zararı
+7,MALİYET HESAPLARI
+70,MALİYET MUHASEBESİ BAĞLANTI HESAPLARI
+700,Maliyet Muhasebesi Bağlantı Hesabı
+701,Maliyet Muhasebesi Yansıtma Hesabı
+71,DİREKT İLK MADDE VE MALZEME GİDERLERİ
+710,Direkt İlk Madde ve Malzeme Giderleri
+711,Direkt İlk Madde ve Malzeme Yansıtma Hesabı
+712,Direkt İlk Madde ve Malzeme Fiyat Farkı
+713,Direkt İlk Madde ve Malzeme Miktar Farkı
+72,DİREKT İŞÇİLİK GİDERLERİ
+720,Direkt İşçilik Giderleri
+721,Direkt İşçilik Giderleri Yansıtma Hesabı
+722,Direkt İşçilik Ücret Farkları
+723,Direkt İşçilik Süre (Zaman) Farkları
+73,GENEL ÜRETİM GİDERLERİ
+730,Genel Üretim Giderleri
+731,Genel Üretim Giderleri Yansıtma Hesabı
+732,Genel Üretim Giderleri Bütçe Farkları
+733,Genel Üretim Giderleri Verimlilik Farkları
+734,Genel Üretim Giderleri Kapasite Farkları
+74,HİZMET ÜRETİM MALİYETİ
+740,Hizmet Üretim Maliyeti
+741,Hizmet Üretim Maliyeti Yansıtma Hesabı
+742,Hizmet Üretim Maliyeti Fark Hesapları
+75,ARAŞTIRMA VE GELİŞTİRME GİDERLERİ
+750,Araştırma ve Geliştirme Giderleri
+751,Araştırma ve Geliştirme Giderleri Yansıtma Hesabı
+752,Araştırma ve Geliştirme Gider Farkları
+76,PAZARLAMA SATIŞ VE DAĞITIM GİDERLERİ
+760,Pazarlama Satış ve Dağıtım Giderleri
+761,Pazarlama Satış ve Dağıtım Giderleri Yansıtma Hesabı
+762,Pazarlama Satış ve Dağıtım Giderleri Fark Hesabı
+77,GENEL YÖNETİM GİDERLERİ
+770,Genel Yönetim Giderleri
+771,Genel Yönetim Giderleri Yansıtma Hesabı
+772,Genel Yönetim Gider Farkları Hesabı
+78,FİNANSMAN GİDERLERİ
+780,Finansman Giderleri
+781,Finansman Giderleri Yansıtma Hesabı
+782,Finansman Giderleri Fark Hesabı
+79,GİDER ÇEŞİTLERİ (7/B SEÇENEĞİ)
+790,İlk Madde ve Malzeme Giderleri
+791,İşçi Ücret ve Giderleri
+792,Memur Ücret ve Giderleri
+793,Dışarıdan Sağlanan Fayda ve Hizmetler
+794,Çeşitli Giderler
+795,Vergi Resim ve Harçlar
+796,Amortismanlar ve Tükenme Payları
+797,Finansman Giderleri
+798,Gider Çeşitleri Yansıtma Hesabı
+799,Üretim Maliyet Hesabı
+9,NAZIM HESAPLAR
+900,Borçlu Nazım Hesaplar
+901,Alacaklı Nazım Hesaplar
+283,Ertelenmiş Vergi Varlığı
+483,Ertelenmiş Vergi Yükümlülüğü
+549.90,Aktüeryal Kazanç/Kayıp Fonu (OCI)
+648,Enflasyon Düzeltmesi Karları
+658,Enflasyon Düzeltmesi Zararları (-)
+698,Enflasyon Düzeltme Hesabı

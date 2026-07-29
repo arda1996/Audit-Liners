@@ -1,0 +1,1276 @@
+{
+  "_amac": "Bir SMMM'nin fiilen eline geçen BELGE EVRENİNİN envanteri. Okuma motorunun geliştirme ve sınama veri setidir: hangi belge türü, hangi alanları taşır, hangi bağıntıyla DOĞRULANIR, hangi mevzuata dayanır, kaç farklı düzende gelir.",
+  "_neden_boyle": "300 rastgele PDF bir veri seti DEĞİLDİR — test seti olması için her belgenin doğru cevabı da bilinmelidir. Ayrıca gerçek doldurulmuş belgeler mükellef verisi içerir, herkese açık bulunmaz. Bu yüzden veri seti iki eksenlidir: (1) belge TÜRÜ ve doğrulama kuralı, (2) o türün geldiği VARYANT kaynakları (banka, entegratör, kurum). Şablon sayısı = tür × varyant. Motor türü öğrenir, varyantı şablon belleğinde biriktirir.",
+  "_kullanim": [
+    "GELİŞTİRME: yeni belge türü eklerken `zorunlu_alanlar` ve `denklemler` doğrudan data/belge-parametreleri.json'a taşınır.",
+    "SINAMA: `ornek_yolu` dolu olan her kayıt regresyon örneğidir. Kullanıcı gerçek belge ekledikçe burası dolar.",
+    "ÖNCELİK: `siklik` alanı hangi türe önce yatırım yapılacağını söyler — GUNLUK olanlar hacmin çoğunu üretir.",
+    "KAPSAM ÖLÇÜMÜ: `durum` alanı motorun o türü okuyup okuyamadığını gösterir; ilerleme buradan izlenir."
+  ],
+  "_genisletme": "Yeni tür eklerken doldurulması ZORUNLU alanlar: kod, ad, kategori, siklik, zorunlu_alanlar, dayanak, durum. `denklemler` boş olabilir ama boşsa NEDEN boş olduğu `dogrulama_notu`nda yazılmalı — doğrulanamayan belge, motorun otomatik dolduramayacağı belgedir.",
+  "_durum_kodlari": {
+    "OKUNUYOR": "Motor bu türü tanıyor, alanları çıkarıyor, denklemi sınıyor.",
+    "KISMEN": "Bazı alanlar okunuyor; denklem yok veya eksik.",
+    "PLANLI": "Şeması yazıldı, motora bağlanmadı.",
+    "ARASTIRMA": "Alan yapısı netleşmedi; gerçek örnek gerekiyor."
+  },
+  "_siklik_kodlari": {
+    "GUNLUK": "Her gün onlarca gelir — hacmin çoğu burada, otomasyon getirisi en yüksek.",
+    "AYLIK": "Ayda bir/birkaç kez.",
+    "DONEMSEL": "Üç aylık / yıllık.",
+    "SEYREK": "Yılda birkaç kez veya olaya bağlı — uzun kuyruk, seçimli mod yeterli."
+  },
+  "belge_turleri": [
+    {
+      "kod": "EFATURA_SATIS",
+      "ad": "e-Fatura (satış)",
+      "kategori": "SATIS_ALIS",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "vkn",
+        "belge_no",
+        "tarih",
+        "matrah",
+        "kdv",
+        "toplam"
+      ],
+      "opsiyonel_alanlar": [
+        "tevkifat",
+        "istisna_kod",
+        "iskonto",
+        "ettn",
+        "senaryo"
+      ],
+      "denklemler": [
+        "matrah + kdv = toplam",
+        "kalem toplamı = matrah"
+      ],
+      "dayanak": "VUK 229, 509 Sıra No.lu VUK GT",
+      "durum": "OKUNUYOR",
+      "varyant_ekseni": "EFATURA_ENTEGRATOR",
+      "notlar": "UBL-TR XML varsa OCR'a hiç gerek yok — birebir okunur. PDF çıktısı entegratöre göre değişir."
+    },
+    {
+      "kod": "EFATURA_ALIS",
+      "ad": "e-Fatura (alış)",
+      "kategori": "SATIS_ALIS",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "vkn",
+        "belge_no",
+        "tarih",
+        "matrah",
+        "kdv",
+        "toplam"
+      ],
+      "opsiyonel_alanlar": [
+        "tevkifat",
+        "istisna_kod"
+      ],
+      "denklemler": [
+        "matrah + kdv = toplam"
+      ],
+      "dayanak": "VUK 229",
+      "durum": "OKUNUYOR",
+      "varyant_ekseni": "EFATURA_ENTEGRATOR"
+    },
+    {
+      "kod": "EARSIV",
+      "ad": "e-Arşiv fatura",
+      "kategori": "SATIS_ALIS",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "belge_no",
+        "tarih",
+        "matrah",
+        "kdv",
+        "toplam"
+      ],
+      "denklemler": [
+        "matrah + kdv = toplam"
+      ],
+      "dayanak": "509 Sıra No.lu VUK GT",
+      "durum": "OKUNUYOR",
+      "varyant_ekseni": "EFATURA_ENTEGRATOR",
+      "notlar": "Nihai tüketiciye kesilir; VKN yerine TCKN olabilir veya hiç olmayabilir."
+    },
+    {
+      "kod": "KAGIT_FATURA",
+      "ad": "Kağıt fatura",
+      "kategori": "SATIS_ALIS",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "belge_no",
+        "tarih",
+        "matrah",
+        "kdv",
+        "toplam"
+      ],
+      "denklemler": [
+        "matrah + kdv = toplam"
+      ],
+      "dayanak": "VUK 229-231",
+      "durum": "KISMEN",
+      "dogrulama_notu": "Taranmış gelir; metin katmanı yok. Görüntü okuma zinciri gerekiyor.",
+      "varyant_ekseni": "MATBAA"
+    },
+    {
+      "kod": "EIRSALIYE",
+      "ad": "e-İrsaliye",
+      "kategori": "SATIS_ALIS",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "vkn",
+        "belge_no",
+        "tarih",
+        "sevk_tarihi"
+      ],
+      "denklemler": [],
+      "dogrulama_notu": "Tutar taşımaz — doğrulama, eşleşen faturayla çapraz yapılır.",
+      "dayanak": "VUK 230, 509 Sıra No.lu VUK GT",
+      "durum": "PLANLI",
+      "varyant_ekseni": "EFATURA_ENTEGRATOR"
+    },
+    {
+      "kod": "ESMM",
+      "ad": "e-Serbest Meslek Makbuzu",
+      "kategori": "SATIS_ALIS",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "tarih",
+        "brut",
+        "stopaj",
+        "kdv",
+        "net"
+      ],
+      "denklemler": [
+        "brüt − stopaj + kdv = net tahsil edilen",
+        "stopaj = brüt × oran"
+      ],
+      "dayanak": "GVK 94, VUK 236",
+      "durum": "PLANLI",
+      "notlar": "Serbest meslekte TAHSİL esası — ödenmemiş gider yazılamaz (GVK 68)."
+    },
+    {
+      "kod": "EMUSTAHSIL",
+      "ad": "e-Müstahsil makbuzu",
+      "kategori": "SATIS_ALIS",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "tckn",
+        "tarih",
+        "brut",
+        "stopaj",
+        "net"
+      ],
+      "denklemler": [
+        "brüt − stopaj = net"
+      ],
+      "dayanak": "VUK 235, GVK 94/11",
+      "durum": "PLANLI",
+      "notlar": "Çiftçiden alımda. Bağkur/borsa tescil kesintileri de olabilir."
+    },
+    {
+      "kod": "GIDER_PUSULASI",
+      "ad": "Gider pusulası",
+      "kategori": "SATIS_ALIS",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "tckn",
+        "tarih",
+        "brut",
+        "stopaj",
+        "net"
+      ],
+      "denklemler": [
+        "brüt − stopaj = net"
+      ],
+      "dayanak": "VUK 234",
+      "durum": "OKUNUYOR"
+    },
+    {
+      "kod": "PERAKENDE_FIS",
+      "ad": "Perakende satış fişi / yazarkasa fişi",
+      "kategori": "SATIS_ALIS",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ],
+      "opsiyonel_alanlar": [
+        "kdv",
+        "vkn",
+        "unvan"
+      ],
+      "denklemler": [
+        "kdv dahil toplam = matrah + kdv (oran biliniyorsa)"
+      ],
+      "dayanak": "VUK 233",
+      "durum": "ARASTIRMA",
+      "dogrulama_notu": "Termal kağıt, solmuş, buruşuk. Görüntü okumanın en zor sınıfı."
+    },
+    {
+      "kod": "IADE_FATURASI",
+      "ad": "İade faturası",
+      "kategori": "SATIS_ALIS",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "belge_no",
+        "tarih",
+        "matrah",
+        "kdv",
+        "toplam"
+      ],
+      "denklemler": [
+        "matrah + kdv = toplam",
+        "iade tutarı ≤ asıl fatura tutarı"
+      ],
+      "dayanak": "KDVK 35, MSUGT 610",
+      "durum": "PLANLI",
+      "notlar": "600 TERS ÇEVRİLMEZ; 610'a yazılır. Asıl faturayla çapraz doğrulanmalı."
+    },
+    {
+      "kod": "BANKA_DEKONT",
+      "ad": "Banka dekontu (havale/EFT/FAST)",
+      "kategori": "BANKA",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "tarih",
+        "tutar"
+      ],
+      "opsiyonel_alanlar": [
+        "unvan",
+        "iban",
+        "aciklama",
+        "referans"
+      ],
+      "denklemler": [],
+      "dogrulama_notu": "Tek işlem — iç aritmetiği yok. Doğrulama ekstre bakiyesi ve fatura eşleşmesiyle yapılır.",
+      "dayanak": "VUK mük. 257 (tevsik)",
+      "durum": "PLANLI",
+      "varyant_ekseni": "BANKA"
+    },
+    {
+      "kod": "BANKA_EKSTRE",
+      "ad": "Hesap ekstresi",
+      "kategori": "BANKA",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "iban",
+        "donem",
+        "acilis",
+        "kapanis"
+      ],
+      "denklemler": [
+        "açılış + Σgiriş − Σçıkış = kapanış",
+        "her satırda: önceki bakiye ± tutar = yeni bakiye"
+      ],
+      "dayanak": "—",
+      "durum": "PLANLI",
+      "varyant_ekseni": "BANKA",
+      "notlar": "Bakiye zinciri, satır bazlı doğrulama sağlar — okuma hatasını satırında yakalar. En değerli denklem türü."
+    },
+    {
+      "kod": "KREDI_ODEME_PLANI",
+      "ad": "Kredi ödeme planı",
+      "kategori": "BANKA",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "anapara",
+        "faiz_orani",
+        "vade",
+        "taksit"
+      ],
+      "denklemler": [
+        "Σtaksit = anapara + Σfaiz",
+        "kalan bakiye zinciri kapanmalı"
+      ],
+      "dayanak": "—",
+      "durum": "PLANLI",
+      "varyant_ekseni": "BANKA"
+    },
+    {
+      "kod": "POS_HESAP_OZETI",
+      "ad": "POS / sanal POS hesap özeti",
+      "kategori": "BANKA",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "brut_ciro",
+        "komisyon",
+        "net_aktarilan"
+      ],
+      "denklemler": [
+        "brüt ciro − komisyon − BSMV = net aktarılan"
+      ],
+      "dayanak": "6802 BSMV",
+      "durum": "ARASTIRMA",
+      "varyant_ekseni": "BANKA"
+    },
+    {
+      "kod": "CEK_SENET",
+      "ad": "Çek / senet görüntüsü",
+      "kategori": "BANKA",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "tutar",
+        "vade",
+        "kesideci"
+      ],
+      "denklemler": [
+        "rakamla tutar = yazıyla tutar"
+      ],
+      "dayanak": "TTK 780 vd.",
+      "durum": "KISMEN",
+      "notlar": "Rakam↔yazı çapraz kontrolü motorumuzda VAR ve burada doğrudan işe yarar."
+    },
+    {
+      "kod": "KUR_BILGISI",
+      "ad": "TCMB döviz kuru bildirimi",
+      "kategori": "BANKA",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "tarih",
+        "para_birimi",
+        "kur"
+      ],
+      "denklemler": [],
+      "dogrulama_notu": "Tek değer; doğrulama TCMB kaynağıyla karşılaştırmadır.",
+      "dayanak": "VUK 280",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "TAHSILAT_MAKBUZU",
+      "ad": "Tahsilat makbuzu",
+      "kategori": "TAHSILAT_ODEME",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "tarih",
+        "tutar",
+        "yaziyla"
+      ],
+      "denklemler": [
+        "rakamla tutar = yazıyla tutar"
+      ],
+      "dayanak": "VUK 232 vd.",
+      "durum": "OKUNUYOR"
+    },
+    {
+      "kod": "TEDIYE_MAKBUZU",
+      "ad": "Tediye makbuzu",
+      "kategori": "TAHSILAT_ODEME",
+      "siklik": "GUNLUK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "tarih",
+        "tutar",
+        "yaziyla"
+      ],
+      "denklemler": [
+        "rakamla tutar = yazıyla tutar"
+      ],
+      "dayanak": "—",
+      "durum": "OKUNUYOR"
+    },
+    {
+      "kod": "CARI_MUTABAKAT",
+      "ad": "Cari mutabakat / bakiye bildirimi",
+      "kategori": "TAHSILAT_ODEME",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "unvan",
+        "tarih",
+        "borc_bakiye",
+        "alacak_bakiye",
+        "net_bakiye"
+      ],
+      "denklemler": [
+        "borç − alacak = net bakiye",
+        "net bakiye = defterdeki cari bakiye (çapraz)"
+      ],
+      "dayanak": "BDS 505 (dış teyit)",
+      "durum": "OKUNUYOR",
+      "notlar": "Defterle çapraz doğrulama burada mümkün — belge dışı bağımsız tanık."
+    },
+    {
+      "kod": "BORDRO",
+      "ad": "Ücret bordrosu",
+      "kategori": "PERSONEL",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "brut_ucret",
+        "sgk_isci",
+        "issizlik_isci",
+        "gelir_vergisi",
+        "damga",
+        "net_ucret"
+      ],
+      "denklemler": [
+        "brüt − SGK işçi − işsizlik − gelir vergisi − damga = net",
+        "Σ personel = bordro toplamı"
+      ],
+      "dayanak": "GVK 61-63, 5510 SK",
+      "durum": "PLANLI",
+      "varyant_ekseni": "BORDRO_YAZILIMI",
+      "notlar": "Muhtasar ve SGK bildirgesiyle çapraz doğrulanabilir — üçlü mutabakat."
+    },
+    {
+      "kod": "SGK_TAHAKKUK",
+      "ad": "SGK aylık prim ve hizmet belgesi / tahakkuk fişi",
+      "kategori": "PERSONEL",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "sigortali_sayisi",
+        "prim_matrahi",
+        "prim_tutari"
+      ],
+      "denklemler": [
+        "prim matrahı × oran = prim tutarı",
+        "bordro SGK matrahı = bildirge matrahı (çapraz)"
+      ],
+      "dayanak": "5510 SK",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "ISE_GIRIS_CIKIS",
+      "ad": "SGK işe giriş / çıkış bildirgesi",
+      "kategori": "PERSONEL",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "tckn",
+        "ad_soyad",
+        "tarih"
+      ],
+      "denklemler": [],
+      "dogrulama_notu": "Tutar yok; bordro personel listesiyle çapraz kontrol edilir.",
+      "dayanak": "5510 SK 8/9",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "IHBAR_KIDEM",
+      "ad": "Kıdem / ihbar tazminatı hesap belgesi",
+      "kategori": "PERSONEL",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "calisma_suresi",
+        "giydirilmis_ucret",
+        "kidem",
+        "ihbar"
+      ],
+      "denklemler": [
+        "kıdem = giydirilmiş ücret × yıl (tavan sınırlı)"
+      ],
+      "dayanak": "1475 SK 14, 4857 SK 17",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "KDV1",
+      "ad": "KDV Beyannamesi (1 No.lu)",
+      "kategori": "BEYANNAME",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "matrah_toplami",
+        "hesaplanan_kdv",
+        "indirilecek_kdv",
+        "odenecek_veya_devreden"
+      ],
+      "denklemler": [
+        "hesaplanan − indirimler = ödenecek veya devreden",
+        "Σ oran bazlı matrah = matrah toplamı",
+        "beyan = defterdeki 391/191 (çapraz)"
+      ],
+      "dayanak": "KDVK 40-41",
+      "durum": "KISMEN",
+      "varyant_ekseni": "BEYANNAME_KAYNAGI"
+    },
+    {
+      "kod": "KDV2",
+      "ad": "KDV Beyannamesi (2 No.lu, sorumlu sıfatıyla)",
+      "kategori": "BEYANNAME",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "matrah",
+        "tevkif_edilen_kdv"
+      ],
+      "denklemler": [
+        "matrah × oran × tevkifat oranı = tevkif edilen"
+      ],
+      "dayanak": "KDVK 9",
+      "durum": "PLANLI",
+      "notlar": "KDV1'in 109 satırıyla zincirlenir — iki beyanname çapraz doğrulanabilir."
+    },
+    {
+      "kod": "MUHTASAR",
+      "ad": "Muhtasar ve Prim Hizmet Beyannamesi",
+      "kategori": "BEYANNAME",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "gayrisafi_tutar",
+        "kesinti_tutari",
+        "kisi_sayisi"
+      ],
+      "denklemler": [
+        "Σ ödeme türü kesintisi = toplam kesinti",
+        "bordro stopajı = beyan (çapraz)"
+      ],
+      "dayanak": "GVK 94, 98",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "GECICI_VERGI",
+      "ad": "Geçici vergi beyannamesi",
+      "kategori": "BEYANNAME",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "donem",
+        "ticari_kar",
+        "kkeg",
+        "matrah",
+        "hesaplanan_vergi",
+        "odenecek"
+      ],
+      "denklemler": [
+        "ticari kâr + KKEG − istisnalar = matrah",
+        "matrah × oran = hesaplanan",
+        "hesaplanan − önceki dönemler = ödenecek"
+      ],
+      "dayanak": "GVK mük. 120, KVK 32",
+      "durum": "KISMEN"
+    },
+    {
+      "kod": "KURUMLAR",
+      "ad": "Kurumlar vergisi beyannamesi",
+      "kategori": "BEYANNAME",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "donem",
+        "ticari_kar",
+        "kkeg",
+        "matrah",
+        "hesaplanan_vergi"
+      ],
+      "denklemler": [
+        "ticari kâr + KKEG − indirimler − geçmiş yıl zararı = matrah",
+        "beyan = gelir tablosu (çapraz)"
+      ],
+      "dayanak": "KVK 14-25",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "GELIR_VERGISI",
+      "ad": "Yıllık gelir vergisi beyannamesi",
+      "kategori": "BEYANNAME",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "donem",
+        "matrah",
+        "hesaplanan_vergi",
+        "mahsup_edilecek"
+      ],
+      "denklemler": [
+        "dilimli tarife uygulaması",
+        "hesaplanan − mahsuplar = ödenecek"
+      ],
+      "dayanak": "GVK 85-92",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "DAMGA_BEYAN",
+      "ad": "Damga vergisi beyannamesi",
+      "kategori": "BEYANNAME",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "matrah",
+        "vergi"
+      ],
+      "denklemler": [
+        "matrah × nispi oran = vergi (veya maktu tutar)"
+      ],
+      "dayanak": "488 sayılı DVK",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "TAHAKKUK_FISI",
+      "ad": "Vergi dairesi tahakkuk fişi",
+      "kategori": "BEYANNAME",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "vergi_turu",
+        "tahakkuk_tutari",
+        "vade"
+      ],
+      "denklemler": [
+        "tahakkuk = beyannamedeki ödenecek (çapraz)"
+      ],
+      "dayanak": "VUK 25",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "ODEME_MAKBUZU_VD",
+      "ad": "Vergi ödeme makbuzu",
+      "kategori": "BEYANNAME",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "tarih",
+        "vergi_turu",
+        "tutar"
+      ],
+      "denklemler": [
+        "ödeme = tahakkuk (çapraz)"
+      ],
+      "dayanak": "—",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "DEGERLEME_GAYRIMENKUL",
+      "ad": "Gayrimenkul değerleme raporu",
+      "kategori": "DEGERLEME",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "degerlenen_varlik",
+        "degerleme_tarihi",
+        "yontem",
+        "ulasilan_deger",
+        "degerleme_uzmani"
+      ],
+      "denklemler": [
+        "ARALIK: ulaşılan değer, gösterilen emsallerin arasında olmalı",
+        "TARIH: değerleme tarihi ≤ rapor tarihi ve dönem içinde",
+        "VARLIK: TFRS 13 girdi seviyesi (1/2/3) beyan edilmiş olmalı",
+        "CAPRAZ: rapordaki değer = deftere alınan tutar"
+      ],
+      "dayanak": "TFRS 13, SPK Değerleme Standartları",
+      "durum": "ARASTIRMA",
+      "varyant_ekseni": "DEGERLEME_FIRMASI",
+      "notlar": "Aritmetik denklemi YOKTUR — doğrulama aralık/tarih/varlık/çapraz türlerindendir. Motor bu denklem türlerini henüz desteklemiyor."
+    },
+    {
+      "kod": "DEGERLEME_MAKINE",
+      "ad": "Makine-teçhizat değerleme raporu",
+      "kategori": "DEGERLEME",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "degerlenen_varlik",
+        "degerleme_tarihi",
+        "yontem",
+        "ulasilan_deger"
+      ],
+      "denklemler": [
+        "ARALIK: emsal aralığı",
+        "CAPRAZ: 253 hesabındaki tutar"
+      ],
+      "dayanak": "TFRS 13, VUK 262",
+      "durum": "ARASTIRMA",
+      "varyant_ekseni": "DEGERLEME_FIRMASI"
+    },
+    {
+      "kod": "STOK_SAYIM",
+      "ad": "Stok sayım tutanağı",
+      "kategori": "DEGERLEME",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "sayim_tarihi",
+        "kalem_listesi",
+        "toplam_deger"
+      ],
+      "denklemler": [
+        "Σ(miktar × birim maliyet) = toplam değer",
+        "CAPRAZ: 153 hesap bakiyesi"
+      ],
+      "dayanak": "VUK 186, TMS 2",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "AMORTISMAN_TABLOSU",
+      "ad": "Amortisman tablosu",
+      "kategori": "DEGERLEME",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "varlik",
+        "maliyet",
+        "oran",
+        "donem_amortismani",
+        "birikmis"
+      ],
+      "denklemler": [
+        "maliyet × oran = dönem amortismanı",
+        "Σ dönem = birikmiş",
+        "CAPRAZ: 257/268 bakiyesi"
+      ],
+      "dayanak": "VUK 313-320",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "KIYMET_TAKDIR",
+      "ad": "Kıymet takdir raporu (mahkeme/icra)",
+      "kategori": "DEGERLEME",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "varlik",
+        "tarih",
+        "takdir_edilen_deger"
+      ],
+      "denklemler": [
+        "TARIH tutarlılığı",
+        "CAPRAZ: defter değeri"
+      ],
+      "dayanak": "İİK",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "TAPU_SENEDI",
+      "ad": "Tapu senedi",
+      "kategori": "RESMI",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "ada_parsel",
+        "malik",
+        "tarih",
+        "beyan_edilen_deger"
+      ],
+      "denklemler": [
+        "CAPRAZ: 250/252 hesabına alınan tutar"
+      ],
+      "dayanak": "4721 TMK",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "ARAC_RUHSAT",
+      "ad": "Araç tescil belgesi (ruhsat)",
+      "kategori": "RESMI",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "plaka",
+        "sasi_no",
+        "marka_model",
+        "cinsi",
+        "tescil_tarihi"
+      ],
+      "denklemler": [],
+      "dogrulama_notu": "Tutar taşımaz. KRİTİK İŞLEVİ: 'cinsi' alanı binek oto mu ticari mi belirler — KKEG kısıtı (GVK 40/5) buna bağlıdır.",
+      "dayanak": "2918 KTK",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "NOTER_SATIS",
+      "ad": "Noter araç satış sözleşmesi",
+      "kategori": "RESMI",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "taraflar",
+        "plaka",
+        "tarih",
+        "satis_bedeli"
+      ],
+      "denklemler": [
+        "CAPRAZ: 254 hesabına alınan tutar = satış bedeli"
+      ],
+      "dayanak": "1512 Noterlik K.",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "TICARET_SICIL",
+      "ad": "Ticaret sicil gazetesi",
+      "kategori": "RESMI",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "sicil_no",
+        "tarih",
+        "konu"
+      ],
+      "opsiyonel_alanlar": [
+        "sermaye",
+        "ortaklar",
+        "temsil_yetkisi"
+      ],
+      "denklemler": [
+        "CAPRAZ: sermaye = 500 hesap bakiyesi"
+      ],
+      "dayanak": "TTK 35",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "VERGI_LEVHASI",
+      "ad": "Vergi levhası",
+      "kategori": "RESMI",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "unvan",
+        "vkn",
+        "vergi_dairesi",
+        "faaliyet_kodu",
+        "beyan_edilen_matrah"
+      ],
+      "denklemler": [
+        "CAPRAZ: beyan edilen matrah = beyannamedeki matrah"
+      ],
+      "dayanak": "VUK 5",
+      "durum": "PLANLI"
+    },
+    {
+      "kod": "IMZA_SIRKULERI",
+      "ad": "İmza sirküleri",
+      "kategori": "RESMI",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "unvan",
+        "yetkililer",
+        "tarih"
+      ],
+      "denklemler": [],
+      "dogrulama_notu": "Tutar yok; yetki doğrulaması için kullanılır (BDS 315 iç kontrol).",
+      "dayanak": "—",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "FAALIYET_BELGESI",
+      "ad": "Oda faaliyet belgesi",
+      "kategori": "RESMI",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "unvan",
+        "sicil_no",
+        "faaliyet_konusu",
+        "tarih"
+      ],
+      "denklemler": [],
+      "dayanak": "—",
+      "durum": "ARASTIRMA",
+      "dogrulama_notu": "Tutar taşımaz. Faaliyet konusunun sektör seçimiyle tutarlılığı için kullanılır."
+    },
+    {
+      "kod": "GUMRUK_BEYANNAME",
+      "ad": "Gümrük beyannamesi",
+      "kategori": "RESMI",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "beyanname_no",
+        "tarih",
+        "fob_deger",
+        "cif_deger",
+        "gumruk_vergisi",
+        "kdv"
+      ],
+      "denklemler": [
+        "FOB + navlun + sigorta = CIF",
+        "CIF + gümrük vergisi = KDV matrahı"
+      ],
+      "dayanak": "4458 Gümrük K., KDVK 21",
+      "durum": "ARASTIRMA",
+      "notlar": "İhracat istisnası ve ithalat KDV'si için zorunlu dayanak."
+    },
+    {
+      "kod": "KIRA_SOZLESMESI",
+      "ad": "Kira sözleşmesi",
+      "kategori": "SOZLESME",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "taraflar",
+        "baslangic",
+        "sure",
+        "aylik_kira"
+      ],
+      "denklemler": [
+        "stopaj = kira × oran (GVK 94/5)",
+        "CAPRAZ: aylık gider kaydı = sözleşme kirası"
+      ],
+      "dayanak": "6098 TBK 299 vd., GVK 94/5",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "HIZMET_SOZLESMESI",
+      "ad": "Hizmet / danışmanlık sözleşmesi",
+      "kategori": "SOZLESME",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "taraflar",
+        "tarih",
+        "bedel"
+      ],
+      "denklemler": [
+        "damga vergisi = bedel × binde 9,48",
+        "CAPRAZ: faturalanan tutar ≤ sözleşme bedeli"
+      ],
+      "dayanak": "488 DVK",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "LEASING_SOZLESMESI",
+      "ad": "Finansal kiralama sözleşmesi",
+      "kategori": "SOZLESME",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "taraflar",
+        "varlik",
+        "anapara",
+        "taksitler",
+        "faiz"
+      ],
+      "denklemler": [
+        "Σtaksit = anapara + Σfaiz",
+        "CAPRAZ: 260/302-402 hesapları"
+      ],
+      "dayanak": "6361 SK, TFRS 16",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "TESLIM_TUTANAGI",
+      "ad": "Teslim / kabul tutanağı",
+      "kategori": "SOZLESME",
+      "siklik": "SEYREK",
+      "zorunlu_alanlar": [
+        "taraflar",
+        "tarih",
+        "konu"
+      ],
+      "denklemler": [],
+      "dogrulama_notu": "Hasılatın ne zaman doğduğunu belgeler (TFRS 15 kontrol devri).",
+      "dayanak": "TFRS 15",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "MIZAN",
+      "ad": "Mizan (geçici/kesin)",
+      "kategori": "DENETIM",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "hesap_listesi",
+        "borc_toplam",
+        "alacak_toplam"
+      ],
+      "denklemler": [
+        "Σborç = Σalacak",
+        "her hesap: borç − alacak = bakiye"
+      ],
+      "dayanak": "VUK 219",
+      "durum": "PLANLI",
+      "notlar": "Denklemi en güçlü belgelerden — okuma hatasını anında ele verir."
+    },
+    {
+      "kod": "BILANCO",
+      "ad": "Bilanço",
+      "kategori": "DENETIM",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "donem",
+        "aktif_toplam",
+        "pasif_toplam"
+      ],
+      "denklemler": [
+        "aktif = pasif",
+        "dönen + duran = aktif",
+        "KVYK + UVYK + özkaynak = pasif"
+      ],
+      "dayanak": "MSUGT",
+      "durum": "PLANLI",
+      "varyant_ekseni": "MUHASEBE_YAZILIMI"
+    },
+    {
+      "kod": "GELIR_TABLOSU",
+      "ad": "Gelir tablosu",
+      "kategori": "DENETIM",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "donem",
+        "brut_satis",
+        "smm",
+        "brut_kar",
+        "donem_kari"
+      ],
+      "denklemler": [
+        "brüt satış − indirimler = net satış",
+        "net satış − SMM = brüt kâr",
+        "CAPRAZ: dönem kârı = bilanço 590"
+      ],
+      "dayanak": "MSUGT",
+      "durum": "PLANLI",
+      "varyant_ekseni": "MUHASEBE_YAZILIMI"
+    },
+    {
+      "kod": "KEBIR",
+      "ad": "Defter-i kebir / muavin döküm",
+      "kategori": "DENETIM",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "hesap",
+        "donem",
+        "hareketler",
+        "bakiye"
+      ],
+      "denklemler": [
+        "açılış + Σborç − Σalacak = kapanış bakiyesi"
+      ],
+      "dayanak": "VUK 182",
+      "durum": "PLANLI",
+      "varyant_ekseni": "MUHASEBE_YAZILIMI"
+    },
+    {
+      "kod": "YEVMIYE",
+      "ad": "Yevmiye defteri dökümü",
+      "kategori": "DENETIM",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "yevmiye_no",
+        "tarih",
+        "satirlar"
+      ],
+      "denklemler": [
+        "her fişte Σborç = Σalacak",
+        "yevmiye no boşluksuz ve artan"
+      ],
+      "dayanak": "VUK 183",
+      "durum": "PLANLI",
+      "varyant_ekseni": "MUHASEBE_YAZILIMI"
+    },
+    {
+      "kod": "EDEFTER_BERAT",
+      "ad": "e-Defter beratı",
+      "kategori": "DENETIM",
+      "siklik": "AYLIK",
+      "zorunlu_alanlar": [
+        "donem",
+        "berat_no",
+        "imza_tarihi",
+        "ozet_deger"
+      ],
+      "denklemler": [
+        "CAPRAZ: berat özeti = defter dosyası özeti"
+      ],
+      "dayanak": "1 Sıra No.lu e-Defter GT",
+      "durum": "ARASTIRMA"
+    },
+    {
+      "kod": "DENETIM_RAPORU",
+      "ad": "Bağımsız denetim raporu",
+      "kategori": "DENETIM",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "denetlenen",
+        "donem",
+        "gorus_turu",
+        "denetci",
+        "tarih"
+      ],
+      "denklemler": [
+        "VARLIK: görüş türü beyan edilmiş olmalı",
+        "TARIH: rapor tarihi ≥ bilanço tarihi"
+      ],
+      "dayanak": "BDS 700-706",
+      "durum": "ARASTIRMA",
+      "varyant_ekseni": "DENETIM_FIRMASI"
+    },
+    {
+      "kod": "TEYIT_MEKTUBU",
+      "ad": "Banka / cari teyit mektubu (dış teyit)",
+      "kategori": "DENETIM",
+      "siklik": "DONEMSEL",
+      "zorunlu_alanlar": [
+        "kurum",
+        "tarih",
+        "bakiye"
+      ],
+      "denklemler": [
+        "CAPRAZ: teyit bakiyesi = defter bakiyesi"
+      ],
+      "dayanak": "BDS 505",
+      "durum": "ARASTIRMA",
+      "varyant_ekseni": "BANKA"
+    }
+  ],
+  "varyant_eksenleri": {
+    "_not": "Aynı belge TÜRÜ, kaynağına göre farklı DÜZENDE gelir. Şablon sayısı = tür × varyant. Motor türü koddan bilir, düzeni şablon belleğinden ÖĞRENİR. Bu listeler öğrenmenin hedef kümesidir — her biri bir kez öğrenilince o kaynaktan gelen tüm belgeler otomatik okunur.",
+    "BANKA": {
+      "aciklama": "Dekont, ekstre, kredi planı, POS özeti ve teyit mektubu bu kaynaklardan gelir. Her bankanın kendi düzeni var.",
+      "kamu_mevduat": [
+        "Ziraat Bankası",
+        "Halkbank",
+        "VakıfBank",
+        "Ziraat Dinamik Banka"
+      ],
+      "ozel_mevduat": [
+        "Akbank",
+        "Türkiye İş Bankası",
+        "Yapı Kredi",
+        "Türk Ekonomi Bankası",
+        "Şekerbank",
+        "Anadolubank",
+        "Fibabanka",
+        "Turkish Bank",
+        "Colendi Bank",
+        "FUPS Bank"
+      ],
+      "yabanci_mevduat": [
+        "Garanti BBVA",
+        "DenizBank",
+        "QNB",
+        "ING Bank",
+        "Alternatif Bank",
+        "Burgan Bank",
+        "Odeabank",
+        "HSBC",
+        "Citibank",
+        "Deutsche Bank",
+        "ICBC Turkey Bank",
+        "Arap Türk Bankası",
+        "Bank of China Turkey",
+        "MUFG Bank Turkey",
+        "Rabobank",
+        "T-Bank",
+        "Enpara Bank"
+      ],
+      "katilim": [
+        "Kuveyt Türk",
+        "Albaraka Türk",
+        "Türkiye Finans",
+        "Vakıf Katılım",
+        "Ziraat Katılım",
+        "Türkiye Emlak Katılım",
+        "Dünya Katılım",
+        "Hayat Finans Katılım",
+        "T.O.M Katılım"
+      ],
+      "kalkinma_yatirim": [
+        "Türk Eximbank",
+        "Türkiye Sınai Kalkınma Bankası",
+        "Türkiye Kalkınma Bankası",
+        "İller Bankası",
+        "Aktif Bank",
+        "Takasbank",
+        "PASHA Bank",
+        "Nurol Yatırım",
+        "GSD Yatırım",
+        "Diler Yatırım",
+        "Destek Yatırım",
+        "D Yatırım",
+        "Golden Global",
+        "Standard Chartered Yatırım",
+        "Bank of America"
+      ]
+    },
+    "EFATURA_ENTEGRATOR": {
+      "aciklama": "e-Fatura/e-Arşiv PDF çıktısının düzenini entegratör belirler. XML (UBL-TR) her zaman aynıdır — XML varsa OCR'a hiç gerek yok, bu yüzden entegratör farkı YALNIZ PDF yolunda önemlidir.",
+      "liste": [
+        "GİB Portal",
+        "Logo e-Fatura",
+        "Mikro",
+        "Netsis",
+        "Uyumsoft",
+        "İzibiz",
+        "Paraşüt",
+        "Digital Planet",
+        "e-Finans",
+        "Turkcell e-Şirket",
+        "Foriba/Sovos",
+        "Nes Bilgi",
+        "Veriban",
+        "İdea",
+        "Zirve",
+        "Akınsoft",
+        "Bizimhesap",
+        "Kolay Bi'Fatura",
+        "QNB e-Fatura",
+        "TÜRMOB Luca"
+      ]
+    },
+    "MUHASEBE_YAZILIMI": {
+      "aciklama": "Mizan, kebir, yevmiye, bilanço ve gelir tablosu dökümleri bu yazılımlardan gelir. SMMM'nin kendi yazılımı sabittir; müşteriden gelenler değişir.",
+      "liste": [
+        "Luca (TÜRMOB)",
+        "Logo Tiger/Go",
+        "Mikro",
+        "Netsis",
+        "Zirve",
+        "Akınsoft",
+        "Eta",
+        "Orka",
+        "Vega",
+        "Nebim",
+        "Paraşüt",
+        "Bizimhesap",
+        "Uyumsoft",
+        "Datasoft",
+        "Link",
+        "Barsoft",
+        "Odak",
+        "Senkron",
+        "Dia",
+        "Canias"
+      ]
+    },
+    "BORDRO_YAZILIMI": {
+      "aciklama": "Bordro ve SGK bildirge dökümleri.",
+      "liste": [
+        "Luca Bordro",
+        "Logo İK",
+        "Mikro Bordro",
+        "Zirve Bordro",
+        "Kolay İK",
+        "BordroPlus",
+        "Netsis İK",
+        "SGK e-Bildirge",
+        "İŞKUR portal",
+        "Orka Bordro"
+      ]
+    },
+    "DEGERLEME_FIRMASI": {
+      "aciklama": "SPK lisanslı değerleme kuruluşları. Rapor formatı firmadan firmaya TAMAMEN farklıdır; aritmetik denklem yoktur. En zor sınıf — öğrenme katmanının asıl sınavı burasıdır.",
+      "not": "SPK'nın yetkili değerleme kuruluşları listesi güncel tutulmalı; buraya isim yazmak yerine mükellefin fiilen çalıştığı firmalar biriktirilmeli.",
+      "liste": []
+    },
+    "DENETIM_FIRMASI": {
+      "aciklama": "KGK yetkili bağımsız denetim kuruluşları. Rapor iskeleti BDS 700 ile standarttır ama düzen firmaya göre değişir.",
+      "liste": []
+    },
+    "MATBAA": {
+      "aciklama": "Anlaşmalı matbaa basımı kağıt belgeler. e-belgeye geçişle azalıyor ama eski dönem ve küçük mükellefte sürüyor.",
+      "liste": []
+    },
+    "BEYANNAME_KAYNAGI": {
+      "aciklama": "Beyanname çıktısının geldiği yer.",
+      "liste": [
+        "GİB Beyanname Düzenleme Programı (BDP)",
+        "GİB İnteraktif Vergi Dairesi",
+        "Muhasebe yazılımı çıktısı",
+        "e-Beyanname XML"
+      ]
+    }
+  },
+  "ornekler": {
+    "_not": "Gerçek örnek belgeler buraya eklenir. GERÇEK MÜKELLEF VERİSİ EKLENMEZ — anonimleştirilmiş veya kamuya açık örnekler kullanılır. Her örnek için `beklenen` alanı doldurulmalıdır; beklenen değeri olmayan dosya test örneği değil, sadece dosyadır.",
+    "_dizin": "data/ornek-belgeler/ (git'e girmez — .gitignore)",
+    "kayitlar": []
+  },
+  "_kapsam_ozeti": {
+    "belge_turu": 57,
+    "varyant_kaynagi": 109,
+    "kuramsal_sablon": 491,
+    "kuramsal_sablon_aciklama": "Varyant ekseni olan her tür, o eksendeki her kaynak için ayrı bir düzendir. Motorun öğrenmesi gereken hedef küme budur.",
+    "denklemi_olan_tur": 49,
+    "durum": {
+      "OKUNUYOR": 7,
+      "KISMEN": 4,
+      "PLANLI": 26,
+      "ARASTIRMA": 20
+    },
+    "_uyari": "Bu sayılar ENVANTERDİR, başarı ölçüsü DEĞİLDİR. Motorun gerçekte kaçını okuduğu ancak gerçek belgelerle ölçülebilir ve o ölçüm HENÜZ YAPILMADI. 'OKUNUYOR' etiketi, o türün ŞEMASININ motora bağlı olduğunu söyler; her varyantında çalıştığını değil."
+  }
+}

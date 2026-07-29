@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 880" width="1240" height="880" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ok" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#64748b"/></marker>
+<marker id="okr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#dc2626"/></marker>
+<marker id="okg" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#059669"/></marker></defs>
+<rect width="1240" height="880" fill="#fbfaf8"/>
+<text x="40" y="52" font-size="27" font-weight="700" fill="#16191d">4 · Eşleştirme (Tahsis) Motoru — para hangi faturayı kapatır?</text>
+<text x="40" y="78" font-size="14" fill="#64748b">Otomatik ASIL, maker istisna. Üç öncelik katmanı sırayla çalışır; artan para bir sonrakine akar.</text>
+
+<!-- 3 katman -->
+<rect x="40" y="104" width="1160" height="212" rx="12" fill="#fff" stroke="#cbd5e1"/>
+<text x="62" y="132" font-size="15" font-weight="700" fill="#16191d">Öncelik sırası</text>
+
+<rect x="62" y="146" width="356" height="150" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+<text x="82" y="172" font-size="13.5" font-weight="700" fill="#334155">0 · DONMUŞ</text>
+<text x="82" y="196" font-size="11.5" fill="#475569">Deftere fiş olarak geçmiş dağıtım</text>
+<text x="82" y="216" font-size="11.5" fill="#475569">aynen korunur — yeniden hesaplanmaz.</text>
+<rect x="82" y="228" width="316" height="56" rx="8" fill="#fff" stroke="#cbd5e1"/>
+<text x="98" y="250" font-size="11" fill="#b91c1c">Bir kez unutuldu: tek düzeltme 365 yeni +</text>
+<text x="98" y="268" font-size="11" fill="#b91c1c">366 storno üretti (zincirleme kayma)</text>
+
+<rect x="434" y="146" width="356" height="150" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="454" y="172" font-size="13.5" font-weight="700" fill="#92400e">1 · MANUEL (maker)</text>
+<text x="454" y="196" font-size="11.5" fill="#475569">Muhasebecinin kararı FIFO'yu EZER.</text>
+<text x="454" y="216" font-size="11.5" fill="#475569">Hedef fatura doluysa oradaki tahsis</text>
+<text x="454" y="234" font-size="11.5" fill="#475569">DÜŞÜRÜLÜR, o para serbest kalır.</text>
+<rect x="454" y="244" width="316" height="40" rx="8" fill="#fff" stroke="#fbbf24"/>
+<text x="470" y="269" font-size="11" fill="#92400e">Yalnız HEDEF faturada — zincir kaymaz</text>
+
+<rect x="806" y="146" width="372" height="150" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text x="826" y="172" font-size="13.5" font-weight="700" fill="#065f46">2 · FIFO (otomatik)</text>
+<text x="826" y="196" font-size="11.5" fill="#475569">O carinin EN ESKİ açık faturasından</text>
+<text x="826" y="214" font-size="11.5" fill="#475569">başlayarak kapatır.</text>
+<rect x="826" y="226" width="332" height="58" rx="8" fill="#fff" stroke="#a7f3d0"/>
+<text x="842" y="248" font-size="11.5" font-weight="600" fill="#047857">Dayanak: TBK 100</text>
+<text x="842" y="268" font-size="11" fill="#334155">Borçlu belirtmemişse en eski/muaccel borç kapanır</text>
+
+<line x1="418" y1="221" x2="430" y2="221" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+<line x1="790" y1="221" x2="802" y2="221" stroke="#64748b" stroke-width="2" marker-end="url(#ok)"/>
+
+<!-- ön koşul -->
+<rect x="40" y="332" width="560" height="118" rx="10" fill="#fff" stroke="#dc2626" stroke-width="1.5"/>
+<text x="62" y="360" font-size="14" font-weight="700" fill="#b91c1c">Otomatik eşleşmenin ön koşulu: KARŞI TARAF ÜNVANI</text>
+<text x="62" y="386" font-size="11.5" fill="#334155">Ünvan yoksa hangi cariye ait olduğu bilinemez.</text>
+<text x="62" y="406" font-size="11.5" fill="#334155">Tahmin edip bir cariye yazmak <tspan font-weight="700">yanlış bakiye</tspan> üretir.</text>
+<text x="62" y="430" font-size="11.5" font-weight="600" fill="#dc2626">» Motor eşleştirmez, maker kuyruğuna düşer (havada bakiye)</text>
+
+<rect x="620" y="332" width="580" height="118" rx="10" fill="#fff" stroke="#cbd5e1"/>
+<text x="642" y="360" font-size="14" font-weight="700" fill="#16191d">İki ek kural</text>
+<text x="642" y="386" font-size="11.5" fill="#334155">• Tahsilat, kendinden <tspan font-weight="600">SONRAKİ tarihli</tspan> faturayı kapatamaz</text>
+<text x="642" y="404" font-size="11" fill="#64748b">   (henüz doğmamış borç ödenmiş sayılamaz)</text>
+<text x="642" y="428" font-size="11.5" fill="#334155">• Hükümsüz belgeye (taslak/iptal/red) tahsis <tspan font-weight="600">edilemez</tspan></text>
+
+<!-- sonuç durumları -->
+<text x="40" y="490" font-size="17" font-weight="700" fill="#16191d">Manuel eşleştirmenin dört sonucu — sessiz durum YOK</text>
+<rect x="40" y="508" width="1160" height="150" rx="10" fill="#fff" stroke="#cbd5e1"/>
+
+<rect x="62" y="524" width="270" height="116" rx="8" fill="#ecfdf5" stroke="#059669"/>
+<text x="80" y="548" font-size="12" font-weight="700" fill="#065f46">TAM_YAZILDI_FATURA_KAPANDI</text>
+<text x="80" y="574" font-size="11.5" fill="#334155">Tahsilatın tamamı yazıldı,</text>
+<text x="80" y="592" font-size="11.5" fill="#334155">fatura kapandı.</text>
+<text x="80" y="620" font-size="11" fill="#059669">tutar = fatura kalanı</text>
+
+<rect x="346" y="524" width="270" height="116" rx="8" fill="#fffbeb" stroke="#fbbf24"/>
+<text x="364" y="548" font-size="12" font-weight="700" fill="#92400e">TAM_YAZILDI_FATURA_ACIK</text>
+<text x="364" y="574" font-size="11.5" fill="#334155">Tamamı yazıldı ama fatura</text>
+<text x="364" y="592" font-size="11.5" fill="#334155">KAPANMADI — kısmi ödeme.</text>
+<text x="364" y="620" font-size="11" fill="#b45309">tutar &lt; fatura kalanı · cari borç sürer</text>
+
+<rect x="630" y="524" width="270" height="116" rx="8" fill="#fffbeb" stroke="#fbbf24"/>
+<text x="648" y="548" font-size="12" font-weight="700" fill="#92400e">KISMEN_YAZILDI</text>
+<text x="648" y="574" font-size="11.5" fill="#334155">Faturanın borcu kadarı yazıldı,</text>
+<text x="648" y="592" font-size="11.5" fill="#334155">AŞAN kısım FIFO'ya aktı.</text>
+<text x="648" y="620" font-size="11" fill="#b45309">tutar &gt; fatura kalanı · artan = avans</text>
+
+<rect x="914" y="524" width="264" height="116" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+<text x="932" y="548" font-size="12" font-weight="700" fill="#b91c1c">YAZILAMADI</text>
+<text x="932" y="574" font-size="11.5" fill="#334155">Hedef başka MANUEL kararla</text>
+<text x="932" y="592" font-size="11.5" fill="#334155">dolu — manuel manueli düşürmez.</text>
+<text x="932" y="620" font-size="11" fill="#dc2626">» hangisini kaldıracağı söylenir</text>
+
+<!-- güvenlik katmanı -->
+<text x="40" y="700" font-size="17" font-weight="700" fill="#16191d">Güvenlik katmanı — her mutasyon iki kapıdan geçer</text>
+<rect x="40" y="718" width="560" height="122" rx="10" fill="#fff" stroke="#0891b2" stroke-width="1.5"/>
+<text x="62" y="744" font-size="13.5" font-weight="700" fill="#0e7490">ÖN KONTROL (K kodları)</text>
+<text x="62" y="766" font-size="11.5" fill="#475569">Kullanıcı hatasını ENGELLER — çözümüyle birlikte</text>
+<text x="62" y="790" font-size="11" font-family="Courier, monospace" fill="#334155">K01 tahsilat yok · K02 fatura yok · K03 hükümsüz</text>
+<text x="62" y="808" font-size="11" font-family="Courier, monospace" fill="#334155">K04 cari · K05 yön · K06 net borç 0 · K07 manuel dolu</text>
+<text x="62" y="826" font-size="11" font-family="Courier, monospace" fill="#64748b">K08 zaten bağlı · K09 tarih · K10 tutar aşımı (uyarı)</text>
+
+<rect x="620" y="718" width="580" height="122" rx="10" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="642" y="744" font-size="13.5" font-weight="700" fill="#6d28d9">DEĞİŞMEZ (D kodları)</text>
+<text x="642" y="766" font-size="11.5" fill="#475569">Sistem hatasını YAKALAR — biri bozulursa BUG'dır</text>
+<text x="642" y="790" font-size="11" font-family="Courier, monospace" fill="#334155">D01 para korunumu · D02 dağıtım tutarlılığı</text>
+<text x="642" y="808" font-size="11" font-family="Courier, monospace" fill="#334155">D03 aşırı tahsilat · D04 negatif kalan</text>
+<text x="642" y="826" font-size="11" font-family="Courier, monospace" fill="#334155">D05 hükümsüz belge tahsis almış · D06 defter dengesi</text>
+
+<text x="40" y="866" font-size="11.5" fill="#94a3b8">Audit-Liners · tahsis motoru · crates/api/src/kontrol.rs · GET /api/kontrol/saglik</text>
+</svg>

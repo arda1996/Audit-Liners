@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'IBM Plex Sans', system-ui, sans-serif; background: #F4F6F8; color: #16191D; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #16191D; color: #fff; }
+  .scry::-webkit-scrollbar { width: 10px; height: 10px; }
+  .scry::-webkit-scrollbar-thumb { background: #DDE1E6; border-radius: 8px; border: 3px solid #fff; }
+  .scry::-webkit-scrollbar-track { background: transparent; }
+</style>
+</helmet>
+
+<div style="display:flex; min-height:100vh; width:100%; background:#F4F6F8;">
+
+  <!-- SOL MENÜ -->
+  <aside style="width:248px; flex-shrink:0; background:#FFFFFF; border-right:1px solid #EBEDF0; display:flex; flex-direction:column; position:sticky; top:0; height:100vh;">
+    <div style="padding:20px 20px 16px 20px; display:flex; align-items:center; gap:11px;">
+      <div style="width:34px; height:34px; border-radius:9px; background:#16191D; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; letter-spacing:-0.5px;">DT</div>
+      <div style="display:flex; flex-direction:column; line-height:1.15;">
+        <span style="font-size:14px; font-weight:600;">{{ companyName }}</span>
+        <span style="font-size:11.5px; color:#8A929E;">Ön Muhasebe</span>
+      </div>
+    </div>
+
+    <nav class="scry" style="flex:1; overflow-y:auto; padding:6px 12px 16px 12px; display:flex; flex-direction:column; gap:2px;">
+      <div style="font-size:10.5px; font-weight:600; letter-spacing:0.7px; color:#A8AEB8; padding:14px 12px 6px 12px;">GENEL</div>
+      <sc-for list="{{ navGenel }}" as="item" hint-placeholder-count="1">
+        <div onClick="{{ item.onClick }}" style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; border-radius:9px; cursor:pointer; font-size:13.5px; background:{{ item.bg }}; color:{{ item.color }}; font-weight:{{ item.weight }}; box-shadow:{{ item.shadow }};">
+          <span>{{ item.label }}</span>
+          <span style="font-size:11px; color:{{ item.badgeColor }}; font-weight:600;">{{ item.badge }}</span>
+        </div>
+      </sc-for>
+
+      <div style="font-size:10.5px; font-weight:600; letter-spacing:0.7px; color:#A8AEB8; padding:14px 12px 6px 12px;">SATIŞ &amp; ALIŞ</div>
+      <sc-for list="{{ navSatis }}" as="item" hint-placeholder-count="3">
+        <div onClick="{{ item.onClick }}" style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; border-radius:9px; cursor:pointer; font-size:13.5px; background:{{ item.bg }}; color:{{ item.color }}; font-weight:{{ item.weight }}; box-shadow:{{ item.shadow }};">
+          <span>{{ item.label }}</span>
+          <span style="font-size:11px; color:{{ item.badgeColor }}; font-weight:600;">{{ item.badge }}</span>
+        </div>
+      </sc-for>
+
+      <div style="font-size:10.5px; font-weight:600; letter-spacing:0.7px; color:#A8AEB8; padding:14px 12px 6px 12px;">FİNANS</div>
+      <sc-for list="{{ navFinans }}" as="item" hint-placeholder-count="2">
+        <div onClick="{{ item.onClick }}" style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; border-radius:9px; cursor:pointer; font-size:13.5px; background:{{ item.bg }}; color:{{ item.color }}; font-weight:{{ item.weight }}; box-shadow:{{ item.shadow }};">
+          <span>{{ item.label }}</span>
+          <span style="font-size:11px; color:{{ item.badgeColor }}; font-weight:600;">{{ item.badge }}</span>
+        </div>
+      </sc-for>
+
+      <div style="font-size:10.5px; font-weight:600; letter-spacing:0.7px; color:#A8AEB8; padding:14px 12px 6px 12px;">RAPOR &amp; VERGİ</div>
+      <sc-for list="{{ navRapor }}" as="item" hint-placeholder-count="2">
+        <div onClick="{{ item.onClick }}" style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; border-radius:9px; cursor:pointer; font-size:13.5px; background:{{ item.bg }}; color:{{ item.color }}; font-weight:{{ item.weight }}; box-shadow:{{ item.shadow }};">
+          <span>{{ item.label }}</span>
+          <span style="font-size:11px; color:{{ item.badgeColor }}; font-weight:600;">{{ item.badge }}</span>
+        </div>
+      </sc-for>
+    </nav>
+
+    <div style="padding:12px; border-top:1px solid #EBEDF0;">
+      <div style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px; background:#F7F8FA;">
+        <div style="width:30px; height:30px; border-radius:50%; background:#16191D; color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600;">SK</div>
+        <div style="display:flex; flex-direction:column; line-height:1.2; flex:1; min-width:0;">
+          <span style="font-size:12.5px; font-weight:600;">Selin Kaya</span>
+          <span style="font-size:11px; color:#8A929E;">Mali Müşavir</span>
+        </div>
+        <span style="color:#A8AEB8; font-size:16px;">⌄</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ANA ALAN -->
+  <main class="scry" style="flex:1; min-width:0; height:100vh; overflow-y:auto;">
+
+    <!-- ÜST BAR -->
+    <header style="position:sticky; top:0; z-index:5; background:rgba(244,246,248,0.86); backdrop-filter:blur(8px); border-bottom:1px solid #EBEDF0; padding:14px 28px; display:flex; align-items:center; gap:18px;">
+      <div style="display:flex; flex-direction:column; line-height:1.2;">
+        <h1 style="margin:0; font-size:18px; font-weight:700; letter-spacing:-0.3px;">Genel Bakış</h1>
+        <span style="font-size:12px; color:#8A929E;">Dönem özeti ve nakit durumu</span>
+      </div>
+
+      <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
+        <div style="display:flex; align-items:center; gap:8px; background:#fff; border:1px solid #E4E7EB; border-radius:10px; padding:8px 12px; min-width:230px;">
+          <span style="color:#A8AEB8; font-size:14px;">⌕</span>
+          <span style="font-size:13px; color:#A8AEB8;">Fatura, cari, belge ara…</span>
+          <span style="margin-left:auto; font-size:11px; color:#B6BCC6; border:1px solid #E4E7EB; border-radius:5px; padding:1px 6px;">⌘K</span>
+        </div>
+
+        <div onClick="{{ cyclePeriod }}" style="display:flex; align-items:center; gap:8px; background:#fff; border:1px solid #E4E7EB; border-radius:10px; padding:8px 13px; cursor:pointer; font-size:13px; font-weight:600;">
+          <span style="width:7px; height:7px; border-radius:50%; background:#15A06E;"></span>
+          {{ period }}
+          <span style="color:#A8AEB8; font-size:13px;">⌄</span>
+        </div>
+
+        <button style="display:flex; align-items:center; gap:7px; background:#16191D; color:#fff; border:none; border-radius:10px; padding:9px 15px; cursor:pointer; font-size:13px; font-weight:600; font-family:inherit;">
+          <span style="font-size:15px; line-height:1;">+</span> Yeni İşlem
+        </button>
+      </div>
+    </header>
+
+    <div style="padding:24px 28px 48px 28px; display:flex; flex-direction:column; gap:18px;">
+
+      <!-- KPI KARTLARI -->
+      <section style="display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;">
+        <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+          <div style="background:#fff; border:1px solid #EBEDF0; border-radius:14px; padding:16px 17px; display:flex; flex-direction:column; gap:13px;">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:12.5px; color:#6B7280; font-weight:500;">{{ k.label }}</span>
+              <span style="width:8px; height:8px; border-radius:3px; background:{{ k.dot }};"></span>
+            </div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:23px; font-weight:600; letter-spacing:-0.5px;">{{ k.value }}</div>
+            <div style="display:flex; align-items:center; gap:7px;">
+              <span style="display:inline-flex; align-items:center; gap:3px; font-size:12px; font-weight:600; color:{{ k.deltaColor }}; background:{{ k.deltaBg }}; padding:2px 7px; border-radius:6px;">{{ k.delta }}</span>
+              <span style="font-size:11.5px; color:#A8AEB8;">{{ k.sub }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </section>
+
+      <!-- GRAFİK + VERGİ TAKVİMİ -->
+      <section style="display:grid; grid-template-columns:1.55fr 1fr; gap:14px;">
+
+        <!-- Gelir / Gider grafiği -->
+        <div style="background:#fff; border:1px solid #EBEDF0; border-radius:14px; padding:18px 20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:14px; font-weight:600;">Gelir / Gider</span>
+              <span style="font-size:11.5px; color:#A8AEB8;">Son 6 ay · ₺</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <span style="display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#6B7280;"><span style="width:9px; height:9px; border-radius:3px; background:#15A06E;"></span>Gelir</span>
+              <span style="display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#6B7280;"><span style="width:9px; height:9px; border-radius:3px; background:#E5484D;"></span>Gider</span>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:18px; height:186px; padding-bottom:26px; border-bottom:1px solid #F0F2F4;">
+            <sc-for list="{{ chart }}" as="b" hint-placeholder-count="6">
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; height:100%; justify-content:flex-end; position:relative;">
+                <div style="display:flex; align-items:flex-end; gap:5px; height:100%; width:100%; justify-content:center;">
+                  <div style="width:18px; border-radius:5px 5px 0 0; background:#15A06E; height:{{ b.gelirH }};"></div>
+                  <div style="width:18px; border-radius:5px 5px 0 0; background:#E5484D; height:{{ b.giderH }};"></div>
+                </div>
+                <span style="position:absolute; bottom:-24px; font-size:11.5px; color:#A8AEB8; font-weight:500;">{{ b.ay }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Vergi & Beyanname Takvimi -->
+        <div style="background:#fff; border:1px solid #EBEDF0; border-radius:14px; padding:18px 20px; display:flex; flex-direction:column;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+            <span style="font-size:14px; font-weight:600;">Vergi &amp; Beyanname Takvimi</span>
+            <span style="font-size:11.5px; color:#E8830C; font-weight:600; background:#FDF1E3; padding:2px 8px; border-radius:6px;">2 yakın</span>
+          </div>
+          <div style="display:flex; flex-direction:column;">
+            <sc-for list="{{ taxItems }}" as="t" hint-placeholder-count="4">
+              <div style="display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid #F2F4F6;">
+                <div style="width:38px; height:38px; border-radius:10px; background:{{ t.bg }}; display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1; flex-shrink:0;">
+                  <span style="font-size:13px; font-weight:700; color:{{ t.fg }};">{{ t.gun }}</span>
+                  <span style="font-size:9.5px; font-weight:600; color:{{ t.fg }};">{{ t.ayKisa }}</span>
+                </div>
+                <div style="display:flex; flex-direction:column; line-height:1.25; flex:1; min-width:0;">
+                  <span style="font-size:13px; font-weight:600;">{{ t.title }}</span>
+                  <span style="font-size:11.5px; color:#A8AEB8;">{{ t.date }}</span>
+                </div>
+                <span style="font-size:11.5px; font-weight:600; color:{{ t.fg }}; background:{{ t.bg }}; padding:3px 9px; border-radius:7px;">{{ t.kalan }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÜST-KÜME KARTLARI: Alacaklar / Borçlar (açılır pencere) -->
+      <section style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <sc-for list="{{ clusters }}" as="c" hint-placeholder-count="2">
+          <div style="background:#fff; border:1px solid #EBEDF0; border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; gap:15px;">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+              <div style="display:flex; flex-direction:column; gap:3px;">
+                <span style="font-size:13px; color:#6B7280; font-weight:500;">{{ c.label }}</span>
+                <span style="font-family:'IBM Plex Mono', monospace; font-size:22px; font-weight:600; letter-spacing:-0.5px; color:{{ c.totalColor }};">{{ c.total }}</span>
+                <span style="font-size:11.5px; color:#A8AEB8;">{{ c.count }} cari · {{ c.overdue }}</span>
+              </div>
+              <div onClick="{{ c.onOpen }}" style="display:flex; align-items:center; gap:5px; font-size:12.5px; font-weight:600; color:#16191D; background:#F4F6F8; border:1px solid #E9ECEF; border-radius:9px; padding:7px 12px; cursor:pointer;">
+                Detay <span style="font-size:13px;">→</span>
+              </div>
+            </div>
+            <!-- yaşlandırma şeridi -->
+            <div style="display:flex; height:9px; border-radius:6px; overflow:hidden; gap:2px;">
+              <sc-for list="{{ c.aging }}" as="a" hint-placeholder-count="4">
+                <div style="background:{{ a.color }}; width:{{ a.w }};"></div>
+              </sc-for>
+            </div>
+            <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+              <sc-for list="{{ c.aging }}" as="a" hint-placeholder-count="4">
+                <span style="display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:#6B7280;"><span style="width:8px; height:8px; border-radius:3px; background:{{ a.color }};"></span>{{ a.label }} · {{ a.amount }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </section>
+
+      <!-- SON İŞLEMLER -->
+      <section style="background:#fff; border:1px solid #EBEDF0; border-radius:14px; overflow:hidden;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #F0F2F4;">
+          <span style="font-size:14px; font-weight:600;">Son İşlemler</span>
+          <span style="font-size:12.5px; color:#8A929E; font-weight:500; cursor:pointer;">Tümünü gör →</span>
+        </div>
+        <div>
+          <div style="display:grid; grid-template-columns:90px 1fr 150px 140px 130px; gap:12px; padding:10px 20px; font-size:11px; font-weight:600; letter-spacing:0.4px; color:#A8AEB8; text-transform:uppercase; border-bottom:1px solid #F2F4F6;">
+            <span>Tarih</span><span>Açıklama</span><span>Belge No</span><span style="text-align:right;">Tutar</span><span style="text-align:right;">Durum</span>
+          </div>
+          <sc-for list="{{ transactions }}" as="tx" hint-placeholder-count="6">
+            <div style="display:grid; grid-template-columns:90px 1fr 150px 140px 130px; gap:12px; padding:{{ rowPad }}; align-items:center; border-bottom:1px solid #F4F6F8;">
+              <span style="font-size:13px; color:#8A929E;">{{ tx.date }}</span>
+              <div style="display:flex; align-items:center; gap:10px; min-width:0;">
+                <span style="width:7px; height:7px; border-radius:50%; background:{{ tx.typeDot }}; flex-shrink:0;"></span>
+                <span style="font-size:13.5px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ tx.desc }}</span>
+              </div>
+              <span style="font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:#8A929E;">{{ tx.doc }}</span>
+              <span style="font-family:'IBM Plex Mono', monospace; font-size:13.5px; font-weight:600; text-align:right; color:{{ tx.amountColor }};">{{ tx.amount }}</span>
+              <div style="display:flex; justify-content:flex-end;">
+                <span style="font-size:12px; font-weight:600; color:{{ tx.statusFg }}; background:{{ tx.statusBg }}; padding:4px 10px; border-radius:7px; white-space:nowrap;">{{ tx.status }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- AÇILIR PENCERE (üst-küme detayı) -->
+  <sc-if value="{{ activeCluster }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCluster }}" style="position:fixed; inset:0; background:rgba(22,25,29,0.32); backdrop-filter:blur(2px); z-index:40; display:flex; align-items:center; justify-content:center; padding:32px;">
+      <div onClick="{{ stop }}" style="width:640px; max-width:100%; max-height:86vh; background:#fff; border-radius:16px; box-shadow:0 24px 60px rgba(22,25,29,0.22); display:flex; flex-direction:column; overflow:hidden;">
+        <div style="padding:20px 24px; border-bottom:1px solid #F0F2F4; display:flex; align-items:flex-start; justify-content:space-between;">
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span style="font-size:16px; font-weight:700;">{{ activeCluster.label }} — Detay</span>
+            <span style="font-size:12.5px; color:#8A929E;">{{ activeCluster.count }} cari · Toplam {{ activeCluster.total }}</span>
+          </div>
+          <div onClick="{{ closeCluster }}" style="width:32px; height:32px; border-radius:9px; background:#F4F6F8; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#6B7280;">✕</div>
+        </div>
+        <div class="scry" style="overflow-y:auto; padding:8px 24px 20px 24px;">
+          <sc-for list="{{ activeCluster.buckets }}" as="g" hint-placeholder-count="3">
+            <div style="margin-top:16px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span style="width:9px; height:9px; border-radius:3px; background:{{ g.color }};"></span>
+                <span style="font-size:12.5px; font-weight:600; color:#16191D;">{{ g.label }}</span>
+                <span style="font-size:11.5px; color:#A8AEB8;">· {{ g.amount }}</span>
+              </div>
+              <sc-for list="{{ g.items }}" as="row" hint-placeholder-count="2">
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:10px; background:#F8F9FB; margin-bottom:6px;">
+                  <div style="display:flex; align-items:center; gap:11px;">
+                    <div style="width:30px; height:30px; border-radius:8px; background:{{ row.avBg }}; color:{{ row.avFg }}; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600;">{{ row.ini }}</div>
+                    <div style="display:flex; flex-direction:column; line-height:1.25;">
+                      <span style="font-size:13px; font-weight:600;">{{ row.name }}</span>
+                      <span style="font-size:11px; color:#A8AEB8;">{{ row.detail }}</span>
+                    </div>
+                  </div>
+                  <span style="font-family:'IBM Plex Mono', monospace; font-size:13.5px; font-weight:600; color:{{ g.color }};">{{ row.amount }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:14px 24px; border-top:1px solid #F0F2F4; display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:12.5px; color:#8A929E;">90+ gün kalemleri turuncu/kırmızı ile işaretlidir.</span>
+          <button style="background:#16191D; color:#fff; border:none; border-radius:9px; padding:9px 16px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit;">Toplu Hatırlatma Gönder</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:880},&quot;companyName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Demir Ticaret A.Ş.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;İçerik&quot;},&quot;period&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Haziran 2026&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;İçerik&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Kompakt&quot;,&quot;options&quot;:[&quot;Dengeli&quot;,&quot;Kompakt&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Görünüm&quot;}}">
+class Component extends DCLogic {
+  state = { activeNav: 'dashboard', openCluster: null, periodIdx: 0 };
+
+  periods = ['Haziran 2026', 'Mayıs 2026', 'Nisan 2026', '2026 Q2'];
+
+  navStyle(active) {
+    return active
+      ? { bg: '#F1F3F5', color: '#16191D', weight: '600', shadow: 'inset 2px 0 0 #16191D' }
+      : { bg: 'transparent', color: '#5B6470', weight: '500', shadow: 'none' };
+  }
+
+  buildNav(items) {
+    return items.map(it => {
+      const s = this.navStyle(this.state.activeNav === it.id);
+      return {
+        label: it.label,
+        badge: it.badge || '',
+        badgeColor: it.badgeTone === 'warn' ? '#E8830C' : (it.badgeTone === 'neg' ? '#E5484D' : '#A8AEB8'),
+        bg: s.bg, color: s.color, weight: s.weight, shadow: s.shadow,
+        onClick: () => this.setState({ activeNav: it.id }),
+      };
+    });
+  }
+
+  clustersData() {
+    return {
+      alacak: {
+        label: 'Alacaklar (Tahsil Edilecek)',
+        total: '₺ 968.400', totalColor: '#15A06E', count: 14, overdue: '₺ 329.000 gecikmiş',
+        onOpen: () => this.setState({ openCluster: 'alacak' }),
+        aging: [
+          { label: '0-30g', amount: '₺ 496.500', w: '51%', color: '#15A06E' },
+          { label: '31-60g', amount: '₺ 142.900', w: '15%', color: '#9BB7A8' },
+          { label: '61-90g', amount: '₺ 96.200', w: '10%', color: '#E8830C' },
+          { label: '90+g', amount: '₺ 232.800', w: '24%', color: '#E5484D' },
+        ],
+        buckets: [
+          { label: '0-30 gün (Güncel)', amount: '₺ 496.500', color: '#15A06E', items: [
+            { ini: 'Mİ', name: 'Mavi İnşaat Ltd. Şti.', detail: 'FT-2026-0411 · 12 gün', amount: '₺ 312.000', avBg: '#E7F6EF', avFg: '#15A06E' },
+            { ini: 'YM', name: 'Yıldız Market A.Ş.', detail: 'EFT-0392 · 6 gün', amount: '₺ 184.500', avBg: '#E7F6EF', avFg: '#15A06E' },
+          ]},
+          { label: '31-60 gün', amount: '₺ 142.900', color: '#5B6470', items: [
+            { ini: 'ET', name: 'Ege Tekstil San.', detail: 'FT-2026-0388 · 44 gün', amount: '₺ 142.900', avBg: '#EEF0F2', avFg: '#5B6470' },
+          ]},
+          { label: '61-90 gün (Riskli)', amount: '₺ 96.200', color: '#E8830C', items: [
+            { ini: 'AL', name: 'Anadolu Lojistik', detail: 'FT-2026-0356 · 78 gün', amount: '₺ 96.200', avBg: '#FDF1E3', avFg: '#E8830C' },
+          ]},
+          { label: '90+ gün (Gecikmiş)', amount: '₺ 232.800', color: '#E5484D', items: [
+            { ini: 'BG', name: 'Batı Gıda Dağıtım', detail: 'FT-2026-0301 · 104 gün', amount: '₺ 232.800', avBg: '#FCEBEC', avFg: '#E5484D' },
+          ]},
+        ],
+      },
+      borc: {
+        label: 'Borçlar (Ödenecek)',
+        total: '₺ 642.180', totalColor: '#E5484D', count: 9, overdue: '₺ 87.650 gecikmiş',
+        onOpen: () => this.setState({ openCluster: 'borc' }),
+        aging: [
+          { label: '0-30g', amount: '₺ 388.300', w: '60%', color: '#15A06E' },
+          { label: '31-60g', amount: '₺ 166.230', w: '26%', color: '#9BB7A8' },
+          { label: '61-90g', amount: '₺ 0', w: '0%', color: '#E8830C' },
+          { label: '90+g', amount: '₺ 87.650', w: '14%', color: '#E5484D' },
+        ],
+        buckets: [
+          { label: '0-30 gün (Güncel)', amount: '₺ 388.300', color: '#15A06E', items: [
+            { ini: 'AL', name: 'Anadolu Lojistik', detail: 'FT-2026-0418 · 18.400', amount: '₺ 218.400', avBg: '#E7F6EF', avFg: '#15A06E' },
+            { ini: 'OE', name: 'Otoyol Enerji A.Ş.', detail: 'Elektrik · 9 gün', amount: '₺ 169.900', avBg: '#E7F6EF', avFg: '#15A06E' },
+          ]},
+          { label: '31-60 gün', amount: '₺ 166.230', color: '#5B6470', items: [
+            { ini: 'TM', name: 'Toprak Malzeme', detail: 'FT-2026-0377 · 39 gün', amount: '₺ 166.230', avBg: '#EEF0F2', avFg: '#5B6470' },
+          ]},
+          { label: '90+ gün (Gecikmiş)', amount: '₺ 87.650', color: '#E5484D', items: [
+            { ini: 'ET', name: 'Ege Tekstil San.', detail: 'FT-2026-0409 · 96 gün', amount: '₺ 87.650', avBg: '#FCEBEC', avFg: '#E5484D' },
+          ]},
+        ],
+      },
+    };
+  }
+
+  renderVals() {
+    const companyName = this.props.companyName ?? 'Demir Ticaret A.Ş.';
+    const period = this.props.period ?? this.periods[this.state.periodIdx];
+    const dense = (this.props.density ?? 'Dengeli') === 'Kompakt';
+    const rowPad = dense ? '9px 20px' : '14px 20px';
+
+    const kpis = [
+      { label: 'Net Kâr · Dönem', value: '₺ 486.320', delta: '+%12,4', deltaColor: '#15A06E', deltaBg: '#E7F6EF', dot: '#15A06E', sub: 'Geçen aya göre' },
+      { label: 'Toplam Gelir', value: '₺ 1.842.900', delta: '+%8,1', deltaColor: '#15A06E', deltaBg: '#E7F6EF', dot: '#9BB7A8', sub: 'Bu dönem' },
+      { label: 'Toplam Gider', value: '₺ 1.356.580', delta: '+%4,3', deltaColor: '#E5484D', deltaBg: '#FCEBEC', dot: '#E5484D', sub: 'Bu dönem' },
+      { label: 'Nakit Pozisyon', value: '₺ 2.214.760', delta: 'Kasa + Banka', deltaColor: '#5B6470', deltaBg: '#F1F3F5', dot: '#16191D', sub: 'Güncel' },
+    ];
+
+    const raw = [
+      { ay: 'Oca', gelir: 1.21, gider: 0.97 },
+      { ay: 'Şub', gelir: 1.38, gider: 1.05 },
+      { ay: 'Mar', gelir: 1.52, gider: 1.18 },
+      { ay: 'Nis', gelir: 1.44, gider: 1.27 },
+      { ay: 'May', gelir: 1.70, gider: 1.22 },
+      { ay: 'Haz', gelir: 1.84, gider: 1.36 },
+    ];
+    const max = 1.9;
+    const chart = raw.map(b => ({
+      ay: b.ay,
+      gelirH: Math.round((b.gelir / max) * 100) + '%',
+      giderH: Math.round((b.gider / max) * 100) + '%',
+    }));
+
+    const taxItems = [
+      { gun: '08', ayKisa: 'TEM', title: 'Damga Vergisi', date: '08 Temmuz 2026', kalan: '8 gün', bg: '#FDF1E3', fg: '#E8830C' },
+      { gun: '17', ayKisa: 'TEM', title: 'Geçici Vergi (2. dönem)', date: '17 Temmuz 2026', kalan: '17 gün', bg: '#FDF1E3', fg: '#E8830C' },
+      { gun: '23', ayKisa: 'TEM', title: 'Muhtasar & SGK', date: '23 Temmuz 2026', kalan: '23 gün', bg: '#F1F3F5', fg: '#5B6470' },
+      { gun: '26', ayKisa: 'TEM', title: 'KDV Beyannamesi', date: '26 Temmuz 2026', kalan: '26 gün', bg: '#F1F3F5', fg: '#5B6470' },
+    ];
+
+    const tone = {
+      pos: { fg: '#15A06E', bg: '#E7F6EF' },
+      neg: { fg: '#E5484D', bg: '#FCEBEC' },
+      warn: { fg: '#E8830C', bg: '#FDF1E3' },
+      neutral: { fg: '#5B6470', bg: '#F1F3F5' },
+    };
+    const txRaw = [
+      { date: '29 Haz', desc: 'Anadolu Lojistik — Nakliye gideri', doc: 'FT-2026-0418', amount: '−₺ 18.400', type: 'gider', status: 'Ödendi', t: 'pos' },
+      { date: '28 Haz', desc: 'Yıldız Market — Ürün satışı', doc: 'EFT-0392', amount: '+₺ 64.200', type: 'gelir', status: 'Tahsil edildi', t: 'pos' },
+      { date: '27 Haz', desc: 'Mavi İnşaat — Hakediş faturası', doc: 'FT-2026-0411', amount: '+₺ 142.000', type: 'gelir', status: 'Bekliyor', t: 'neutral' },
+      { date: '26 Haz', desc: 'Ege Tekstil — Hammadde alımı', doc: 'FT-2026-0409', amount: '−₺ 87.650', type: 'gider', status: 'Gecikti', t: 'neg' },
+      { date: '25 Haz', desc: 'KDV tahakkuk kaydı', doc: 'BYN-2026-05', amount: '−₺ 53.120', type: 'vergi', status: 'İhlal riski', t: 'warn' },
+      { date: '24 Haz', desc: 'Demir Yapı — Danışmanlık geliri', doc: 'EFT-0388', amount: '+₺ 36.000', type: 'gelir', status: 'Tahsil edildi', t: 'pos' },
+    ];
+    const typeDot = { gelir: '#15A06E', gider: '#E5484D', vergi: '#E8830C' };
+    const transactions = txRaw.map(tx => ({
+      date: tx.date, desc: tx.desc, doc: tx.doc, amount: tx.amount,
+      typeDot: typeDot[tx.type] || '#A8AEB8',
+      amountColor: tx.amount.charAt(0) === '+' ? '#15A06E' : '#16191D',
+      status: tx.status, statusFg: tone[tx.t].fg, statusBg: tone[tx.t].bg,
+    }));
+
+    const cl = this.clustersData();
+
+    return {
+      companyName, period, rowPad,
+      cyclePeriod: () => this.setState(s => ({ periodIdx: (s.periodIdx + 1) % this.periods.length })),
+      navGenel: this.buildNav([{ id: 'dashboard', label: 'Genel Bakış' }]),
+      navSatis: this.buildNav([
+        { id: 'fatura', label: 'Faturalar', badge: '7', badgeTone: 'warn' },
+        { id: 'cari', label: 'Cari Hesaplar' },
+        { id: 'stok', label: 'Stok & Ürünler' },
+      ]),
+      navFinans: this.buildNav([
+        { id: 'kasa', label: 'Kasa & Banka' },
+        { id: 'gelirgider', label: 'Gelir / Gider' },
+      ]),
+      navRapor: this.buildNav([
+        { id: 'rapor', label: 'Raporlar' },
+        { id: 'beyanname', label: 'Beyanname & Vergi', badge: '2', badgeTone: 'warn' },
+      ]),
+      kpis, chart, taxItems, transactions,
+      clusters: [cl.alacak, cl.borc],
+      activeCluster: this.state.openCluster ? cl[this.state.openCluster] : null,
+      closeCluster: () => this.setState({ openCluster: null }),
+      stop: (e) => { e.stopPropagation(); },
+    };
+  }
+}
+</script>
+</body>
+</html>

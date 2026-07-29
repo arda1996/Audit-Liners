@@ -1,0 +1,40 @@
+{
+  "surum": 1,
+  "aciklama": "Banka PDF ekstre profilleri — takipsistemiv2 parser'larından damıtılan alan bilgisi (D.5). İlke: motor kod, banka veri — yeni banka eklemek = bu dosyaya profil eklemek. imzalar: PDF metninde banka tanıma (öncelik sırası önemli — spesifik olanlar genel adlardan ÖNCE). dogrulandi:false = örnek PDF ile teyit bekliyor.",
+  "genel_kurallar": [
+    "Tablo okuma bbox-bazlı yapılır — extract_tables tarzı araçlar hücre boşluklarını yutar",
+    "Bir işlem birden çok satıra bölünebilir (açıklama wrap, sayfa sonu) — multi-line birleştirme şart",
+    "Regex IGNORECASE Türkçe İ/I için güvenilmez — tr_katla (domain::isim) ile karşılaştır",
+    "PDF DESC sıralıysa kronolojiğe çevirmek PARSER'ın işi (motorlar eski→yeni bekler)",
+    "Ters işlem işaretleme parser'da YAPILMAZ — tek sorumlu: domain::ekstre::ters_isle (idempotent)",
+    "Dedup: 1) hareket_anahtari (içerik+sıra) 2) referans_no unique ise 3) içerik-anahtarı fallback"
+  ],
+  "bankalar": [
+    { "kod": "ziraat", "ad": "T.C. Ziraat Bankası", "imzalar": ["T.C. ZİRAAT BANKASI", "ZİRAAT BANKASI", "ZIRAATBANK"],
+      "tarih_format": "gg.aa.yyyy", "tutar_format": "TR (1.234,56)", "siralama": "DESC — çevrilir",
+      "referans": { "var": true, "desen": "F##### öneki", "unique": false },
+      "satir_deseni": "TARİH [gürültü] F##### AÇIKLAMA TUTAR BAKİYE", "dogrulandi": true },
+    { "kod": "vakifbank", "ad": "VakıfBank", "imzalar": ["VAKIFBANK", "VAKIF BANK", "VAKIFLAR BANKASI", "T.VAKIFLAR BANKASI"],
+      "tarih_format": "gg.aa.yyyy (çoklu format toleransı)", "tutar_format": "TR",
+      "referans": { "var": true, "desen": "14-18 haneli işlem no (genelde 17)", "unique": true, "not": "receipt-dedup için UYGUN" },
+      "dogrulandi": true },
+    { "kod": "getir_finans", "ad": "Getir Finans (Fibabanka)", "imzalar": ["GETİRFİNANS", "GETIRFINANS", "GETİR FİNANS", "FIBABANKA", "Fibabanka", "getirfinans"], "dogrulandi": false },
+    { "kod": "dunya_katilim", "ad": "Dünya Katılım", "imzalar": ["DÜNYA KATILIM", "DUNYA KATILIM", "DünyaKatılım", "DünyaKatılımBankası"], "dogrulandi": false },
+    { "kod": "qnb", "ad": "QNB", "imzalar": ["QNB BANK", "QNB FİNANS", "FİNANSBANK", "DEVREDEN BAKİYE"], "dogrulandi": false },
+    { "kod": "garanti", "ad": "Garanti BBVA", "imzalar": ["GARANTİ BBVA", "GARANTI BANKASI", "T. GARANTİ"], "dogrulandi": false },
+    { "kod": "is_bankasi", "ad": "İş Bankası", "imzalar": ["TÜRKİYE İŞ BANKASI", "ISBANK"], "dogrulandi": false },
+    { "kod": "yapi_kredi", "ad": "Yapı Kredi", "imzalar": ["YAPI KREDİ", "YAPIKREDI", "YAPI VE KREDİ"], "dogrulandi": false },
+    { "kod": "akbank", "ad": "Akbank", "imzalar": ["AKBANK", "AK BANK"], "dogrulandi": false },
+    { "kod": "halkbank", "ad": "Halkbank", "imzalar": ["HALKBANK", "HALK BANKASI"], "dogrulandi": false },
+    { "kod": "tombank", "ad": "TOM Bank", "imzalar": ["TOM BANK", "TOMBANK", "T.O.M."], "dogrulandi": false },
+    { "kod": "alternatif", "ad": "Alternatif Bank", "imzalar": ["ALTERNATİF BANK", "ALTERNATİFBANK", "ALTERNATIF BANK", "ALTERNATİF"], "dogrulandi": false },
+    { "kod": "kuveyt_turk", "ad": "Kuveyt Türk", "imzalar": ["KUVEYT TÜRK", "KUVEYTTÜRK", "KUVEYT TURK", "KTEFTRIS"], "dogrulandi": false },
+    { "kod": "hayat_finans", "ad": "Hayat Finans", "imzalar": ["HAYAT FİNANS", "HAYAT FINANS", "HAYAT FİNANS KATILIM"], "dogrulandi": false },
+    { "kod": "emlak_katilim", "ad": "Emlak Katılım", "imzalar": ["EMLAK KATILIM", "EMLAK KATILIM BANKASI"], "dogrulandi": false },
+    { "kod": "vakif_katilim", "ad": "Vakıf Katılım", "imzalar": ["VAKIF KATILIM", "VAKIF KATILIM BANKASI"], "not": "IBAN'da çakışan dönemli ekstreler görülür — overlap-aware kontrol şart", "dogrulandi": false },
+    { "kod": "teb", "ad": "TEB", "imzalar": ["TÜRK EKONOMİ BANKASI", "TEB A.Ş"], "dogrulandi": false },
+    { "kod": "ing", "ad": "ING", "imzalar": ["ING BANK", "ING BANK A.Ş"], "dogrulandi": false },
+    { "kod": "denizbank", "ad": "DenizBank", "imzalar": ["DENİZBANK", "DENIZ BANK"], "dogrulandi": false },
+    { "kod": "enpara", "ad": "Enpara", "imzalar": ["ENPARA"], "dogrulandi": false }
+  ]
+}

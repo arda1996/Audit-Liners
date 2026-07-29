@@ -1,0 +1,42 @@
+{
+  "surum": 1,
+  "aciklama": "UFRS hesaplama motoru güncel parametreleri — hardcode yasak ilkesi (vergi-parametreleri.json deseni). Oranlar ppm ölçeğinde de verilir (%39,75 = 397500 ppm). Yıllık/dönemsel güncellenir.",
+  "parametreler": [
+    {
+      "anahtar": "tcmb_avans_faiz",
+      "ad": "TCMB Avans Faiz Oranı",
+      "deger_yuzde": "39,75",
+      "deger_ppm": 397500,
+      "dogrulandi": true,
+      "kaynak": "Resmî Gazete / TCMB Reeskont ve Avans Faiz Oranları (Temmuz 2026)",
+      "tarih": "2026-07"
+    },
+    {
+      "anahtar": "tcmb_reeskont_iskonto",
+      "ad": "TCMB Reeskont İskonto Oranı",
+      "deger_yuzde": "38,75",
+      "deger_ppm": 387500,
+      "dogrulandi": true,
+      "kaynak": "Resmî Gazete / TCMB (Temmuz 2026)",
+      "tarih": "2026-07"
+    },
+    {
+      "anahtar": "kidem_tavani",
+      "ad": "Kıdem Tazminatı Tavanı",
+      "deger_tl": "73.729,87",
+      "deger_kurus": 7372987,
+      "dogrulandi": true,
+      "kaynak": "Hazine ve Maliye Bakanlığı genelgesi — 2026 Temmuz–Aralık dönemi",
+      "tarih": "2026-07"
+    },
+    {
+      "anahtar": "kv_orani",
+      "ad": "Kurumlar Vergisi Oranı",
+      "deger_yuzde": "25",
+      "deger_ppm": 250000,
+      "dogrulandi": true,
+      "kaynak": "KVK 5520 md.32 (data/vergi-parametreleri.json ile uyumlu)",
+      "tarih": "2026"
+    }
+  ]
+}

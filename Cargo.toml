@@ -1,0 +1,5 @@
+[workspace]
+resolver = "2"
+members = ["crates/domain", "crates/api"]
+# src-tauri kendi başına derlenir (ağır tauri/wry); hızlı domain/api döngüsünü yavaşlatmasın.
+exclude = ["src-tauri"]

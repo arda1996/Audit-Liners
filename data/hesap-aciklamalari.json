@@ -1,0 +1,1235 @@
+{
+ "kaynak": "MSUGT — Tekdüzen Hesap Planı Açıklamaları (resmi)",
+ "hesaplar": [
+  {
+   "kod": "100",
+   "ad": "KASA",
+   "tanim": "Bu hesap, işletmenin elinde bulunan ulusal ve yabancı paraların TL. karşılığının izlenmesi için kullanılır.",
+   "isleyis": "Tahsil olunan para tutarları borç, ödemeler ve bankaya yatırılan para tutarları alacak kaydedilir. Hesap daima borç bakiyesi verir veya sıfır olur. Hiçbir şekilde alacak bakiyesi vermez."
+  },
+  {
+   "kod": "101",
+   "ad": "ALINAN ÇEKLER",
+   "tanim": "Bu hesap gerçek ve tüzel kişiler tarafından işletmeye verilmiş olup, henüz tahsil için bankaya verilmemiş veya ciro edilmemiş olan çeklerin izlenmesini sağlar.",
+   "isleyis": "Alınan çeklerin yazılı değerleri ile borç, bankadan tahsil veya ciro edildiğinde alacak kaydedilir."
+  },
+  {
+   "kod": "102",
+   "ad": "BANKALAR",
+   "tanim": "Bu hesap, işletmece yurt içi ve yurt dışı banka ve benzeri finans kurumlarına yatırılan ve çekilen paraların izlenmesini kapsar.",
+   "isleyis": "Bankalara para olarak veya hesaben yatırılan değerler borç, çekilen tutarlar ile üçüncü kişilerce tahsil edildiği anlaşılan çek ve ödeme emirleri alacak kaydedilir."
+  },
+  {
+   "kod": "103",
+   "ad": "VERİLEN ÇEKLER VE ÖDEME EMİRLERİ (-)",
+   "tanim": "İşletmenin üçüncü kişilere bankalardan çekle veya ödeme emri ile yapacağı ödemeler bu hesapta izlenir.",
+   "isleyis": "Kişilere çek ve ödeme emri verildiğinde hesaba alacak; çek ve ödeme emirlerinin bankadan tahsil edildiği anlaşıldığında bu hesaba borç, bankalar hesabına alacak kaydedilir. 104. 105. 106. 107."
+  },
+  {
+   "kod": "108",
+   "ad": "DİĞER HAZIR DEĞERLER",
+   "tanim": "Nitelikleri itibarıyla hazır değer sayılan pullar, vadesi gelmiş kuponlar, tahsil edilecek banka ve posta havaleleri (yoldaki paralar gibi) değerleri kapsar.",
+   "isleyis": "Bu değerler elde edildiğinde hesabın borcuna, elden çıkarıldığında da hesabın alacağına kaydedilir. 109."
+  },
+  {
+   "kod": "110",
+   "ad": "HİSSE SENETLERİ",
+   "tanim": "Geçici olarak, elde tutulan hisse senetleri bu hesapta izlenir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "111",
+   "ad": "ÖZEL KESİM TAHVİL, SENET VE BONOLARI",
+   "tanim": "Özel sektörün çıkartmış bulunduğu tahvil, senet ve bonolar bu hesapta izlenir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "112",
+   "ad": "KAMU KESİMİ TAHVİL, SENET VE BONOLARI",
+   "tanim": "Kamu tarafından çıkartılmış bulunan tahvil, senet ve bonolar bu hesapta izlenir. 113. 114. 115. 116. 117.",
+   "isleyis": ""
+  },
+  {
+   "kod": "118",
+   "ad": "DİĞER MENKUL KIYMETLER",
+   "tanim": "Hisse senetleri, kamu ve özel sektör tarafından çıkarılmış bulunan tahvil, bono ve senetlerin dışındaki diğer menkul kıymetlerin takip edildiği hesaptır. Menkul Kıymetler Hesaplarının",
+   "isleyis": "Menkul kıymetler edinildiğinde alış bedeli üzerinden yukarıdaki hesaplara borç, elden çıkartıldığında ise, aynı bedel ile alacak kaydedilir. Menkul kıymetlerin satınalma giderleri \"65. Diğer Faaliyetlerden Olağan Gider Ve Zararlar\" grubundaki ilgili gider hesabında izlenir. Menkul kıymetlerin satışından doğan zararlar \"Diğer Faaliyetlerden Olağan Gider ve Zararlar\" grubundaki ilgili hesapta; kârlar ise \"64. Diğer Faaliyetlerden Olağan Gelir ve Kârlar\" grubundaki ilgili hesapta izlenir."
+  },
+  {
+   "kod": "119",
+   "ad": "MENKUL KIYMETLER DEĞER DÜŞÜKLÜĞÜ KARŞILIGI (-)",
+   "tanim": "Menkul kıymetlerin borsa veya piyasa değerlerinde önemli ölçüde ya da sürekli olarak değer azalması olduğu tespit edildiğinde ortaya çıkacak zararların karşılanması amacı ile ayrılması gereken karşılıkların izlendiği hesaptır.",
+   "isleyis": "Değer azalışları için azalışın tamamını karşılayacak olan tutar bu hesaba alacak \"65. Diğer Faaliyetlerden Olağan Gider ve Zararlar\" grubunda yer alan \"654. Karşılık Giderleri\" hesabına borç kaydedilir. Kendisine karşılık ayrılmış olan menkul kıymet elden çıkarıldığında veya değer düşüklüğünün gerçekleşmemesi halinde bu hesaba borç kaydedilerek, karşılık tutarı \"644. Konusu Kalmayan Karşılıklar Hesabı\"na aktarılarak kapatılır."
+  },
+  {
+   "kod": "120",
+   "ad": "ALICILAR",
+   "tanim": "Bu hesap, işletmenin faaliyet konusunu oluşturan mal ve hizmet satışlarından kaynaklanan senetsiz alacaklarının izlenmesi için kullanılır.",
+   "isleyis": "Senetsiz alacağın doğması ile bu hesaba borç, tahsil edilmesi halinde (ödemeler, aktarmalar ve hesaben mahsuplar dahil) alacak kaydedilir."
+  },
+  {
+   "kod": "121",
+   "ad": "ALACAK SENETLERİ",
+   "tanim": "Bu hesap, işletmenin faaliyet konusunu oluşturan mal ve hizmet satışlarından kaynaklanan senede bağlanmış alacaklarını kapsar.",
+   "isleyis": "Alınan senet tutarları bu hesaba borç, tahsilinde ise alacak kaydedilir."
+  },
+  {
+   "kod": "122",
+   "ad": "ALACAK SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, senetli alacakların tasarruf değeri ile değerlenmesini sağlamak üzere alacak senetleri için ayrılan reeskont tutarlarının izlenmesinde kullanılır.",
+   "isleyis": "Hesaplanan reeskont tutarları bu hesaba alacak, \"65. Diğer Faaliyetlerden Olağan Gider ve Zararlar\" grubundaki \"652. Reeskont Faiz Giderleri Hesabı\"na gider yazılır. İzleyen dönemde bu hesap \"65. Diğer Faaliyetlerden Olağan Gelir ve Kârlar\" grubundaki \"642. Faiz Gelirleri Hesabı\"na aktarılarak kapatılır. 123."
+  },
+  {
+   "kod": "124",
+   "ad": "KAZANILMAMIŞ FİNANSAL KİRALAMA FAİZ GELİRLERİ (-)",
+   "tanim": "Bu hesap finansal kiralamanın yapıldığı tarihte kiralama işlemlerinden doğan alacaklar ile kira ödemelerinin bugünkü değeri arasındaki farkı gösteren henüz kazanılmamış finansal kiralama faiz gelirlerinin izlendiği hesaptır. Bu gelirlerin hesaplanmasına ilişkin bilgiler bilanço dipnotlarında yer alır.",
+   "isleyis": "Finansal kiralama sözleşme tutarı ile finansal kiralamayla ilgili kira ödemelerinin bugünkü değeri arasındaki fark “Kazanılmamış Finansal Kiralama Faiz Gelirleri” olarak bu hesaba alacak kaydedilir. Her dönem sonunda gerçekleşmiş olan faiz gelirleri tutarları bu hesaba borç “60- Brüt Satışlar” hesap grubunda ilgili satış geliri hesabına alacak olarak kaydedilir. Ancak, esas faaliyet konusu finansal kiralama olamayan işletmelerce yapılan finansal kiralama işlemiyle ilgili gerçekleşmiş faiz gelirleri, “64- Diğer Faaliyetlerden Olağan Gelir ve Karlar” hesap grubunda faiz geliri hesabına alacak olarak kaydedilir. 125."
+  },
+  {
+   "kod": "126",
+   "ad": "VERİLEN DEPOZİTO VE TEMİNATLAR",
+   "tanim": "İşletmece üçüncü kişilere karşı bir işin yapılmasının üstlenilmesi veya bir sözleşmenin ya da diğer işlemlerin karşılığı olarak geri alınmak üzere verilen depozito ve teminat niteliğindeki değerlerin izlendiği hesaptır.",
+   "isleyis": "Verilen depozito ve teminatlar bu hesabın borcuna, geri alınanlar veya hesaba sayılanlar alacağına kaydedilir. 127- DİĞER TİCARİ ALACAKLAR İşletmenin ticari faaliyetleri sonucu ortaya çıkan ve yukarıdaki hesapların kapsamına girmeyen tahsili gecikmiş alacaklar (henüz şüpheli alacak niteliğini kazanmayanlar) ve diğer çeşitli senetsiz ticari alacaklar bu hesapta izlenir. İşleyişi : Yukarıda belirtilen alacaklar bu hesaba borç; tahsil veya mahsup işlemi yapıldığında ilgili hesaplara karşılık, bu hesaba alacak kaydedilir.\""
+  },
+  {
+   "kod": "128",
+   "ad": "ŞÜPHELİ TİCARİ ALACAKLAR",
+   "tanim": "Ödeme süresi geçmiş bu nedenle vadesi bir kaç defa uzatılmış veya protesto edilmiş, yazı ile birden fazla istenmiş ya da dava veya icra safhasına aktarılmış senetli ve senetsiz alacakları kapsar.",
+   "isleyis": "Tahsili şüpheli hale gelmiş olan alacaklar ilgili hesapların alacağı karşılığında bu hesaba borç yazılarak bu durumdaki alacaklar normal alacaklardan çıkarılır. Alacağın tahsili veya tahsil edilemeyeceğinin kesinleşmesi durumunda bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "129",
+   "ad": "ŞÜPHELİ TİCARİ ALACAKLAR KARŞILIĞI (-)",
+   "tanim": "\"128. Şüpheli Ticari Alacaklar\" için ayrılacak karşılıklarla, perakende satış yöntemi kullanarak bilanço gününden önceki iki hesap döneminde vadesinde tahsil edilemeyen alacakların ilgili dönemlerdeki toplam vadeli satışlara oranlarının ortalamasının değerleme dönemindeki vadeli satışlara uygulanması suretiyle bulunacak şüpheli alacaklar için ayrılan karşılıkları kapsar. Teminatlı alacaklarda karşılık teminatı aşan kısım için ayrılır. Bu hesap amaca uygun olarak bölümlenebilir.",
+   "isleyis": "Hesaplanan karşılık tutarı bu hesaba alacak, \"654. Karşılık Giderleri\" hesabına borç kaydedilir. Şüpheli alacağın tahsiline bağlı olarak, tahmin olunan zararın kısmen ya da tamamen gerçekleşmemesi halinde, gerçekleşmeyen kısım \"644. Konusu Kalmayan Karşılıklar Hesabı\" alacağına devredilerek bu hesaba borç kaydedilir. Şüpheli alacağın tahsilinin imkansız olduğu kesinleştiği takdirde bu hesaba borç, ilgili hesaba da alacak kaydedilir. Gerçekleşen zararın ayrılan karşılıklardan fazla olması halinde, ayrılan karşılık kadar bu hesaba borç, zarar fazlası ise \"681. Önceki Dönem Gider ve Zararları\" hesabına borç, tahsil edilemeyen tutar, ilgili alacak hesabına alacak kaydolunur. Perakende satış yönteminin uygulanması sonucunda bulunan, dönemin karşılık tutarının o tarihteki şüpheli alacaklar karşılığı tutarından az olması durumunda, aradaki fark \"644. Konusu Kalmayan Karşılıklar Hesabı\"na aktarılmak üzere bu hesaba borç yazılır. Daha önce alacaklardan düşülen ve bu hesaba borç kaydedilen alacakların tahsili söz konusu olduğu takdirde, oluşlarına göre \"671. Önceki Dönem Gelir ve Kârlar\" hesabına alınır."
+  },
+  {
+   "kod": "131",
+   "ad": "ORTAKLARDAN ALACAKLAR",
+   "tanim": "İşletmenin esas faaliyet konusu dışındaki işlemleri dolayısı ile (ödünç verme ve benzer nedenlerle ortaya çıkan) ortaklarından alacaklı bulunduğu tutarların izlendiği hesaptır.",
+   "isleyis": "Alacağın doğması halinde hesaba borç, tahsili halinde ise alacak kaydedilir."
+  },
+  {
+   "kod": "132",
+   "ad": "İŞTİRAKLERDEN ALACAKLAR",
+   "tanim": "İşletmenin esas faaliyet konusu dışındaki işlemleri dolayısı ile (ödünç verme ve benzer nedenlerle ortaya çıkan) iştiraklerinden olan alacaklarını kapsar.",
+   "isleyis": "Bu hesaba; alacağın doğması halinde borç, tahsili halinde ise alacak kaydedilir."
+  },
+  {
+   "kod": "133",
+   "ad": "BAĞLI ORTAKLIKLARDAN ALACAKLAR",
+   "tanim": "İşletmenin esas faaliyet konusu dışındaki işlemleri dolayısı ile (ödünç verme ve benzer nedenlerle ortaya çıkan) bağlı ortaklıklardan olan alacaklarını içerir.",
+   "isleyis": "Bu hesaba; alacağın doğması halinde borç, tahsili halinde ise alacak kaydedilir. 134."
+  },
+  {
+   "kod": "135",
+   "ad": "PERSONELDEN ALACAKLAR",
+   "tanim": "İşletmeye dahil personel ve işçinin işletmeye olan çeşitli borçlarını kapsar.",
+   "isleyis": "Bu hesaba, alacağın doğması halinde borç; tahsili halinde ise alacak kaydedilir."
+  },
+  {
+   "kod": "136",
+   "ad": "DİĞER ÇEŞİTLİ ALACAKLAR",
+   "tanim": "Ticari olmayıp yukarıda sayılan hesaplardan herhangi birine dahil edilemeyen alacakların izlendiği hesaptır.",
+   "isleyis": "İşletme lehine doğan alacaklar bu hesaba borç; tahsilatlar alacak kaydedilir."
+  },
+  {
+   "kod": "137",
+   "ad": "DİĞER ALACAK SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, bu grupta belirtilen senetli alacakların tasarruf değeri ile değerlenmesini sağlamak üzere alacak senetleri için ayrılan reeskont tutarları bu hesapta izlenir.",
+   "isleyis": "Hesaplanan reeskont tutarları bu hesaba alacak, \"652. Reeskont Faiz Giderleri Hesabı\"na gider yazılır. İzleyen dönemde bu hesap \"642. Faiz Gelirleri Hesabı\"na aktarılarak kapatılır."
+  },
+  {
+   "kod": "138",
+   "ad": "ŞÜPHELİ DİĞER ALACAKLAR",
+   "tanim": "Ödeme süresi geçmiş bu nedenle vadesi bir kaç defa uzatılmış veya protesto edilmiş, yazı ile birden fazla istenmiş ya da dava veya icra safhasına aktarılmış senetli ve senetsiz diğer alacakları kapsar.",
+   "isleyis": "Tahsili şüpheli hale gelen diğer alacaklar ilgili hesapların alacağı karşılığında bu hesaba borç yazılarak, sağlam alacaklardan çıkarılması sağlanır. Alacağın tahsili veya tahsil edilemeyeceğinin kesinleşmesi durumunda bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "139",
+   "ad": "ŞÜPHELİ DİĞER ALACAKLAR KARŞILIĞI (-)",
+   "tanim": "Senetli ve senetsiz şüpheli diğer alacakların tahsil edilememe ihtimalinin kuvvetlenmiş olması halinde, bu tür risklerin giderilmesini sağlamak üzere ayrılan karşılıkları kapsar. Teminatlı alacaklarda karşılık, teminatı aşan kısım için kullanılır.",
+   "isleyis": "Hesaplanan karşılık tutarı bu hesaba alacak, \"654. Karşılık Giderleri Hesabı\"na borç kaydedilir. Şüpheli alacağın tahsiline bağlı olarak, tahmin olunan zararın kısmen ya da tamamen gerçekleşmemesi halinde; gerçekleşmeyen kısım \"644. Konusu Kalmayan Karşılıklar Hesabı\"na alacak kaydolunarak bu hesaba borç yazılır. Şüpheli alacağın tahsilinin imkansız olduğu kesinleştiği takdirde bu hesaba borç, ilgili hesaba da alacak kaydedilir. Gerçekleşen zararın ayrılan karşılıklardan fazla olması halinde, ayrılan karşılık kadar bu hesaba, zarar fazlası ise \"681. Önceki Dönem Gider ve Zararları Hesabı\"na borç yazılır. Tahsil edilemeyen tutar ise ilgili alacak hesabına alacak kaydolunur. Daha önce alacaklardan düşülen ve bu hesaba borç kaydedilen alacakların tahsili söz konusu olduğu takdirde, oluşlarına göre \"671. Önceki Dönem Gelir ve Kârları Hesabı\"na alınır. 14."
+  },
+  {
+   "kod": "150",
+   "ad": "İLK MADDE VE MALZEME",
+   "tanim": "Üretimde veya diğer faaliyetlerde kullanılmak üzere işletmede bulundurulan hammadde, yardımcı madde, işletme malzemesi, ambalaj malzemesi ve diğer malzemelerin izlendiği hesaptır.",
+   "isleyis": "Satın alındıkları ya da üretildikleri maliyet bedelleri ile bu hesabın borcuna, üretime verildiğinde, tüketildiğinde, satıldığında veya devredildiğinde ise hesabın alacağına kaydedilir."
+  },
+  {
+   "kod": "151",
+   "ad": "YARI MAMULLER-ÜRETİM",
+   "tanim": "Henüz tam mamul haline gelmemiş ancak direkt ilk madde ve malzeme ile direkt işçilik ve genel üretim giderlerinden belli oranlarda pay almış üretim aşamasındaki mamullerin izlendiği hesaptır.",
+   "isleyis": "Maliyet dönemi sonunda direkt ilk madde ve malzeme, direkt işçilik ve genel üretim giderleri tutarları kadar bu hesap borçlandırılır. Üretimi tamamlananların maliyet tutarı bu hesabın alacağı karşılığında ilgili stok hesaplarına aktarılır."
+  },
+  {
+   "kod": "152",
+   "ad": "MAMULLER",
+   "tanim": "Üretim çalışmaları sonunda elde edilen ve satışa hazır hale gelmiş bulunan mamullerin izlendiği hesaptır.",
+   "isleyis": "Bu hesap, üretimi tamamlanan mamullerin ambarlara alınmasıyla borçlandırılır. Satılması veya herhangi bir nedenle ambardan çekilmesi ile alacaklandırılır."
+  },
+  {
+   "kod": "153",
+   "ad": "TİCARİ MALLAR",
+   "tanim": "Herhangi bir değişikliğe tabi tutulmadan satmak amacı ile işletmeye alınan ticari mallar (emtia) ve benzeri kalemler bu hesapta yer alır.",
+   "isleyis": "Satın alınan ticari mallar (emtia) maliyet bedeli ile bu hesaba borç, satılması veya herhangi bir nedenle ambardan çekilmesinde ise maliyet bedeli ile alacak kaydedilir. 154. 155. 156."
+  },
+  {
+   "kod": "157",
+   "ad": "DİĞER STOKLAR",
+   "tanim": "Yukarıdaki stok kalemlerinin hiç birinin kapsamına alınmayan ürün, artık ve hurda gibi kalemler bu hesap grubunda yer alır.",
+   "isleyis": "Elde edilen bu stoklar maliyet bedeli ile hesaba borç, satıldığında, devredildiğinde veya kullanıldığında alacak kaydedilir."
+  },
+  {
+   "kod": "158",
+   "ad": "STOK DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)",
+   "tanim": "Bu hesap, yangın, deprem, su basması gibi doğal afetler ve bozulmak, çürümek, kırılmak, çatlamak, paslanmak, teknolojik gelişmeler ve moda değişiklikleri nedenleriyle stokların fiziki ve ekonomik değerlerinde önemli azalışların ortaya çıkması veya bunların dışında diğer nedenlerle stokların piyasa fiyatlarında düşmelerin meydana gelmesi dolayısıyla, kayıpları karşılamak üzere ayrılan karşılıkların izlendiği hesaptır.",
+   "isleyis": "Stok değer düşüklüğü tespit edildiğinde \"654. Karşılık Giderleri Hesabı\"nın borcu karşılığında bu hesaba alacak kaydedilir. Karşılık ayrılan stok kaleminin işletme içinde kullanılması ya da satılması halinde; ilgili stok hesabının alacağı ile karşılaştırılarak daha önce ayrılan karşılık \"644. Konusu Kalmayan Karşılıklar Hesabı\"na aktarılarak kapatılır."
+  },
+  {
+   "kod": "159",
+   "ad": "VERİLEN SİPARİŞ AVANSLARI",
+   "tanim": "Yurt içinden ya da yurt dışından satın alınmak üzere siparişe bağlanan stoklarla ilgili olarak yapılan avans ödemelerinin izlendiği hesaptır.",
+   "isleyis": "Yapılan ödemeler bu hesaba borç, malın teslimi üzerine alacak kaydedilir. 16. 17- YILLARA YAYGIN İNŞAAT VE ONARIM MALİYETLERİ Bu grup, yıllara yaygın inşaat ve onarım işleri yapan işletmelerin, bu işleri dolayısıyla yaptıkları harcamaların izlendiği hesapları kapsar.\" 170-178 YILLARA YAYGIN İNŞAAT VE ONARIM MALİYETLERİ İşletmenin üstlendiği yıllara yaygın inşaat ve onarım işlerinin maliyetlerinin oluşturulduğu hesaplardır. Bu hesaplar projeler bazında izlenir. İşleyişi : İşletmenin üstlendiği inşaat ve onarım işleri ile ilgili giderleri, \"741- Hizmet Üretim Maliyeti Yansıtma Hesabı\" ve faaliyet giderleri ile finansman giderlerinden bu inşaat ve onarıma düşen ortak gider payları ise \"751, 761, 771 ve 781\" kod numaralı yansıtma hesaplarının alacağı karşılığında bu hesaplara borç kaydedilir. Bu hesaplarda olunan maliyet, geçici kabul yapıldığında \"622- Satılan Hizmet Maliyeti\" hesabına devredilir. İnşaat ve onarım işinin proje bazındaki sayısı, her bir inşaatın 170-178 hesap aralığında açılacak hesaplar üzerinde defteri kebir düzeyinde izlenmesine imkan vermeyecek kadar fazla ise; diğer proje yardımcı defter düzeyinde izlenebilir. Bu durumda, her bir proje için tutulacak yardımcı defterler, defteri kebir hükmündedir.\" 178- YILLARA YAYGIN İNŞAAT ENFLASYON DÜZELTME HESABI Bu hesap, \"697- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı\" nın borç kalanının aktarılarak proje bazında açılacak tali hesaplar düzeyinde izlendiği hesaptır. İşleyişi: \"697- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı\" nın borç kalanı dönem sonlarında söz konusu hesabın alacağına karşılık bu hesabın borcuna alınarak geçici kabule kadar bu hesapta bekletilir. Geçici kabul yapıldığında o projeye ilişkin tutar bu hesaptan \"658Enflasyon Düzeltmesi Zararları\" hesabına aktarılır. 179- TAŞERONLARA VERİLEN AVANSLAR Bu hesap, yıllara yaygın inşaat ve onarım faaliyetinde bulunan işletmeler tarafından, taahhüt konusu inşaat ve onarım işinin bir kısmının ya da tamamının taşeronlara yaptırılması durumunda, taşeronlara verilen avansların proje bazında izlenmesi için kullanılır."
+  },
+  {
+   "kod": "180",
+   "ad": "GELECEK AYLARA AİT GİDERLER",
+   "tanim": "Bu hesap, peşin ödenen ve cari dönem içinde ilgili gider hesaplarına kaydedilmemesi gereken, gelecek döneme ait giderleri izlemek için kullanılır.",
+   "isleyis": "Gelecek aylarda ilgili gider ve maliyet hesaplarına borç kaydedilecek peşin olarak ödenen giderler, bu hesabın borcuna kaydedilir. Gelecek aylarda bu hesaba alacak verilmek suretiyle ilgili gider hesabına aktarılır."
+  },
+  {
+   "kod": "181",
+   "ad": "GELİR TAHAKKUKLARI",
+   "tanim": "Üçüncü kişilerden tahsili ya da bunlar hesabına kesin borç kaydı hesap döneminden sonra yapılacak gelirlerin, içinde bulunan döneme ait olan kısımlarının izlendiği hesaptır.",
+   "isleyis": "Dönem sonlarında, döneme ait olarak hesaplanacak tutarlar ilgili hasılat ve gelir hesapları karşılığında bu hesaba borç kaydedilir. Sonraki dönemde, alacakların kesinleşmesiyle hesaptaki tutarlar bu hesabın alacağına karşılık ilgili hesapların borcuna geçirilerek kapatılır."
+  },
+  {
+   "kod": "190",
+   "ad": "DEVREDEN KATMA DEĞER VERGİSİ",
+   "tanim": "Bir dönemde indirilemeyen ve izleyen vergisinin kaydedildiği ve izlendiği hesaptır.",
+   "isleyis": "\"191- İNDİRİLECEK KDV\" hesabının \"39l- HESAPLANAN KDV\" hesabı ile karşılaştırılmasından sonraki bakiyesi dönem sonlarında sözkonusu hesaba karşılık bu hesaba borç, izleyen dönem veya dönemlerde yapılacak indirimler alacak kaydedilir. \"291GELECEK YILLARDA İNDİRİLECEK KDV\" hesabından, \"l91- İNDİRİLECEK KDV\" hesabına aktarılan tutarlar indirilme dönemlerinden önce bu hesaba intikal ettirilmez"
+  },
+  {
+   "kod": "191",
+   "ad": "İNDİRİLECEK KDV",
+   "tanim": "Her türlü mal ve hizmetin satın alınması sırasında satıcılara ödenen katma değer vergisinin kaydedildiği ve izlendiği hesaptır.",
+   "isleyis": "Mal ve hizmet alımlarından doğan indirilecek katma değer vergisi bu hesaba borç, mevzuat gereği yapılan indirimler ve hesaba yapı1an düzeltmeler ile indirilemeyen ve \"190DEVREDEN KDV\" hesabına aktarılan borç bakiyesi bu hesaba alacak .yazılır."
+  },
+  {
+   "kod": "192",
+   "ad": "DİĞER KDV",
+   "tanim": "Teşvikli yatırım mallarının ithalinde ödenmesi gerektiği halde ödenmeyip, fiilen indirilmesinin mümkün olacağı tarihe kadar ertelenen katma değer vergisinin, ertelemenin bir yıl içinde olması halinde kaydedildiği ve izlendiği hesaptır.",
+   "isleyis": "Teşvikli yatırım mallarının ithalinde, gümrük idareleri tarafından tarh ve tahakkuk ettirilerek ertelenen katma değer vergisi pasifteki ilgili hesabın alacağı mukabili bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "193",
+   "ad": "PEŞİN ÖDENEN VERGİLER VE FONLAR",
+   "tanim": "Mevzuat gereğince peşin ödenen ve bir yıl içinde indirim konusu yapılabilecek gelir, kurumlar ve diğer vergiler ile fonların kayıt ve takip edildiği hesaptır.\"",
+   "isleyis": "Peşin ödenen ve bir yıl içinde indirim konusu yapılabilecek gelir, kurumlar ve diğer vergiler ile fonlar, bu hesaba borç yazılır. Dönem sonunda tahakkuk edecek gelir veya kurumlar vergisi ile fon karşılıklarından yapılacak olan indirimi teminen \"37- BORÇ VE GİDER KARŞILIKLARI\" grubunda bulunan \"371- DÖNEM KÂRININ PEŞİN ÖDENEN VERGİ VE DİĞER YÜKÜMLÜLÜKLERİ\" hesabının borcuna aktarılır. Ancak aktarılacak tutar \"370- DÖNEM KÂRI VERGİ VE DİĞER YÜKÜMLÜLÜK KARŞILIKLARI\" hesabının tutarından fazla olamaz. Aktarılamayan tutar, dönem sonunda bu hesabın bakiyesi olarak kalır.\" 194."
+  },
+  {
+   "kod": "195",
+   "ad": "İŞ AVANSLARI",
+   "tanim": "İşletme adına mal ve hizmet satın alacak, işletme adına bir kısım gider ve ödemeleri yapacak personel ve personel dışındaki kişilere verilen iş avanslarının izlendiği hesaptır.",
+   "isleyis": "Avans verildiğinde bu hesaba borç; avans alanın ibraz ettiği harcama veya ödeme belgelerine dayanılarak ilgili hesapların borcu karşılığında, bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "196",
+   "ad": "PERSONEL AVANSLARI",
+   "tanim": "Personel ve işçilere maaş, ücret ve yolluklarına mahsuben önceden ödenen avansların izlendiği hesaptır.",
+   "isleyis": "Yapılan ödemeler bu hesaba borç; nakden iadeler ile istihkaklardan kesilen tutarlar ve tevdi edilen belgeler tutarı alacak kaydedilir."
+  },
+  {
+   "kod": "197",
+   "ad": "SAYIM VE TESELLÜM NOKSANLARI",
+   "tanim": "Sayımlar sonucunda tespit edilen kasa, stok ve maddi duran varlıklar noksanlarıyla, tesellüm sırasında ortaya çıkan noksanların geçici olarak kayıt ve izleneceği hesaptır.",
+   "isleyis": "Noksanlığın ortaya çıkması ile hesaba borç, sorumlularından tahsili veya zarar kaydedilmesi halinde ise alacak kaydedilir."
+  },
+  {
+   "kod": "198",
+   "ad": "DİĞER ÇEŞİTLİ DÖNEN VARLIKLAR",
+   "tanim": "Bu hesap grubu içerisinde sayılanların dışında kalan diğer çeşitli dönen varlıkların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "199",
+   "ad": "DİĞER DÖNEN VARLIKLAR KARŞILIĞI (-)",
+   "tanim": "Yıl sonunda ilgili kesin hesaplarına aktarılması imkanı bulunmayan kasa, stok ve maddi duran varlık sayım noksanları tutarının, sayım fazlaları tutarının üstünde olması halinde fark kadar ayrılacak karşılıkları kapsar.",
+   "isleyis": "Ayrılan karşılık tutarı bu hesaba alacak \"654. Karşılık Giderleri Hesabı\"na borç kaydedilir, karşılık nedeninin gerçekleşmesi halinde \"197. Sayım ve Tesellüm Noksanları Hesabı\"karşılığında bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "220",
+   "ad": "ALICILAR",
+   "tanim": "İşletmenin faaliyet konusunu oluşturan mal ve hizmet satışlarından kaynaklanan senetsiz alacakları ifade eder. Finansal kiralamadan doğan senetsiz alacaklar da bu hesapta izlenir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "221",
+   "ad": "ALACAK SENETLERİ",
+   "tanim": "İşletmenin faaliyet konusunu oluşturan mal ve hizmet satışlarından kaynaklanan senede bağlanmış alacakları ile diğer her türlü senetli alacakları ifade eder. Finansal kiralama işlemlerinden doğan senetli alacaklar da bu hesapta izlenir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "222",
+   "ad": "ALACAK SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, senetli alacakların tasarruf değeriyle değerlenmesini sağlamak amacı ile alacak senetleri için ayrılan reeskont tutarlarının izlenmesinde kullanılır. Alacak Senetleri için ayrılan reeskont tutarları, \"Alacak Senetleri\" hesabının altında bir indirim kalemi olarak gösterilir. 223.",
+   "isleyis": ""
+  },
+  {
+   "kod": "224",
+   "ad": "KAZANILMAMIŞ FİNANSAL KİRALAMA FAİZ GELİRLERİ (-)",
+   "tanim": "Bu hesap finansal kiralamanın yapıldığı tarihte kiralama işlemlerinden doğan alacaklar ile kira ödemelerinin bugünkü değeri arasındaki farkı gösteren henüz kazanılmamış finansal kiralama faiz gelirlerinin izlendiği hesaptır. Bu gelirlerin hesaplanmasına ilişkin bilgiler bilanço dipnotlarında yer alır.",
+   "isleyis": "Finansal kiralama sözleşme tutarı ile finansal kiralamayla ilgili kira ödemelerinin bugünkü değeri arasındaki fark “Kazanılmamış Finansal Kiralama Faiz Gelirleri” olarak bu hesaba alacak kaydedilir. Kiralama sözleşmesine uygun olarak tamamlanan ve her dönem sonunda hesaplanan izleyen döneme ait faiz gelirleri tutarı bu hesaba borç “124- Kazanılmamış Finansal Kiralama Faiz Gelirleri” hesabına alacak olarak kaydedilir. 225."
+  },
+  {
+   "kod": "226",
+   "ad": "VERİLEN DEPOZİTO VE TEMİNATLAR",
+   "tanim": "İşletmede, üçüncü kişilere karşı bir işin yapılmasının üstlenilmesi ve bir akdin karşılığı olarak, geri alınmak üzere verilen, bir yıldan uzun süreli depozito ve teminat niteliğindeki değerlerin izlendiği hesaptır. 227. 228.",
+   "isleyis": ""
+  },
+  {
+   "kod": "229",
+   "ad": "ŞÜPHELİ ALACAKLAR KARŞILIĞI (-)",
+   "tanim": "Perakende satış yöntemi kullanarak bilanço gününden önceki iki hesap döneminde vadesinde tahsil edilemeyen alacakların ilgili dönemlerdeki toplam vadeli satışlara oranlarının ortalamasının değerleme dönemindeki vadeli satışlara uygulanması suretiyle bulunacak şüpheli alacaklar için ayrılan karşılıkları kapsar. Teminatlı alacaklarda karşılık teminatı aşan kısım için ayrılır. \"129. Şüpheli Ticari Alacaklar Karşılığı Hesabı\" gibi çalışır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "232",
+   "ad": "İŞTİRAKLERDEN ALACAKLAR",
+   "tanim": "İşletmenin, esas faaliyet konusu dışındaki işlemleri dolayısı ile (ödünç verme ve benzer nedenlerle ortaya çıkan) iştiraklerinden olan alacaklarını içerir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "233",
+   "ad": "BAĞLI ORTAKLIKLARDAN ALACAKLAR",
+   "tanim": "İşletmenin, esas faaliyet konusu dışındaki işlemleri dolayısı ile (ödünç verme ve benzer nedenlerle ortaya çıkan) bağlı ortaklıklarından olan alacaklarını kapsar. 234. 235.",
+   "isleyis": ""
+  },
+  {
+   "kod": "236",
+   "ad": "PERSONELDEN ALACAKLAR",
+   "tanim": "İşletme topluluğuna dahil personel ve işçinin, işletmeye olan uzun vadeli çeşitli borçlarını kapsar. Bunlara verilen avanslar bu hesapta izlenmez.",
+   "isleyis": ""
+  },
+  {
+   "kod": "237",
+   "ad": "DİĞER ÇEŞİTLİ ALACAKLAR",
+   "tanim": "Ticari olmayan ve yukarıda sayılan hesaplardan herhangi birine dahil edilemeyen alacakların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "238",
+   "ad": "DİĞER ALACAK SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, diğer alacaklar grubundaki senetli alacakların değerlenmesini sağlamak amacı ile alacak senetleri için ayrılan reeskont tutarlarının izlenmesinde kullanılır. 238.",
+   "isleyis": ""
+  },
+  {
+   "kod": "239",
+   "ad": "ŞÜPHELİ DİĞER ALACAKLAR KARŞILIĞI (-)",
+   "tanim": "Senetli ve senetsiz uzun vadeli şüpheli diğer alacakların, tahsil edilememe ihtimali-nin kuvvetlenmiş olması durumunda, bu tür risklerin giderilmesini önlemek üzere ayrılan karşılıkları kapsar. Teminatlı alacaklarda karşılık teminatı aşan kısım için kullanılır. Ticari Alacaklar ile Diğer Alacaklar Hesap Gruplarının İşleyişleri : Yukarıdaki alacak hesaplarının herbirinin tanımı, bölümlenmesi, işleyişi, değerlemesi dönen varlıklar içerisinde yer alan ilgili alacak hesaplarında olduğu gibidir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "240",
+   "ad": "BAĞLI MENKUL KIYMETLER",
+   "tanim": "İştiraklerdeki sermaye payları hesabında aranan asgari yüzdeleri taşımadığı için iştirakler hesabında izlenemeyen, ancak uzun vadede elde tutulması amaçlanan hisse senetleri ile hisse senetleri dışında kalan ve uzun vadeli amaçlarla veya yasal zorunluluklarla veya paraya dönüşme niteliği kaybolduğu için elde tutulan menkul kıymetler bu hesapta izlenir.",
+   "isleyis": "Bu menkul kıymetler elde edildiğinde veya bu gruba devredilmesi gerektiğinde \"240. Bağlı Menkul Kıymetler Hesabı\"na borç; elden çıkarıldığında bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "241",
+   "ad": "BAĞLI MENKUL KIYMETLER DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)",
+   "tanim": "Bağlı menkul kıymetlerin; borsa veya piyasa değerlerinde önemli ölçüde yada sürekli olarak değer azalması olduğu tespit edildiğinde; ortaya çıkacak zararların karşılanması amacı ile ayrılması gereken karşılıkların izlendiği hesaptır.",
+   "isleyis": "Dönen varlıklar grubundaki \"119. Menkul Kıymetler Değer Düşüklüğü Karşılığı Hesabı\"nda açıklanmıştır."
+  },
+  {
+   "kod": "242",
+   "ad": "İŞTİRAKLER",
+   "tanim": "İşletmenin, doğrudan veya dolaylı olarak diğer şirketlerin yönetimine ve ortaklık politikalarının belirlenmesine katılmak üzere edindiği hisse senetleri veya ortaklık paylarının izlendiği hesaptır. İştirakler hesabı, bir ortaklıktaki en fazla % 50 oranında olan sermaye payları veya oy haklarının izlenmesinde kullanılır. İştirak edilen ortaklıklarda iştirak ilişkisinden bahsedebilmek için sermaye payı dikkate alınmaksızın sahip olunan oy hakkı veya yönetime katılma hakkının en az % 10 oranında bulunması gerekir.",
+   "isleyis": "İştirak için sermaye taahhüdünde bulunulduğunda veya hisse senedi edinildiğinde hesaba borç, elden çıkarılmalarında alacak kaydedilir."
+  },
+  {
+   "kod": "243",
+   "ad": "İŞTİRAKLERE SERMAYE TAAHHÜTLERİ (-)",
+   "tanim": "İştiraklerle ilgili sermaye taahhütlerinin izlendiği hesaptır.",
+   "isleyis": "İştirak için sermaye taahhüdünde bulunulduğunda \"242. İştirakler Hesabı\"ı karşılığında bu hesaba alacak, taahhüt yerine getirildikçe de hesaba borç kaydedilir."
+  },
+  {
+   "kod": "244",
+   "ad": "İŞTİRAKLER SERMAYE PAYLARI DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)",
+   "tanim": "İştirak paylarının borsa veya piyasa değerinde sürekli ya da önemli ölçüde meydana gelen değer azalmalarının izlendiği hesaptır.",
+   "isleyis": "Ayrılması kararlaştırılan değer azalma karşılıkları \"654. Karşılık Giderleri Hesabı\"na gider kaydı suretiyle bu hesaba alacak; kendisine karşılık ayrılmış olan iştirak payı elden çıkartıldığında veya değer düşüklüğünün gerçekleşmemesi halinde ise \"644. Konusu Kalmayan Karşılıklar Hesabı\"na gelir kaydı suretiyle hesaba borç kaydedilir."
+  },
+  {
+   "kod": "245",
+   "ad": "BAĞLI ORTAKLIKLAR",
+   "tanim": "İşletmenin doğrudan veya dolaylı olarak yüzde 50 oranından fazla sermaye ya da oy hakkına veya en az bu oranda yönetim çoğunluğunu seçme hakkına sahip olduğu iştiraklerin sermaye paylarının izlendiği hesaptır. Bağlı ortaklığın sahipliğinin belirlenmesinde yukarıdaki kıstaslardan, yönetim çoğunluğunu seçme hakkı, esas alınır.",
+   "isleyis": "Bağlı ortaklık için sermaye taahhüdünde bulunulduğunda veya hisse senedi edinildiğinde hesaba borç, ortaklık paylarının elden çıkarılmasıyla alacak kaydedilir."
+  },
+  {
+   "kod": "246",
+   "ad": "BAĞLI ORTAKLIKLARA SERMAYE TAAHHÜTLERİ (-)",
+   "tanim": "Bağlı ortaklıklarla ilgili sermaye taahhütlerinin izlendiği hesaptır.",
+   "isleyis": "Bağlı ortaklık için sermaye taahhüdünde bulunulduğunda \"245. Bağlı Ortaklıklar Hesabı\" karşılığında bu hesaba alacak, taahhüt yerine getirildikçe de hesaba borç kaydedilir."
+  },
+  {
+   "kod": "247",
+   "ad": "BAĞLI ORTAKLIKLAR SERMAYE PAYLARI DEĞER DÜŞÜKLÜĞÜ",
+   "tanim": "KARŞILIĞI (-) Bağlı ortaklığa iştirak paylarının borsa veya piyasa değerinde, sürekli ya da önemli ölçüde meydana gelen değer azalmalarının izlendiği hesaptır.",
+   "isleyis": "Ayrılması kararlaştırılan değer azalma karşılıkları, \"654. Karşılık Giderleri Hesabı\"na gider kaydı suretiyle bu hesaba alacak; kendisine karşılık ayrılmış olan bağlı ortaklık sermaye payı elden çıkartıldığında veya değer düşüklüğünün gerçekleşmemesi halinde ise \"644. Konusu Kalmayan Karşılıklar Hesabı\"na alacak kaydı suretiyle hesaba borç kaydedilir."
+  },
+  {
+   "kod": "248",
+   "ad": "DİĞER MALİ DURAN VARLIKLAR",
+   "tanim": "Yukarıda belirtilen hesapların hiçbirinin kapsamına girmeyen özellikle kendi bölümlerinde tanımlanmayan diğer mali duran varlıkların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "249",
+   "ad": "DİĞER MALİ DURAN VARLIKLAR KARŞILIĞI (-)",
+   "tanim": "Diğer mali duran varlıkların değerinde, sürekli ya da önemli ölçüde meydana gelen değer azalmalarının izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "250",
+   "ad": "ARAZİ VE ARSALAR",
+   "tanim": "İşletmeye ait her türlü arazi ve arsaların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "251",
+   "ad": "YERALTI VE YERÜSTÜ DÜZENLERİ",
+   "tanim": "Herhangi bir işin gerçekleşmesini sağlamak veya kolaylaştırmak için; yeraltında veya yerüstünde inşa edilmiş her türlü yol, hark, köprü, tünel, bölme, sarnıç, iskele vb. yapıların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "252",
+   "ad": "BİNALAR",
+   "tanim": "Bu hesap işletmenin her türlü binaları ve bunların ayrılmaz parçalarının izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "253",
+   "ad": "TESİS, MAKİNA VE CİHAZLAR",
+   "tanim": "Üretimde kullanılan her türlü makine, tesis ve cihazlar ile bunların eklentileri ve bu amaçla kullanılan taşıma gereçlerinin (Konveyör, Forklift vb) izlendiği hesaptır. Bu hesap kullanım amaçlarına ve makine çeşitlerine göre bölümlenebilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "254",
+   "ad": "TAŞITLAR",
+   "tanim": "İşletme faaliyetlerinde kullanılan tüm taşıtların izlendiği hesaptır. Ulaştırma sektöründe hizmet üretimi amacıyla kullanımda olan tüm taşıt araçları da bu hesapta izlenir. Ancak. ulaştırma sektöründe ana üretimde kullanılan taşıt araçlarının toplam tutarı bilanço dipnotlarında gösterilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "255",
+   "ad": "DEMİRBAŞLAR",
+   "tanim": "İşletme faaliyetlerinin yürütülmesinde kullanılan her türlü büro makine ve cihazları ile döşeme, masa, koltuk, dolap, mobilya gibi maddi varlıkların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "256",
+   "ad": "DİĞER MADDİ DURAN VARLIKLAR",
+   "tanim": "Yukarıda belirtilen hesapların hiçbirinin kapsamına girmeyen özellikle kendi bölümlerinde tanımlanmayan diğer maddi duran varlıkların izlendiği hesaptır. İşleyişleri : Maddi duran varlıklar hesapları satınalma, devir, inşa veya imal bedelleriyle borçlandırılır. Satılan, devredilen, kullanma yeteneğini kaybedenler ise, alacak kaydı ile hesaplardan çıkarılır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "257",
+   "ad": "BİRİKMİŞ AMORTİSMANLAR (-)",
+   "tanim": "Maddi duran varlık bedellerinin, kullanılabilecekleri süre içerisinde hesaben yokedilebilmesini sağlamak amacıyla kullanılan hesaptır.",
+   "isleyis": "Ayrılan amortismanlar ilgili gider hesapları karşılığında bu hesaba alacak; satılan, devredilen, kullanma yeteneğini kaybedenler ise hesaba borç, ilgili varlık hesabına da alacak kaydedilir."
+  },
+  {
+   "kod": "258",
+   "ad": "YAPILMAKTA OLAN YATIRIMLAR",
+   "tanim": "İşletmede, yapımı süren ve tamamlandığında ilgili maddi duran varlık hesabına aktarılacak olan, her türlü madde ve malzeme ile işçilik ve genel giderlerle ilgili harcamaların izlendiği hesaptır.",
+   "isleyis": "Yapılmakta olan yatırım projelerine direkt ve endirekt şekilde gelen harcamalar bu hesaba borç: tamamlanan yatırım bedelleri ilgili maddi duran varlık hesabına borç kaydedilerek, bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "259",
+   "ad": "VERİLEN AVANSLAR",
+   "tanim": "Yurt içinden veya yurt dışından satınalınmak üzere sipariş edilen maddi duran varlıklarla ilgili olarak yapılan avans ödemelerinin izlendiği hesaptır. Sipariş avansıyla ilgili giderleri de kapsar.",
+   "isleyis": "Ödeme yapıldığında hesaba borç: sipariş edilen malzeme teslim alındığında ilgili hesabın borcu karşılığında bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "260",
+   "ad": "HAKLAR",
+   "tanim": "İmtiyaz, patent, lisans, ticari marka ve ünvan gibi bir bedel ödenerek elde edilen bazı hukuki tasarruflar ile kamu otoritelerinin işletmeye belirli alanlarda tanıdığı kullanma, yararlanma gibi yetkiler dolayısıyla yapılan harcamaları kapsar.",
+   "isleyis": "Edinilen haklar, maliyet bedelleri ile bu hesaba borç kaydedilir. Yararlanma süreleri içerisinde, yararlanma sürelerinin belli olmaması durumunda, 5 yıllık sürede eşit taksitlerle itfa olunarak yok edilir."
+  },
+  {
+   "kod": "261",
+   "ad": "ŞEREFİYE",
+   "tanim": "Bu hesap, bir işletme devralınırken katlanılan maliyet ile söz konusu işletmenin rayiç bedelle hesaplanan net varlıklarının (öz varlık) değeri arasındaki olumlu farkların izlenmesinde kullanılır. Şerefiye hesaplanırken rayiç bedelin tespit edilmemesi halinde, net defter değeri esas alınır.",
+   "isleyis": "Ödenen şerefiye bedellerinin tamamı bu hesabın borcuna kaydolunur. Yok edilmeleri amortisman yoluyla 5 yıl içinde eşit taksitlerle yapılır."
+  },
+  {
+   "kod": "262",
+   "ad": "KURULUŞ VE ÖRGÜTLENME GİDERLERİ",
+   "tanim": "İşletmenin kurulması, yeni bir şubenin açılması, işlerin sürekli olarak genişletilmesi için yapılan ve karşılığında maddi bir değer elde edilmeyen giderlerin aktifleştirilmeleri durumunda izlendiği hesaptır.",
+   "isleyis": "Maliyet değerleri ile bu hesaba borç kaydedilir. Yokedilmeleri amortisman yolu ile olur. Genelde beş yılda eşit taksitlerle itfa olunarak yok edilir."
+  },
+  {
+   "kod": "263",
+   "ad": "ARAŞTIRMA VE GELİŞTİRME GİDERLERİ",
+   "tanim": "İşletmede yeni ürün ve teknolojiler oluşturulması mevcutların geliştirilmesi ve benzeri amaçlarla yapılan her türlü harcamalardan, aktifleştirilen kısmının izlendiği hesaptır.",
+   "isleyis": "Maliyet değerleri ile bu hesaba borç kaydedilir. 5 yıl içinde eşit taksitlerle itfa edilerek yok edilir."
+  },
+  {
+   "kod": "264",
+   "ad": "ÖZEL MALİYETLER",
+   "tanim": "Kiralanan gayrimenkullerin geliştirilmesi veya ekonomik değerinin sürekli olarak artırılması amacıyla yapılan giderler ile (normal bakım, onarım ve temizleme giderleri hariç) bu gayrimenkulun kullanılması için yapılıp kira süresinin sonunda mal sahibine bırakılacak olan, varlıkların bedellerini kapsar.",
+   "isleyis": "Yapılan harcamalar hesaba borç kaydedilir. Bu harcamalar kira süresi içerisinde, kira süresinin beş yıldan fazla olması durumunda da beş yılda eşit tutarlarla, amorti edilir. 265. 266."
+  },
+  {
+   "kod": "267",
+   "ad": "DİĞER MADDİ OLMAYAN DURAN VARLIKLAR",
+   "tanim": "Yukarıda sayılanların dışında kalan diğer maddi olmayan duran varlık kalemlerinin izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "268",
+   "ad": "BİRİKMİŞ AMORTİSMANLAR (-)",
+   "tanim": "Maddi olmayan duran varlık bedellerinin, kullanılabilecekleri süre içerisinde yokedilebilmesini sağlamak amacıyla kullanılan hesaptır.",
+   "isleyis": "Ayrılan amortismanlar, ilgili gider hesapları karşılığında bu hesaba alacak; kullanım hakkı sona erenler ya da elden çıkarılanlar hesaba borç, ilgili varlık hesabına alacak kaydedilir."
+  },
+  {
+   "kod": "269",
+   "ad": "VERİLEN AVANSLAR",
+   "tanim": "Maddi olmayan duran varlıklarla ilgili olarak gerek yurt içi, gerekse yurt dışındaki kişi ve kuruluşlara yapılan avans ödemelerinin izlendiği hesaptır.",
+   "isleyis": "Ödeme yapıldığında hesaba borç; varlıklar elde edildiğinde ilgili hesabın borcu karşılığında bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "271",
+   "ad": "ARAMA GİDERLERİ",
+   "tanim": "Arama amacı ile yapılan ve bununla ilgili giderlerin izlendiği hesaptır. Maden yatağının işletmeye elverişli olup olmadığının belirlenmesi ve giriş noktalarının saptanması için, işletmeye geçmeden önce yapılan arama giderleri ile petrol araştırması ile ilgili olarak arazinin yerden ve havadan (topoğrafik, jeolojik, jeofizik, jeoşimik vb.) incelenmesine ve gerekli işlem, deneyim ve jeolojik bilgi almak amacı ile yapılan sondaj giderleri gibi yapılan harcamalar bu hesapta izlenir. Arama faaliyetlerinin sonucunda üretilebilir cevher rezervi saptanamamışsa yapılan giderler zarar kaydedilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "272",
+   "ad": "HAZIRLIK VE GELİŞTİRME GİDERLERİ",
+   "tanim": "Açık işletmelerde, maden üstündeki örtüyü kaldırmak veya yeraltındaki maden yataklarına girmek, bu yatakla yerüstü arasında genel kütlenin tüketilmesine kadar sürekli bir bağlantı kurmak ve maden yataklarını üretime elverişli parçalara bölmek, gerek insanların gerekse araçların gidip gelme ve havalandırılmalarını ve cevherin taşınmasını sağlamak amacıyla açılacak olan düşey, yatay ve eğilimli yol, mecra ve benzeri faaliyetlerin gerektirdiği giderlerle; petrol işlemlerinden kuyu açma, temizleme, derinleştirme, bitirme veya bu işlemlere hazırlık için yapılan işçilik, yakıt, tamir ve bakım, nakliye, ikmal, malzeme vb. giderlerin izlendiği hesaptır. 273. 274. 275. 276.",
+   "isleyis": ""
+  },
+  {
+   "kod": "277",
+   "ad": "DİĞER ÖZEL TÜKENMEYE TABİ VARLIKLAR",
+   "tanim": "Özellikle kendi bölümlerinde tanımlanmayan özel tükenmeye tabi diğer varlık değerlerinin izlendiği hesaptır. İşleyişleri : Belirli maddi varlıkla ilgisi kesinlikle saptanan harcamalar bu hesaplara borç, özelliğini yitirmiş olan varlıklar ise kayıtlardan çıkarılmak üzere bu hesaplara alacak kaydedilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "278",
+   "ad": "BİRİKMİŞ TÜKENME PAYLARI (-)",
+   "tanim": "Özel tükenmeye tabi varlıklar grubuna giren kalemler özelliklerine göre \"Tükenme payı\" ayrılmak suretiyle itfa edilir.",
+   "isleyis": "Özel tükenmeye tabi varlıklar tükenme payı, maliyet ve gider hesapları karşılığında hu hesaba alacak, kayıtlardan çıkarıldığı takdirde borç kaydedilir."
+  },
+  {
+   "kod": "279",
+   "ad": "VERİLEN AVANSLAR",
+   "tanim": "Özel tükenmeye tabi varlıklar için yapılan avans ödemelerinin izlendiği hesaptır.",
+   "isleyis": "Avans ödemesi yapıldığında hesaba borç, kesinleşen ödemelerde, önceki avans ödemesi mahsup edilmek üzere hesaba alacak kaydedilir. 28. GELECEK YILLARA AİT GİDERLER VE GELİR TAHAKKUKLARI : Bu grup, içinde bulunan dönemde ortaya çıkan ancak gelecek yıllara ait olan giderler ile faaliyet dönemine ait olup da ileriki yıllarda tahsil edilebilecek gelirlerden oluşur. Bu grup hesapları aşağıda gösterilmiştir."
+  },
+  {
+   "kod": "280",
+   "ad": "GELECEK YILLARA AİT GİDERLER",
+   "tanim": "Bu hesap, peşin ödenen ve cari dönem içinde ilgili gider hesaplarına kaydedilmemesi gereken, gelecek yıllara ait giderleri izlemek için kullanılır.",
+   "isleyis": "Gelecek yıllarla ilgili gider ve maliyet hesaplarına borç kaydedilecek olan peşin ödenen giderler bu hesabın borcuna kaydedilir. ilgili hesap dönemlerinde bu hesabın alacağı karşılığında dönen varlıklardaki \"Gelecek Aylara Ait Giderler\" hesabına gerekli aktarmalar yapılır."
+  },
+  {
+   "kod": "281",
+   "ad": "GELİR TAHAKKUKLARI",
+   "tanim": "Üçüncü kişilerden tahsili ya da bunlar hesabına kesin borç kaydı bir yıl veya daha sonraki yıllarda yapılacak gelirlerin içinde bulunulan döneme ait olan kısımlarının, ilgili gelir hesabı karşılığında borç kaydedileceği hesaptır.",
+   "isleyis": "Dönem sonlarında, döneme ait olarak hesaplanacak tutarlar ilgili hasılat ve gelir hesapları karşılığında bu hesaba borç kaydedilir. Sonraki yıllarda alacakların kesinleşmesiyle hesaptaki tutarlar bu hesabın alacağına karşılık, üçüncü kişi hesaplarının borcuna geçirilerek kapatılır."
+  },
+  {
+   "kod": "291",
+   "ad": "GELECEK YILLARDA İNDİRİLECEK KDV",
+   "tanim": "Satın alınan veya imal edilen, amortismana tabi iktisadi kıymetlerle ilgili, bir yıldan daha uzun sürede indirilebilecek nitelikteki KDV'nin kayıt ve izlendiği hesaptır.",
+   "isleyis": "Amortismana tabi iktisadi kıymetlerle ilgili bir yıldan daha uzun sürede indirilebilecek nitelikteki KDV bu hesaba borç, indirilebilme dönemlerine isabet eden tutarlar ise bilanço dönemi sonunda bu hesaba alacak verilirken, \"191. İndirilecek Katma Değer Vergisi Hesabı\"na aktarılır."
+  },
+  {
+   "kod": "292",
+   "ad": "DİĞER KDV",
+   "tanim": "Ertelenen, iadesi gereken, tahsil edilen ve çeşitli şekillerde ortaya çıkan diğer KDV'nin bir yılı aşan tutarlarının kaydedildiği hesaptır.",
+   "isleyis": "Yukarıda belirtilen nitelikteki KDV'nin ortaya çıkması halinde bu hesaba borç, ilgili hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "293",
+   "ad": "GELECEK YILLAR İHTİYACI STOKLAR",
+   "tanim": "Tedbirli satın alma ve imal etme politikası gereği ve stok dönüş hızı düşüklüğü nedeniyle işletmede bulunan ve işletmenin bir yıllık dönem içinde kullanabileceğinden daha fazla olan stok kalemlerinin izlendiği hesaptır.",
+   "isleyis": "Gelecek yıllar ihtiyacı stoklar bu hesaba gruplar olarak borç ve kullanım dönemi bir yılın altına düştüğünde ilgili stok hesaplarına devredilerek bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "294",
+   "ad": "ELDEN ÇIKARILACAK STOKLAR VE MADDİ DURAN VARLIKLAR",
+   "tanim": "Çeşitli nedenlerle işletmede kullanılma ve satış olanaklarını yitiren stoklar ve duran varlıkların izlendiği hesaptır.",
+   "isleyis": "Tanımdaki niteliğe dönüşen varlıklar ilgili bulundukları varlık hesaplarından çıkarılarak bu hesaba alınır; elden çıkarıldıklarında ise hesap kapatılır."
+  },
+  {
+   "kod": "295",
+   "ad": "PEŞİN ÖDENEN VERGİLER VE FONLAR",
+   "tanim": "İzleyen yıldan sonraki yıllarda indirim konusu yapılabilecek olan peşin ödenen vergi ve fonların izlendiği hesaptır.",
+   "isleyis": "Gelecek dönemden daha sonraki yıllarda indirim konusu yapılabilecek nitelikteki vergi ve fonlar ödendiğinde bu hesaba borç yazılır. İndirilebilme süresi bir yılın altına inen vergi ve fonlar bu hesabın alacağına karşılık, \"193. Peşin Ödenen Vergi ve Fonlar\" hesabına aktarılır.\" 296."
+  },
+  {
+   "kod": "297",
+   "ad": "DİĞER ÇEŞİTLİ DURAN VARLIKLAR",
+   "tanim": "Bu hesap grubu içerisinde sayılanların dışında kalan diğer çeşitli duran varlıkların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "298",
+   "ad": "STOK DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)",
+   "tanim": "Bu hesap yangın, deprem, su basması gibi doğal afetler ve bozulmak, çürümek, kırılmak, çatlamak, paslanmak, teknolojik gelişmeler ve moda değişiklikleri nedeniyle, stokların fiziki ve ekonomik değerlerinde önemli azalışların ortaya çıkması veya bunun dışında diğer nedenlerle gelecek yıllar ihtiyaç stokların piyasa fiyatlarında düşmelerin meydana gelmesi veya elden çıkarılacak stoklar dolayısıyla, kayıpları karşılamak üzere ayrılan karşılıkların izlendiği hesaptır.",
+   "isleyis": "Dönen varlıklar grubundaki \"158. Stok Değer Düşüklüğü Karşılığı Hesabı\"nda açıklanmıştır."
+  },
+  {
+   "kod": "299",
+   "ad": "BİRİKMİŞ AMORTİSMANLAR (-)",
+   "tanim": "Bu gruptaki amortismana tabi varlıklar için ayrılan amortismanların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "300",
+   "ad": "BANKA KREDİLERİ",
+   "tanim": "Bu hesap, banka ve diğer finans kuruluşlarından sağlanan kısa vadeli kredilere ilişkin tutarları içeren hesap kalemidir.",
+   "isleyis": "Alınan kısa vadeli krediler bu hesaba alacak, ödenmeleri halinde borç kaydedilir."
+  },
+  {
+   "kod": "301",
+   "ad": "FİNANSAL KİRALAMA İŞLEMLERİNDEN BORÇLAR",
+   "tanim": "Bu hesap, kiracıların finansal kiralama yapanlara olan ve vadesi 1 yılı geçmeyen borçlarının izlendiği hesaptır.",
+   "isleyis": "Finansal kiralama sözleşme tutarı bu hesaba alacak, finansal kiralamaya konu olan ilgili varlık hesabına kira ödemelerinin bugünkü değeri ile borç ve bu iki tutar arasındaki fark da “302Ertelenmiş Finansal Kiralama Borçlanma Maliyetleri” hesabına borç kaydedilir."
+  },
+  {
+   "kod": "302",
+   "ad": "ERTELENMİŞ FİNANSAL KİRALAMA BORÇLANMA MALİYETLERİ(-)",
+   "tanim": "Finansal kiralamanın yapıldığı tarihte kiralama işlemlerinden doğan borçlar ile kiralanan varlığa ilişkin kira ödemelerinin bugünkü değeri arasındaki farkı gösteren henüz ödenmemiş finansal kiralama borçlanma maliyetlerinin izlendiği hesaptır.",
+   "isleyis": "Finansal kiralama sözleşme tutarı ile finansal kiralamaya konu olan varlığa ilişkin kira ödemelerinin bugünkü değeri arasındaki fark “Ertelenmiş Finansal Kiralama Borçlanma Maliyetleri” olarak bu hesaba borç kaydedilir. Kiralama sözleşmesine uygun olarak tamamlanan her dönem sonunda gerçekleşmiş olan faiz giderleri tutarları bu hesaba alacak “66-Borçlanma Maliyetleri” hesap grubunda ilgili borçlanma gideri hesabına borç olarak kaydedilir."
+  },
+  {
+   "kod": "303",
+   "ad": "UZUN VADELİ KREDİLERİN ANAPARA TAKSİTLERİ VE FAİZLERİ",
+   "tanim": "Vadelerine bir yıldan fazla süre bulunmakla birlikte uzun vadeli kredilerin, bilanço tarihinden itibaren bir yıl içinde ödenecek anapara taksitleri ile vadesi bir yılın altına düşenleri ve bunların tahakkuk ettiği halde henüz ödenmeyen faizlerini kapsar.",
+   "isleyis": "İşletmenin uzun vadeli borçlarından, bilançonun düzenlenme tarihini izleyen bir yıllık dönemde ödenecek olan taksitleri ve faizleri bu hesaba alacak, ödenmeleri halinde borç kaydedilir."
+  },
+  {
+   "kod": "304",
+   "ad": "TAHVİL ANAPARA BORÇ TAKSİT VE FAİZLERİ",
+   "tanim": "Bilanço tarihinden itibaren bir yıl içinde ödenecek tahvil anapara borç taksitleri ile tahvillerin tahakkuk edip de henüz ödenmeyen faizlerinin izlendiği hesaptır.",
+   "isleyis": "Yukarıda belirtilen tahvil anapara borç, taksit ve faizleri bu hesaba alacak, ödenmeleri halinde borç kaydedilir."
+  },
+  {
+   "kod": "305",
+   "ad": "ÇIKARILMIŞ BONOLAR VE SENETLER",
+   "tanim": "Tedavüldeki finansman bonoları ve banka bonoları gibi kısa vadeli para ve sermaye piyasası araçları karşılığında sağlanan fonlar bu hesapta izlenir.",
+   "isleyis": "Bu hesapta tanımlanan menkul kıymetler ihraç edildiğinde nominal bedel üzerinden bu hesaba alacak, ilgili hesaplara borç kaydedilir. Ödenmeleri halinde hesaba borç kaydedilir."
+  },
+  {
+   "kod": "306",
+   "ad": "ÇIKARILMIŞ DİĞER MENKUL KIYMETLER",
+   "tanim": "Çıkarılmış bonolar ve senetler kapsamına alınamayan diğer menkul kıymetlerin izlendiği hesaptır.",
+   "isleyis": "Yukarıda tanımlananlar dışında çıkarılmış diğer menkul kıymetler nominal bedel üzerinden bu hesaba alacak, ilgili hesaplara borç kaydedilir. Ödenmeleri halinde borç kaydedilir. 307."
+  },
+  {
+   "kod": "308",
+   "ad": "MENKUL KIYMETLER İHRAÇ FARKLARI (-)",
+   "tanim": "Nominal değerinin altında ihraç edilen tahvil, senet vs. diğer menkul kıymetlerin nominal değeri ile satış fiyatı arasındaki farkın gelecek döneme ait olan kısmı bu hesapta izlenir.",
+   "isleyis": "Nominal değerin altında ihraç edilen tahvil, senet vs. diğer menkul kıymetlerin nominal değeri ile satış fiyatı arasındaki farklardan gelecek döneme ait olanlar ve \"408. Menkul Kıymetler İhraç Farkı Hesabı\"ndan bu hesaba aktarılanlar bu hesabın borcuna, menkul kıymetin vadesine paralel olarak itfa edilmesi kaydıyla hesaplanan itfa tutarları, \"66. Finansman Giderleri\" grubundaki hesaplar karşılığında bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "309",
+   "ad": "DİĞER MALİ BORÇLAR",
+   "tanim": "Yukarıdaki hesap kalemlerinin hiç birinin kapsamına alınmayan mali borçların izlendiği hesaptır.",
+   "isleyis": "Bu hesaba; borcun doğması halinde alacak, ödenmesi halinde borç kaydedilir. 31."
+  },
+  {
+   "kod": "320",
+   "ad": "SATICILAR",
+   "tanim": "İşletmenin faaliyet konusu ile ilgili her türlü mal ve hizmet alımlarından kaynaklanan senetsiz borçların izlendiği hesaptır. Ortaklar, ana kuruluş, iştirakler ve bağlı ortaklıklara olan senetsiz ticari borçların bilanço dipnotlarında gösterilmesi gerekir.",
+   "isleyis": "Senetsiz borcun doğması ile bu hesaba alacak, ödenmesi halinde borç kaydedilir."
+  },
+  {
+   "kod": "321",
+   "ad": "BORÇ SENETLERİ",
+   "tanim": "İşletmenin faaliyet konusu ile ilgili her türlü mal ve hizmet alımlarından kaynaklanan senede bağlanmış ticari borçlarının izlendiği hesaptır. Ortaklar ana kuruluş, iştirakler ve bağlı ortaklıklara olan senetli ticari borçların bilanço dipnotlarında gösterilmesi gerekir.",
+   "isleyis": "Borç senetleri tutarları bu hesaba alacak, ödenmesi halinde borç kaydedilir."
+  },
+  {
+   "kod": "322",
+   "ad": "BORÇ SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, senetli borçların tasarruf değeri ile değerlemesini sağlamak üzere borç senetleri için ayrılan reeskont tutarlarının izlenmesinde kullanılır.",
+   "isleyis": "Hesaplanan reeskont tutarları bu hesaba borç, \"64. Diğer Faaliyetlerden Olağan Gelir ve Kârlar\" grubundaki \"642. Faiz Gelirleri Hesabı\"na gelir kaydedilir. İzleyen dönemde hu hesap \"65. Diğer Faaliyetlerden Olağan Gider ve Zararlar\" grubunun \"652. Reeskont Faiz Giderleri Hesabı\"na aktarılarak kapatılır. 323. 324. 325."
+  },
+  {
+   "kod": "326",
+   "ad": "ALINAN DEPOZİTO VE TEMİNATLAR",
+   "tanim": "Üçüncü kişilerin belli bir işi yapmalarını, aldıkları bir değeri geri vermelerini sağlamak amacıyla ve belli sözleşmeler nedeniyle gerçekleşecek bir alacağın karşılığı olarak alınan depozito ve teminat niteliğindeki değerlerin izlendiği hesaptır.",
+   "isleyis": "Alınan depozito ve teminatlar bu hesabın alacağına, geri verilenler veya hesaba sayılanlar borcuna kaydedilir. 327. 328."
+  },
+  {
+   "kod": "329",
+   "ad": "DİĞER TİCARİ BORÇLAR",
+   "tanim": "Yukarıdaki hesap kalemlerinin hiç birinin kapsamına alınamayan ticari borçların izlendiği hesaptır.",
+   "isleyis": "Bu hesaba, borcun doğması halinde alacak, ödenmesi halinde borç kaydedilir."
+  },
+  {
+   "kod": "331",
+   "ad": "ORTAKLARA BORÇLAR",
+   "tanim": "İşletmenin, esas faaliyet konusu dışındaki işlemleri dolayısıyla işletmelerde işletme sahibine) borçlu bulunduğu tutarların izlendiği hesaptır.",
+   "isleyis": "Borcun doğması halinde hesaba alacak, ödenmesi halinde ise borç kaydedilir."
+  },
+  {
+   "kod": "332",
+   "ad": "İŞTİRAKLERE BORÇLAR",
+   "tanim": "İşletmenin esas faaliyet konusu dışındaki işlemleri dolayısıyla iştiraklerine olan borçlarının izlendiği hesaptır.",
+   "isleyis": "Bu hesaba; borcun doğması halinde alacak, ödenmesi halinde işe borç kaydedilir."
+  },
+  {
+   "kod": "333",
+   "ad": "BAĞLI ORTAKLIKLARA BORÇLAR",
+   "tanim": "İşletmenin; sermaye taahhüdünden borçları hariç olmak üzere faaliyet konusu dışındaki işlemleri dolayısıyla bağlı ortaklıklara olan borçlarının izlendiği hesaptır.",
+   "isleyis": "Bu hesaba, borcun doğması halinde alacak, ödenmesi halinde ise borç kaydedilir. 334."
+  },
+  {
+   "kod": "335",
+   "ad": "PERSONELE BORÇLAR",
+   "tanim": "İşletmenin personeline olan çeşitli borçlar bu hesapta izlenir.",
+   "isleyis": "Tahakkuk eden personele borçlar bu hesabın alacağına, ödenmesi halinde borcuna kaydedilir. 336."
+  },
+  {
+   "kod": "337",
+   "ad": "DİĞER BORÇ SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, diğer borçlar gurubundaki senetli borçların değerlemesini sağlamak amacı ile borç senetleri için ayrılan reeskont tutarlarının izlendiği hesaptır.",
+   "isleyis": "Hesaplanan reeskont tutarları bu hesaba borç, \"642. Faiz Gelirleri Hesabı\"na gelir kaydedilir. İzleyen dönemde hu hesap \"652. Reeskont Faiz Giderleri Hesabı\"na aktarılarak kapatılır. 338."
+  },
+  {
+   "kod": "339",
+   "ad": "DİĞER ÇEŞİTLİ BORÇLAR",
+   "tanim": "Ticari olmayıp yukarıdaki hesaplardan hiçbirinin kapsamına alınamayan çeşitli borçların izlendiği hesaptır.",
+   "isleyis": "Bu hesaba; borcun doğması halinde alacak, ödenmesi halinde ise borç kaydedilir."
+  },
+  {
+   "kod": "340",
+   "ad": "ALINAN SİPARİŞ AVANSLARI",
+   "tanim": "İşletmenin satış amacıyla gelecekte yapacağı mal ve hizmet teslimleri ile ilgili olarak peşin tahsil ettiği tutarların izlendiği hesaptır.",
+   "isleyis": "Alıcılardan alınan avanslar bu hesabın alacağına, malın teslim edilmesi, hizmetin görülmesi halinde borcuna yazılır. 341. 342. 343. 344. 345. 346. 347. 348."
+  },
+  {
+   "kod": "349",
+   "ad": "ALINAN DİĞER AVANSLAR",
+   "tanim": "Özel bölümünde tanımlanan avanslar dışında, işletmenin aldığı her türlü kısa vadeli avansların izlendiği hesaptır.",
+   "isleyis": "\"Diğer Avanslar\" \"340. Alınan Sipariş Avansları Hesabında\" açıklanmıştır."
+  },
+  {
+   "kod": "360",
+   "ad": "ÖDENECEK VERGİ VE FONLAR",
+   "tanim": "İşletmenin ekonomik faaliyetlerde bulunmasının sonucu ilgili mali mevzuat uyarınca mükellef veya sorumlu sıfatıyla işletmenin kendisine, personeline ve üçüncü kişilere ilişkin olarak ödenmesi gereken vergi, resim, harç ve fonların izlendiği hesaptır.",
+   "isleyis": "Vergi, resim, harçların tahakkuk ettirilmesini gerektiren olaylar ve işlemler ortaya çıktıkça anılan hesaplar alacaklanır, ödemeler yapıldıkça borçlanır. Bir yıldan daha uzun sürede ödenecek ertelenmiş veya takside bağlanmış vergiler varsa, bunlar \"438. Kamuya Olan Ertelenmiş veya Taksitlendirilmiş Borçlar Hesabı\" na aktarılır."
+  },
+  {
+   "kod": "361",
+   "ad": "ÖDENECEK SOSYAL GÜVENLİK KESİNTİLERİ",
+   "tanim": "İşletmenin, personelin hakedişlerinden sosyal güvenlik mevzuatı hükümlerine göre kesintiye tabi tutmakla yükümlü bulunduğu, personele ait emeklilik keseneği ve sigorta primleri ile bunlara ilişkin işveren katılma payları ve işverence sosyal güvenlik kuruluşlarına ödenecek diğer yükümlülüklerin izlendiği hesaptır.",
+   "isleyis": "Kesintiler yapıldıkça bu hesap alacaklandırılır ve ödemeler yapıldıkça borçlandırılır Bir yıldan daha uzun sürede ödenecek Sosyal Güvenlik Kesintileri varsa, bunlar \"438. Kamuya Olan Ertelenmiş veya Taksitlendirilmiş Borçlar Hesabı\" na aktarılır. 362. 363. 364. 365. 366. 367."
+  },
+  {
+   "kod": "368",
+   "ad": "VADESİ GEÇMİŞ ERTELENMİŞ VEYA TAKSİTLENDİRİLMİŞ VERGİ VE",
+   "tanim": "DİĞER YÜKÜMLÜLÜKLER Kanuni süresi içerisinde ödenmeyen vergi ve yükümlülükler ile erteleme ve taksitlendirme süresi bilanço tarihinde bir yıldan az olan vergi ve yükümlülükleri kapsar.",
+   "isleyis": "Vadelerinde ödenemeyen vergi ve diğer yükümlülüklerle erteleme veya taksitlendirme süresi bir yıldan az olanlar ile vadesi bir yılın altına düştüğü için 438 nolu hesaptan bu hesaba aktarılanlar, hesabın alacağına kaydedilir. Ödenmeleri halinde hesaba borç kaydedilir. Ancak, vadesi geçmiş vergi ve diğer yükümlülüklerde erteleme veya taksite bağlama süresi bir yılı aşanlar bu hesabın borcu karşılığında \"438. Kamuya Olan Ertelenmiş veya Taksitlendirilmiş Borçlar Hesabı\"na aktarılır."
+  },
+  {
+   "kod": "369",
+   "ad": "ÖDENECEK DİĞER YÜKÜMLÜLÜKLER",
+   "tanim": "Özel bölümlerinde tanımlananlar dışında kalan yükümlülüklerin izlendiği hesaptır.",
+   "isleyis": "Tahakkuk ettirilmesini gerektiren olaylar ve işlemler ortaya çıktıkça anılan hesaplar alacaklanır, ödemeler yapıldıkça borçlanır."
+  },
+  {
+   "kod": "372",
+   "ad": "KIDEM TAZMİNATI KARŞILIĞI",
+   "tanim": "Bu hesapta, belirlenecek esaslar çerçevesinde ayrılan ve bir yıl içinde ödeneceği öngörülen kıdem tazminatları karşılıkları izlenir.",
+   "isleyis": "\"472. Kıdem Tazminatı Karşılığı Hesabı\"ndan yukarıda yapılan tanım çerçevesinde yapılan aktarmalar bu hesaba alacak, ödenmesi halinde ise borç kaydedilir."
+  },
+  {
+   "kod": "373",
+   "ad": "MALİYET GİDERLERİ KARŞILIĞI",
+   "tanim": "Aylık maliyetlerin belirlenmesinde, gelecek aylarda kesin tahakkuku yapılacak giderlerle aylık maliyetlere pay verilmesinde, tamir-bakım, ikramiyeler, finansman giderleri vb. giderlere ilişkin tahmini gider karşılıklarının izlendiği hesaptır.",
+   "isleyis": "Aylık maliyetlere yüklenen tahmini gider karşılıkları bu hesaba alacak bu giderlerin kesin tutarları belli olduğunda ise bu hesaba borç kaydedilir. 374. 375. 376. 377. 378."
+  },
+  {
+   "kod": "379",
+   "ad": "DİĞER BORÇ VE GİDER KARŞILIKLARI",
+   "tanim": "Kısa vadeli diğer borç ve gider karşılıklarının izlendiği hesaptır.",
+   "isleyis": "Bu grubun yukarıda belirtilen hesapları içinde yer almayan ve önemlilik kavramına göre de ayrı ayrı hesaplarda izlenmesi mümkün olmayan borç ve gider karşılıkları bu hesaba alacak, ödenmeleri halinde de borç kaydedilir."
+  },
+  {
+   "kod": "380",
+   "ad": "GELECEK AYLARA AİT GELİRLER",
+   "tanim": "Gelecek bilanço dönemlerine ait peşin tahsil olunan gelirlerin bir yıldan kısa süreye ait kısımlarının izlendiği hesaptır.",
+   "isleyis": "Peşin tahsil olunan gelirler bu hesabın alacağına kaydedilir. Ait olduğu dönemde ilgili gelir hesaplarına devredilir."
+  },
+  {
+   "kod": "381",
+   "ad": "GİDER TAHAKKUKLARI",
+   "tanim": "Gelecek aylarda ödemesi yapılacak ve kesinlikle belgeye dayalı gider tahakkuklarının izlendiği hesaptır.",
+   "isleyis": "Yapılan tahakkuklar ilgili gider ve zarar hesaplarına borç, bu hesaba alacak, yapılan ödemeler borç kaydedilir."
+  },
+  {
+   "kod": "391",
+   "ad": "HESAPLANAN KDV",
+   "tanim": "Bu hesap; teslim edilen mal veya ifa edilen hizmetler üzerinden hesaplanan Katma Değer Vergisi ile işlemi gerçekleşmeyen ya da işlemden vazgeçilen mal ve hizmetlere ilişkin katma değer vergisinin izlendiği hesaptır.",
+   "isleyis": "Hesaplanan katma değer vergisi bu hesaba alacak kaydedilir. Düzeltmeler bu hesaba borç kaydedilir. Vergilendirme dönemi itibariyle bu hesabın bakiyesi, \"191- İNDİRİLECEK KDV\" ve/veya \"190- DEVREDEN KDV\" hesapları ile karşılaştırılır. Yapılan karşılaştırmada bu hesabın bakiyesi \"191- İNDİRİLECEK KDV\" ve/veya \"190- DEVREDEN KDV\" hesaplarının bakiyesinden fazla olduğu takdirde vadesinde ödenmek üzere \"360ÖDENECEK VERGİ VE FONLAR\" hesabına aktarılarak kapatılır."
+  },
+  {
+   "kod": "392",
+   "ad": "DİĞER KDV",
+   "tanim": "Bu hesap; teşvikli yatırım mallarının ithalinden doğan ve ertelenen Katma Değer Vergisi ve ihraç kaydiyle satış nedeniyle ertelenen ve terkin edilecek Katma Değer Vergisi gibi ihtiyaca göre bölümlenir.",
+   "isleyis": "Teşvikli yatırım mallarının ithalinde gümrük idareleri tarafından tarh ve tahakkuk ettirilerek ertelenen katma değer vergisi, aktifteki ilgili hesabın borcu mukabili bu hesaba alacak, mevzuat gereği yapılacak terkin sonunda aktifteki ilgili hesabın alacağı karşılığı bu hesaba borç kaydedilmek suretiyle işlem görür. Yatırım teşvik belgelerinde öngörüldüğü şekilde gerçekleşmemesi halinde ertelenen katma değer vergisi bu hesaba borç, ödenmek üzere pasifteki tahakkuk hesabına alacak kaydedilir. Vergi dairesince tecil olunan katma değer vergisi \"391. Hesaplanan Katma Değer Vergisi Hesabı\" nın borcu mukabili bu hesaba alacak, mevzuat gereği yapılacak terkin sonucunda borçlusunun alacağı mukabili bu hesaba borç kaydedilir. İhracatın gerçekleşmemesi halinde ise, tecil olunan katma değer vergisi \"391. Hesaplanan Katma Değer Vergisi Hesabı\"nın alacağı mukabili bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "393",
+   "ad": "MERKEZ VE ŞUBELER CARİ HESABI",
+   "tanim": "Merkezin şubelerle, şubelerin merkezle veya kendi aralarındaki borç ve alacak ilişkilerinin izlendiği borçlu ve alacaklı olarak çalışan hesaptır. Bu hesap dönem içinde kullanılır, füzyon da kapatılır.",
+   "isleyis": "Merkezin şubelerden, şubelerin diğer şubelerden veya merkezden olan alacakları bu hesaba borç, borçları da alacak kaydedilir. 394. 395. 396."
+  },
+  {
+   "kod": "397",
+   "ad": "SAYIM VE TESELLÜM FAZLALARI",
+   "tanim": "Sayımlar sonunda tespit edilen kasa, stok ve maddi duran varlıklar fazlalarıyla, üniteler arası yollamada ortaya çıkan fazlaların geçici olarak kayıt edileceği hesaptır.",
+   "isleyis": "Kasa sayım fazlasının tespitinde kasa hesabı borcu karşılığında bu hesaba alacak kaydolunur. Belgelerine dayanarak üçüncü şahıslara ödenmesi gereken kasa fazlaları bu hesabın borcuna kaydolunur. Bu hesaptaki kalıntıdan bekleme süresini dolduranlar \"671. Önceki Dönem Gelir ve Karlar\" hesabı alacağına aktarılır. Stok sayım fazlalarının tespitinde, emsal değeri üzerinden bu hesaba alacak, ilgili stok hesabına borç yazılır. Sayım dönemi içinde normal olduğu belgelenen fazlalar ilgili maliyet hesapları karşılığında bu hesaba borç kaydolunur. Maddi duran varlık fazlasının tespitinde, fazlalar emsal değerleriyle ilgili duran varlık hesabı karşılığında bu hesaba alacak yazılır, sayım dönemi içinde kâr kaydı gerektiği belgelenenler \"679. Diğer Olağandışı Gelir ve Kârlar Hesabı\" karşılığında bu hesaba borç yazılır. 398."
+  },
+  {
+   "kod": "399",
+   "ad": "DİĞER ÇEŞİTLİ YABANCI KAYNAKLAR",
+   "tanim": "Bu hesap grubu içinde sayılanların dışında kalan diğer çeşitli yabancı kaynakların izlendiği hesaptır.",
+   "isleyis": "Yukarıdaki hesaplar dışında oluşan diğer yabancı kaynaklar bu hesabın alacağına, ödemeler ise borcuna kaydolunur."
+  },
+  {
+   "kod": "400",
+   "ad": "BANKA KREDİLERİ",
+   "tanim": "Banka ve diğer finans kuruluşlarından alınan uzun vadeli kredilerin yer aldığı hesaptır.",
+   "isleyis": "Alınan uzun vadeli krediler bu hesaba alacak, ödenmeleri halinde borç kaydedilir. Bilanço tarihinden itibaren bir yıl içinde ödenecek ana para taksitleri ile vadesi bir yıla düşen tutarlar \"303. Uzun Vadeli Kredilerin Anapara Taksitleri ve Faizleri Hesabı\" nın alacağına aktarılmak suretiyle bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "401",
+   "ad": "FİNANSAL KİRALAMA İŞLEMLERİNDEN BORÇLAR",
+   "tanim": "Bu hesap, kiracıların finansal kiralama yapanlara olan ve vadesi 1 yılı aşan borçlarının izlendiği hesaptır.",
+   "isleyis": "Finansal kiralama sözleşme tutarı bu hesaba alacak, finansal kiralamaya konu olan ilgili varlık hesabına kira ödemelerinin bugünkü değeri ile borç ve bu iki tutar arasındaki fark da “402Ertelenmiş Finansal Kiralama Borçlanma Maliyetleri” hesabına borç kaydedilir. Dönemsellik varsayımına uygun olarak dönem sonlarında, izleyen dönemi ilgilendiren tutar, “301- Finansal Kiralama İşlemlerinden Borçlar” hesabına alacak, bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "402",
+   "ad": "ERTELENMİŞ FİNANSAL KİRALAMA BORÇLANMA MALİYETLERİ(-)",
+   "tanim": "Finansal kiralamanın yapıldığı tarihte kiralama işlemlerinden doğan ve vadesi bir yılı aşan borçlar ile kiralanan varlığa ilişkin kira ödemelerinin bugünkü değeri arasındaki farkı gösteren henüz ödenmemiş finansal kiralama borçlanma maliyetlerinin izlendiği hesaptır.",
+   "isleyis": "Finansal kiralama sözleşme tutarı ile finansal kiralamaya konu olan varlığa ilişkin kira ödemelerinin bugünkü değeri arasındaki fark “Ertelenmiş Finansal Kiralama Borçlanma Maliyetleri” olarak bu hesaba borç kaydedilir. Kiralama sözleşmesine uygun olarak tamamlanan ve her dönem sonunda izleyen döneme ilişkin tutar “302- Ertelenmiş Finansal Kiralama Borçlanma Maliyetleri” hesabına borç, bu hesaba alacak kaydedilir. 403. 404."
+  },
+  {
+   "kod": "405",
+   "ad": "ÇIKARILMIŞ TAHVİLLER",
+   "tanim": "İşletme tarafından çıkarılmış bulunan tahvillerden vadesi bir yılı aşanlar bu hesapta izlenir. İşletmece hisse senedi ile değiştirilebilir ve erken paraya çevrilebilir tahviller çıkarılmış olması durumunda bunların tutar ve nitelikleri dipnotlarda ayrıca belirtilir.",
+   "isleyis": "Çıkarılmış tahviller nominal bedelleri ile bu hesaba alacak kaydedilir. Bilanço tarihinden itibaren bir yıl içinde ödenecek tahvil, anapara borç ve taksitleri bilanço dönemlerinde \"304. Tahvil Anapara, Borç, Taksit ve Faizleri Hesabına\" aktarılmak suretiyle bu hesaba borç kaydedilir. 406."
+  },
+  {
+   "kod": "407",
+   "ad": "ÇIKARILMIŞ DİĞER MENKUL KIYMETLER",
+   "tanim": "İşletmece çıkarılmış katılma intifa senedi dışındaki vadeleri bir yıldan uzun olan diğer menkul değerler bu hesap kaleminde yer alır. Yukarıdaki hesaplarda tanımlanmış menkul kıymetler dışında kalan çıkarılmış diğer menkul kıymetler bu hesapta izlenir. İşletmece çıkarılmış katılma intifa senetleri ve özkaynak niteliğindeki diğer menkul kıymetler bu hesapta yer almaz. Ortakların \"Katılma intifa Senedi\" ihraç etmeleri halinde,\"Katılma İntifa Senedi Sermayesi\" özkaynaklar grubunda \"Sermaye\" hesabının altında; \"Geri Satın Alınan Katılma İntifa Senetleri\" ise dönen varlıklarda menkul kıymetler hesap grubu içinde gösterilir.",
+   "isleyis": "Yukarıda tanımlananlar dışında çıkarılmış diğer menkul kıymetler nominal bedelle bu hesaba alacak kaydedilir. Bilanço tarihinden itibaren bir yıl içinde ödenecek tahvil anapara borç ve taksitleri bilanço dönemlerinde \"306. Çıkarılmış Diğer Menkul Kıymetler Hesabı\"na aktarılmak suretiyle bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "408",
+   "ad": "MENKUL KIYMETLER İHRAÇ FARKI (-)",
+   "tanim": "Nominal değerinin altında ihraç edilen tahvil, senet ve diğer menkul kıymetlerin nominal değerleri ile satış fiyatı arasındaki farkın gelecek yıllara ait olan kısmı bu hesapta izlenir.",
+   "isleyis": "Nominal değerinin altında ihraç edilen tahvil, senet ve diğer menkul kıymetlerin nominal değeri ile satış fiyatı arasındaki fark bu hesabın borcuna kaydedilir. Bu satış farklarında gelecek dönemde itfa edilecek kısmı bilanço tarihinde \"308. Menkul Kıymetler İhraç Farkı Hesabı\"na aktarılarak bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "409",
+   "ad": "DİĞER MALİ BORÇLAR",
+   "tanim": "Yukarıdaki hesap kalemlerinin hiçbirine girmeyen değerler bu başlık altında toplanır.",
+   "isleyis": "Bu hesaba, borcun doğması halinde alacak, ödenmesi halinde borç kaydedilir. 41."
+  },
+  {
+   "kod": "420",
+   "ad": "SATICILAR",
+   "tanim": "İşletmenin faaliyet konusu i1e ilgili her türlü mal ve hizmet alımlarından kaynaklanan vadelerine bir yıldan fazla süre bulunan senetsiz borçların izlendiği hesaptır.",
+   "isleyis": "Senetsiz ticari borcun doğması ile bu hesaba alacak kaydedilir. Bilanço çıkarma dönemlerinde vadeleri bir yılın altına düşenler bu hesaba borç kaydedilerek \"320. Satıcılar Hesabı\" nın alacağına aktarılır."
+  },
+  {
+   "kod": "421",
+   "ad": "BORÇ SENETLERİ",
+   "tanim": "İşletmenin faaliyet konusu ile ilgili her türlü mal ve hizmet alımlarından kaynaklanan vadelerine bir yıldan fazla süre bulunan senetli borçlarının izlendiği hesaptır.",
+   "isleyis": "Borç senetleri tutarları bu hesaba alacak bilanço tarihinde vadeleri bir yılın altına düşen senetli borçlar \"321. Borç Senetleri Hesabı\"nın alacağına aktarılarak bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "422",
+   "ad": "BORÇ SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, senetli borçların tasarruf değeriyle değerlenmesini sağlamak üzere, borç senetleri için ayrılan reeskont tutarlarının izlenmesinde kullanılır.",
+   "isleyis": "Hesaplanan reeskont tutarları bu hesaba borç, \"64. Diğer Faaliyetlerden Olağan Gelir ve Kârlar\" grubundaki \"642. Faiz Gelirleri Hesabı\"na alacak kaydedilir. İzleyen dönemde bu hesap, \"65. Diğer Faaliyetlerden Olağan Gider ve Zararlar\" grubunun \"652. Reeskont Faiz Giderleri Hesabına\" aktarılarak kapatılır. 423. 424. 425."
+  },
+  {
+   "kod": "426",
+   "ad": "ALINAN DEPOZİTO VE TEMİNATLAR",
+   "tanim": "\"326. Alınan Depozito ve Teminatlar\" hesabında alış amaçları belirtilen depozito ve teminattan vadeleri bir yıldan fazla olan kısımları bu hesap kapsamına girer.",
+   "isleyis": "Alınan depozito ve teminatlar bu hesabın alacağına, geri verilenler veya hesaba sayılanlarla, geri verilmemiş bilanço gününde vadeleri bir yılın altına düşenler bu hesabın borcuna yazılarak \"326. Alınan Depozito ve Teminatlar Hesabı\"na aktarılarak kapatılır. 427. 428."
+  },
+  {
+   "kod": "429",
+   "ad": "DİĞER TİCARİ BORÇLAR",
+   "tanim": "Yukarıdaki hesap kalemlerinin hiç birinin kapsamına alınamayan bir yılı aşan ticari borçların izlendiği hesaptır.",
+   "isleyis": "Bu hesaba borcun doğması halinde alacak, vadesi bir yılın altına düşenler \"329. Diğer Ticari Borçlar Hesabı\"na aktarılarak borç kaydedilir."
+  },
+  {
+   "kod": "431",
+   "ad": "ORTAKLARA BORÇLAR",
+   "tanim": "İşletmenin esas faaliyet konusu dışındaki işlemleri dolayısıyla ortaklara borçlu bulunduğu vadeleri bir yıldan fazla süreli tutarların izlendiği hesaptır.",
+   "isleyis": "Borcun doğması halinde hesaba alacak, vadesi bir yılın altına düşmesi halinde 331 No.lu hesaba aktarılarak borç kaydedilir."
+  },
+  {
+   "kod": "432",
+   "ad": "İŞTİRAKLERE BORÇLAR",
+   "tanim": "İşletmenin esas faaliyet konusu dışındaki işlemleri dolayısıyla iştiraklerine olan vadeleri bir yıldan fazla süreli borçlarının izlendiği hesaptır.",
+   "isleyis": "Borcun doğması halinde hesaba alacak vadesi bir yılın altına düşmesi halinde \"332. İştiraklere borçlar Hesabı\"na aktarılarak borç kaydedilir."
+  },
+  {
+   "kod": "433",
+   "ad": "BAĞLI ORTAKLIKLARA BORÇLAR",
+   "tanim": "İşletmenin sermaye taahhüdünden borçları hariç olmak üzere faaliyet konusu dışındaki işlemleri dolayısıyla bağlı ortaklıklara olan borçlarının izlendiği hesaptır.",
+   "isleyis": "Borcun doğması ile hesaba alacak, vadesi bir yılın altına düşenler \"333. Bağlı Ortaklıklara Borçlar Hesabı\"na aktarılmak suretiyle borç kaydedilir. 434. 435. 436."
+  },
+  {
+   "kod": "437",
+   "ad": "DİĞER BORÇ SENETLERİ REESKONTU (-)",
+   "tanim": "Bilanço gününde, uzun vadeli diğer borçlar grubunda yer alan senetli borçların değerlemesini sağlamak amacı ile borç senetleri için ayrılan reeskont tutarlarının izlendiği hesaptır.",
+   "isleyis": "\"337. Diğer Borç Senetleri Reeskontu Hesabı\"nda açıklanmıştır."
+  },
+  {
+   "kod": "438",
+   "ad": "KAMUYA OLAN ERTELENMİŞ VEYA TAKSİTLENDİRİLMİŞ BORÇLAR",
+   "tanim": "Kamuya olan vergi ve benzeri borçlardan vadesinde ödenmeyip ertelenmiş veya taksite bağlanmış olup bir yıldan daha uzun bir sürede ödenecek olan kısmının izlendiği hesaptır.",
+   "isleyis": "Bir yıldan uzun vadeli kamuya olan ertelenmiş veya taksitlendirilmiş borçlar ile \"368. Vadesi Geçmiş Ertelenmiş veya Taksitlendirilmiş Vergi ve Diğer Yükümlülükler Hesabı\"ndan vadeleri bir yılı aşan borçlar hesaba alacak; vadesi bir yılın altına düşenler kısa vadeli yabancı kaynaklarda yer alan ilgili hesaplara aktarılmak suretiyle bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "439",
+   "ad": "DİĞER ÇEŞİTLİ BORÇLAR",
+   "tanim": "Ticari olmayıp yukarıdaki hesaplardan hiç birinin kapsamına alınamayan çeşitli borçların izlendiği hesaptır.",
+   "isleyis": "Borcun doğması halinde alacak, bilanço tarihinde vadesi bir yılın altına düşenler \"339. Diğer Çeşitli Borçlar Hesabı\"na aktarılarak borç yazılır."
+  },
+  {
+   "kod": "440",
+   "ad": "ALINAN SİPARİŞ AVANSLARI",
+   "tanim": "İşletmenin satış sözleşmesine dayanarak mal ve hizmetin tesliminden önce tahsil ettiği bir yılı aşan avansların izlendiği hesaptır.",
+   "isleyis": "Alıcılardan alınan avanslar bu hesaba alacak, vadesi bir yılın altına düşenler \"340. Alınan Sipariş Avansları Hesabı\"na aktarılmak suretiyle bu hesaba borç kaydedilir. 441. 442. 443. 444. 445. 446. 447. 448."
+  },
+  {
+   "kod": "449",
+   "ad": "ALINAN DİĞER AVANSLAR",
+   "tanim": "Yukarıda açıklanan avanslar dışında, işletmenin aldığı her türlü uzun vadeli avansların izlendiği hesaptır.",
+   "isleyis": "Alınan avanslar bu hesabın alacağına, vadesi bir yılın altına düşenler \"349. Alınan Diğer Avanslar Hesabı\"na aktarılmak suretiyle bu hesaba borç kaydedilir. 45. 46."
+  },
+  {
+   "kod": "472",
+   "ad": "KIDEM TAZMİNATI KARŞILIĞI",
+   "tanim": "Belirlenecek esaslar çerçevesinde ayrılacak kıdem tazminatı karşılıkları bu hesap kaleminde gösterilir.",
+   "isleyis": "Hesaplanan kıdem tazminatı karşılık tutarları ilgili gider hesaplarına borç bu hesaba alacak kaydedilir. İzleyen dönemde ödenmesi beklenen kıdem tazminatı karşılık tutarları bu hesabın borcuna, \"37. Borç ve Gider Karşılıkları\" grubundaki \"372. Kıdem Tazminatı Karşılığı Hesabı\"na alacak kaydedilir. 473. 474. 475. 476. 477. 478."
+  },
+  {
+   "kod": "479",
+   "ad": "DİĞER BORÇ VE GİDER KARŞILIKLARI",
+   "tanim": "Uzun vadeli diğer borç ve gider karşılıklarının izlendiği hesaptır.",
+   "isleyis": "Bu grubun yukarıda belirlenen hesaplar içinde yer almayan ve önemlilik kavramına göre de ayrı ayrı hesaplarda izlenmesi mümkün olmayan borç ve gider karşılıkları doğduğunda bu hesaba alacak, ilgili gider gruplarına borç kaydedilir. İzleyen dönemde ödenmesi beklenen borç ve gider karşılık tutarları bu hesabın borcuna, \"379. Diğer Borç ve Gider Karşılıkları Hesabı\"nın alacağına kaydedilir."
+  },
+  {
+   "kod": "480",
+   "ad": "GELECEK YILLARA AİT GELİRLER",
+   "tanim": "Gelecek bilanço dönemlerine ait peşin tahsil olunan gelirlerin bir yıldan uzun süreye ait kısımlarının izlendiği hesaptır.",
+   "isleyis": "Peşin tahsil olunan gelirler bu hesabın alacağına kaydedilir. Kısa vadeli nitelik kazanan gelirler bu hesabın borcu mukabili \"380. Gelecek Aylara Ait Gelirler Hesabı\"na aktarılır."
+  },
+  {
+   "kod": "481",
+   "ad": "GİDER TAHAKKUKLARI",
+   "tanim": "Gelecek yıllarda ödenmesi yapılacak ve kesinlikle belgeye dayalı gider tahakkuklarının izlendiği hesaptır.",
+   "isleyis": "Yapılan tahakkuklar ilgili gider ve zarar hesapları mukabili bu hesaba alacak, vadesi bir yılın altına düşenler \"381. Gider Tahakkukları Hesabı\"na aktarılarak bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "492",
+   "ad": "GELECEK YILLARA ERTELENEN VEYA TERKİN EDİLEN KDV",
+   "tanim": "Bu hesap, teşvikli yatırım mallarının ithalinde ödenmesi gerektiği halde ödenmeyip, fiilen indirilmesinin mümkün olacağı tarihe kadar ertelenen katma değer vergisi ile imalatçı teşebbüsler tarafından imal ettikleri mallardan ihraç edilmek kaydı ile ihracatçılara yapılan teslimler nedeniyle hesaplanan ve düzenlenen fatura ve fatura yerine geçen belgelerde mevzuat gereği ihracatçılardan tahsil edilmeyen ve tamamının indirim konusu yapılmaması nedeniyle gelecek bilanço devrelerine kadar tecil olunan katma değer vergisinin kaydedildiği ve izlendiği hesaptır.",
+   "isleyis": "Bu hesap bilanço döneminde \"392. Diğer Katma Değer Vergisi Hesabı\"yla ilişkilendirilmek suretiyle kullanılır ve bu hesap gibi işlem görür."
+  },
+  {
+   "kod": "493",
+   "ad": "TESİSE KATILMA PAYLARI",
+   "tanim": "İşletmeye ait tesislerden yararlanmak amacıyla üçüncü kişilerin, tesis bedellerine katılma paylarının kayıt ve izlendiği hesaptır.",
+   "isleyis": "Katılma paylarının tahsilinde bu hesaba alacak, tesisin ömrü süresine göre belirlenecek itfa tutarları \"649. Faaliyetle İlgili Diğer Gelir ve Kârlar Hesabı\"na alınarak bu hesaba borç kaydedilir. 494. 495. 496. 497. 498."
+  },
+  {
+   "kod": "499",
+   "ad": "DİĞER ÇEŞİTLİ UZUN VADELİ YABANCI KAYNAKLAR",
+   "tanim": "Bu hesap grubu içerisinde sayılanların dışında kalan diğer çeşitli yabancı kaynakların izlendiği hesaptır.",
+   "isleyis": "Tahakkuk eden tutarlar bu hesaba alacak, vadesi bir yılın altına düşenler, \"399. Diğer Çeşitli Yabancı Kaynaklar Hesabı\"na aktarılarak borç kaydedilir."
+  },
+  {
+   "kod": "500",
+   "ad": "SERMAYE",
+   "tanim": "İşletmeye tahsis edilen veya işletmelerin ana sözleşmelerinde yer alan ve Ticaret Siciline tescil edilmiş bulunan sermaye tutarı bu hesapta yer alır. Kayıtlı sermaye sistemine alınan ortaklıklarda çıkarılmış sermaye gösterilir. Kayıtlı sermaye tavanı ayrıca dipnotlarda belirtilir.",
+   "isleyis": "Taahhüt edilen sermaye tutarı bu hesaba alacak, ödenmemiş sermaye hesabına borç kaydedilir."
+  },
+  {
+   "kod": "501",
+   "ad": "ÖDENMEMİŞ SERMAYE (-)",
+   "tanim": "İşletmeye tahsis edilen veya ortaklarca yüklenilen sermayenin henüz ödenmemiş kısmıdır.",
+   "isleyis": "Taahhüt edilen sermaye tutarı \"500. Sermaye Hesabı\" alacağı ile bu hesaba borç, ödenen tutarlar alacak kaydedilir. 502- SERMAYE DÜZELTMESİ OLUMLU FARKLARI Bu hesap ödenmiş sermaye tutarının düzeltilmesi sonucu ortaya çıkan olumlu farkların izlendiği hesaptır. İşleyişi: Ödenmiş sermaye tutarının enflasyon düzeltilmesine tabi tutulması sonucunda ödenmiş sermaye tutarında meydana gelen artışlar bu hesabın alacağına, “698- Enflasyon Düzeltme Hesabı” nın borcuna kaydedilir. İzleyen dönemde enflasyon oranının düşmesi sonucu taşıma işleminden ortaya çıkan azalışlar bu hesabın borcuna “698- Enflasyon Düzeltme Hesabı” nın alacağına kaydedilir. Bu farkların sermayeye eklenmesi durumunda “500- Sermaye Hesabı” nın alacağına karşılık bu hesap borçlandırılır. 503- SERMAYE DÜZELTMESİ OLUMSUZ FARKLARI (-) Bu hesap ödenmiş sermaye tutarının düzeltilmesi sonucu ortaya çıkan olumsuz farkların izlendiği hesaptır. İşleyişi: Ödenmiş sermaye tutarının ilk kez enflasyon düzeltilmesine tabi tutulması sonucu ödenmiş sermaye tutarında azalış meydana gelmesi durumunda bu hesabın borcuna, “698- Enflasyon Düzeltme Hesabı” nın alacağına kaydedilir. İzleyen dönemlerde düzeltme sonucunda ortaya çıkan olumlu farklar önce bu hesaptaki tutardan mahsup edilir, varsa kalanı “502- Sermaye Düzeltmesi Olumlu Farklar” hesabına alacak yazılır."
+  },
+  {
+   "kod": "520",
+   "ad": "HİSSE SENEDİ İHRAÇ PRİMLERİ",
+   "tanim": "Yeni çıkarılan hisse senetlerinin primli satışından kaynaklanan tutarlar bu hesapta izlenir.",
+   "isleyis": "Hisse senedinin nominal fiyatı ile satış fiyatı arasındaki fark bu hesabın alacağına satış biçimine bağlı olarak ilgili hesabın borcuna kaydedilir. Bu tutarların sermayeye ilavesi veya başka bir amaçla kullanılması durumunda hesaba borç kaydedilir. 521. HİSSE SENEDİ İPTAL KÂRLARI İptal edilen hisse senetlerinin bedellerine mahsuben yapılan ödemelerin, bunların yerine çıkarılan hisse senetlerinden elde edilen hasılat noksanı kapatıldıktan sonra artan kısmın izlendiği hesaptır. İşleyişi : Elde edilen hisse senedi iptal karları bu hesaba alacak kaydedilir. Bu tutarların sermayeye ilavesi veya başka amaçlarla kullanılması durumunda ilgili hesaplara borç kaydedilir."
+  },
+  {
+   "kod": "522",
+   "ad": "M.D.V. YENİDEN DEĞERLEME ARTIŞLARI",
+   "tanim": "İşletmenin aktifine kayıtlı maddi duran varlık kalemlerinin yeniden değerlenmesinden oluşan değer artışlarının izlendiği hesaptır.",
+   "isleyis": "Yeniden değerleme net değer artışı ilgili hesaplar karşılığında bu hesaba alacak kaydedilir. Bu tutarların sermayeye ilavesi veya başka bir amaçla kullanılması durumunda bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "523",
+   "ad": "İŞTİRAKLER YENİDEN DEĞERLEME ARTIŞLARI",
+   "tanim": "İşletmenin iştirakleri ile bağlı ortaklıkları bünyesinde yapılan yeniden değerleme dolayısıyla oluşan değer artışının sermayeye eklenmesi sonucunda, bu sermayeden işletmeye isabet eden kısmı gösterir.",
+   "isleyis": "İşletmenin iştirakleri ve bağlı ortaklıkları bünyesinde yapılan yeniden değerleme dolayısıyla oluşan değer artışları sermayeye eklenmesi sonucunda, işletmeye bedelsiz olarak verilen hisse senetleri ve payları bu hesabın alacağına, \"242. İştirakler\" veya \"245. Bağlık Ortaklıklar Hesapları\"nın borcuna kaydedilir. 524. 525. 526. 527. 528."
+  },
+  {
+   "kod": "529",
+   "ad": "DİĞER SERMAYE YEDEKLERİ",
+   "tanim": "Bu hesap grubu içerisinde sayılanların dışında kalan diğer sermaye yedeklerinin izlendiği hesaptır. 53. 54. KÂR YEDEKLERİ Kanun, ana sözleşme hükümleri ya da ortaklıkların yetkili organları tarafından alınan kararlar uyarınca, dağıtılmamış ya da işletmede alıkonulmuş kârlar bu hesap grubunda gösterilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "540",
+   "ad": "YASAL YEDEKLER",
+   "tanim": "Kanun hükümleri uyarınca ayrılmış bulunan yedekler bu hesap kaleminde gösterilir.",
+   "isleyis": "Yedekler faaliyet yılı kârından mahsup edilmek suretiyle bu hesaplara alacak kaydedilir."
+  },
+  {
+   "kod": "541",
+   "ad": "STATÜ YEDEKLERİ",
+   "tanim": "Ana sözleşme hükümleri çerçevesinde ayrılan yedekler bu hesap kalemi içinde yer alır.",
+   "isleyis": "Bu hesap \"540. Yasal Yedekler Hesabı\" gibi işlem görür."
+  },
+  {
+   "kod": "542",
+   "ad": "OLAĞANÜSTÜ YEDEKLER",
+   "tanim": "Sermaye şirketlerinde Genel Kurul tarafından ayrılmasına karar verilen olağanüstü yedek akçeler ile dağıtım dışı kalan kârlar bu hesapta yer alır.",
+   "isleyis": "Bu hesap \"540. Yasal Yedekler Hesabı\" gibi işlem görür. 543. 544. 545. 546. 547. 548. DİĞER KÂR YEDEKLERİ Özellikle kendi bölümlerinde tanımlanmamış olan kârdan ayrılan diğer yedekler bu hesapta izlenir. İşleyişi : Kardan ayrılan tutarlar bu hesaba alacak, mahsubunda borç kaydedilir."
+  },
+  {
+   "kod": "549",
+   "ad": "ÖZEL FONLAR",
+   "tanim": "İşletmede bırakılması ve tasarrufu zorunlu yasal fonlar ile diğer maksatlarla ayrılan fonlar bu hesapta izlenir.",
+   "isleyis": "Kardan ayrılan tutarlar bu hesaba alacak, mahsubunda borç kaydedilir. 55. 56."
+  },
+  {
+   "kod": "570",
+   "ad": "GEÇMİŞ YILLAR KARLARI",
+   "tanim": "Geçmiş faaliyet dönemlerinde ortaya çıkan ve işletme sahibine veya ortaklarına dağıtılmamış bulunan kârlardan ilgili yedek hesaplarına alınmayan tutarların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "580",
+   "ad": "GEÇMİŞ YILLAR ZARARLARI",
+   "tanim": "Geçmiş faaliyet dönemlerinde ortaya çıkan dönem net zararlarının izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "590",
+   "ad": "DÖNEM NET KARI",
+   "tanim": "İşletmenin faaliyet dönemine ilişkin vergi sonrası net kâr tutarının izlendiği hesaptır.",
+   "isleyis": "Sonuç hesaplarında yer alan \"692. Dönem Net Kârı veya Zararı Hesabı\"ndan aktarılan tutarlar bu hesaba alacak, aynı hesaba borç kaydedilir."
+  },
+  {
+   "kod": "591",
+   "ad": "DÖNEM NET ZARARI (-)",
+   "tanim": "İşletmenin faaliyet dönemine ilişkin net zarar tutarının izlendiği hesaptır.",
+   "isleyis": "Sonuç hesaplarında yer alan \"692. Dönem Net Kârı veya Zararı Hesabı\"ndan aktarılan tutarlar bu hesaba borç, aynı hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "600",
+   "ad": "YURTİÇİ SATIŞLAR",
+   "tanim": "Yurt içindeki gerçek ve tüzel kişilere satılan mal ve hizmetler karşılığında alınan ya da tahakkuk ettirilen toplam değerlerin izlendiği hesaptır. Gereksinime göre bölümlenebilir.",
+   "isleyis": "Satış gerçekleştiğinde hasılat tutarı bu hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "601",
+   "ad": "YURTDIŞI SATIŞLAR",
+   "tanim": "Yurt dışında satılan mal ve hizmetler karşılığında alınan yada alınacak olan toplam değerlerin izlendiği hesaptır.",
+   "isleyis": "Yurtiçi satışlarda olduğu gibidir."
+  },
+  {
+   "kod": "602",
+   "ad": "DİĞER GELİRLER",
+   "tanim": "İşletmenin korunması, ihracatı teşvik ya da hükümet politikasına uyma zorunluluğu karşısında oluşan işletmenin faaliyet hasılatındaki düşüklüğü veya faaliyet zararını gidermek için, sermaye katkısı niteliğinde olmayan, mali yardımlar (sübvansiyonlar), devletin bazı malları vergi, resim, harç ve benzeri yükümlülüklerden istisna etmesi yoluyla yaptığı yardımlar (vergi iadeleri) ve satış tarihindeki vade farkları, ihracatla ilgili fiyat istikrar destekleme primi vb.. hasılat kalemleri bu hesapta izlenir.",
+   "isleyis": "Dönem içindeki faaliyetlerden doğan sübvansiyon, vergi iadesi, vade farkları, (vb.) tutarları saptanarak ilgili hesaba borç, bu hesaba ise alacak kaydedilir."
+  },
+  {
+   "kod": "610",
+   "ad": "SATIŞTAN İADELER (-)",
+   "tanim": "Satılan malların iade edilen bölümünün fatura tutarlarını kapsar.",
+   "isleyis": "Daha önce yapılan satışlar ile ilgili olarak ilgili hesaplara borç, Brüt Satışlardan ilgili hesaplara alacak kaydedilmiş bulunan malın fatura tutarı, malın kısmen yada tamamen iade edilmesi durumuna göre, \"610. Satıştan İadeler Hesabı\"nın borcuna, buna karşılık ilgili hesaba alacak kaydedilir."
+  },
+  {
+   "kod": "611",
+   "ad": "SATIŞ İSKONTOLARI (-)",
+   "tanim": "Satışla ilgili faturanın düzenlenip satışın gerçekleşmesinden sonra yapılan her türlü kasa ve miktar iskontoları bu hesapta yer alır. Kasa iskontosu, kredili satışlarda alıcının mal bedelini vadesinden önce ödemesi dolayısıyla, bu peşin ödeme karşılığında alıcıya belirli oranlarda indirim yapılmasıdır. Miktar iskontosu ise alıcının belli tutarlar üzerinde alışlarda bulunarak satıcının mal sürümüne katkıda bulunmasından dolayı kendisine belli oran ya da tutarlarda yapılan indirimdir.",
+   "isleyis": "Uygulanan iskonto ilgili \"Alacaklar\" hesabına alacak kaydedilirken, \"611. Satış İskontoları Hesabı\"na borç kaydedilir."
+  },
+  {
+   "kod": "612",
+   "ad": "DİĞER İNDİRİMLER (-)",
+   "tanim": "Satıcı tarafından, alıcı hesabına, malın sevki sırasında ödenen giderleri ifade eden ve satılan mallara ait olan sevk giderleri, satılan malların hatalı ve noksan olması ya da taşıma sırasında hasara uğramış olması nedeniyle yapılması zorunlu indirimler ile satış vergileri, fonlar (KDV hariç) ve benzerleri bu kalemde gösterilir. Bu hesap ihtiyaca göre bölümlenir.",
+   "isleyis": "Satılan mal ya da hizmet bedelinden yapılan indirim, hasılatla ilişkilendirilmeden \"612. Diğer İndirimler Hesabı\"na borç, ilgili hesaplara ise alacak kaydedilir."
+  },
+  {
+   "kod": "620",
+   "ad": "SATILAN MAMULLER MALİYET (-)",
+   "tanim": "",
+   "isleyis": "Satılan mamullerin maliyet tutarı 152 nolu hesaba (Mamuller Hs.) alacak, bu hesaba ise borç kaydedilir."
+  },
+  {
+   "kod": "621",
+   "ad": "SATILAN TİCARİ MALLAR MALİYETİ (-)",
+   "tanim": "Herhangi bir değişikliğe tabi olmadan satılmak amacıyla alınan ticari mallar (emtia) ve benzeri kalemlerin maliyetini kapsar.",
+   "isleyis": "Satılan ticari malların maliyet tutarı \"153. Ticari Mallar Hesabı\"na alacak, bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "622",
+   "ad": "SATILAN HİZMET MALİYETİ (-)",
+   "tanim": "Üretilen hizmetlerle ilgili olarak yapılan giderlerin kaydedildiği hesaptır.",
+   "isleyis": "Üretilen hizmetle ilgili giderler niteliklerine göre, eş zamanlı kayıt sistemine tabi olan ve 7/A seçeneğini uygulayan hizmet işletmeleri \"741. Hizmet Üretim Maliyeti Yansıtma Hesabı\" alacağı ile, 7/B seçeneğini uygulayan küçük işletmelerde \"799. Üretim Maliyeti Hesabı\" alacağı ile, bu hesaba borç kaydedilir."
+  },
+  {
+   "kod": "623",
+   "ad": "DİĞER SATIŞLARIN MALİYETİ (-)",
+   "tanim": "İşletmenin esas faaliyet konusu ile ilgili diğer satış gelirlerinin elde edilmesi için yapılan giderlerin izlendiği hesaptır.",
+   "isleyis": "Hesaplanan satışların maliyeti bu hesabın borcuna kaydedilir."
+  },
+  {
+   "kod": "630",
+   "ad": "ARAŞTIRMA VE GELİŞTİRME GİDERLERİ (-)",
+   "tanim": "Üretim maliyetinin düşürülmesi, satışların artırılması ve yeni üretim biçim ve teknolojilerin işletmede uygulanması amacıyla yapılan giderlerden aktifleştirilmeyen araştırma ve geliştirme giderleri ile aktifleştirilmiş olanlardan bu döneme isabet eden itfa payları bu hesapta yer alır. Bu fonksiyonla ilgili olan ve 7. grupta izlenen giderler 7/A seçeneğinde \"751- Araştırma ve Geliştirme Giderleri Yansıtma Hesabı\", 7/B seçeneğinde \"798- Gider Çeşitleri Yansıtma Hesabı\" alacağı ile hu hesabın borcuna devredilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "631",
+   "ad": "PAZARLAMA, SATIŞ VE DAĞITIM GİDERLERİ (-)",
+   "tanim": "Mal ve hizmetlerin pazarlama, satış ve dağıtım faaliyetleri ile ilgili olarak yapılan endirekt malzeme, endirekt işçilik, personel giderleri, dışardan sağlanan fayda ve hizmetler, çeşitli giderler, vergi resim ve harçlar, amortismanlar ve tükenme paylarından oluşur. Pazarlama fonksiyonu ile ilgili giderler 7 inci grupta izlenir ve dönem sonlarında \"761- Pazarlama Satış ve Dağıtım Giderleri Yansıtma Hesabı\" alacağı ile, 7/B seçeneğinde ise \"798- Gider Çeşitleri Yansıtma Hesabı\" alacağı ile bu fonksiyona ait giderler bu hesaba devredilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "632",
+   "ad": "GENEL YÖNETİM GİDERLERİ (-)",
+   "tanim": "İşletmenin genel yönetim fonksiyonu ile ilgili olarak yapılan ve üretimle ya da satılan mal maliyeti ile doğrudan ilişkisi kurulamayan endirekt malzeme, endirekt işçilik, personel giderleri, dışardan sağlanan fayda ve hizmetler, çeşitli giderler, vergi resim ve harçlar, amortisman giderlerinden oluşur. Genel yönetim fonksiyonu ile ilgili giderler 7 inci grupta izlenir ve dönem sonlarında 7/A seçeneğinde, \"771- Genel Yönetim Giderleri Yansıtma Hesabı\" alacağı ile, 7/B seçeneğinde ise \"798- Gider Çeşitleri Yansıtma Hesabı\" alacağı ile bu hesaba devredilir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "640",
+   "ad": "İŞTİRAKLERDEN TEMETTÜ GELİRLERİ",
+   "tanim": "İşletmelerin sermayelerine katıldıkları iştiraklerden elde ettikleri temettü gelirlerinin izlendiği hesaptır. Hisse senedi ve tahvil gibi menkul kıymet satışından doğan kârlar ya da zararlar bu hesaba alınmaz.",
+   "isleyis": ""
+  },
+  {
+   "kod": "641",
+   "ad": "BAĞLI ORTAKLIKLARDAN TEMETTÜ GELİRLERİ",
+   "tanim": "İşletmenin bağlı ortaklıklarından elde ettikleri temettü gelirlerinin izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "642",
+   "ad": "FAİZ GELİRLERİ",
+   "tanim": "Her türlü kısa ve uzun vadeli mali yatırımlardan sağlanan faiz gelirlerinin izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "643",
+   "ad": "KOMİSYON GELİRLERİ",
+   "tanim": "Tahakkuk eden komisyon gelirleri bu hesapta izlenir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "644",
+   "ad": "KONUSU KALMAYAN KARŞILIKLAR",
+   "tanim": "Aktifle ilgili olarak ayrılan karşılıklardan iptal edilen tutarlar bu hesapta izlenir. 645. MENKUL KIYMET SATIŞ KÂRLARI Menkul kıymet satış kârlarının izlendiği hesaptır.",
+   "isleyis": "Menkul kıymetler satıldığında, satış değeri ile maliyet değeri arasındaki olumlu fark bu hesaba alacak yazılır.\" 646. KAMBİYO KÂRLARI Kambiyo kârlarının izlendiği hesaptır. (İhracatla ilgili dönem içinde ortaya çıkan kur farkları bu hesaba değil, \"601- YURT DIŞI SATIŞLAR\" hesabına aktarılır.) İşleyişi : Kambiyo işlemlerinden doğan kârlar bu hesaba alacak yazılır.\""
+  },
+  {
+   "kod": "647",
+   "ad": "REESKONT FAİZ GELİRLERİ",
+   "tanim": "Reeskont faiz gelirlerinin izlendiği hesaptır.",
+   "isleyis": "İşletmenin senetli borçlarının dönem sonu itibariyle yapılan reeskont işlem faiz geliri ile; alacak senetleri reeskontunun, izleyen dönem başında iptalinden ortaya çıkan faiz gelirleri bu hesaba alacak yazılır.\""
+  },
+  {
+   "kod": "648",
+   "ad": "ENFLASYON DÜZELTMESİ KARLARI",
+   "tanim": "Bu hesap mali tabloların enflasyon düzeltmesinden ortaya çıkan net olumlu farkların \"698Enflasyon Düzeltme Hesabından\" ve yıllara yaygın inşaat işinde \"358- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabından\" aktarılarak izlendiği hesaptır.",
+   "isleyis": "\"698- Enflasyon Düzeltme Hesabından\" ve yıllara yaygın inşaat işinde geçici kabulde \"358Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabından\" bu hesaba aktarılan tutarlar söz konusu hesapların borcuna karşılık bu hesaba alacak yazılır. 649. FAALİYETLE İLGİLİ DİĞER OLAĞAN GELİR VE KÂRLAR\" hesabının ismi DİĞER OLAĞAN GELİR VE KÂRLAR Yukarıdaki hesaplar kapsamına girmeyen diğer olağan faaliyetlerden sağlanan gelir ve kârların izlendiği hesaptır."
+  },
+  {
+   "kod": "653",
+   "ad": "KOMİSYON GİDERLERİ (-)",
+   "tanim": "İşletmenin diğer olağan faaliyetleriyle ilgili olarak acenta, temsilci ve benzeri işletmelere ödediği komisyon giderlerinin izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "654",
+   "ad": "KARŞILIK GİDERLERİ (-)",
+   "tanim": "Aktifle ilgili olarak ayrılan karşılık giderlerinin izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "655",
+   "ad": "MENKUL KIYMET SATIŞ ZARARLARI (-)",
+   "tanim": "Menkul kıymet satış zararlarının izlendiği hesaptır.",
+   "isleyis": "Menkul kıymetler satıldığında, satış değeri ile maliyet değeri arasındaki olumsuz fark bu hesaba borç yazılır.\""
+  },
+  {
+   "kod": "656",
+   "ad": "KAMBİYO ZARARLARI (-)",
+   "tanim": "Kambiyo zararlarının izlendiği hesaptır. (Borçlanma ile ilgili kur farkları bu hesaba alınmaz, finansman gideri olarak muhasebeleştirilir.)",
+   "isleyis": "Kambiyo işlemlerinden doğan zararlar bu hesaba borç yazılır. 657- REESKONT FAİZ GİDERLERİ (-) : İşletmenin senetli alacaklarının dönem sonu itibariyle yapılan reeskont faiz giderleri ile borç senetleri reeskontunun, izleyen dönem başında iptalinden ortaya çıkan faiz giderlerinin izlendiği hesaptır. 658- ENFLASYON DÜZELTMESİ ZARARLARI (-) Bu hesap mali tabloların enflasyon düzeltmesinden ortaya çıkan net olumsuz farkların \"698Enflasyon Düzeltme Hesabından\" ve yıllara yaygın inşaat işinde \"178- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabından\" aktarılarak izlendiği hesaptır. İşleyişi: \"698- Enflasyon Düzeltme Hesabından\" ve yıllara yaygın inşaat işinde geçici kabulde \"178Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabından\" bu hesaba aktarılan tutarlar söz konusu hesapların alacağına karşılık bu hesaba borç yazılır."
+  },
+  {
+   "kod": "659",
+   "ad": "DİĞER OLAGAN GİDER VE ZARARLAR (-)",
+   "tanim": "Yukarıdaki hesaplar kapsamına girmeyen diğer olağan faaliyetlerle ilgili gider ve zararların izlendiği hesaptır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "660",
+   "ad": "KISA VADELİ BORÇLANMA GİDERLERİ (-)",
+   "tanim": "Bir yıla kadar vadeli olan borçlanmalarla ilgili olarak yüklenilen ve varlıkların maliyetine eklenmeyen faiz ve benzeri diğer giderlerin izlendiği hesaptır. 7. grupta izlenen finansman giderleri 7/A seçeneğinde \"781- Finansman Giderleri Yansıtma Hesabı\" 7/B seçeneğinde ise \"798- Gider Çeşitleri Yansıtma Hesabı\"nın alacağı ile bu hesabın borcuna aktarılır.",
+   "isleyis": ""
+  },
+  {
+   "kod": "661",
+   "ad": "UZUN VADELİ BORÇLANMA GİDERLERİ (-)",
+   "tanim": "Bir yılı aşan vadeli borçlanmalarla ilgili faiz ve benzeri giderlerin izlendiği hesaptır. 67. OLAĞANDIŞI GELİR VE KÂRLAR İşletmenin olağan faaliyetlerinden bağımsız olan ve bu nedenle arızi nitelik taşıyan duran varlıkların satışlarından elde edilen kârlar ile olağan dışı olay ve gelişmeler nedeniyle ortaya çıkan gelir ve kârların yer aldığı hesap grubudur. 670. 671. ÖNCEKİ DÖNEM GELİR VE KÂRLARI Cari dönemden önceki dönemlere ait olan ve bu dönemlerin mali tablolarına hata ya da unutulma nedenleriyle yansıtılamayan tutarların gösterildiği hesap kalemidir. 672. 673. 674. 675. 676. 677. 678. 679. DİĞER OLAĞANDIŞI GELİR VE KÂRLAR Yukarıdaki hesap kalemleri dışında kalan ve arızi bir karakter taşıyan duran varlık satışlarından doğan kârlar gibi gelir ve kârların yer aldığı hesap kalemidir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "680",
+   "ad": "ÇALIŞMAYAN KISIM GİDER VE ZARARLARI (-)",
+   "tanim": "Üretimle ilgili giderlerden çalışılmayan döneme ve çalışmayan kısımlara ait giderleri içerir.",
+   "isleyis": ""
+  },
+  {
+   "kod": "681",
+   "ad": "ÖNCEKİ DÖNEM GİDER VE ZARARLARI (-)",
+   "tanim": "Cari dönemden önceki döneme ait olan ve bu dönemlerin mali tablolarına hata yada unutulma nedeni ile yansıtılmayan veya sonradan ortaya çıkan tutarların gösterildiği hesaptır. 682. 683. 684. 685. 686. 687. 688.",
+   "isleyis": ""
+  },
+  {
+   "kod": "689",
+   "ad": "DİĞER OLAĞANDIŞI GİDER VE ZARARLAR",
+   "tanim": "Yukarıda tanımlanan hesaplar kapsamı dışında kalan diğer olağan dışı gider ve zararlardan oluşur. 69. DÖNEM NET KÂRI VE ZARARI 690. DÖNEM KÂRI VEYA ZARARI Dönem sonlarında, sonuç hesaplarında yer alan gelir ve gider hesaplarının aktarıldığı hesaptır. Gelir hesapları bu hesabın alacağına, gider hesapları borcuna kaydedilir. Hesabın kalanı vergiden önceki dönem kârı veya zararını gösterir. 691. DÖNEM KÂRI VERGİ VE DİĞER YASAL YÜKÜMLÜLÜK KARŞILIKLARI (-) Dönem kârı üzerinden, ilgili mevzuat hükümlerine göre hesaplanan vergi ve yasal yükümlülükler bu hesabın borcuna, \"370- Dönem Kârı Vergi ve Diğer Yasal Yükümlülük Karşılıkları Hesabı\"nın alacağına kaydedilir. Bu hesap \"590- Dönem Kârı veya Zararı Hesabı\" ile birlikte kapatılarak \"692- Dönem Net Kârı veya Zararı Hesabı\"na devredilir. 692. DÖNEM NET KÂRI VEYA ZARARI \"690- Dönem Kâr veya Zararı Hesabı\" ile \"691- Dönem Kârı Vergi ve Diğer Yasal Yükümlülük Karşılıkları Hesapları\"nın karşılıklı olarak kapatılması sonucu bulunan fark hu hesaba kaydedilir. Vergiden sonraki Net Dönem Kârı Hesabın alacağına, Net Dönem zararı ise borcuna kaydedilir. Bu hesap, dönem sonlarında \"590- Dönem Net Kârı Hesabı\"na devredilerek kapatılır. 697- YILLARA YAYGIN İNŞAAT ENFLASYON DÜZELTME Bu hesap yıllara yaygın inşaat ve onarım işlerine ait maliyet ve hakedişlere ilişkin enflasyon düzeltmeleri sonucu oluşan farkların izlendiği hesaptır.",
+   "isleyis": "Yıllara yaygın inşaat ve onarım işlerine ait maliyetlere ilişkin enflasyon düzeltmeleri sonucu oluşan artışlar 17 nci gruptaki ilgili defter-i kebir hesaplarının (bu hesaplarda enflasyon düzeltmelerinin yarattığı farklar için açılacak tali hesapların) borcuna karşılık bu hesabın alacağına kaydedilir. Hakedişlere ilişkin düzeltmeler sonucu oluşan artışlar da 35 inci gruptaki ilgili defter-i kebir hesaplarının (bu hesaplarda enflasyon düzeltmelerinin yarattığı farklar için açılacak tali hesapların) alacağına karşılık bu hesabın borcuna kaydedilir. Bu hesap alacak ve borç kalanı vermesi durumuna göre “178- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı” veya “358- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı” na devredilerek kapatılır. İnşaat ve onarım işlerinde birden fazla proje olması durumunda bu hesapta her bir proje için bir tali hesap açılarak farklar projeler itibariyle izlenir. \"17- Yıllara Yaygın İnşaat ve Onarım Maliyetleri\" hesap grubundaki yıllara yaygın inşaat işlerine ilişkin maliyetlerin ve \"35- Yıllara Yaygın İnşaat ve Onarım Hakedişleri\" hesap grubundaki hakediş bedellerinin düzeltmesinden ortaya çıkan farklar, \"697- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabında\" izlenir. Bu hesap alacak ve borç kalanı vermesi durumuna göre \"178- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı\" veya \"358- Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı\" na devredilerek kapatılır. 698- ENFLASYON DÜZELTME HESABI Bu hesap parasal olmayan kıymetlerin düzeltilmesi sonucu oluşan farkların izlendiği hesaptır. İşleyişi: Parasal olmayan bilanço kalemlerinin düzeltilmesi sonucu oluşan farklar, ilgili varlık ve kaynaklara ilişkin defter-i kebir hesaplarına (bu hesaplarda enflasyon düzeltmelerinin yarattığı farklar için açılacak tali hesaplara) karşılık bu hesaba kaydedilir. Parasal olmayan varlık kalemlerinin enflasyona göre düzeltilmesi sonucu ortaya çıkan artışlar bu hesabın alacağına, parasal olmayan kaynak kalemlerindeki artışlar ise borcuna yazılır. Bu hesap, alacak ve borç kalanı vermesi durumuna göre, \"648- Enflasyon Düzeltmesi Karları\" veya \"658- Enflasyon Düzeltmesi Zararları\" hesabına devredilerek kapatılır. Bilanço kalemleri yanında gelir tablosunu da düzelten işletmeler parasal olmayan varlık ve kaynakların düzeltme farklarına ilave olarak gelir tablosu kalemlerinin düzeltilmesinden ortaya çıkan farkları da bu hesaba kaydederler. Gelir hesaplarının düzeltilmesinden ortaya çıkan farklar ilgili gelir hesaplarının (bu hesaplarda enflasyon düzeltmelerinin yarattığı farklar için açılacak tali hesapların) alacağına karşılık bu hesaba borç yazılır. Gider hesaplarının düzeltilmesinden ortaya çıkan farklar da ilgili gider hesaplarının (bu hesaplarda enflasyon düzeltmelerinin yarattığı farklar için açılacak tali hesapların) borcuna karşılık bu hesaba alacak yazılır. Hesabın alacak kalanı \"648- Enflasyon Düzeltmesi Karları\" hesabına, borç kalanı ise \"658- Enflasyon Düzeltmesi Zararları\" hesabına devredilerek kapatılır. 7 MALİYET HESAPLARI Maliyet hesapları, mal ve hizmetlerin planlanan biçim ve niteliğe getirilmesi için yapılan giderlerin toplandığı ve maliyet unsurlarına dönüştürülerek izlendiği hesaplardır. Bu bölümde yer alan gider hesapları uygulamada esneklik sağlamak üzere iki seçenek halinde 7/A ve 7/B olarak sunulmuştur. 7/A seçeneğinde giderler defter-i kebirde fonksiyon esasına göre, 7/B seçeneğinde ise çeşit esasına göre belirlenmiştir. Bu suretle, işletmelere giderlerin bölümlenmesinde ve defter-i kebirde izlenmesinde kendi organizasyon yapılarına, büyüklüklerine ve ihtiyaçlarına göre düzenleyebilmeleri için kolaylık sağlanmış, farklı maliyet hesaplama yöntemlerine uyulabilmesi açısından da geniş bir esneklik tanınmıştır. 7/A SEÇENEĞİNDE MALİYET HESAPLARI(1) Tebliğin IV - DÜZENLEMENİN KAPSAMI bölümüne göre; ek mali tabloları düzenlemek durumunda olan üretim ve hizmet işletmeleri için zorunlu olan 7/A seçeneğinde; giderler, esas defterlerde fonksiyon esasına göre belirlenmiştir. Eş zamanlı kayıt yönteminin kullanılması önerilen bu uygulamada, giderler yapıldıkları anda ilgili defter-i kebir hesaplarına \"Fonksiyon Esasına\" göre kaydedilirken, söz konusu giderler aynı zamanda yardımcı defterlerde hem çeşit esasına hem de ilgili gider yerlerine göre izlenir. Gider çeşitlerinin izleneceği yardımcı defter kayıtlarının, giderlerin ait oldukları gider yerlerini de gösterecek şekilde tutulması durumunda, yöntem amacına uygun biçimde yürütülmüş olacaktır. Bu kayıt yönteminde; giderler eş zamanlı olarak aynı anda hem fonksiyonlarına, hem çeşitlerine hem de ilgili gider yerlerine göre izlendiğinden; muhasebe kayıtlarının azaltılmasına ve her kademenin üretim ve hizmet maliyetlerinin belli bir düzen içinde oluşturulmasına olanak sağlamaktadır. 3 Sıra Nolu Muhasebe Sistemi Uygulama Genel Tebliği ile, maliyet hesaplarında 7/A seçeneğinin uygulanması, aktif toplamı veya net satışları toplamı belirlenen tutarları aşan üretim ve hizmet işletmeleri için zorunlu hale getirilmiştir. Halen uygulanmakta olan bu tutarlar 9 sıra No'lu Muhasebe Sistemi Uygulama Genel Tebliği ile 150 milyar lira ve 300 milyar lira olarak belirlenmiştir. 9 sıra No'lu Muhasebe Sistemi Uygulama Genel Tebliği ile belirlenen sözkonusu tutarlar sırasıyla 300 milyar lira ve 600 milyar liraya yükseltilmiştir. Buna göre, 2000 yılı aktif toplamı 300 milyar lirayı veya net satışlar toplamı 600 milyar lirayı aşan üretim ve hizmet işletmelerinin 2001 yılında maliyet hesaplarını 7/A seçeneğine göre tutmaları zorunludur. Parasal Hadler Bu tebliğde yer alan parasal hadler, takip eden yıllarda Bakanlıkca ayrıca bir belirleme yapılmadığı takdirde, her yıl bir önceki yıl için Vergi Usul Kanunu hükümleri uyarınca tespit edilen yeniden değerleme oranında artırılarak uygulanacaktır. Bu şekilde yapılacak hesaplamada 50 milyon lira ve daha düşük olan tutarlar dikkate alınmayacak, 50 milyon liradan fazla olan tutarlar ise 100 milyon liraya yükseltilecektir. Bu uygulamada, maliyet hesap grupları aşağıdaki gibi bölümlenmiştir. 70 Maliyet Muhasebesi Bağlantı Hesapları (Maliyet muhasebesinin genel muhasebeden bağımsız çalışması durumunda bu grup çalıştırılır.) 71 Direkt İlkmadde Ve Malzeme Giderleri 72 Direkt İşçilik Giderleri 73 Genel Üretim Giderleri 74 Hizmet Üretim Maliyeti 75 Araştırma Geliştirme Giderleri 76 Pazarlama Satış ve Dağıtım Giderleri 77 Genel Yönetim Giderleri 78 Finansman Giderleri Bu uygulamada yardımcı defterlerde izlenecek Gider Çeşitleri 0-9 sayılı hesaplarda, Gider Yerleri ise 10-99 sayılı hesaplarda gösterildiği gibidir. Bu bölümde yer alan Maliyet Hesap Gruplarının her biri defter-i kebir hesabı düzeyinde gider hesapları, yansıtma hesapları ve fark hesapları olarak bölümlenir. GİDER HESAPLARI : Bu hesaplar; dönem içinde yapılan ve tahakkuk ettirilen giderlerin izlendiği ve borçlarına kaydedildiği hesaplardır. Gider hesaplarına yapılacak kayıtlara ilişkin olarak düzenlenecek muhasebe fişlerinde gider yerleri ve gider çeşitleri hesaplarına ait numaralar birlikte yazılır. GİDER YANSITMA HESAPLARI : Bu hesaplar, \"fiili maliyetlerin\" uygulandığı durumlarda gider hesaplarında toplanan giderlerin tümünün; önceden saptanmış maliyet yöntemlerinin kullanılması durumunda ise, bunlara göre saptanan giderlerin ilgili hesaplara yansıtılmasını sağlamak amacıyla kullanılır. FARK HESAPLARI : Bu hesaplar, önceden saptanmış maliyet yöntemlerinin uygulanması halinde fiili giderler ile önceden saptanmış giderler arasındaki farkların kaydedildiği hesaplardır. Fark hesapları borç ve alacak kalıntısı verebilir. 70 MALİYETİ MUHASEBESİ BAĞLANTI HESAPLARI Bu grupda yer alan hesaplar genel muhasebe ile maliyet muhasebesinin birbirinden ayrı olarak yürütülmesinin istenmesi durumunda, genel muhasebe ile maliyet muhasebesi arasında bağlantıların kurulmasını sağlamak amacıyla kullanılır. 700. Maliyet Muhasebesi Bağlantı Hesabı : Genel Muhasebe ile maliyet muhasebesi arasında bağlantıyı sağlayan ve genel muhasebe tarafından tutulan hesaptır. Maliyet muhasebesinin genel muhasebeden ayrı izlendiği durumlarda maliyetlerle ilgili giderler genel muhasebe tarafından bu hesaba borç kaydedilir. İşleyişi : Maliyetle ilgili tüm giderler tahakkuk ettikçe hu hesaba borç, ilgili aktif ve pasif hesaplara alacak kaydedilir. Maliyet dönemleri sonunda maliyet muhasebesi tarafından genel muhasebeye bildirilen veriler bu hesabın alacağına, ilgili hesapların borcuna kaydedilir. 701. Maliyet Muhasebesi Yansıtma Hesabı : Genel Muhasebe ile maliyet muhasebesi arasında bağlantıyı sağlayan ve maliyet muhasebesi tarafından tutulan ve \"700- Maliyet Muhasebesi Bağlantı Hesabı\"nın borcuna kaydedilen giderlerin, maliyet muhasebesince ilgili hesaplara aktarılmasını sağlayan hesaptır. İşleyişi : Genel muhasebede \"700- Maliyet Muhasebesi Bağlantı Hesabı\"nın borcuna kaydedilen giderler genel muhasebeden gelen belgeler doğrultusunda maliyet muhasebesinde bu hesabın alacağına, fonksiyonel gider hesaplarının borcuna kaydedilir. Maliyet muhasebesinden genel muhasebeye aktarılan tutarlar ise bu hesabın borcuna, ilgili fonksiyonel gider yansıtma hesaplarının alacağına kaydedilir. 71 DİREKT İLKMADDE VE MALZEME GİDERLERİ Bu grupta yer alan hesaplar, üretilen mamülün bünyesine ana madde olarak katılan ve hangi mamülden ne kadar tüketildiği, ekonomik bakımdan ayrı olarak izlenebilen ilkmadde ve malzemelerle ilgili gider, yansıtma ve fark hesaplarını kapsar. 710. Direkt İlkmadde Ve Malzeme Giderleri : Bu giderler, esas üretim gider yerleri ile ilgili olup, mamülün bünyesine giren, mamülün temel öğesini oluşturan ve mamülün bünyesine doğrudan yüklenebilen maddelerin kullanımı fiili tutarlarla bu hesapta izlenir. Üretimde kullanılmayan ve satılan ilkmadde ve malzemenin maliyeti bu hesapta izlenmez. İşleyişi : Dönem içinde üretimde kullanılmak üzere ana ve yardımcı üretim yerlerinde ambardan çekilen direkt maddeler bu hesabın borcuna, \"150- İlkmadde ve Malzeme Hesabı\"nın alacağına kaydedilir. Eş zamanlı kayıt sistemi uygulayan işletmelerde giderlerin tahakkuk kaydının yapılmasını sağlamak üzere düzenlenen fişde, gider çeşidi ile gider yeri kodunun yazılması esastır. Hesapla ilgili yapılan düzeltmeler hesabın alacağına kaydedilir. Dönem sonlarında hu hesap, \"711- Direkt İlkmadde ve Malzeme Yansıtma Hesabı\" ile karşılaştırılarak kapatılır. 711. Direkt İlkmadde ve Malzeme Yansıtma Hesabı : Fiili maliyet yönteminin uygulandığı durumlarda \"710- Direkt İlkmadde ve Malzeme Giderleri Hesabı\"nın borcuna gider çeşidi olarak kaydedilen giderler ile, önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda, önceden hesaplanmış giderler, maliyet unsuru olarak bu hesabın alacağı karşılığında \"151- Yarı Mamüller-Üretim Hesabı\"na borç kaydedilir. Dönem sonlarında \"710- Direkt İlkmadde ve Malzeme Giderleri Hesabı\" ile karşılaştırılarak kapatılır. 712. Direkt İlkmadde ve Malzeme Fiyat Farkı : Önceden saptanmış maliyet hesaplama yöntemlerinin uygulandığı durumlarda fiili direkt ilkmadde ve malzeme giderleri ile önceden saptanmış ve maliyetlere yüklenmiş, direkt ilkmadde ve malzeme giderleri arasındaki olumlu veya olumsuz fiyat farklarının izlendiği hesaptır. Olumsuz fiyat farkları bu hesabın borcuna, olumlu fiyat farkları ise alacağına kaydedilir. Dönem sonlarında bu hesap ilgili stok ve satış maliyet hesaplarına aktarılarak kapatılır. 713. Direkt İlkmadde ve Malzeme Miktar Farkı : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda fiili direkt ilkmadde ve malzeme giderleri ile önceden saptanmış direkt ilkmadde ve malzeme giderleri arasındaki olumlu veya olumsuz miktar farklarının kaydedildiği hesaptır. Olumsuz miktar farkları hesabın borcuna, olumlu farklar ise alacağına kaydedilir. Dönem sonunda hu hesap ilgili stok ve satış maliyet hesaplarına aktarılarak kapatılır. 72 DİREKT İŞÇİLİK GİDERLERİ Bu grup bir mal veya hizmetin üretim maliyetine doğrudan doğruya verilebilen işçilik giderleri ile ilgili gider, yansıtma ve fark hesaplarından oluşur. 720. Direkt İşçilik Giderleri Hesabı : Bu giderler esas üretim gider yerleri ile ilgili olup, belli bir mamül veya hizmetin üretim maliyetine doğrudan doğruya yüklenebilen işçilik giderlerini kapsar. Bu giderler hangi mamül veya mamül grubu için harcandığı izlenebilen ve herhangi bir dağıtım anahtarına gerek duymadan, işçi başına düşen çalışma süresi ölçülebilen işçilik giderlerinden oluşur. 721. Direkt İşçilik Giderleri Yansıtma Hesabı : Fiili maliyet yönteminin uygulandığı durumlarda \"720- Direkt İşçilik Giderleri Hesabı\"nın borcuna gider çeşidi olarak kaydedilen giderler ile önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda önceden saptanmış direkt işçilik giderleri, maliyet unsuru olarak bu hesabın alacağı karşılığında \"151- Yarı Mamüller Üretim Hesabı\"na borç kaydedilir. Fiili maliyet yönteminin uygulandığı işletmelerde üretim yapılmayan işçilikler olağan durumlarda bu hesabın alacağı karşılığı \"680- Çalışmayan Kısım Giderleri Hesabı\"nın borcuna aktarılır. 722. Direkt İşçilik Ücret Farkları: Önceden saptanmış maliyet hesaplama yöntemlerinin uygulandığı durumlarda, fiili direkt işçilik giderleri ile önceden saptanmış ve maliyetlere yüklenmiş direkt işçilik giderleri arasındaki olumlu veya olumsuz ücret farklarının izlendiği hesaptır. Olumsuz ücret farkları bu hesabın borcuna, olumlu ücret farkları ise alacağına kaydedilir. Bu hesap dönem sonlarında ilgili stok ve satış maliyeti hesaplarına aktarılarak kapatılır. 723. Direkt İşçilik Süre (Zaman) Farkları : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda fiili giderler ile önceden saptanmış giderler arasındaki olumlu ya da olumsuz süre (zaman) farklarının kaydedildiği hesaptır. Olumsuz süre farkları bu hesabın borcuna olumlu süre farkları ise alacağına kaydedilir. Dönem sonlarında bu hesap ilgili stok ve satış maliyeti hesaplarına aktarılarak kapatılır. 73 GENEL ÜRETİM GİDERLERİ Bu grup işletmenin üretimi ve bu üretime bağlı hizmetler için yapılan direkt ilk madde ve malzeme ve direkt işçilik dışında kalan giderlerle ilgili gider, yansıtma ve fark hesaplarından oluşur. 730. Genel Üretim Giderleri : İşletmenin üretimi ve bu üretime bağlı hizmetler için yapılan direkt işçilik ve direkt ilkmadde ve malzeme dışında kalan giderlerin izlendiği hesaptır. Bu giderlerin; — Üretim ve hizmet maliyeti ile ilgili bir gider niteliğini taşıması, — Çeşit ve değer yönü ile doğrudan doğruya değil ancak dağıtım yoluyla üretim ve hizmet maliyetlerine yansıtılabilir nitelikte olması, gerekir. Tahakkuk eden giderler bu hesabın borcuna kaydedilir. Dönem sonlarında \"731- Genel Üretim Giderleri Yansıtma Hesabı\" ile karşılaştırılarak kapatılır. 731. Genel Üretim Giderleri Yansıtma Hesabı : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda, önceden saptanmış genel üretim giderleri, Fiili maliyet yönteminin uygulandığı durumlarda, \"730- Genel üretim Giderleri Hesabı\"nın borcuna kaydedilen giderleri, bu hesabın alacağı karşılığı \"151- Yarı Mamüller Üretim Hesabı\" ile diğer aktif, gider ve zarar hesaplarına borç kaydedilir. 732. Genel Üretim Giderleri Bütçe Farkları : Fiili üretim genel giderleri ile maliyetlere yüklenen önceden saptanmış giderler arasındaki olumlu ya da olumsuz bütçe farklarının izlendiği hesaptır. Olumsuz farklar hesabın borcuna olumlu farklar ise alacağına kaydedilir. Dönem sonlarında bu hesap ilgili stok ve satış maliyeti hesaplarına aktarılarak kapatılır. 733. Genel Üretim Giderleri Verimlilik Farkları : Fiili üretim genel giderleri ile maliyetlere yüklenen önceden saptanmış giderler arasındaki olumlu ya da olumsuz verimlilik farklarının izlendiği hesaptır. Olumsuz farklar hesabın borcuna olumlu farklar ise alacağına kaydedilir. Dönem sonlarında bu hesap ilgili stok ve satış maliyeti hesaplarına aktarılarak kapatılır. 734. Genel Üretim Giderleri Kapasite Farkları : Fiili üretim genel giderleri ile maliyetlere yüklenen önceden saptanmış giderler arasındaki olumlu ya da olumsuz kapasite farklarının izlendiği hesaptır. Olumsuz farklar hesabın borcuna olumlu farklar ise alacağına kaydedilir. Dönem sonlarında bu hesap ilgili stok ve satış maliyeti hesaplarına aktarılarak kapatılır. 74 HİZMET ÜRETİM MALİYETİ Bu grup hizmet işletmeleri ile ilgilidir. Hizmet işletmelerinde 71, 72 ve 73 gruplarda yer alan hesaplar kullanılmaz. Bu hesaplar yerine bu gruptaki hesaplar kullanılır. Hizmet işletmelerinin üretim maliyetlerinin izlenmesinde kullanılan hesaplar bu grupta yer alır. 740. Hizmet Üretim Maliyeti Hizmet işletmelerinde üretilen hizmetler için yapılan giderlerin fiili tutarları bu hesabın horcuna kaydedilir. Dönem sonlarında bu hesap \"741- Hizmet Üretim Maliyeti Yansıtma\" hesabı ile karşılaştırılarak kapatılır. 741. Hizmet Üretim Maliyeti Yansıtma Hesabı : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda, önceden saptanmış hizmet maliyetini oluşturan giderler, fiili maliyet yönteminin uygulandığı durumlarda \"740Hizmet Üretim Maliyeti Hesabı\"nın borcuna kaydedilen tutarları hu hesabın alacağı karşılığı \"622- Satılan Hizmet Maliyeti Hesabı\"nın borcuna aktarılır. Dönem sonlarında bu hesap \"740- Hizmet Üretim Maliyeti Hesabı\" ile karşılaştırılarak kapatılır. 742. Hizmet Üretim Maliyeti Fark Hesapları : Hizmet üretim maliyetlerinin fiili tutarları ile önceden saptanmış hizmet üretim maliyeti arasındaki olumlu veya olumsuz farkların izlendiği hesaptır. Olumsuz farklar hesabın borcuna, olumlu farklar hesabın alacağına kaydedilir. Dönem sonlarında hu hesap \"622 Satılan Hizmet Maliyeti Hesabına\" aktarılarak kapatılır. 75. ARAŞTIRMA VE GELİŞTİRME GİDERLERİ : Bu grup araştırma ve geliştirme faaliyetleri ile ilgili gider, yansıtma ve fark hesaplarından oluşur. 750. Araştırma ve Geliştirme Giderleri : Üretime devam olunan mamüllerin maliyetlerini düşürmek, satışlarını arttırmak, bulunan yeni üretim çeşitlerinin işletmede kullanılmakta olan yöntem ve işlemlerini geliştirmek ya da yeni yöntem ve işlemler bulmak, üretimde kullanılan teçhizatın yenilerinin ve mevcutlarının geliştirilmesine ilişkin araştırmalar yapmak, satış ve pazarlama faaliyetlerini geliştirmek ve diğer bir deyişle ticari alana uygulanması için yapılan giderlerin kaydedildiği hesaptır. Aktifleştirilmeyen araştırma ve geliştirme giderleri ile aktifleştirilmiş olanlardan bu döneme isabet eden itfa payları bu hesabın borcuna kaydedilir. Dönem sonlarında bu hesap, \"751Araştırma ve Geliştirme Giderleri Yansıtma Hesabı\" ile karşılaştırılarak kapatılır. 751. Araştırma ve Geliştirme Giderleri Yansıtma Hesabı : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda, önceden saptanmış araştırma ve geliştirme giderleri fiili maliyet yöntemlerinin uygulandığı durumlarda \"750Araştırma Geliştirme Giderleri Hesabı\"nın borcuna kaydedilen tutarlar bu hesabın alacağı karşılığı, sonuç hesaplarında \"630- Araştırma ve Geliştirme Giderleri\" veya ilgili aktif hesaplara borç kaydedilir. Bu hesap, dönem sonlarında \"750- Araştırma ve Geliştirme Giderleri Hesabı\"yla kapatılır. 752. Araştırma ve Geliştirme Gider Farkları : Araştırma ve geliştirme fiili giderleri ile önceden saptanmış giderler arasındaki olumlu ya da olumsuz farkların izlendiği hesaptır. Olumsuz farklar hesabın borcuna olumlu farklar ise alacağına kaydedilir. Dönem sonlarında bu hesap \"630- Araştırma ve Geliştirme Giderleri Hesabı\"na aktarılarak kapatılır. 76 PAZARLAMA SATIŞ VE DAĞITIM GİDERLERİ Bu grup, pazarlama, satış ve dağıtım faaliyetleri ile ilgili gider, yansıtma ve fark hesaplarından oluşur. 760. Pazarlama Satış ve Dağıtım Giderleri : Mamülün stoklara verildiği ve hizmetin tamamlandığı andan itibaren bu mal ve hizmetlerin alıcılara teslimine kadar yapılan giderler bu hesaba borç kaydedilir. Dönem sonlarında bu hesap, \"761- Pazarlama Satış ve Dağıtım Giderleri Yansıtma Hesabı\" ile karşılaştırılarak kapatılır. 761. Pazarlama Satış ve Dağıtım Giderleri Yansıtma Hesabı : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda önceden saptanmış pazarlama, satış ve dağıtım giderleri ile, fiili maliyet yönteminin uygulandığı durumlarda \"760- Pazarlama Satış ve Dağıtım Giderleri Hesabı\"nın borcuna kaydedilen giderler bu hesabın alacağı karşılığı \"631- Pazarlama Satış ve Dağıtım Giderleri Hesabı\"na devredilir. Dönem sonlarında bu hesap, \"760- Pazarlama Satış ve Dağıtım Giderleri Hesabı\" ile karşılaştırılarak kapatılır. 762. Pazarlama Satış ve Dağıtım Giderleri Fark Hesabı : Pazarlama giderlerinin fiili tutarları ile önceden saptanmış giderler arasındaki olumlu ya da olumsuz farkların izlendiği hesaptır. Olumsuz farklar hesabın borcuna olumlu farklar ise alacağına kaydedilir. Dönem sonlarında bu hesap \"631- Pazarlama Satış ve Dağıtım Giderleri Hesabı\"na aktarılarak kapatılır. 77 GENEL YÖNETİM GİDERLERİ : Bu grup yönetim fonksiyonu ile ilgili gider, yansıtma ve fark hesaplarından oluşur. 770. GENEL YÖNETİM GİDERLERİ : Bir işletmenin yönetim fonksiyonları, işletme politikasının tayini, organizasyon ve kadro kuruluşu, büro hizmetleri, kamu ilişkileri, güvenlik, hukuk işleri, personel işleri, kredi ve tahsilatı da kapsayan muhasebe ve mali işler servislerin giderleri bu hesaba borç kaydedilir. Dönem sonlarında bu hesap, \" 771- Araştırma ve geliştirme Giderleri Yan-sıtma Hesabı\" ile karşılaştırılarak kapatılır. 771. Genel Yönetim Giderleri Yansıtma Hesabı : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda, önceden saptanmış genel yönetim giderleri, Fiili maliyet yönteminin uygulandığı durumlarda \"770- Genel Yönetim Giderleri Hesabı\"nın borcuna kaydedilen giderleri hesabın alacağı karşılığı \"632- Genel Yönetim Giderleri Hesabı\"na borç kaydedilir. Bu hesap, dönem sonlarında \"770- Genel Yönetim Giderleri Hesabı\" ile karşılaştırılarak kapatılır. 772. Genel Yönetim Gider Farkları Hesabı : Fiili genel yönetim giderleri ile önceden saptanmış giderler arasındaki olumlu ya da olumsuz farklar bu hesaba alınır ve dönem sonlarında \"632- Genel Yönetim Giderleri Hesabı\"na aktarılarak kapatılır. 78 FİNANSMAN GİDERLERİ : Bu grupta işletmenin borçlandığı tutarlarla ilgili olarak katlanılan ve varlıkların maliyetine eklenmemiş bulunan faiz ve benzeri giderlerle, yansıtma ve fark hesapları yer alır. 780. Finansman Giderleri Hesabı : İşletme faaliyetlerinin aksamadan yürütülebilmesi amacıyla borçlanılan tutarlarla ilgili faiz, kur farkları, komisyon ve benzeri giderler bu hesaba borç kaydedilir. 781. Finansman Giderleri Yansıtma Hesabı : Önceden saptanmış maliyet yöntemlerinin uygulandığı durumlarda, önceden saptanmış finansman giderleri ile fiili maliyet yöntemlerinin uygulandığı durumlarda \"780- Finansman Giderleri Hesabı\"nın borcuna kaydedilen giderler bu hesabın alacağı karşılığında sonuç hesaplarındaki \"66- Finansman Giderleri\" grubunun ilgili hesabına borç kaydedilir. 782. Finansman Giderleri Fark Hesabı : Finansman Giderlerinin fiili tutarları ile önceden saptanmış tutarları arasındaki olumlu ya da olumsuz farkların izlendiği hesaptır. Olumsuz farklar hesabın borcuna olumlu farklar ise alacağına kaydedilir. Dönem sonunda bu hesap \"66- Finansman Giderleri\" grubunun ilgili hesabına aktarılarak kapatılır. 0-9 GİDER ÇEŞİTLERİ Gider çeşitleri hesapları, mal ve hizmet üretiminde katlanılması gereken maliyetlerin bünyesindeki harcama çeşitlerini ifade eder. Bu hesaplar, kuruluşların bünyelerine uygun biçimde detaylandırılır. Gider çeşitleri hesaplarının sabit, değişken ve yarı değişken olarak gruplandırılması mümkündür. Gruplar içindeki gider çeşitlerinin sabit, değişken ve yarı değişken biçimde ayırımı işletmelerin kendi ihtiyaç ve insiyatiflerine bırakılmıştır. Gider çeşitleri hesaplarının kodlamasında aşağıda belirtilen sınıflama esas alınmıştır. Gider hesapları grupları : 0 İlk madde ve malzeme 1 İşçi ücret ve giderleri 2 Memur ücret ve giderleri 3 Dışardan sağlanan fayda ve hizmetler 4 Çeşitli giderler 5 Vergi, resim ve harçlar 6 Amortismanlar ve tükenme payları 7 Finansman Giderleri 0. İlk Madde ve Malzeme Giderleri Mal ve hizmetlerin üretilmesini, işletme faaliyetlerinin devamlılığını sağlamak amacıyla tüketilen her türlü direkt ilkmadde ve malzeme, endirekt malzeme ve üretimle ilgili dışarıyla yaptırılan işleri kapsar. 1. İşçi Ücret ve Giderleri İşletme faaliyetlerini yürütmek üretim ve hizmetleri gerçekleştirmek amacıyla çalıştırılan işçiler için tahakkuk ettirilen, (Esas işçilik, fazla mesai, üretim primleri, ikramiyeler, yıllık izin ücretleri, S. Sigorta işveren primi, gece primi, hafta tatili ve genel tatil ücretleri, her türlü sosyal yardımlar ve işçilere ait diğer giderler gibi) her türlü tutarları kapsar. 2. Memur Ücret ve Giderleri İşletme faaliyetlerini yürütmek, üretim ve hizmetler gerçekleştirmek amacıyla çalıştırılan aylıklı yönetici, memur, büro personeli vb.. için tahakkuk ettirilen her türlü tutarları kapsar. 3. Dışardan Sağlanan Fayda ve Hizmetler İşletme faaliyetlerini yürütmek, üretim pazarlama ve diğer hizmetleri gerçekleştirmek amacıyla dışarıdan sağlanan fayda ve hizmetler (elektrik, su, gaz bakım ve onarım, haberleşme, nakliye ile diğer fayda ve hizmetler) için yapılan giderleri kapsar. 4. Çeşitli Giderler Yukarıda belirtilen giderler dışında, işletme faaliyetlerini sürdürmek için yapılması gerekli olan giderleri kapsar. Sigorta giderleri, kira giderleri, yolluk giderleri dava icra ve noter giderleri, iştirak payı ve aidat giderleri, çeşitli giderler gibi giderler bu grupta yer alır. 5. Vergi, Resim ve Harçlar Mevzuat gereğince tahakkuk ettirilen gider niteliğindeki vergi, resim ve harçları kapsar. 6. Amortismanlar ve Tükenme Payları Maddi ve maddi olmayan duran varlıklar ile, özel tükenmeye tabi varlıklar için ayrılan amortisman gideri ile tükenme paylarını kapsar. 7. Finansman Giderleri İşletmenin gerek yatırım gerekse işletme sermayesi ihtiyacını karşılamak üzere yaptığı kısa veya uzun vadeli borçlanmaların faiz, komisyon ve kur farklarını kapsar. Gider Çeşitleri Hesaplarının İşleyişi : Eş zamanlı kayıt yöntemini uygulayan işletmelerde, giderler tahakkuk ettikçe ilgili fonksiyonel gider hesaplarına kaydedilirken, aynı anda yardımcı defterlerdeki söz konusu çeşit hesaplarına da kaydedilir. Gider çeşitlerinin izlendiği yardımcı defter kayıtlarının gider yerlerini de gösterecek biçimde tutulması esastır. 10-99 GİDER YERLERİ Gider yeri, üretim ve hizmetlerin yapıldığı ve maliyetlerin oluştuğu, örgütün bir birimini ya da birim içindeki bir yeri ifade eder. Giderlerin planlanması, kontrol edilmesi ve bu giderlerin dengeli bir biçimde toplanıp dağıtılmasını sağlar. Gider yerlerinin saptanmasında genellikle kuruluşların organizasyon şeması esas alınır. Gider yerleri aşağıdaki gibi bölümlenir. - Esas üretim gider yerleri - Yardımcı üretim gider yerleri - Yardımcı hizmet gider yerleri - Yatırım gider yerleri - Üretim yerleri yönetimi gider yerleri - Araştırma ve geliştirme gider yerleri - Pazarlama, satış ve dağıtım gider yerleri - Genel yönetim gider yerleri. Gider yerlerinin bölümlenmesinde yukarıda verilen gider yerleri gruplanması esas olmakla beraber, kuruluşların işletme faaliyet alanı ile faaliyetin teknolojik akımına uygun olarak açılacak gider yerleri, bu verilen ana grup başlıkları altında yer alabilir. 7/B SEÇENEĞİNDE MALİYET HESAPLARI Ticaret işletmeleri isteyen küçük hizmet işletmeleri ve isteyen küçük üretim işletmeleri giderlerin izlenmesinde bu seçeneği uygular. Ek mali tablo düzenlemek zorunda olmayan ticaret işletmeleri, küçük hizmet işletmeleri ve küçük üretim işletmelerinden isteyenler, giderlerin izlenmesinde bu seçeneği uygular. Aktif ve net satışlar toplamları yukarıda belirtilen rakamların altında kalan üretim ve hizmet işletmeleri ile aktif ve net satış toplamları ne olursa olsun ticaret işletmeleri için 7/A seçeneği zorunlu değildir. Bu işletmeler 7/A ve 7/B seçeneğinden herhangi birini tercih edebilirler. Şu anda giderlerinin izlenmesinde 7/A seçeneğini uygulayan ancak bu Tebliğ ile kriter olarak kullanılan rakamların artırılması nedeniyle 7/B seçeneğini uygulama imkanı ortaya çıkan işletmeler hesap dönemi sonuna kadar 7/A seçeneğini uygulamaya devam edeceklerdir. Bu işletmeler dilerlerse gelecek hesap dönemi başından itibaren 7/B seçeneğini tercih etmek imkanına sahiptirler. Aktif ve net satışlar toplamları yukarıda belirtilen rakamların altında kalan üretim ve hizmet işletmeleri ile aktif ve net satış toplamları ne olursa olsun ticaret işletmeleri için 7/A seçeneği zorunlu değildir. Bu işletmeler 7/A ve 7/B seçeneğinden herhangi birini tercih edebilirler (MSUGT 3). Bu uygulamada; giderler defter-i kebirde maliyet dönemi boyunca çeşit esasına göre izlenir. Maliyet çıkarma dönemlerinde, söz konusu giderler gider dağıtım tablosu aracılığıyla fonksiyonlarına dönüştürülerek ilgili gider yerlerine ve hizmet veya mamül maliyetlerine veya sonuç hesaplarına aktarılır. Gider çeşitlerinin fonksiyonlarına dönüştürülmesinde ve ilgili gider yerlerine yüklenmesinde, işletmeler isterlerse gider çeşidi hesaplarından ilgili gider yerlerine ve fonksiyonel gider hesaplarına aktarmalar yapılmasını gerektirecek kayıt düzenini seçerler. İsterlerse, eş zamanlı kayıt düzenini bu seçenek için de kullanarak yardımcı defterlerde fonksiyonel gider hesaplarını ve gider yerlerini izleyebilirler. Bu suretle gider çeşitleri tahakkuk ettikçe ilgili defter-i kebir hesaplarında izlenirken; aynı anda yardımcı defterlerde fonksiyonlarına göre izlenip eş zamanlı olarak gider yerlerine aktarılabilir. 7/B seçeneğinde işletmeler 79 No.lu gruptaki maliyet hesaplarını kullanır. Bu uygulamada maliyet hesap grupları aşağıdaki gibi bölümlenir: 79 GİDER ÇEŞİTLERİ 790 ilk Madde Ve Malzeme Giderleri 791 İşçi Ücret ve Giderleri 792 Memur Ücret ve Giderleri 793 Dışarıdan Sağlanan Fayda Ve Hizmetler 794 Çeşitli Giderler 795 Vergi, Resim Ve Harçlar 796 Amortismanlar Ve Tükenme Payları 797 Finansman Giderleri 798 Gider Çeşitleri Yansıtma Hesapları 799 Üretim Maliyet Hesabı Hesapların İşleyişi : Giderler tahakkuk ettikçe dönem boyunca 790-797 No.lu çeşit esasına göre bölümlenmiş ilgili gider hesaplarının borcuna kaydedilir. Üretim ve Hizmet işletmelerinde, maliyet çıkarma dönemlerinde düzenlenen gider dağıtım tablosu sonucuna göre fonksiyonlarına ve gider yerlerine göre gruplanan çeşit hesaplarının toplam tutarları, \"798- Gider Çeşitleri Yansıtma Hesabı\" alacağı ile \"799- Üretim Maliyet Hesabı\"na ve \"630- Araştırma ve Geliştirme Giderleri\", \"631- Pazarlama Satış ve Dağıtım Giderleri\", \"632- Genel Yönetim Giderleri\", \"66- Finansman Giderleri\" grubunun ilgili hesabına, \"680- Çalışmayan Kısım Gider ve Zararları\" hesaplarının ilgili olanlarına veya aktifleşmesi gereken tutarlar ise ilgili aktif hesaplarının borcuna kaydedilir. Dönem sonlarında \"799- Üretim Maliyet Hesabı\", üretim işletmelerinde 151- Yarı Mamüller Üretim\" ve \"152Mamüller\" hesaplarına, hizmet işletmelerinde ise \"622- Satılan Hizmet Maliyeti Hesabı\"na devredilerek kapatılır. Ticaret işletmelerinde ise dönem boyunca gider çeşitleri hesabının borcuna kaydedilen tutarlar, dönem sonlarında fonksiyonlarına dönüştürülerek sonuç hesapları arasında yer alan 630, 631, 632 hesapları ile 66- Finansman Giderleri Grubu\" ilgili hesabının borcuna, \"798Gider Çeşitleri Yansıtma Hesapları\"nın alacağına yazılır. 798 ile 790-797 numaralı hesaplar dönem sonlarında karşılaştırılarak kapatılır."
+  }
+ ]
+}

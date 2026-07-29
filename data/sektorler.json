@@ -1,0 +1,91 @@
+{
+  "surum": 1,
+  "aciklama": "Türkiye reel sektör kataloğu — mükellefin faaliyet konusu (ticaret sicil gazetesi / kuruluş sözleşmesi / NACE Rev.2) çekirdek muhasebeyi belirler. İLKE: aynı iktisadi kıymet sektöre göre farklı hesaba düşer — üretici için '150 İlk madde', tüccar için '153 Ticari mal'; üretim maliyet hesapları (71-78) yalnız üretim/hizmet işletmesinde. Bu katalog mükellefe uygulanınca: varsayılan stok/maliyet hesapları, 7A/7B, gelir/gider akışı ve şablonlar sektöre göre kurulur. NACE ilk 2 hane = ana kısım.",
+  "maliyet_secenekleri": {
+    "7A": "Gider yeri esaslı (71-78 fonksiyonel maliyet + yansıtma). Üretim/hizmette eşik üstü ZORUNLU.",
+    "7B": "Gider çeşidi esaslı (79x). Ticaret + eşik altı üretim/hizmet serbest tercih.",
+    "yok": "Maliyet muhasebesi yok — saf alım-satım (yalnız 153→621)."
+  },
+  "sektorler": [
+    {
+      "kod": "TIC", "ad": "Toptan / perakende ticaret", "nace_kisim": "G", "nace_ornek": "46-47",
+      "uretim": false, "maliyet_secenegi": "yok",
+      "stok_hesabi": ["153"], "maliyet_hesabi": ["621"], "hasilat_hesabi": ["600", "601"],
+      "ozel_hesaplar": [],
+      "nitelik": "Değişikliğe uğramadan satılan mal = TİCARİ MAL (153). Üretim maliyeti YOK; SMM doğrudan 621. Alınan mal maliyetle 153'e girer, satışta 621'e çıkar.",
+      "denetim_program": "TIC"
+    },
+    {
+      "kod": "ETIC", "ad": "E-ticaret", "nace_kisim": "G", "nace_ornek": "47.91",
+      "uretim": false, "maliyet_secenegi": "yok",
+      "stok_hesabi": ["153"], "maliyet_hesabi": ["621"], "hasilat_hesabi": ["600", "610"],
+      "ozel_hesaplar": ["108", "760"],
+      "nitelik": "TIC + sanal POS/aracı platform (108 diğer hazır değerler askıda tahsilat), yüksek iade (610), kargo/komisyon gideri (760). Fiziksel mal yine 153.",
+      "denetim_program": "ETIC"
+    },
+    {
+      "kod": "URT", "ad": "Üretim / imalat", "nace_kisim": "C", "nace_ornek": "10-33",
+      "uretim": true, "maliyet_secenegi": "7A",
+      "stok_hesabi": ["150", "151", "152"], "maliyet_hesabi": ["620", "710", "720", "730"], "hasilat_hesabi": ["600", "601"],
+      "ozel_hesaplar": ["150", "151", "152", "711", "721", "731", "680"],
+      "nitelik": "AYNI mal tüccarda 153 iken üreticide zincir: 150 İlk madde → 710/720/730 → 711/721/731 yansıtma → 151 Yarı mamul (ARA MAMÜL) → 152 Mamul → satışta 620. Boş kapasite GÜG'ü stoklanamaz → 680 (TMS 2).",
+      "denetim_program": "URT"
+    },
+    {
+      "kod": "INS", "ad": "İnşaat / taahhüt (yıllara yaygın)", "nace_kisim": "F", "nace_ornek": "41-43",
+      "uretim": true, "maliyet_secenegi": "7A",
+      "stok_hesabi": ["170", "151"], "maliyet_hesabi": ["740", "170"], "hasilat_hesabi": ["350", "600"],
+      "ozel_hesaplar": ["170", "350", "295", "179", "359"],
+      "nitelik": "Yıllara yaygın: maliyet 170'te birikir, hakediş 350'de; kâr/zarar iş bitiminde veya TFRS 15 tamamlanma yüzdesiyle. Konut satışı yapan inşaatta arsa+yapım maliyeti STOK (15x). Hakediş stopajı (295).",
+      "denetim_program": "INS"
+    },
+    {
+      "kod": "HIZ", "ad": "Hizmet (danışmanlık / yazılım / ajans)", "nace_kisim": "M", "nace_ornek": "62, 69-74",
+      "uretim": true, "maliyet_secenegi": "7B",
+      "stok_hesabi": [], "maliyet_hesabi": ["622", "740"], "hasilat_hesabi": ["600"],
+      "ozel_hesaplar": ["740", "622", "340", "380"],
+      "nitelik": "Fiziksel stok YOK; ana maliyet iş gücü. Hizmet üretim maliyeti 740 → 622. Avans 340→600 dönüşümü, dönemsellik 380/480 kritik. Eşik altı 7/B tercih edilir.",
+      "denetim_program": "HIZ"
+    },
+    {
+      "kod": "LOJ", "ad": "Taşımacılık / lojistik / depolama", "nace_kisim": "H", "nace_ornek": "49-53",
+      "uretim": true, "maliyet_secenegi": "7B",
+      "stok_hesabi": [], "maliyet_hesabi": ["740"], "hasilat_hesabi": ["600"],
+      "ozel_hesaplar": ["254", "257", "740", "760"],
+      "nitelik": "Ana varlık araç filosu (254) + amortisman (257); akaryakıt/bakım maliyet. VUK 272: ömrü/değeri artıran harcama aktifleştirilir, rutin bakım gider.",
+      "denetim_program": "LOJ"
+    },
+    {
+      "kod": "GID", "ad": "Restoran / gıda perakende / konaklama", "nace_kisim": "I", "nace_ornek": "55-56",
+      "uretim": true, "maliyet_secenegi": "7B",
+      "stok_hesabi": ["150", "153"], "maliyet_hesabi": ["620", "621"], "hasilat_hesabi": ["600"],
+      "ozel_hesaplar": ["150", "620", "689"],
+      "nitelik": "Hem hammadde (150) hem satılık ürün. Nakit yoğun (Z raporu ↔ kayıt). Fire/zayi (689) + KDV düzeltmesi (KDVK 30). Restoranda üretim+hizmet karması.",
+      "denetim_program": "GID"
+    },
+    {
+      "kod": "TAR", "ad": "Tarım / hayvancılık", "nace_kisim": "A", "nace_ornek": "01-03",
+      "uretim": true, "maliyet_secenegi": "7A",
+      "stok_hesabi": ["151", "152", "153"], "maliyet_hesabi": ["710", "730"], "hasilat_hesabi": ["600"],
+      "ozel_hesaplar": ["150", "151", "152", "295"],
+      "nitelik": "CANLI VARLIK (TMS 41 — hayvan/bitki gerçeğe uygun değer − satış maliyeti). Tarımsal ürün hasatta 152/153. Üretim maliyet zinciri işler; mevsimsellik + destekleme primleri. TFRS overlay'de TMS 41 kritik (pazar boşluğu).",
+      "denetim_program": "TAR"
+    },
+    {
+      "kod": "ENR", "ad": "Enerji üretimi", "nace_kisim": "D", "nace_ornek": "35",
+      "uretim": true, "maliyet_secenegi": "7A",
+      "stok_hesabi": [], "maliyet_hesabi": ["730", "740"], "hasilat_hesabi": ["600"],
+      "ozel_hesaplar": ["253", "257", "730"],
+      "nitelik": "Yüksek maddi duran varlık (santral 253) + amortisman; üretilen enerji stoklanamaz → anlık satış. Lisanssız/lisanslı ayrımı.",
+      "denetim_program": "URT"
+    },
+    {
+      "kod": "SRB", "ad": "Serbest meslek (SMMM / avukat / doktor)", "nace_kisim": "M", "nace_ornek": "69, 86",
+      "uretim": false, "maliyet_secenegi": "yok",
+      "stok_hesabi": [], "maliyet_hesabi": ["770"], "hasilat_hesabi": ["600"],
+      "ozel_hesaplar": ["770", "360"],
+      "nitelik": "Serbest meslek kazancı (GVK). TAHSİL ESASI (defter-beyan sistemi farklı); stopaj (94). İşletme defteri/serbest meslek kazanç defteri — bilanço esası şart değil.",
+      "denetim_program": "HIZ"
+    }
+  ]
+}

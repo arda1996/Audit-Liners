@@ -1,0 +1,34 @@
+/target
+**/*.rs.bk
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Belge okuma araçları — sanal ortam (kurulum: tools/belge-venv-kur.sh)
+tools/belge-venv/
+*-sayfalar/
+
+# Playwright çıktıları
+web/test-results/
+web/playwright-report/
+test-results/
+
+# Bağımlılıklar ve derleme çıktıları
+node_modules/
+web/dist/
+dist/
+
+# ÖĞRENİLEN ŞABLONLAR — mükellefe özgü, yayına gitmez.
+# Motor bunu çalışırken üretir; başka kurulumda anlamı yoktur.
+data/ogrenilen-sablonlar.json
+
+# GERÇEK BELGELER — mükellef verisi. ASLA depoya girmez (KVKK / VUK 227).
+# Yerel geliştirmede kullan, paylaşırken anonimleştir. Bkz. data/ornek-belgeler/OKUBENI.md
+data/ornek-belgeler/*
+!data/ornek-belgeler/OKUBENI.md
+
+# Claude Code oturum günlükleri — geliştirme izi, ürünün parçası değil
+.claude/sessions/
+.claude/completions/
+.claude/settings.local.json

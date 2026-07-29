@@ -1,0 +1,2957 @@
+{
+  "surum": 7,
+  "aciklama": "UFRS WorkSheet çalışma kataloğu — her TMS/TFRS düzeltmesi ayrı çalışma sayfası. Denetçinin oluşturduğu AJE/RJE kayıtları WTB'ye (dönüşüm mizanı) akar. Her kayıtta DAYANAK (ekspertiz raporu / piyasa uygunluğu / hesaplama) + DENETÇİ NOTU zorunlu. Deftere ASLA işlenmez. sektorler: hangi sektör profillerinde uygun (data/sektorler.json kodları; '*'=hepsi). devir: dönem devrinde davranış (TASI_BIRAK=P/L bacakları 570/580'e, bilanço aynen · TERS_CEVIR=devir + zorunlu yeniden ölçüm · TEKRARLA=birikim devri + cari dilim yeniden · TASIMA_YOK=kendini tüketir, taşınırsa çift sayım · YENIDEN_URET=taşınmaz, yeni bakiyeden yeniden önerilir). Tasarım: docs/tasarim/ufrs-worksheet.md + wtb araştırması kayit_hesaplari: çalışmanın kayıt bacaklarında kullanılan STABİL hesap seti (borc/alacak adayları; sektör değişse de değişmez — stoğun içeriği değişir, 153/158 değişmez). degerleme_yontemleri: bu çalışmada uygulanabilir ölçüm yöntemleri (denetçi seçer; kayıtta saklanır — 'kaydın hesabını verebilmek' için). kisa_ad: sekme etiketi (standart + kısa isim, ör. 'TFRS 15 — Hasılat'). kayit_hesaplari[].tur: hangi kayıt türünde geçerli (AJE|RJE|*) — form seçili türe göre çipleri süzer. senaryolar: denetçi HESAP aramaz, SENARYO seçer — standart kaydın şeklini çizer (bacaklar) + ertelenmiş vergi kanalını (ev_kanal: kz→691/691, oci_522→522.90, oci_549→549.90; ev_yon: EVV=283/EVY=483) belirler. @hedef = seçili hesap. ev_hesaplari: EV hesap haritası. v7: senaryolarda hedef_onekleri (@hedef izinli önekler), tutar_kaynak (motor/girdi_bakiye/elle), kurallar[] (V-kural kodları, docs/tasarim/spiral-standart-haritasi-A1.md), ev_kanal:'yok' (EV kurulmaz — TMS 12.15 istisnaları/özkaynak-içi), cift_tutar+pay (karma simetri senaryoları: ana=tam, ikinci=tutar2, kalan=fark; bacak.kanal EV bölüşümü).",
+  "dayanak_turleri": [
+    {
+      "kod": "ekspertiz",
+      "ad": "Ekspertiz / Değerleme Raporu",
+      "aciklama": "SPK lisanslı değerleme kuruluşu raporu (GUD ölçümü)"
+    },
+    {
+      "kod": "piyasa",
+      "ad": "Piyasa Verisi / Emsal",
+      "aciklama": "Gözlemlenebilir piyasa fiyatı, emsal işlem, fiyat listesi"
+    },
+    {
+      "kod": "hesaplama",
+      "ad": "Hesaplama Kağıdı",
+      "aciklama": "Denetçinin yeniden hesabı (amortisman, etkin faiz, yaşlandırma)"
+    },
+    {
+      "kod": "sozlesme",
+      "ad": "Sözleşme / Belge",
+      "aciklama": "Kira/kredi/satış sözleşmesi, vade dökümü"
+    },
+    {
+      "kod": "aktueryal",
+      "ad": "Aktüeryal Hesap",
+      "aciklama": "Kıdem tazminatı vb. aktüeryal varsayım seti"
+    },
+    {
+      "kod": "teyit",
+      "ad": "Üçüncü Taraf Teyidi",
+      "aciklama": "Hukukçu mektubu, banka teyidi, müşteri mutabakatı"
+    }
+  ],
+  "calismalar": [
+    {
+      "id": "WS-RECLASS",
+      "standart": "TMS 1",
+      "tur": "RJE",
+      "ad": "Sunum Sınıflaması (Reclass)",
+      "anlatim": "Tutar değiştirmeden TFRS sunumuna uygun satıra taşıma: uzun vadeli kredinin kısa vadeli kısmı, avansların ayrıştırılması, ilişkili taraf ayrımı (331 ortaklara borçlar → ilişkili taraf), şüpheli alacağın netleştirilmesi. Kâr/zararı etkilemez.",
+      "dayanak_onerisi": "sozlesme",
+      "hesaplar": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "sira": 1,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "YENIDEN_URET",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "303.90",
+            "ad": "UV Kredilerin KV Taksitleri",
+            "tur": "RJE"
+          },
+          {
+            "kod": "159.90",
+            "ad": "Verilen Sipariş Avansları",
+            "tur": "RJE"
+          },
+          {
+            "kod": "129",
+            "ad": "Şüpheli Alacak Karşılığı",
+            "tur": "RJE"
+          },
+          {
+            "kod": "120.90",
+            "ad": "Alıcılar — İlişkili Taraf",
+            "tur": "RJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "400",
+            "ad": "Banka Kredileri (UV)",
+            "tur": "RJE"
+          },
+          {
+            "kod": "320.01",
+            "ad": "Satıcılar",
+            "tur": "RJE"
+          },
+          {
+            "kod": "128",
+            "ad": "Şüpheli Ticari Alacaklar",
+            "tur": "RJE"
+          },
+          {
+            "kod": "340.90",
+            "ad": "Alınan Sipariş Avansları",
+            "tur": "RJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "maliyet"
+      ],
+      "kisa_ad": "Sınıflama",
+      "parametreler": [
+        {
+          "anahtar": "kv_taksit",
+          "ad": "12 ay içinde ödenecek anapara (TL)",
+          "tip": "tutar",
+          "varsayilan": "",
+          "aciklama": "UV kredi itfa planına göre 12 ay içinde ödenecek toplam anapara → 400'den 303'e sınıflanır"
+        }
+      ],
+      "hesapla": true,
+      "senaryolar": [
+        {
+          "kod": "uv_kredi_kv_siniflama",
+          "ad": "UV Kredinin KV Taksiti",
+          "tur": "RJE",
+          "aciklama": "12 ay içinde ödenecek anapara taksiti 400'den 303'e sınıflanır; tutar kredi itfa planından (TMS 1.69). K/Z etkisi yok.",
+          "bacaklar": [
+            {
+              "hesap": "400",
+              "yon": "B"
+            },
+            {
+              "hesap": "303.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "motor",
+          "kurallar": []
+        },
+        {
+          "kod": "temettu_iptali",
+          "ad": "Dönem Sonrası Temettü İptali",
+          "tur": "RJE",
+          "aciklama": "Raporlama döneminden sonra ilan edilen temettü dönem sonunda yükümlülük değildir; deftere atılmış borç kaydı iptal edilir — TMS 10.12-13.",
+          "bacaklar": [
+            {
+              "hesap": "331",
+              "yon": "B"
+            },
+            {
+              "hesap": "570",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": [
+            "V33",
+            "V34"
+          ]
+        },
+        {
+          "kod": "iliskili_taraf_ayrimi",
+          "ad": "İlişkili Taraf Ayrıştırması",
+          "tur": "RJE",
+          "aciklama": "İlişkili taraf bakiyesi ayrı sunum satırına taşınır (TMS 1.54 + TMS 24 besler): örn. 120 içindeki ortak/grup alacağı 120.90'a. Tutar değişmez.",
+          "bacaklar": [
+            {
+              "hesap": "120.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "120",
+            "121",
+            "127",
+            "131",
+            "331"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": []
+        },
+        {
+          "kod": "avans_ayristirma",
+          "ad": "Avansların Ayrıştırılması",
+          "tur": "RJE",
+          "aciklama": "Satıcı/alıcı cari bakiyesi içinde kalan sipariş avansları TFRS sunumu için 159/340'a ayrıştırılır (TMS 1.57). K/Z etkisi yok.",
+          "bacaklar": [
+            {
+              "hesap": "159.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "320",
+            "120",
+            "340"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": []
+        }
+      ]
+    },
+    {
+      "id": "WS-GUD-MDV",
+      "standart": "TMS 16",
+      "tur": "AJE",
+      "ad": "MDV Yeniden Değerleme (GUD)",
+      "anlatim": "Maddi duran varlığın gerçeğe uygun değeri ile net defter değeri farkı. Artış özkaynakta (522 Yeniden Değerleme) izlenir; azalış K/Z'ye. Dayanak: SPK lisanslı değerleme raporu şart.",
+      "dayanak_onerisi": "ekspertiz",
+      "hesaplar": [
+        "25",
+        "522"
+      ],
+      "sira": 2,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TASI_BIRAK",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "252",
+            "ad": "Binalar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "253",
+            "ad": "Tesis Makine ve Cihazlar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "257",
+            "ad": "Birikmiş Amortismanlar (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "659.90",
+            "ad": "Değer Düşüklüğü Zararı",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "522.90",
+            "ad": "MDV Yeniden Değerleme Artışları",
+            "tur": "AJE"
+          },
+          {
+            "kod": "252",
+            "ad": "Binalar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "253",
+            "ad": "Tesis Makine ve Cihazlar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "257",
+            "ad": "Birikmiş Amortismanlar (-)",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "gud_ekspertiz",
+        "gud_piyasa",
+        "maliyet"
+      ],
+      "kisa_ad": "MDV Yeniden Değerleme",
+      "senaryolar": [
+        {
+          "kod": "gud_artis",
+          "ad": "GUD Artışı (değer yükselmesi)",
+          "tur": "AJE",
+          "aciklama": "Ekspertiz değeri > net defter değeri; artış özkaynakta (522) birikir, EV OCI kanalında — TMS 16.39 + TMS 12.61A. Sınıfın tamamı yeniden değerlenir (16.36).",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "522.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "ev_kanal": "oci_522",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V01",
+            "V04",
+            "V12",
+            "V42"
+          ]
+        },
+        {
+          "kod": "gud_artis_onceki_bakiyeli",
+          "ad": "GUD Artışı — önceki K/Z azalışı geri çevrilerek",
+          "tur": "AJE",
+          "aciklama": "Artışın, aynı varlık için daha önce K/Z'ye yazılmış azalışı geri çeviren kısmı gelir (649), aşan kısmı 522'ye — TMS 16.39 son cümle (simetri). Motor varlığın önceki 659/522 geçmişine bakar; gelir yazılan kısım önceki gideri aşamaz.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B",
+              "pay": "ana"
+            },
+            {
+              "hesap": "649.90",
+              "yon": "A",
+              "pay": "ikinci",
+              "kanal": "kz"
+            },
+            {
+              "hesap": "522.90",
+              "yon": "A",
+              "pay": "kalan",
+              "kanal": "oci_522"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "ev_kanal": "oci_522",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V01",
+            "V02",
+            "V04",
+            "V12",
+            "V42"
+          ],
+          "cift_tutar": true,
+          "ikinci_tutar_ad": "Önceki dönemde K/Z'ye yazılan tutar (649'a gidecek kısım)"
+        },
+        {
+          "kod": "gud_azalis",
+          "ad": "GUD Azalışı (önceki artış yok)",
+          "tur": "AJE",
+          "aciklama": "Ekspertiz değeri < net defter değeri ve varlığın 522 bakiyesi yok; azalış doğrudan K/Z'ye (659) — TMS 16.40 ilk cümle. EV K/Z kanalında EVV.",
+          "bacaklar": [
+            {
+              "hesap": "659.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V04",
+            "V12",
+            "V42"
+          ]
+        },
+        {
+          "kod": "gud_azalis_onceki_bakiyeli",
+          "ad": "GUD Azalışı — önceki 522 bakiyesi varken",
+          "tur": "AJE",
+          "aciklama": "Azalış önce o varlığın 522 bakiyesinden düşülür, aşan kısım K/Z'ye (659) — TMS 16.40 (simetri). Motor 522 geçmişine bakar; OCI'ye yazılan kısım varlığın 522 bakiyesini aşamaz. EV bacak bazında bölünür (V12).",
+          "bacaklar": [
+            {
+              "hesap": "522.90",
+              "yon": "B",
+              "pay": "ikinci",
+              "kanal": "oci_522"
+            },
+            {
+              "hesap": "659.90",
+              "yon": "B",
+              "pay": "kalan",
+              "kanal": "kz"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A",
+              "pay": "ana"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "ev_kanal": "oci_522",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V02",
+            "V05",
+            "V12",
+            "V42"
+          ],
+          "cift_tutar": true,
+          "ikinci_tutar_ad": "Varlığın 522 fonu bakiyesi (öncelikle fondan düşülür)"
+        },
+        {
+          "kod": "yd_fazlasi_570_transferi",
+          "ad": "522 → Geçmiş Yıl Kârına Transfer",
+          "tur": "AJE",
+          "aciklama": "Kullanım süresince (YD amortismanı − maliyet amortismanı farkı kadar) veya varlığın çıkışında 522 bakiyesi 570'e taşınır; transfer K/Z üzerinden YAPILAMAZ — TMS 16.41. 522'deki tutar net-vergi taşındığından yeni EV bacağı kurulmaz.",
+          "bacaklar": [
+            {
+              "hesap": "522.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "570",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V03"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-GUD-YAGM",
+      "standart": "TMS 40",
+      "tur": "AJE",
+      "ad": "Yatırım Amaçlı Gayrimenkul (GUD)",
+      "anlatim": "Kira/değer artışı amaçlı gayrimenkul 25x'ten YAGM'ye sınıflanır (RJE) + GUD modeli seçildiyse değer farkı doğrudan K/Z'ye (649/659). Dayanak: ekspertiz raporu.",
+      "dayanak_onerisi": "ekspertiz",
+      "hesaplar": [
+        "25"
+      ],
+      "sira": 3,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TASI_BIRAK",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "Yatırım Amaçlı Gayrimenkul",
+            "ad": "TFRS kalemi",
+            "tur": "*"
+          },
+          {
+            "kod": "649.90",
+            "ad": "YAGM Değer Artış Kazancı",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "250",
+            "ad": "Arazi ve Arsalar",
+            "tur": "RJE"
+          },
+          {
+            "kod": "252",
+            "ad": "Binalar",
+            "tur": "RJE"
+          },
+          {
+            "kod": "649.90",
+            "ad": "YAGM Değer Artış Kazancı",
+            "tur": "AJE"
+          },
+          {
+            "kod": "659.90",
+            "ad": "YAGM Değer Azalış Zararı",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "gud_ekspertiz",
+        "gud_piyasa",
+        "maliyet"
+      ],
+      "kisa_ad": "Yatırım Amaçlı GM",
+      "senaryolar": [
+        {
+          "kod": "yagm_deger_artis",
+          "ad": "YAG GUD Artışı (K/Z)",
+          "tur": "AJE",
+          "aciklama": "GUD modelinde değer artışı oluştuğu dönemde K/Z'ye (649) — TMS 40.35. 522 (OCI) KULLANILAMAZ. EV K/Z kanalında EVY.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "649.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "252"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V27",
+            "V42"
+          ]
+        },
+        {
+          "kod": "yagm_deger_azalis",
+          "ad": "YAG GUD Azalışı (K/Z)",
+          "tur": "AJE",
+          "aciklama": "GUD modelinde değer azalışı K/Z'ye (659) — TMS 40.35. EV K/Z kanalında EVV.",
+          "bacaklar": [
+            {
+              "hesap": "659.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "252"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V27",
+            "V42"
+          ]
+        },
+        {
+          "kod": "yagm_amortisman_iptali",
+          "ad": "GUD Modelinde Amortisman İptali",
+          "tur": "AJE",
+          "aciklama": "GUD modelindeki YAG'a amortisman ayrılmaz — TMS 40.33-35; defterde ayrılan amortisman iptal edilir (gider bacağı işletmenin defterine göre 632/730 alt hesabı olabilir).",
+          "bacaklar": [
+            {
+              "hesap": "257",
+              "yon": "B"
+            },
+            {
+              "hesap": "632.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": [
+            "V28"
+          ]
+        },
+        {
+          "kod": "kullanimdan_yagm_transfer_artis",
+          "ad": "Sahibi Kullanımından YAG'a Transfer (artış)",
+          "tur": "AJE",
+          "aciklama": "Transfer günündeki GUD − defter değeri farkının artış kısmı TMS 16.39 rejimiyle 522'ye — TMS 40.61-62 (GUD modelinin tek OCI istisnası). Azalış kısmı için gud_azalis mantığı (659, kz). Transfer yalnız kanıtlanmış kullanım değişikliğiyle (40.57). Motor önceki 659/522 geçmişine bakar (16.39-40 simetrisi).",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "522.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "252"
+          ],
+          "ev_kanal": "oci_522",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V29",
+            "V30",
+            "V12",
+            "V42"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-AMORT",
+      "standart": "TMS 16",
+      "tur": "AJE",
+      "ad": "Amortisman — Faydalı Ömür Farkı",
+      "anlatim": "VUK oranı (Maliye listesi) ile işletmenin gerçek faydalı ömrü farklıysa birikmiş amortisman düzeltilir. Kıst esası TFRS'de gün bazlı. Açılış farkı 570/580'e, cari fark gidere.",
+      "dayanak_onerisi": "hesaplama",
+      "hesaplar": [
+        "25",
+        "26",
+        "257",
+        "268",
+        "7"
+      ],
+      "sira": 4,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TEKRARLA",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "770.90",
+            "ad": "Amortisman Gideri (TFRS)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "730.90",
+            "ad": "GÜG Amortisman (TFRS)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "257",
+            "ad": "Birikmiş Amortismanlar (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "570.90",
+            "ad": "Geçmiş Yıl TFRS Düzeltmeleri",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "257",
+            "ad": "Birikmiş Amortismanlar (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "268",
+            "ad": "Birikmiş Amortismanlar MODV (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "770.90",
+            "ad": "Amortisman Gideri (TFRS)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "570.90",
+            "ad": "Geçmiş Yıl TFRS Düzeltmeleri",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "maliyet"
+      ],
+      "kisa_ad": "Amortisman",
+      "senaryolar": [
+        {
+          "kod": "amort_cari_ek_gider",
+          "ad": "Cari Dönem Ek Amortisman (TFRS ömrü kısa)",
+          "tur": "AJE",
+          "aciklama": "İşletmenin gerçek faydalı ömrü VUK oranından kısa / kıst gün bazlı / bileşen amortismanı → cari dönem ek amortisman gideri — TMS 16.43-51. Ömür/kalıntı değişikliği tahmin değişikliğidir, yalnız ileriye dönük uygulanır (TMS 8.36).",
+          "bacaklar": [
+            {
+              "hesap": "770.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "257",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V32",
+            "V42"
+          ]
+        },
+        {
+          "kod": "amort_cari_iptal",
+          "ad": "Cari Dönem Amortisman İptali (VUK fazla ayırmış)",
+          "tur": "AJE",
+          "aciklama": "TFRS ömrü VUK oranından uzun → defterde fazla ayrılan cari amortisman iptali — TMS 16.50-51. EV K/Z kanalında EVY.",
+          "bacaklar": [
+            {
+              "hesap": "257",
+              "yon": "B"
+            },
+            {
+              "hesap": "770.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V32"
+          ]
+        },
+        {
+          "kod": "amort_acilis_farki",
+          "ad": "Açılış (Geçmiş Yıl) Amortisman Farkı",
+          "tur": "AJE",
+          "aciklama": "Önceki dönemlere ait kümülatif amortisman farkı 570/580'e (yön farkın işaretine göre ters kurulabilir) — TMS 8 geçmişe dönük uygulama. EV bacağı burada kurulmaz; doğrudan özkaynak kanalı (TMS 12.61A(b)) WS-EV'de elle işlenir.",
+          "bacaklar": [
+            {
+              "hesap": "570.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "257",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V31"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-KIDEM",
+      "standart": "TMS 19",
+      "tur": "AJE",
+      "ad": "Kıdem Tazminatı Karşılığı",
+      "anlatim": "VUK'ta ödemede gider; TFRS'de çalışılan döneme tahakkuk (öngörülen birim kredi). İskonto + maaş artışı + devir hızı varsayımları parametre bloğunda; aktüeryal fark OCI'de.",
+      "dayanak_onerisi": "aktueryal",
+      "hesaplar": [
+        "372",
+        "472",
+        "77"
+      ],
+      "sira": 5,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TEKRARLA",
+      "parametreler": [
+        {
+          "anahtar": "kisi_sayisi",
+          "ad": "Çalışan sayısı",
+          "tip": "tamsayi",
+          "varsayilan": "",
+          "aciklama": "Kıdem hakkı doğurabilecek dönem sonu çalışan sayısı (SGK bildirgesi)"
+        },
+        {
+          "anahtar": "ort_aylik_brut_ucret",
+          "ad": "Ortalama giydirilmiş brüt (TL/ay)",
+          "tip": "tutar",
+          "varsayilan": "",
+          "aciklama": "Brüt + düzenli ek ödemeler"
+        },
+        {
+          "anahtar": "ort_kidem_yil_x10",
+          "ad": "Ortalama kıdem (yıl × 10)",
+          "tip": "tamsayi",
+          "varsayilan": "50",
+          "aciklama": "50 = 5,0 yıl"
+        },
+        {
+          "anahtar": "reel_iskonto_orani",
+          "ad": "Reel iskonto oranı (%)",
+          "tip": "yuzde",
+          "varsayilan": "3,5",
+          "aciklama": "Nominal iskonto − maaş artışı (TR pratiği %2-4)"
+        },
+        {
+          "anahtar": "ort_kalan_sure_yil",
+          "ad": "Ort. emekliliğe kalan (yıl)",
+          "tip": "tamsayi",
+          "varsayilan": "10",
+          "aciklama": "İskonto dönemi"
+        },
+        {
+          "anahtar": "hak_edis_olasiligi",
+          "ad": "Hak ediş olasılığı (%)",
+          "tip": "yuzde",
+          "varsayilan": "95",
+          "aciklama": "1 − istifa devri (TR pratiği %90-98)"
+        },
+        {
+          "anahtar": "kisa_vade_payi",
+          "ad": "Kısa vade payı (%)",
+          "tip": "yuzde",
+          "varsayilan": "10",
+          "aciklama": "12 ay içinde emekli olacaklar → 372"
+        }
+      ],
+      "hesapla": true,
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "770.90",
+            "ad": "Kıdem Karşılık Gideri (TFRS)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "372.90",
+            "ad": "Kıdem Karşılığı — KV",
+            "tur": "AJE"
+          },
+          {
+            "kod": "472.90",
+            "ad": "Kıdem Karşılığı — UV",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "472.90",
+            "ad": "Kıdem Karşılığı — UV",
+            "tur": "AJE"
+          },
+          {
+            "kod": "372.90",
+            "ad": "Kıdem Karşılığı — KV",
+            "tur": "AJE"
+          },
+          {
+            "kod": "644.90",
+            "ad": "Konusu Kalmayan Karşılık",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "aktueryal",
+        "aktueryal_basit"
+      ],
+      "kisa_ad": "Kıdem Tazminatı",
+      "senaryolar": [
+        {
+          "kod": "kidem_artis",
+          "ad": "Karşılık Artışı — Cari Hizmet Maliyeti (K/Z)",
+          "tur": "AJE",
+          "aciklama": "Cari hizmet maliyeti + ilk kuruluş K/Z'ye (770); öngörülen birim kredi yöntemi — TMS 19.57 + 19.67. VUK'ta ödemede gider → EVV K/Z kanalında.",
+          "bacaklar": [
+            {
+              "hesap": "770.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "372",
+            "472"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V17",
+            "V18",
+            "V42"
+          ]
+        },
+        {
+          "kod": "kidem_faiz_maliyeti",
+          "ad": "Faiz Maliyeti (net tanımlanmış fayda borcu)",
+          "tur": "AJE",
+          "aciklama": "Dönem başı iskonto oranı × net tanımlanmış fayda borcu → finansman gideri — TMS 19.123. EVV artar.",
+          "bacaklar": [
+            {
+              "hesap": "661.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "472.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V17"
+          ]
+        },
+        {
+          "kod": "kidem_aktueryal_kayip",
+          "ad": "Aktüeryal Kayıp (OCI)",
+          "tur": "AJE",
+          "aciklama": "Aktüeryal yeniden ölçüm kaybı OCI'de (549 fon); K/Z'ye yazılamaz ve K/Z'ye geri sınıflanamaz — TMS 19.120(c) + 19.122 + 19.127-128. EV oci_549 kanalında.",
+          "bacaklar": [
+            {
+              "hesap": "549.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "372",
+            "472"
+          ],
+          "ev_kanal": "oci_549",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V17",
+            "V12"
+          ]
+        },
+        {
+          "kod": "kidem_aktueryal_kazanc",
+          "ad": "Aktüeryal Kazanç (OCI)",
+          "tur": "AJE",
+          "aciklama": "Aktüeryal yeniden ölçüm kazancı OCI'de (549 fon); K/Z yasak — TMS 19.120(c) + 19.122. EV oci_549 kanalında, fark yönüne göre önceki EVV azalır/EVY doğar.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "549.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "372",
+            "472"
+          ],
+          "ev_kanal": "oci_549",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V17",
+            "V12"
+          ]
+        },
+        {
+          "kod": "kidem_odeme_cozumu",
+          "ad": "Dönem İçi Ödeme / Karşılık Çözümü",
+          "tur": "AJE",
+          "aciklama": "Fiili kıdem ödemeleri karşılıktan düşülür; ödeme VUK'ta gider olduğundan geçici fark (EVV) kapanır — TMS 19.57(a)(iii).",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "644.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "372",
+            "472"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": []
+        },
+        {
+          "kod": "izin_ikramiye_tahakkuku",
+          "ad": "İzin Karşılığı / İkramiye Tahakkuku (kısa vadeli)",
+          "tur": "AJE",
+          "aciklama": "Kullanılmamış izin ve ikramiye kısa vadeli fayda olarak tahakkuk eder; iskonto edilmez — TMS 19.11-16. VUK'ta ödemede gider → EVV.",
+          "bacaklar": [
+            {
+              "hesap": "770.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "372.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": []
+        }
+      ]
+    },
+    {
+      "id": "WS-K16",
+      "standart": "TFRS 16",
+      "tur": "AJE",
+      "ad": "Kiralamalar — Kullanım Hakkı Varlığı",
+      "anlatim": "12 aydan uzun kiralamalar bilançolaştırılır: kira ödemelerinin bugünkü değeri = kira yükümlülüğü; kullanım hakkı varlığı doğrusal itfa edilir; defterdeki kira gideri iptal edilip amortisman + faiz gideri yazılır. Girdi: kira sözleşme envanteri (defter dışı).",
+      "dayanak_onerisi": "sozlesme",
+      "hesaplar": [
+        "770",
+        "301",
+        "401"
+      ],
+      "sira": 6,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TEKRARLA",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "Kullanım Hakkı Varlığı",
+            "ad": "TFRS kalemi",
+            "tur": "AJE"
+          },
+          {
+            "kod": "770.93",
+            "ad": "KHV Amortismanı",
+            "tur": "AJE"
+          },
+          {
+            "kod": "660.93",
+            "ad": "Kiralama Faiz Gideri",
+            "tur": "AJE"
+          },
+          {
+            "kod": "Kira Yükümlülüğü",
+            "ad": "TFRS kalemi",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "Kira Yükümlülüğü",
+            "ad": "TFRS kalemi",
+            "tur": "AJE"
+          },
+          {
+            "kod": "Kullanım Hakkı Varlığı (Birikmiş Amort.)",
+            "ad": "TFRS kalemi",
+            "tur": "AJE"
+          },
+          {
+            "kod": "770.01",
+            "ad": "Kira Gideri (iptal)",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "bugunku_deger"
+      ],
+      "kisa_ad": "Kiralamalar",
+      "senaryolar": [
+        {
+          "kod": "k16_ilk_muhasebelestirme",
+          "ad": "Kullanım Hakkı + Kira Yükümlülüğü Kuruluşu",
+          "tur": "AJE",
+          "aciklama": "12 aydan uzun kiralamada kira ödemelerinin bugünkü değeri kira yükümlülüğü, aynı tutar (+başlangıç maliyetleri) kullanım hakkı varlığı olur — TFRS 16.22-26. Bu bacaklarda otomatik EV kurulmaz: TMS 12.22A değişikliği gereği eşit tutarlı brüt EVV+EVY WS-EV'de kalem bazında kurulur.",
+          "bacaklar": [
+            {
+              "hesap": "Kullanım Hakkı Varlığı",
+              "yon": "B"
+            },
+            {
+              "hesap": "Kira Yükümlülüğü",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V08",
+            "V42"
+          ]
+        },
+        {
+          "kod": "k16_khv_amortismani",
+          "ad": "Kullanım Hakkı Varlığı Amortismanı",
+          "tur": "AJE",
+          "aciklama": "KHV, kira süresi ile faydalı ömrün kısası boyunca doğrusal itfa edilir — TFRS 16.31-33. VUK'ta böyle bir gider yok → EVV.",
+          "bacaklar": [
+            {
+              "hesap": "770.93",
+              "yon": "B"
+            },
+            {
+              "hesap": "Kullanım Hakkı Varlığı (Birikmiş Amort.)",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": []
+        },
+        {
+          "kod": "k16_kira_faizi",
+          "ad": "Kira Yükümlülüğü Faiz Gideri",
+          "tur": "AJE",
+          "aciklama": "Kira yükümlülüğü üzerinden dönem faizi (alternatif borçlanma oranıyla) — TFRS 16.36-38. VUK'ta karşılığı yok → EVV.",
+          "bacaklar": [
+            {
+              "hesap": "660.93",
+              "yon": "B"
+            },
+            {
+              "hesap": "Kira Yükümlülüğü",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": []
+        },
+        {
+          "kod": "k16_kira_gideri_iptali",
+          "ad": "Defterdeki Kira Gideri İptali + Yükümlülük Ödemesi",
+          "tur": "AJE",
+          "aciklama": "Deftere VUK gereği yazılmış dönemsel kira gideri iptal edilir; ödeme kira yükümlülüğünün anapara kısmını azaltır — TFRS 16.36(b). Gider iptali kârı artırır → EVY yönlü fark (KHV amortismanı + faizle birlikte netleşir).",
+          "bacaklar": [
+            {
+              "hesap": "Kira Yükümlülüğü",
+              "yon": "B"
+            },
+            {
+              "hesap": "770.01",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": []
+        }
+      ]
+    },
+    {
+      "id": "WS-REESKONT",
+      "standart": "TFRS 9",
+      "tur": "AJE",
+      "ad": "Reeskont / İtfa Edilmiş Maliyet",
+      "anlatim": "Vadeli ticari alacak/borçlar etkin faizle bugünkü değere indirgenir (VUK'ta ihtiyari ve iç iskonto). Önceki dönem reeskontu devir sonrası TERS çevrilip yeniden hesaplanır — her dönem tam yeniden ölçüm.",
+      "dayanak_onerisi": "hesaplama",
+      "hesaplar": [
+        "12",
+        "22",
+        "32",
+        "42"
+      ],
+      "sira": 7,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TERS_CEVIR",
+      "parametreler": [
+        {
+          "anahtar": "reeskont_orani",
+          "ad": "Yıllık iskonto oranı (%)",
+          "tip": "yuzde",
+          "varsayilan": "39,75",
+          "aciklama": "TCMB avans faizi (RG Tem 2026) — ufrs-parametreleri.json"
+        },
+        {
+          "anahtar": "vade_gun",
+          "ad": "Ortalama kalan vade (gün)",
+          "tip": "tamsayi",
+          "varsayilan": "60",
+          "aciklama": "Senette senet vadesi; açık hesapta ortalama tahsilat/ödeme süresi"
+        },
+        {
+          "anahtar": "esik_tutar",
+          "ad": "Önemlilik eşiği (TL)",
+          "tip": "tutar",
+          "varsayilan": "10.000",
+          "aciklama": "Altındaki alt hesap bakiyeleri hesaplanmaz"
+        }
+      ],
+      "hesapla": true,
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "657.90",
+            "ad": "Reeskont Faiz Gideri (TFRS)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "322.90",
+            "ad": "Borç Reeskontu (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "422.90",
+            "ad": "Borç Reeskontu UV (-)",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "122.90",
+            "ad": "Alacak Reeskontu (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "222.90",
+            "ad": "Alacak Reeskontu UV (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "647.90",
+            "ad": "Reeskont Faiz Geliri (TFRS)",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "itfa_etkin_faiz",
+        "ic_iskonto"
+      ],
+      "kisa_ad": "Reeskont",
+      "senaryolar": [
+        {
+          "kod": "alacak_reeskontu",
+          "ad": "Ticari Alacak Reeskontu (itfa edilmiş maliyet)",
+          "tur": "AJE",
+          "aciklama": "Vadeli ticari alacak etkin faizle bugünkü değere indirgenir — TFRS 9.4.1.2 + 9.5.4.1; VUK'ta ihtiyari ve iç iskonto olduğundan fark doğar. @hedef = reeskont karşılık hesabı (KV 122 / UV 222). Devirde TERS_CEVIR: her dönem tam yeniden ölçüm.",
+          "bacaklar": [
+            {
+              "hesap": "657.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "122",
+            "222",
+            "137",
+            "237"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V42"
+          ]
+        },
+        {
+          "kod": "borc_reeskontu",
+          "ad": "Ticari Borç Reeskontu (itfa edilmiş maliyet)",
+          "tur": "AJE",
+          "aciklama": "Vadeli ticari borç etkin faizle bugünkü değere indirgenir → reeskont geliri — TFRS 9.5.4.1. @hedef = borç reeskont hesabı (KV 322 / UV 422). Vergiye tabi geçici fark → EVY.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "647.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "322",
+            "422",
+            "337",
+            "437"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V42"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-ECL",
+      "standart": "TFRS 9",
+      "tur": "AJE",
+      "ad": "Beklenen Kredi Zararı (Karşılık Matrisi)",
+      "anlatim": "VUK 323 dava/icra şartlı gerçekleşmiş zarar; TFRS 9 ileriye dönük beklenen zarar. Yaşlandırma kovaları × tarihsel temerrüt oranı + ileriye dönük düzeltme; VUK 129 ile fark kayıtlanır.",
+      "dayanak_onerisi": "hesaplama",
+      "hesaplar": [
+        "120",
+        "121",
+        "128",
+        "129"
+      ],
+      "sira": 8,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TERS_CEVIR",
+      "parametreler": [
+        {
+          "anahtar": "kova_dagilimi",
+          "ad": "Kova dağılımı % (0-30/31-90/91-180/181-360/360+)",
+          "tip": "metin",
+          "varsayilan": "70 / 15 / 8 / 5 / 2",
+          "aciklama": "Brüt alacağın yaş kovalarına dağılımı — Σ %100; v1'de cari ekstre örneklemesinden"
+        },
+        {
+          "anahtar": "temerrut_oranlari",
+          "ad": "Kova temerrüt oranları %",
+          "tip": "metin",
+          "varsayilan": "0,5 / 2 / 10 / 30 / 60",
+          "aciklama": "Tarihsel zarar oranları — kalibrasyon kaynağı denetçi notuna"
+        },
+        {
+          "anahtar": "ileriye_donuk_carpan",
+          "ad": "İleriye dönük çarpan (%)",
+          "tip": "yuzde",
+          "varsayilan": "100",
+          "aciklama": "Makro düzeltme (100=1,00; kötüleşme beklentisinde 110-130)"
+        },
+        {
+          "anahtar": "sahis_bazli_128",
+          "ad": "128 şüpheliye %100 karşılık",
+          "tip": "secim",
+          "varsayilan": "evet",
+          "aciklama": "129'un kapsamadığı 128 kısmı ECL'e eklenir"
+        }
+      ],
+      "hesapla": true,
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "654.90",
+            "ad": "Beklenen Kredi Zararı Gideri",
+            "tur": "AJE"
+          },
+          {
+            "kod": "129.90",
+            "ad": "TFRS ECL Karşılığı (-)",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "129.90",
+            "ad": "TFRS ECL Karşılığı (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "644.90",
+            "ad": "Konusu Kalmayan ECL Karşılığı",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "ecl_matris",
+        "ecl_bireysel"
+      ],
+      "kisa_ad": "Beklenen Kredi Zararı",
+      "senaryolar": [
+        {
+          "kod": "ecl_artis",
+          "ad": "Beklenen Kredi Zararı Karşılığı (K/Z)",
+          "tur": "AJE",
+          "aciklama": "TFRS 9.5.5 basitleştirilmiş yaklaşım: karşılık matrisi (yaşlandırma × temerrüt oranı × ileriye dönük düzeltme); VUK 129 farkı 129.90'a. Karşılık hesabı sabittir; konu alacak portföyü (120/121/128) hesaplama kağıdında. VUK'ta indirilemeyen kısım → EVV.",
+          "bacaklar": [
+            {
+              "hesap": "654.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "129.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V42"
+          ]
+        },
+        {
+          "kod": "ecl_iptal",
+          "ad": "ECL Karşılığı İptali / Azaltımı",
+          "tur": "AJE",
+          "aciklama": "Portföy kalitesi düzeldi veya kovalar boşaldıysa TFRS ECL karşılığı azaltılır — TFRS 9.5.5.8 (her raporlama tarihinde yeniden ölçüm). Önceki EVV kapanır.",
+          "bacaklar": [
+            {
+              "hesap": "129.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "644.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": []
+        }
+      ]
+    },
+    {
+      "id": "WS-NRV",
+      "standart": "TMS 2",
+      "tur": "AJE",
+      "ad": "Stok — Net Gerçekleşebilir Değer",
+      "anlatim": "NRV = tahmini satış fiyatı − tamamlama/satış maliyeti. NRV < maliyet ise karşılık (654/158). Vade farkının maliyetten ayrıştırılması da bu çalışmada. Dayanak: fiyat listesi / dönem sonrası satışlar.",
+      "dayanak_onerisi": "piyasa",
+      "hesaplar": [
+        "15"
+      ],
+      "sira": 9,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TERS_CEVIR",
+      "parametreler": [
+        {
+          "anahtar": "nrv_orani",
+          "ad": "NRV / maliyet oranı (%)",
+          "tip": "yuzde",
+          "varsayilan": "100",
+          "aciklama": "100 = düşüklük yok; yavaş dönen grupta <100 (fiyat listesi / dönem sonrası satış)"
+        },
+        {
+          "anahtar": "tamamlama_satis_maliyeti",
+          "ad": "Tamamlama+satış maliyeti (%)",
+          "tip": "yuzde",
+          "varsayilan": "5",
+          "aciklama": "TMS 2.6 — satış fiyatından düşülür"
+        }
+      ],
+      "hesapla": true,
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "654.91",
+            "ad": "Stok Değer Düşüklüğü Gideri",
+            "tur": "AJE"
+          },
+          {
+            "kod": "158.90",
+            "ad": "Stok Değer Düşüklüğü Karşılığı (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "780.91",
+            "ad": "Stok Vade Farkı Finansman Gideri",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "158.90",
+            "ad": "Stok Değer Düşüklüğü Karşılığı (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "644.91",
+            "ad": "Konusu Kalmayan Stok Karşılığı",
+            "tur": "AJE"
+          },
+          {
+            "kod": "153.01",
+            "ad": "Ticari Mallar",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "nrv",
+        "vade_ayristirma",
+        "maliyet"
+      ],
+      "kisa_ad": "Stok Değer Düşüklüğü",
+      "senaryolar": [
+        {
+          "kod": "nrv_karsilik",
+          "ad": "NRV Karşılığı (maliyet > NGD)",
+          "tur": "AJE",
+          "aciklama": "Kalem bazında NGD = tahmini satış − tamamlanma − satış giderleri; maliyet üstündeyse karşılık — TMS 2.9 + 2.28 + 2.6. Karşılık hesabı sabit (158.90); konu stok grubu denetçi notunda. VUK 278 takdir komisyonu yoksa KKEG → EVV.",
+          "bacaklar": [
+            {
+              "hesap": "654.91",
+              "yon": "B"
+            },
+            {
+              "hesap": "158.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V42"
+          ]
+        },
+        {
+          "kod": "nrv_iptal",
+          "ad": "NRV Karşılığı İptali",
+          "tur": "AJE",
+          "aciklama": "NGD toparlandıysa karşılık iptali; iptal önceki karşılık tutarını AŞAMAZ — TMS 2.33 (hard-stop). Önceki EVV kapanır.",
+          "bacaklar": [
+            {
+              "hesap": "158.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "644.91",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V24"
+          ]
+        },
+        {
+          "kod": "vade_farki_ayristirma",
+          "ad": "Vade Farkının Stoktan Ayrıştırılması",
+          "tur": "AJE",
+          "aciklama": "Uzun vadeli alımda peşin fiyat üstü kısım finansman gideridir, stok maliyetinden çıkarılır — TMS 2.18. EV K/Z kanalında EVV.",
+          "bacaklar": [
+            {
+              "hesap": "780.91",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "150",
+            "151",
+            "152",
+            "153",
+            "157"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": []
+        },
+        {
+          "kod": "maliyet_disi_unsur_ayiklama",
+          "ad": "Maliyet Dışı Unsur Ayıklama",
+          "tur": "AJE",
+          "aciklama": "Anormal fire, (üretim sürecinin gerektirmediği) depolama, genel yönetim payı ve satış giderleri stok maliyetine giremez; ilgili dönem giderine alınır — TMS 2.16 (hard-stop). EV K/Z kanalında EVV.",
+          "bacaklar": [
+            {
+              "hesap": "632.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "150",
+            "151",
+            "152",
+            "153",
+            "157"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V25"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-HASILAT",
+      "standart": "TFRS 15",
+      "tur": "AJE",
+      "ad": "Hasılat — Zamanlama ve Ayrıştırma",
+      "anlatim": "Vadeli satışta hasılat = nakit satış fiyatı; vade farkı 642 Faiz Geliri'ne dönem geçtikçe alınır. Cut-off: kontrol devri gerçekleşmemiş faturalı satış iptali → sözleşme yükümlülüğü (340). Cut-off düzeltmeleri TAŞINMAZ (kendini tüketir).",
+      "dayanak_onerisi": "sozlesme",
+      "hesaplar": [
+        "600",
+        "601",
+        "602",
+        "340",
+        "380",
+        "120"
+      ],
+      "sira": 10,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TASIMA_YOK",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "600.90",
+            "ad": "Yurtiçi Satışlar (iptal)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "Sözleşme Yükümlülüğü",
+            "ad": "TFRS kalemi",
+            "tur": "RJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "642.90",
+            "ad": "Faiz Geliri (vade farkı)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "122.91",
+            "ad": "Alacak Vade Farkı (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "340.90",
+            "ad": "Alınan Sipariş Avansları",
+            "tur": "RJE"
+          },
+          {
+            "kod": "Sözleşme Varlığı",
+            "ad": "TFRS kalemi",
+            "tur": "RJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "vade_ayristirma",
+        "tamamlanma_yuzdesi"
+      ],
+      "kisa_ad": "Hasılat",
+      "senaryolar": [
+        {
+          "kod": "hasilat_vade_farki_ayristirma",
+          "ad": "Vade Farkının Hasılattan Ayrıştırılması",
+          "tur": "AJE",
+          "aciklama": "Önemli finansman bileşeni varsa hasılat = nakit satış fiyatı; vade farkı hasılattan çıkarılır — TFRS 15.60-65. VUK'ta hasılat brüt → indirilebilir geçici fark (EVV).",
+          "bacaklar": [
+            {
+              "hesap": "600.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "122.91",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V42"
+          ]
+        },
+        {
+          "kod": "hasilat_vade_farki_faiz_geliri",
+          "ad": "Vade Farkının Dönem Faiz Gelirine Alınması",
+          "tur": "AJE",
+          "aciklama": "Ayrıştırılan vade farkı dönem geçtikçe etkin faizle 642 Faiz Geliri'ne alınır — TFRS 15.65. Önceki EVV kapanır.",
+          "bacaklar": [
+            {
+              "hesap": "122.91",
+              "yon": "B"
+            },
+            {
+              "hesap": "642.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": []
+        },
+        {
+          "kod": "hasilat_cutoff_iptali",
+          "ad": "Cut-off: Kontrol Devri Olmayan Satış İptali",
+          "tur": "AJE",
+          "aciklama": "Faturalanmış ancak kontrol devri gerçekleşmemiş satış iptal edilip sözleşme yükümlülüğüne alınır — TFRS 15.31 + 15.38. Devirde TASIMA_YOK: kayıt kendini tüketir. EVV (VUK'ta hasılat sayıldı).",
+          "bacaklar": [
+            {
+              "hesap": "600.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "340.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V42"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-KUR",
+      "standart": "TMS 21",
+      "tur": "AJE",
+      "ad": "Kur Çevrimi Farkları",
+      "anlatim": "Parasal kalemler kapanış kuru (VUK'la genelde uyumlu — TCMB alış); asıl fark: stok/MDV maliyetine aktifleştirilmiş kur farklarının iptali (VUK seçimlik izin verir, TMS 21'de gider). Her dönem yeniden ölçülür.",
+      "dayanak_onerisi": "piyasa",
+      "hesaplar": [
+        "646",
+        "656",
+        "120",
+        "320",
+        "15",
+        "25"
+      ],
+      "sira": 11,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TERS_CEVIR",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "656.90",
+            "ad": "Kambiyo Zararı (TFRS)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "570.90",
+            "ad": "Geçmiş Yıl TFRS Düzeltmeleri",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "153.01",
+            "ad": "Ticari Mallar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "253",
+            "ad": "Tesis Makine ve Cihazlar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "646.90",
+            "ad": "Kambiyo Kârı (TFRS)",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "kapanis_kuru"
+      ],
+      "kisa_ad": "Kur Farkları",
+      "senaryolar": [
+        {
+          "kod": "parasal_kapanis_kuru_kari",
+          "ad": "Parasal Kalem Kapanış Kuru (kâr)",
+          "tur": "AJE",
+          "aciklama": "Döviz cinsi parasal kalem kapanış kuruna çekilir, olumlu fark 646'ya — TMS 21.23(a) + 21.28. TR'de kur farkı vergisel olarak da tanındığından genelde EV yok.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "646.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "100",
+            "102",
+            "120",
+            "121",
+            "300",
+            "320",
+            "400",
+            "420"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": []
+        },
+        {
+          "kod": "parasal_kapanis_kuru_zarari",
+          "ad": "Parasal Kalem Kapanış Kuru (zarar)",
+          "tur": "AJE",
+          "aciklama": "Döviz cinsi parasal kalem kapanış kuruna çekilir, olumsuz fark 656'ya — TMS 21.23(a) + 21.28. Genelde EV yok (kur farkı vergisel olarak da tanınır); değerleme yöntemi farkı varsa WS-EV'de değerlendirilir.",
+          "bacaklar": [
+            {
+              "hesap": "656.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "100",
+            "102",
+            "120",
+            "121",
+            "300",
+            "320",
+            "400",
+            "420"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": []
+        },
+        {
+          "kod": "parasal_olmayan_kur_iptali",
+          "ad": "Parasal Olmayan Kaleme Yüklenen Kur Farkı İptali",
+          "tur": "AJE",
+          "aciklama": "Stok/MDV/avans tarihi kurla kalır; kapanış kuruyla çevrilmiş veya maliyete aktifleştirilmiş kur farkı iptal edilip gidere alınır — TMS 21.23(b) (hard-stop). EV K/Z kanalında EVV.",
+          "bacaklar": [
+            {
+              "hesap": "656.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "150",
+            "151",
+            "152",
+            "153",
+            "159",
+            "250",
+            "252",
+            "253",
+            "258",
+            "259"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": [
+            "V19"
+          ]
+        },
+        {
+          "kod": "gud_kalem_kur_farki_oci",
+          "ad": "GUD'la Ölçülen Kalemin Kur Farkı (OCI)",
+          "tur": "AJE",
+          "aciklama": "GUD kazancı OCI'de izlenen parasal olmayan kalemin kur etkisi de OCI'ye — TMS 21.30 (kanal izleme zorunlu). GUD kazancı K/Z'deyse kur etkisi de K/Z'ye (o durumda parasal_olmayan senaryolar kullanılmaz, GUD çalışması kullanılır).",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "522.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "ev_kanal": "oci_522",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V20",
+            "V12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-BORCLANMA",
+      "standart": "TMS 23",
+      "tur": "AJE",
+      "ad": "Borçlanma Maliyetleri",
+      "anlatim": "Yalnız ÖZELLİKLİ varlık maliyetine faiz aktifleştirilir; VUK'ta ilk yıl kredi faizinin MDV maliyetine eklenmesi zorunlu → özellikli olmayan varlıklarda aktifleştirilmiş faiz iptali + amortisman düzeltmesi. Girdi: 780 faiz gideri + kredi sözleşmeleri.",
+      "dayanak_onerisi": "sozlesme",
+      "hesaplar": [
+        "780",
+        "300",
+        "400",
+        "25",
+        "66"
+      ],
+      "sira": 12,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TASI_BIRAK",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "660.90",
+            "ad": "Kısa Vadeli Borçlanma Gideri (TFRS)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "570.90",
+            "ad": "Geçmiş Yıl TFRS Düzeltmeleri",
+            "tur": "AJE"
+          },
+          {
+            "kod": "257",
+            "ad": "Birikmiş Amortismanlar (-)",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "253",
+            "ad": "Tesis Makine ve Cihazlar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "252",
+            "ad": "Binalar",
+            "tur": "AJE"
+          },
+          {
+            "kod": "770.90",
+            "ad": "Amortisman Gideri (TFRS)",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "maliyet"
+      ],
+      "kisa_ad": "Borçlanma Maliyetleri",
+      "senaryolar": [
+        {
+          "kod": "ozellikli_varlik_faiz_aktiflestirme",
+          "ad": "Özellikli Varlığa Faiz Aktifleştirme",
+          "tur": "AJE",
+          "aciklama": "Özellikli varlığa doğrudan atfedilen borçlanma maliyeti aktifleştirilir (zorunlu), defterdeki faiz gideri iptal edilir — TMS 23.8; özel kredi = fiilen katlanılan − geçici plasman geliri (23.12); genel borçlanmada tutar = ortalama harcama × oran, dönem toplam borçlanma maliyetini aşamaz (23.14). Kur farkının yalnız faiz-düzeltmesi kısmı aktifleşir (23.6(e)).",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "660.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "258",
+            "151",
+            "152",
+            "252",
+            "253"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V21",
+            "V22",
+            "V23",
+            "V42"
+          ]
+        },
+        {
+          "kod": "vuk_aktif_faiz_iptali",
+          "ad": "VUK'ta Aktifleştirilmiş Faizin Giderleştirilmesi",
+          "tur": "AJE",
+          "aciklama": "Özellikli olmayan varlığa veya tamamlanma (amaçlanan kullanıma hazır olma) sonrasına ait, VUK gereği aktifleştirilmiş faiz TFRS'de giderdir — TMS 23.22 (aktifleştirme hazır olunca durur). EV K/Z kanalında EVV. Amortisman tabanı değişir → WS-AMORT tetiklenir.",
+          "bacaklar": [
+            {
+              "hesap": "660.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "252",
+            "253",
+            "254",
+            "255",
+            "258"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "girdi_bakiye",
+          "kurallar": [
+            "V22"
+          ]
+        },
+        {
+          "kod": "acilis_faiz_iptali",
+          "ad": "Açılış (Geçmiş Yıl) Aktifleştirilmiş Faiz İptali",
+          "tur": "AJE",
+          "aciklama": "Önceki dönemlerde VUK gereği aktifleştirilmiş faizin kümülatif iptali 570/580'e. EV bacağı burada kurulmaz; doğrudan özkaynak kanalı (TMS 12.61A(b)) WS-EV'de elle işlenir.",
+          "bacaklar": [
+            {
+              "hesap": "570.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "252",
+            "253",
+            "254",
+            "255",
+            "258"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V22",
+            "V31"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-DEGERDUS",
+      "standart": "TMS 36",
+      "tur": "AJE",
+      "ad": "Varlıklarda Değer Düşüklüğü",
+      "anlatim": "Nakit yaratan birim bazında geri kazanılabilir tutar = max(GUD − satış maliyeti; kullanım değeri DCF). Net defter değeri üstündeyse değer düşüklüğü zararı. VUK'ta karşılığı yok → tamamı fark. Diğer varlık çalışmalarından SONRA koşar.",
+      "dayanak_onerisi": "ekspertiz",
+      "hesaplar": [
+        "25",
+        "26",
+        "257",
+        "268"
+      ],
+      "sira": 13,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TASI_BIRAK",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "659.90",
+            "ad": "Değer Düşüklüğü Zararı (TMS 36)",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "257.90",
+            "ad": "MDV Değer Düşüklüğü Karşılığı (-)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "268.90",
+            "ad": "MODV Değer Düşüklüğü Karşılığı (-)",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "kullanim_degeri",
+        "gud_ekspertiz",
+        "gud_piyasa"
+      ],
+      "kisa_ad": "Değer Düşüklüğü",
+      "senaryolar": [
+        {
+          "kod": "deger_dusuklugu",
+          "ad": "Değer Düşüklüğü — normal (yeniden değerlenmemiş) varlık",
+          "tur": "AJE",
+          "aciklama": "Geri kazanılabilir tutar < defter değeri → zarar K/Z'ye (659), birikmiş değer düşüklüğü karşılığına — TMS 36.59-61. İskonto oranı vergi öncesi (36.55); sonraki amortisman yeni defter değerinden (36.63 → WS-AMORT).",
+          "bacaklar": [
+            {
+              "hesap": "659.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "257",
+            "268"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V39",
+            "V40",
+            "V42"
+          ]
+        },
+        {
+          "kod": "deger_dusuklugu_onceki_bakiyeli",
+          "ad": "Değer Düşüklüğü — yeniden değerlenmiş varlık (karma)",
+          "tur": "AJE",
+          "aciklama": "Yeniden değerlenmiş varlıkta zarar önce o varlığın 522 bakiyesinden düşülür, aşan kısım K/Z'ye — TMS 36.60-61, TMS 16.40 simetrisi. Motor 522 geçmişine bakar; OCI bacağı 522 bakiyesini aşamaz. EV bacak bazında bölünür (V12).",
+          "bacaklar": [
+            {
+              "hesap": "522.90",
+              "yon": "B",
+              "pay": "ikinci",
+              "kanal": "oci_522"
+            },
+            {
+              "hesap": "659.90",
+              "yon": "B",
+              "pay": "kalan",
+              "kanal": "kz"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A",
+              "pay": "ana"
+            }
+          ],
+          "hedef_onekleri": [
+            "257",
+            "268"
+          ],
+          "ev_kanal": "oci_522",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V02",
+            "V05",
+            "V12",
+            "V39",
+            "V40",
+            "V42"
+          ],
+          "cift_tutar": true,
+          "ikinci_tutar_ad": "Varlığın 522 fonu bakiyesi (öncelikle fondan düşülür)"
+        },
+        {
+          "kod": "deger_dusuklugu_iptali",
+          "ad": "Değer Düşüklüğü İptali — normal varlık",
+          "tur": "AJE",
+          "aciklama": "Göstergeler ortadan kalktıysa iptal K/Z'ye (649) — TMS 36.114. TAVAN: zarar hiç olmasaydı oluşacak (amortisman düşülmüş) defter değeri aşılamaz (36.117). Sonraki amortisman yeniden hesaplanır (36.121).",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "649.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "257",
+            "268"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V05",
+            "V40"
+          ]
+        },
+        {
+          "kod": "deger_dusuklugu_iptali_onceki_bakiyeli",
+          "ad": "Değer Düşüklüğü İptali — yeniden değerlenmiş varlık (karma)",
+          "tur": "AJE",
+          "aciklama": "İptalin, daha önce K/Z'ye giden zararı geri çeviren kısmı gelir (649), kalanı 522'ye — TMS 36.119-120 (yeniden değerleme artışı gibi). Motor varlığın 659/522 geçmişine bakar. EV bacak bazında bölünür (V12).",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B",
+              "pay": "ana"
+            },
+            {
+              "hesap": "649.90",
+              "yon": "A",
+              "pay": "ikinci",
+              "kanal": "kz"
+            },
+            {
+              "hesap": "522.90",
+              "yon": "A",
+              "pay": "kalan",
+              "kanal": "oci_522"
+            }
+          ],
+          "hedef_onekleri": [
+            "257",
+            "268"
+          ],
+          "ev_kanal": "oci_522",
+          "ev_yon": "EVY",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V02",
+            "V05",
+            "V12",
+            "V40"
+          ],
+          "cift_tutar": true,
+          "ikinci_tutar_ad": "Önceki dönemde K/Z'ye yazılan tutar (649'a gidecek kısım)"
+        },
+        {
+          "kod": "serefiye_deger_dusuklugu",
+          "ad": "Şerefiye Değer Düşüklüğü",
+          "tur": "AJE",
+          "aciklama": "NYB zararı önce şerefiyeye dağıtılır (36.104); şerefiye zararı hiçbir dönemde İPTAL EDİLEMEZ (36.124). EV bacağı KURULMAZ — TMS 12.15(a) ilk muhasebeleştirme istisnası.",
+          "bacaklar": [
+            {
+              "hesap": "659.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "261",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V06",
+            "V07",
+            "V39"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-KARSILIK",
+      "standart": "TMS 37",
+      "tur": "AJE",
+      "ad": "Karşılıklar / Dava Riskleri",
+      "anlatim": "Muhtemel + güvenilir ölçülebilir yükümlülükler karşılık; uzun vadede iskonto. VUK'ta KKEG. Dayanak: hukukçu teyit mektubu + dava listesi.",
+      "dayanak_onerisi": "teyit",
+      "hesaplar": [
+        "37",
+        "47"
+      ],
+      "sira": 14,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TASI_BIRAK",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "654.92",
+            "ad": "Karşılık Gideri (TMS 37)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "770.92",
+            "ad": "Dava Gideri Karşılığı",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "379.90",
+            "ad": "Dava Karşılığı — KV",
+            "tur": "AJE"
+          },
+          {
+            "kod": "479.90",
+            "ad": "Dava Karşılığı — UV",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "en_iyi_tahmin"
+      ],
+      "kisa_ad": "Karşılıklar",
+      "senaryolar": [
+        {
+          "kod": "karsilik_ayrilmasi",
+          "ad": "Karşılık Ayrılması (dava, GSM, iade, çevre)",
+          "tur": "AJE",
+          "aciklama": "TMS 37.14 üç koşul: mevcut yükümlülük + muhtemel çıkış + güvenilir tahmin; en iyi tahmin (37.36). VUK'ta KKEG → EVV. Kıdem tazminatı burada değil, TMS 19 çalışmasında (37.5). Muhtemel değilse kayıt yok, dipnot (37.27-28).",
+          "bacaklar": [
+            {
+              "hesap": "654.92",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "379",
+            "479"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V14",
+            "V16",
+            "V18",
+            "V42"
+          ]
+        },
+        {
+          "kod": "iskonto_cozulmesi",
+          "ad": "İskonto Etkisinin Dönemsel Çözülmesi",
+          "tur": "AJE",
+          "aciklama": "Uzun vadeli karşılık bugünkü değerle ölçülür; zamanın geçişiyle çözülme finansman gideri — TMS 37.45; oran vergi ÖNCESİ (37.47). EVV artar.",
+          "bacaklar": [
+            {
+              "hesap": "661.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "479.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V13"
+          ]
+        },
+        {
+          "kod": "karsilik_iptali",
+          "ad": "Karşılık İptali / Azaltımı",
+          "tur": "AJE",
+          "aciklama": "Her dönem gözden geçirme; yükümlülük kalktıysa iptal zorunlu — TMS 37.59. Önceki EVV kapanır.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "644.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "379",
+            "479"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": []
+        },
+        {
+          "kod": "dezavantajli_sozlesme",
+          "ad": "Ekonomik Açıdan Dezavantajlı Sözleşme",
+          "tur": "AJE",
+          "aciklama": "Kaçınılamaz maliyet > beklenen fayda → karşılık — TMS 37.66. Önce sözleşmeye tahsisli varlıklarda TMS 36 değer düşüklüğü testi (37.69 → WS-DEGERDUS). Gelecek faaliyet zararına karşılık YASAK (37.63).",
+          "bacaklar": [
+            {
+              "hesap": "654.92",
+              "yon": "B"
+            },
+            {
+              "hesap": "379.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V14",
+            "V42"
+          ]
+        },
+        {
+          "kod": "rucu_varligi",
+          "ad": "Tazminat / Rücu Varlığı",
+          "tur": "AJE",
+          "aciklama": "Tazminatın alınması kesine yakınsa AYRI VARLIK olarak kaydedilir, karşılıktan netleştirilmez; tavan = karşılık tutarı — TMS 37.53. EV etkisi ayrıca değerlendirilir (bu senaryoda otomatik EV bacağı kurulmaz).",
+          "bacaklar": [
+            {
+              "hesap": "136",
+              "yon": "B"
+            },
+            {
+              "hesap": "649.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V15",
+            "V42"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-URETIM",
+      "standart": "TMS 2",
+      "tur": "AJE",
+      "ad": "Üretim Maliyeti — 7/A Akış Kontrolü",
+      "anlatim": "Üretim işletmesinde 710/720/730 → 151 → 152 maliyet akışının TMS 2 uyumu: sabit genel üretim giderinin normal kapasiteye göre dağıtımı (boş kapasite gideri stoklanamaz → 680'e), dönem sonu yarı mamul/mamul değerleme kontrolü.",
+      "dayanak_onerisi": "hesaplama",
+      "hesaplar": [
+        "150",
+        "151",
+        "152",
+        "71",
+        "72",
+        "73"
+      ],
+      "sira": 15,
+      "sektorler": [
+        "URT",
+        "GID"
+      ],
+      "devir": "YENIDEN_URET",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "680.90",
+            "ad": "Çalışmayan Kısım Gider ve Zararları",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "151",
+            "ad": "Yarı Mamuller — Üretim",
+            "tur": "AJE"
+          },
+          {
+            "kod": "152",
+            "ad": "Mamuller",
+            "tur": "AJE"
+          },
+          {
+            "kod": "730",
+            "ad": "Genel Üretim Giderleri",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "normal_kapasite",
+        "nrv"
+      ],
+      "kisa_ad": "Üretim Maliyeti",
+      "senaryolar": [
+        {
+          "kod": "bos_kapasite_gideri",
+          "ad": "Boş Kapasite Gideri (normal kapasite düzeltmesi)",
+          "tur": "AJE",
+          "aciklama": "Sabit GÜG normal kapasiteye göre dağıtılır; düşük kapasitede dağıtılmayan kısım stoklanamaz, 680'e gider yazılır — TMS 2.13. EV K/Z kanalında EVV.",
+          "bacaklar": [
+            {
+              "hesap": "680.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "151",
+            "152"
+          ],
+          "ev_kanal": "kz",
+          "ev_yon": "EVV",
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V26"
+          ]
+        },
+        {
+          "kod": "yedi_a_akis_duzeltme",
+          "ad": "7/A Akış Tutarlılığı (yansıtma düzeltmesi)",
+          "tur": "RJE",
+          "aciklama": "711/721/731 yansıtma tutarlılığı: 71x-73x → 151 → 152 akışındaki sınıflama hatası tutar kaydırmayla düzeltilir; K/Z toplamı değişmez. Sektör çekirdeği: üretimde 71x zorunlu. Serbest şablon — bacaklar denetçi seçimiyle şekillenir.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "731",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "150",
+            "151",
+            "152",
+            "620",
+            "710",
+            "711",
+            "720",
+            "721",
+            "730"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "elle",
+          "kurallar": []
+        }
+      ]
+    },
+    {
+      "id": "WS-YYIO",
+      "standart": "TFRS 15",
+      "tur": "AJE",
+      "ad": "Yıllara Yaygın İnşaat (Zamana Yayılı Edim)",
+      "anlatim": "İnşaat sözleşmelerinde VUK 17x/35x biriktirme sistemi ↔ TFRS 15 zamana yayılı hasılat (tamamlanma yüzdesi): maliyet+hakediş bakiyelerinden sözleşme varlığı/yükümlülüğü ve dönem hasılatı türetilir.",
+      "dayanak_onerisi": "sozlesme",
+      "hesaplar": [
+        "17",
+        "35",
+        "60"
+      ],
+      "sira": 16,
+      "sektorler": [
+        "INS"
+      ],
+      "devir": "TEKRARLA",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "Sözleşme Varlığı",
+            "ad": "TFRS kalemi",
+            "tur": "AJE"
+          },
+          {
+            "kod": "350",
+            "ad": "Yıllara Yaygın İnşaat Hakediş Bedelleri",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "600.90",
+            "ad": "Yurtiçi Satışlar (TFRS 15)",
+            "tur": "AJE"
+          },
+          {
+            "kod": "170",
+            "ad": "Yıllara Yaygın İnşaat ve Onarım Maliyetleri",
+            "tur": "AJE"
+          },
+          {
+            "kod": "Sözleşme Yükümlülüğü",
+            "ad": "TFRS kalemi",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "tamamlanma_yuzdesi"
+      ],
+      "kisa_ad": "Yıllara Yaygın İnşaat"
+    },
+    {
+      "id": "WS-EV",
+      "standart": "TMS 12",
+      "tur": "AJE",
+      "ad": "Ertelenmiş Vergi (Çatı Çalışma)",
+      "anlatim": "Tüm düzeltmelerin vergi etkisi: kalem bazında TFRS taşıma değeri − vergi değeri = geçici fark × oran. Diğer çalışmaların kayıtlarından derlenir (ileride otomatik); K/Z–OCI ayrımı zorunlu. Her dönem yeniden derlenir.",
+      "dayanak_onerisi": "hesaplama",
+      "hesaplar": [
+        "28",
+        "48",
+        "691"
+      ],
+      "sira": 17,
+      "cati": true,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TERS_CEVIR",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "283.90",
+            "ad": "Ertelenmiş Vergi Varlığı",
+            "tur": "AJE"
+          },
+          {
+            "kod": "691.90",
+            "ad": "Ertelenmiş Vergi Gideri",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "483.90",
+            "ad": "Ertelenmiş Vergi Yükümlülüğü",
+            "tur": "AJE"
+          },
+          {
+            "kod": "691.90",
+            "ad": "Ertelenmiş Vergi Geliri",
+            "tur": "AJE"
+          },
+          {
+            "kod": "549.90",
+            "ad": "OCI — Yeniden Ölçüm Kazanç/Kayıpları",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "bilanco_yukumluluk"
+      ],
+      "kisa_ad": "Ertelenmiş Vergi",
+      "senaryolar": [
+        {
+          "kod": "ev_oran_degisikligi_kz",
+          "ad": "Vergi Oranı Değişikliği — K/Z Kaynaklı EV",
+          "tur": "AJE",
+          "aciklama": "Yasalaşmış/kesine yakın yeni oranla K/Z kaynaklı 283/483 bakiyeleri yeniden ölçülür; karşı bacak 691 — TMS 12.47 + 12.60. Yön farkın işaretine göre ters de kurulabilir. Bu senaryo EV kaydının kendisidir; ikinci bir EV bacağı kurulmaz.",
+          "bacaklar": [
+            {
+              "hesap": "@hedef",
+              "yon": "B"
+            },
+            {
+              "hesap": "691.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "283",
+            "483"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V09",
+            "V11",
+            "V12",
+            "V41"
+          ]
+        },
+        {
+          "kod": "ev_oran_degisikligi_oci",
+          "ad": "Vergi Oranı Değişikliği — OCI Kaynaklı EV",
+          "tur": "AJE",
+          "aciklama": "OCI'den doğan EV'nin oran etkisi OCI'de düzeltilir (karşı bacak 522.90 veya 549.90) — TMS 12.60 + 12.63 + 12.61A. K/Z (691) kanalına yazılamaz.",
+          "bacaklar": [
+            {
+              "hesap": "522.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "@hedef",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [
+            "283",
+            "483"
+          ],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "motor",
+          "kurallar": [
+            "V09",
+            "V11",
+            "V12",
+            "V41"
+          ]
+        },
+        {
+          "kod": "ev_mali_zarar_evv",
+          "ad": "Mali Zarar / Vergi Avantajı Devri → EVV",
+          "tur": "AJE",
+          "aciklama": "Devreden mali zarar ve vergi avantajları için EVV — TMS 12.34-36. Kullanılabilirlik kanıtı (kâr projeksiyonu) ZORUNLU; TR'de 5 yıllık devir süresi değerlendirilir. EV iskonto edilmez (12.53).",
+          "bacaklar": [
+            {
+              "hesap": "283.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "691.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V09",
+            "V10",
+            "V41",
+            "V42"
+          ]
+        },
+        {
+          "kod": "ev_evv_taninabilirlik_iptali",
+          "ad": "EVV Tanınabilirlik İptali (projeksiyon çöktü)",
+          "tur": "AJE",
+          "aciklama": "Gelecekte yeterli vergiye tabi kâr artık muhtemel değilse EVV azaltılır — TMS 12.56 (her dönem gözden geçirme). Karşı bacak kaynağın kanalına göre; K/Z kaynaklı kısım için 691.",
+          "bacaklar": [
+            {
+              "hesap": "691.90",
+              "yon": "B"
+            },
+            {
+              "hesap": "283.90",
+              "yon": "A"
+            }
+          ],
+          "hedef_onekleri": [],
+          "ev_kanal": "yok",
+          "ev_yon": null,
+          "tutar_kaynak": "elle",
+          "kurallar": [
+            "V10",
+            "V12",
+            "V41"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WS-ENFLASYON",
+      "standart": "TMS 29",
+      "tur": "AJE",
+      "ad": "Enflasyon Düzeltmesi (UYUYAN)",
+      "anlatim": "TMS 29 endekslemesi ŞU AN UYGULANMIYOR (kullanıcı kararı 2026-07). Koşullar oluşursa: VUK mük.298 kayıtları geri çevrilir, TÜFE ile yeniden endekslenir, net parasal pozisyon K/Z'ye. Katalogda hazır bekler.",
+      "dayanak_onerisi": "hesaplama",
+      "hesaplar": [
+        "*"
+      ],
+      "sira": 99,
+      "uyuyan": true,
+      "sektorler": [
+        "*"
+      ],
+      "devir": "TERS_CEVIR",
+      "kayit_hesaplari": {
+        "borc": [
+          {
+            "kod": "570.90",
+            "ad": "Geçmiş Yıl TFRS Düzeltmeleri",
+            "tur": "AJE"
+          }
+        ],
+        "alacak": [
+          {
+            "kod": "698.90",
+            "ad": "Net Parasal Pozisyon Kazanç/Kaybı",
+            "tur": "AJE"
+          }
+        ]
+      },
+      "degerleme_yontemleri": [
+        "maliyet"
+      ],
+      "kisa_ad": "Enflasyon"
+    }
+  ],
+  "degerleme_yontemleri": [
+    {
+      "kod": "gud_ekspertiz",
+      "ad": "Gerçeğe uygun değer — ekspertiz raporu",
+      "aciklama": "SPK lisanslı değerleme kuruluşu raporundaki değer esas alınır (TFRS 13 seviye 2/3)"
+    },
+    {
+      "kod": "gud_piyasa",
+      "ad": "Gerçeğe uygun değer — piyasa/emsal",
+      "aciklama": "Gözlemlenebilir piyasa fiyatı veya emsal işlem (TFRS 13 seviye 1/2)"
+    },
+    {
+      "kod": "maliyet",
+      "ad": "Maliyet modeli",
+      "aciklama": "Maliyet − birikmiş amortisman − değer düşüklüğü"
+    },
+    {
+      "kod": "itfa_etkin_faiz",
+      "ad": "İtfa edilmiş maliyet — etkin faiz",
+      "aciklama": "Etkin faiz yöntemiyle bugünkü değer (TFRS 9)"
+    },
+    {
+      "kod": "ic_iskonto",
+      "ad": "İç iskonto (TCMB avans oranı)",
+      "aciklama": "Tek vadeli iç iskonto formülü; kısa vadede etkin faize yakınsar"
+    },
+    {
+      "kod": "ecl_matris",
+      "ad": "Karşılık matrisi (basitleştirilmiş ECL)",
+      "aciklama": "Yaşlandırma kovaları × tarihsel temerrüt oranı × ileriye dönük düzeltme (TFRS 9)"
+    },
+    {
+      "kod": "ecl_bireysel",
+      "ad": "Bireysel değerlendirme (ECL)",
+      "aciklama": "Müşteri bazında beklenen zarar tahmini"
+    },
+    {
+      "kod": "nrv",
+      "ad": "Net gerçekleşebilir değer",
+      "aciklama": "Tahmini satış fiyatı − tamamlama − satış maliyeti (TMS 2.6)"
+    },
+    {
+      "kod": "aktueryal",
+      "ad": "Öngörülen birim kredi (aktüeryal)",
+      "aciklama": "TMS 19 tam aktüeryal yöntem — kişi bazlı yaş/kıdem/emeklilik"
+    },
+    {
+      "kod": "aktueryal_basit",
+      "ad": "Basitleştirilmiş portföy modeli",
+      "aciklama": "Ortalama kıdem/ücret + iskonto çarpanı; küçük-orta portföyde savunulabilir basitleştirme (OCI ayrımı yok)"
+    },
+    {
+      "kod": "kullanim_degeri",
+      "ad": "Kullanım değeri (DCF)",
+      "aciklama": "Nakit akış projeksiyonu × iskonto oranı (TMS 36)"
+    },
+    {
+      "kod": "bugunku_deger",
+      "ad": "Bugünkü değer (kira ödemeleri)",
+      "aciklama": "Kira ödemelerinin alternatif borçlanma faiziyle iskontosu (TFRS 16)"
+    },
+    {
+      "kod": "tamamlanma_yuzdesi",
+      "ad": "Tamamlanma yüzdesi",
+      "aciklama": "Katlanılan maliyet / toplam tahmini maliyet (TFRS 15 zamana yayılı edim)"
+    },
+    {
+      "kod": "normal_kapasite",
+      "ad": "Normal kapasite dağıtımı",
+      "aciklama": "Sabit GÜG normal kapasiteye dağıtılır; boş kapasite gideri stoklanamaz (TMS 2.13)"
+    },
+    {
+      "kod": "kapanis_kuru",
+      "ad": "Kapanış kuru",
+      "aciklama": "Parasal kalemler dönem sonu TCMB kuru (TMS 21)"
+    },
+    {
+      "kod": "en_iyi_tahmin",
+      "ad": "En iyi tahmin (karşılık)",
+      "aciklama": "Yükümlülüğü kapatmak için gereken en iyi tahmin; uzun vadede iskontolu (TMS 37)"
+    },
+    {
+      "kod": "bilanco_yukumluluk",
+      "ad": "Bilanço yükümlülük yöntemi",
+      "aciklama": "TFRS taşıma değeri − vergi değeri = geçici fark × oran (TMS 12)"
+    },
+    {
+      "kod": "vade_ayristirma",
+      "ad": "Vade farkı ayrıştırma",
+      "aciklama": "Peşin fiyat üstü kısım finansman geliri/gideri (TMS 2.18 / TFRS 15.60)"
+    }
+  ],
+  "ev_hesaplari": {
+    "EVV": "283.90",
+    "EVY": "483.90",
+    "kz": "691.90",
+    "oci_522": "522.90",
+    "oci_549": "549.90"
+  }
+}

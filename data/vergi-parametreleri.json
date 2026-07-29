@@ -1,0 +1,523 @@
+{
+  "surum": "2026.1",
+  "gecerli_yil": 2026,
+  "aciklama": "Kanun bazlı vergi parametreleri — kod hardcode ETMEZ, buradan okur (proaktif değişiklik ilkesi). dogrulandi:false alanlar GİB tebliğiyle teyit bekler; yıllık tebliğlerle bu dosya güncellenir (ileride E.5 firma/yıl parametresine taşınır).",
+  "kanunlar": [
+    {
+      "kod": "GVK-193",
+      "ad": "Gelir Vergisi Kanunu",
+      "alanlar": [
+        {
+          "ad": "Tarife (ücret) 1. dilim — %15",
+          "deger": "190.000 TL'ye kadar",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Tarife 2. dilim — %20",
+          "deger": "400.000 TL'ye kadar",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Tarife 3. dilim — %27",
+          "deger": "1.000.000 TL'ye kadar",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Tarife 4. dilim — %35",
+          "deger": "5.300.000 TL'ye kadar",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Tarife 5. dilim — %40",
+          "deger": "5.300.000 TL üzeri",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Ücret dışı tarife 3-4. dilim farkları",
+          "deger": "tebliğden teyit edilecek",
+          "dogrulandi": false
+        },
+        {
+          "ad": "Kira stopajı (GVK 94)",
+          "deger": "%20",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Serbest meslek stopajı (GVK 94)",
+          "deger": "%20",
+          "dogrulandi": true
+        }
+      ]
+    },
+    {
+      "kod": "KVK-5520",
+      "ad": "Kurumlar Vergisi Kanunu",
+      "alanlar": [
+        {
+          "ad": "Genel oran",
+          "deger": "%25",
+          "dogrulandi": true,
+          "programda": "gecici-vergi motoru buradan okur"
+        },
+        {
+          "ad": "Banka/finans kurumları oranı",
+          "deger": "%30",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Uyumlu mükellef indirimi (GVK mük.121)",
+          "deger": "%5 — üst limit 12.000.000 TL (2026)",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Geçici vergi (KVK 32/mük.120)",
+          "deger": "kümülatif çeyrek, KV oranıyla; önceki dönem hesaplanan mahsup",
+          "dogrulandi": true
+        },
+        {
+          "ad": "İştirak kazancı istisnası (KVK 5/1-a)",
+          "deger": "tam istisna — geçici vergi kağıdında manuel istisna satırı",
+          "dogrulandi": true
+        }
+      ]
+    },
+    {
+      "kod": "KDVK-3065",
+      "ad": "Katma Değer Vergisi Kanunu",
+      "alanlar": [
+        {
+          "ad": "Oranlar",
+          "deger": "%1 · %10 · %20",
+          "dogrulandi": true,
+          "programda": "391/191 muavin kodu = oran; KDV1 taslağı buradan kırılır"
+        },
+        {
+          "ad": "Beyan/ödeme",
+          "deger": "izleyen ayın 28'i",
+          "dogrulandi": true
+        },
+        {
+          "ad": "İndirim mekanizması (KDVK 29)",
+          "deger": "191→391 mahsup, fark 360/190",
+          "dogrulandi": true,
+          "programda": "mahsup motoru"
+        },
+        {
+          "ad": "Zayi mal (KDVK 30)",
+          "deger": "yüklenilen KDV indirim düzeltmesi",
+          "dogrulandi": true,
+          "programda": "GID-02 denetim çalışması"
+        }
+      ]
+    },
+    {
+      "kod": "OTV-4760",
+      "ad": "Özel Tüketim Vergisi Kanunu",
+      "alanlar": [
+        {
+          "ad": "Kapsam",
+          "deger": "I-IV sayılı listeler (akaryakıt, taşıt, tütün/alkol, dayanıklı tüketim)",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Programda",
+          "deger": "SEKTÖREL — akaryakıt/otomotiv mükellefi gelince liste bazlı modül; maliyet muhasebesinde ÖTV alış maliyetine girer (VUK 262)",
+          "dogrulandi": true
+        }
+      ]
+    },
+    {
+      "kod": "GIDER-6802",
+      "ad": "Gider Vergileri Kanunu (BSMV/ÖİV)",
+      "alanlar": [
+        {
+          "ad": "BSMV genel",
+          "deger": "%5",
+          "dogrulandi": true,
+          "programda": "banka ekstresi eşleştirmede masraf satırı ayrıştırma (780/653)"
+        },
+        {
+          "ad": "Kambiyo (döviz satış)",
+          "deger": "binde 2",
+          "dogrulandi": false
+        },
+        {
+          "ad": "ÖİV",
+          "deger": "%10",
+          "dogrulandi": false
+        }
+      ]
+    },
+    {
+      "kod": "DAMGA-488",
+      "ad": "Damga Vergisi Kanunu",
+      "alanlar": [
+        {
+          "ad": "Sözleşmeler (nispi)",
+          "deger": "binde 9,48",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Kira sözleşmeleri",
+          "deger": "binde 1,89",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Ücretler",
+          "deger": "binde 7,59",
+          "dogrulandi": true,
+          "programda": "bordro modülü (E) tahakkukunda 360'a"
+        },
+        {
+          "ad": "Muhtasar beyanname damga (maktu, 2026)",
+          "deger": "791 TL",
+          "dogrulandi": true
+        }
+      ]
+    },
+    {
+      "kod": "HARCLAR-492",
+      "ad": "Harçlar Kanunu",
+      "alanlar": [
+        {
+          "ad": "Programda",
+          "deger": "işlem bazlı gider kaydı (770/689 ayrımı: KKEG kontrolü) — tapu harcı gayrimenkul maliyetine (VUK 270)",
+          "dogrulandi": true
+        }
+      ]
+    },
+    {
+      "kod": "VIV-7338",
+      "ad": "Veraset ve İntikal Vergisi Kanunu",
+      "alanlar": [
+        {
+          "ad": "Programda",
+          "deger": "KAPSAM DIŞI — SMMM ticari defter rutini dışında; bilgi kartı düzeyinde",
+          "dogrulandi": true
+        }
+      ]
+    },
+    {
+      "kod": "VUK-213",
+      "ad": "Vergi Usul Kanunu (usul anayasası)",
+      "alanlar": [
+        {
+          "ad": "Fatura düzenleme sınırı (2026)",
+          "deger": "12.000 TL",
+          "dogrulandi": true,
+          "programda": "BAĞLANACAK: perakende satış üstü fatura uyarısı"
+        },
+        {
+          "ad": "Amortisman / doğrudan gider sınırı (2026)",
+          "deger": "12.000 TL",
+          "dogrulandi": true,
+          "programda": "BAĞLANACAK: D′ değerleme sihirbazı — altındaki demirbaş doğrudan gider"
+        },
+        {
+          "ad": "Şüpheli alacak küçük alacak haddi (2026)",
+          "deger": "25.000 TL",
+          "dogrulandi": true,
+          "programda": "BAĞLANACAK: TIC-03 yaşlandırma çalışması eşiği"
+        },
+        {
+          "ad": "Yeniden değerleme oranı (2026'ya esas)",
+          "deger": "%25,49",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Usulsüzlük cezası I./II. derece (sermaye şti., 2026)",
+          "deger": "35.000 / 17.000 TL",
+          "dogrulandi": true
+        },
+        {
+          "ad": "Kayıt düzeltme",
+          "deger": "md.217 — ters kayıt, fark edilme tarihi",
+          "dogrulandi": true,
+          "programda": "iptal motoru ✅"
+        },
+        {
+          "ad": "Değerleme ölçüleri",
+          "deger": "md.258+ (maliyet/borsa/mukayyet/itibari/emsal)",
+          "dogrulandi": true,
+          "programda": "D′ değerleme motoru ⬜"
+        }
+      ]
+    },
+    {
+      "kod": "AATUHK-6183",
+      "ad": "Amme Alacakları Tahsil Usulü",
+      "alanlar": [
+        {
+          "ad": "Gecikme zammı",
+          "deger": "aylık %4,5 (Cumhurbaşkanı kararıyla değişir)",
+          "dogrulandi": false,
+          "programda": "BAĞLANACAK: geç ödeme hesaplayıcı (vergi takvimi)"
+        },
+        {
+          "ad": "Tecil faizi",
+          "deger": "yıllık %48 civarı — teyit edilecek",
+          "dogrulandi": false
+        }
+      ]
+    }
+  ],
+  "hesaplama": {
+    "aciklama": "MAKİNE-OKUNUR oranlar — hesap makinesi motoru buradan okur, koda gömülmez. Oran değişince yalnız bu dosya güncellenir.",
+    "kdv_oranlari": [
+      {
+        "oran": 0,
+        "ad": "İstisna / %0",
+        "muavin": "01",
+        "gecerli_baslangic": "01.01.1985",
+        "gecerli_bitis": null,
+        "dogrulandi": true,
+        "not": "KDV=0 ise istisna sebep kodu ZORUNLU (UBL-TR TaxExemptionReason)"
+      },
+      {
+        "oran": 1,
+        "ad": "%1 — temel gıda, gazete/dergi vb.",
+        "muavin": "02",
+        "gecerli_baslangic": "01.01.1985",
+        "gecerli_bitis": null,
+        "dogrulandi": true
+      },
+      {
+        "oran": 8,
+        "ad": "%8 — TARİHÎ ORAN (10.07.2023'te %10 oldu)",
+        "muavin": "03",
+        "gecerli_baslangic": "01.01.1985",
+        "gecerli_bitis": "09.07.2023",
+        "dogrulandi": true,
+        "not": "7346 sayılı CK ile 10.07.2023'ten itibaren %10. Yalnız düzeltme beyannamesi/eski dönem kaydı için kullanılır."
+      },
+      {
+        "oran": 10,
+        "ad": "%10 — indirimli oran",
+        "muavin": "04",
+        "gecerli_baslangic": "10.07.2023",
+        "gecerli_bitis": null,
+        "dogrulandi": true
+      },
+      {
+        "oran": 18,
+        "ad": "%18 — TARİHÎ ORAN (10.07.2023'te %20 oldu)",
+        "muavin": "05",
+        "gecerli_baslangic": "01.01.1985",
+        "gecerli_bitis": "09.07.2023",
+        "dogrulandi": true,
+        "not": "7346 sayılı CK ile 10.07.2023'ten itibaren %20. Yalnız düzeltme beyannamesi/eski dönem kaydı için kullanılır."
+      },
+      {
+        "oran": 20,
+        "ad": "%20 — genel oran",
+        "muavin": "06",
+        "gecerli_baslangic": "10.07.2023",
+        "gecerli_bitis": null,
+        "dogrulandi": true
+      }
+    ],
+    "tevkifat_oranlari": [
+      {
+        "pay": 2,
+        "payda": 10,
+        "ad": "2/10"
+      },
+      {
+        "pay": 3,
+        "payda": 10,
+        "ad": "3/10"
+      },
+      {
+        "pay": 4,
+        "payda": 10,
+        "ad": "4/10"
+      },
+      {
+        "pay": 5,
+        "payda": 10,
+        "ad": "5/10"
+      },
+      {
+        "pay": 7,
+        "payda": 10,
+        "ad": "7/10"
+      },
+      {
+        "pay": 9,
+        "payda": 10,
+        "ad": "9/10"
+      }
+    ],
+    "tevkifat_notu": "Oranlar KDV Genel Uygulama Tebliği'nde işlem türüne göre belirlenir. HANGİ işlemde hangi oran uygulanacağı BU DOSYADA YOK — seçim muhasebeciye aittir; motor yalnız seçilen oranla hesaplar.",
+    "stopaj": [
+      {
+        "kod": "kira",
+        "ad": "İşyeri kira stopajı (GVK 94)",
+        "oran": 20,
+        "dogrulandi": true,
+        "hesap": "360"
+      },
+      {
+        "kod": "serbest_meslek",
+        "ad": "Serbest meslek stopajı (GVK 94)",
+        "oran": 20,
+        "dogrulandi": true,
+        "hesap": "360"
+      }
+    ],
+    "damga": [
+      {
+        "kod": "sozlesme",
+        "ad": "Sözleşmeler (nispi)",
+        "binde": 9.48,
+        "dogrulandi": true
+      },
+      {
+        "kod": "kira_sozlesme",
+        "ad": "Kira sözleşmeleri",
+        "binde": 1.89,
+        "dogrulandi": true
+      },
+      {
+        "kod": "ucret",
+        "ad": "Ücretler",
+        "binde": 7.59,
+        "dogrulandi": true
+      }
+    ],
+    "bsmv": {
+      "oran": 5,
+      "ad": "BSMV genel (6802)",
+      "dogrulandi": true,
+      "hesap": "780"
+    },
+    "babs": {
+      "had": 500000,
+      "had_aciklama": "5.000 TL — TARİHÎ had; Ba/Bs bildirimi 565 Sıra No.lu VUK GT ile 25.09.2024'ten itibaren KALDIRILDI.",
+      "yururlukte": false,
+      "kaldirilma_tarihi": "25.09.2024",
+      "dayanak": "565 Sıra No.lu Vergi Usul Kanunu Genel Tebliği",
+      "dogrulandi": true,
+      "not": "GİB, alım/satım verisine e-Fatura/e-Arşiv üzerinden doğrudan eriştiği için ayrı bildirim kaldırıldı. Motor artık BEYANNAME değil, İÇ MUTABAKAT ve ÇAPRAZ KONTROL raporu üretir; 25.09.2024 öncesi düzeltme beyanları için de kullanılabilir."
+    },
+    "tevkifat_alt_sinir": {
+      "tutar": 1200000,
+      "aciklama": "KDV DAHİL 12.000 TL (2026) — altındaki işlemde tevkifat uygulanmaz",
+      "dogrulandi": false,
+      "not": "Kaynak ikincil (sektör yayınları); KDV Genel Uygulama Tebliği'nden teyit edilmeli."
+    },
+    "tevkifat_islem_turleri": {
+      "aciklama": "KDV2/KDV1 tevkifat işlem türü kodları. ORAN BİLEREK BOŞ: her koda karşılık gelen tevkifat oranı KDV Genel Uygulama Tebliği'nde belirlenir ve değişir; motor tahmin yürütmez, oranı muhasebeci seçer.",
+      "kaynak": "BDP KDV1_31 ekranı (2010 dönemi) — kodlar ve kapsam güncel tebliğle DEĞİŞMİŞ OLABİLİR",
+      "dogrulandi": false,
+      "liste": [
+        {
+          "kod": "409",
+          "madde": "9/1",
+          "ad": "İstisnadan vazgeçenlerin hurda ve atık teslimi"
+        },
+        {
+          "kod": "410",
+          "madde": "9/1",
+          "ad": "Yapım işleri + mühendislik-mimarlık hizmetleri"
+        },
+        {
+          "kod": "411",
+          "madde": "9/1",
+          "ad": "Temizlik hizmeti"
+        },
+        {
+          "kod": "412",
+          "madde": "9/1",
+          "ad": "Çevre ve bahçe bakım hizmetleri"
+        },
+        {
+          "kod": "413",
+          "madde": "9/1",
+          "ad": "Özel güvenlik hizmeti"
+        },
+        {
+          "kod": "414",
+          "madde": "9/1",
+          "ad": "Makine, teçhizat, demirbaş ve taşıt tadil/bakım/onarım"
+        },
+        {
+          "kod": "415",
+          "madde": "9/1",
+          "ad": "Yemek servis hizmeti"
+        },
+        {
+          "kod": "416",
+          "madde": "9/1",
+          "ad": "Etüt, plan-proje, danışmanlık, denetim ve benzeri"
+        },
+        {
+          "kod": "417",
+          "madde": "9/1",
+          "ad": "Hurda metalden elde edilen külçe teslimleri"
+        },
+        {
+          "kod": "419",
+          "madde": "9/1",
+          "ad": "Bakır, çinko, alüminyum, kurşun ve alaşımları"
+        },
+        {
+          "kod": "420",
+          "madde": "9/1",
+          "ad": "Yapı denetim hizmetleri"
+        },
+        {
+          "kod": "406",
+          "madde": "29/2",
+          "ad": "Yıl içinde indirimli orana tabi işlemlere ilişkin iade"
+        },
+        {
+          "kod": "408",
+          "madde": "11/1-b",
+          "ad": "Türkiye'de ikamet etmeyenlere iade edilen KDV"
+        }
+      ]
+    },
+    "muavin_notu": "Alt kırılım kodları ARDIŞIKTIR (01,02,03…) — TDHP muavin kuralı. Oran koddan OKUNMAZ, bu katalogdan çözülür; yeni oran eklenince sıradaki numarayı alır.",
+    "otv": {
+      "aciklama": "ÖTV → KDV zinciri. ÖTVK 11 ve KDVK 24/b: ÖTV, KDV MATRAHINA DAHİLDİR. Sıra: bedel → ÖTV → (bedel+ÖTV) → KDV.",
+      "dogrulandi": true,
+      "oran_notu": "ÖTV oranları I–IV sayılı listelerde ürün bazında belirlenir ve sık değişir. ORAN BURADA YOK — motor oranı kullanıcıdan alır, tahmin yürütmez.",
+      "listeler": [
+        {
+          "liste": "I",
+          "ad": "Petrol ürünleri, doğalgaz, madeni yağlar",
+          "yontem": "maktu (litre/kg birim)"
+        },
+        {
+          "liste": "II",
+          "ad": "Kara/hava/deniz taşıtları (binek oto, motosiklet, uçak, yat)",
+          "yontem": "nispi (matrah dilimli)"
+        },
+        {
+          "liste": "III",
+          "ad": "Alkollü içecekler, tütün mamulleri, kolalı gazozlar",
+          "yontem": "nispi + asgari maktu (karma)"
+        },
+        {
+          "liste": "IV",
+          "ad": "Dayanıklı tüketim ve lüks ürünler (beyaz eşya, elektronik, kozmetik)",
+          "yontem": "nispi"
+        }
+      ]
+    },
+    "kkeg": {
+      "aciklama": "Kanunen Kabul Edilmeyen Gider (KVK 11 / GVK 41). Ticari kârdan DÜŞÜLÜR ama mali kâra GERİ EKLENİR.",
+      "izleme": "Gider hesabına normal yazılır; KKEG kısmı AYRI MUAVİNDE izlenir (ör. 770.KKEG) veya nazım hesapta (950/951). Deftere ayrı bir 'KKEG hesabı' açmak MSUGT'de yoktur.",
+      "beyan": "Dönem sonunda geçici/kurumlar vergisi beyannamesinde 'Kanunen Kabul Edilmeyen Giderler' satırında matraha EKLENİR — yevmiyede ters kayıt YAPILMAZ.",
+      "dogrulandi": true,
+      "tipik_kalemler": [
+        "Binek oto gider/amortisman kısıtı aşan kısım",
+        "İndirilemeyen KDV (KDVK 30)",
+        "Vergi cezası, gecikme zammı, para cezası",
+        "Kanuna aykırı bağış ve yardımlar",
+        "Örtülü sermaye faizi / transfer fiyatlandırması farkı"
+      ]
+    }
+  }
+}

@@ -1,0 +1,707 @@
+{
+  "_not": "Belge okuma sözlüğü. Görüntüden metin çıkarmayı MODEL yapar; bu dosya çıkarılan metnin hangi ALAN olduğunu ve hangi DİLDE yazıldığını çözer. Etiketler küçük harfe çevrilip aksan/noktalama sadeleştirilerek eşleştirilir.",
+  "_oncelik": "TR ve EN çekirdek dillerdir (tam kapsam + tam test). DE/FR/RU ikinci halkadır: alan etiketleri ve sayı-yazı okuması var, ülkeye özgü vergi alanları yok.",
+  "diller": {
+    "tr": {
+      "ad": "Türkçe",
+      "cekirdek": true,
+      "sayi_bicimi": {
+        "binlik": ".",
+        "ondalik": ",",
+        "ornek": "1.234,56"
+      },
+      "aylar": [
+        "ocak",
+        "şubat",
+        "mart",
+        "nisan",
+        "mayıs",
+        "haziran",
+        "temmuz",
+        "ağustos",
+        "eylül",
+        "ekim",
+        "kasım",
+        "aralık"
+      ],
+      "tarih_sirasi": "ggaayyyy",
+      "para": {
+        "TRY": [
+          "tl",
+          "try",
+          "₺",
+          "turk lirasi",
+          "lira"
+        ],
+        "USD": [
+          "usd",
+          "$",
+          "dolar"
+        ],
+        "EUR": [
+          "eur",
+          "€",
+          "euro"
+        ]
+      }
+    },
+    "en": {
+      "ad": "English",
+      "cekirdek": true,
+      "sayi_bicimi": {
+        "binlik": ",",
+        "ondalik": ".",
+        "ornek": "1,234.56"
+      },
+      "aylar": [
+        "january",
+        "february",
+        "march",
+        "april",
+        "may",
+        "june",
+        "july",
+        "august",
+        "september",
+        "october",
+        "november",
+        "december"
+      ],
+      "tarih_sirasi": "aaggyyyy",
+      "para": {
+        "USD": [
+          "usd",
+          "$",
+          "dollar",
+          "dollars"
+        ],
+        "GBP": [
+          "gbp",
+          "£",
+          "pound"
+        ],
+        "EUR": [
+          "eur",
+          "€",
+          "euro"
+        ]
+      }
+    },
+    "de": {
+      "ad": "Deutsch",
+      "cekirdek": false,
+      "sayi_bicimi": {
+        "binlik": ".",
+        "ondalik": ",",
+        "ornek": "1.234,56"
+      },
+      "aylar": [
+        "januar",
+        "februar",
+        "märz",
+        "april",
+        "mai",
+        "juni",
+        "juli",
+        "august",
+        "september",
+        "oktober",
+        "november",
+        "dezember"
+      ],
+      "tarih_sirasi": "ggaayyyy",
+      "para": {
+        "EUR": [
+          "eur",
+          "€",
+          "euro"
+        ],
+        "CHF": [
+          "chf",
+          "franken"
+        ]
+      }
+    },
+    "fr": {
+      "ad": "Français",
+      "cekirdek": false,
+      "sayi_bicimi": {
+        "binlik": " ",
+        "ondalik": ",",
+        "ornek": "1 234,56"
+      },
+      "aylar": [
+        "janvier",
+        "février",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "août",
+        "septembre",
+        "octobre",
+        "novembre",
+        "décembre"
+      ],
+      "tarih_sirasi": "ggaayyyy",
+      "para": {
+        "EUR": [
+          "eur",
+          "€",
+          "euro"
+        ],
+        "CHF": [
+          "chf",
+          "franc"
+        ]
+      }
+    },
+    "ru": {
+      "ad": "Русский",
+      "cekirdek": false,
+      "sayi_bicimi": {
+        "binlik": " ",
+        "ondalik": ",",
+        "ornek": "1 234,56"
+      },
+      "aylar": [
+        "январь",
+        "февраль",
+        "март",
+        "апрель",
+        "май",
+        "июнь",
+        "июль",
+        "август",
+        "сентябрь",
+        "октябрь",
+        "ноябрь",
+        "декабрь"
+      ],
+      "ay_ekleri": [
+        "января",
+        "февраля",
+        "марта",
+        "апреля",
+        "мая",
+        "июня",
+        "июля",
+        "августа",
+        "сентября",
+        "октября",
+        "ноября",
+        "декабря"
+      ],
+      "tarih_sirasi": "ggaayyyy",
+      "para": {
+        "RUB": [
+          "руб",
+          "₽",
+          "rub",
+          "рублей",
+          "рубль"
+        ]
+      }
+    }
+  },
+  "belge_turleri": {
+    "FATURA": {
+      "ad": "Fatura",
+      "anahtar": {
+        "tr": [
+          "fatura",
+          "e-fatura",
+          "e-arşiv",
+          "satış faturası",
+          "alış faturası"
+        ],
+        "en": [
+          "invoice",
+          "bill",
+          "tax invoice",
+          "sales invoice"
+        ],
+        "de": [
+          "rechnung",
+          "faktura"
+        ],
+        "fr": [
+          "facture"
+        ],
+        "ru": [
+          "счет-фактура",
+          "счёт-фактура",
+          "счет",
+          "накладная"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "karsi_taraf",
+        "toplam"
+      ]
+    },
+    "MAKBUZ": {
+      "ad": "Tahsilat / ödeme makbuzu",
+      "anahtar": {
+        "tr": [
+          "makbuz",
+          "tahsilat makbuzu",
+          "tediye makbuzu",
+          "serbest meslek makbuzu"
+        ],
+        "en": [
+          "receipt",
+          "cash receipt",
+          "payment receipt"
+        ],
+        "de": [
+          "quittung",
+          "empfangsbestätigung"
+        ],
+        "fr": [
+          "reçu",
+          "quittance"
+        ],
+        "ru": [
+          "квитанция",
+          "приходный кассовый ордер",
+          "расходный кассовый ордер"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "tutar"
+      ]
+    },
+    "GIDER_PUSULASI": {
+      "ad": "Gider pusulası",
+      "anahtar": {
+        "tr": [
+          "gider pusulası",
+          "gider pusulasi"
+        ],
+        "en": [
+          "expense voucher"
+        ],
+        "de": [
+          "eigenbeleg"
+        ],
+        "fr": [
+          "note de frais"
+        ],
+        "ru": [
+          "расходная накладная"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "karsi_taraf",
+        "brut_tutar"
+      ]
+    },
+    "DEKONT": {
+      "ad": "Banka dekontu / ekstre",
+      "anahtar": {
+        "tr": [
+          "dekont",
+          "hesap ekstresi",
+          "hesap özeti",
+          "havale",
+          "eft"
+        ],
+        "en": [
+          "bank statement",
+          "statement of account",
+          "remittance",
+          "wire transfer"
+        ],
+        "de": [
+          "kontoauszug",
+          "überweisung"
+        ],
+        "fr": [
+          "relevé de compte",
+          "virement"
+        ],
+        "ru": [
+          "выписка",
+          "банковская выписка",
+          "платежное поручение"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "tutar"
+      ]
+    }
+  },
+  "alan_etiketleri": {
+    "belge_no": {
+      "tr": [
+        "fatura no",
+        "belge no",
+        "seri sıra no",
+        "makbuz no",
+        "no",
+        "sıra",
+        "sira",
+        "seri sıra",
+        "seri sira no"
+      ],
+      "en": [
+        "invoice no",
+        "invoice number",
+        "document no",
+        "receipt no",
+        "ref",
+        "reference"
+      ],
+      "de": [
+        "rechnungsnummer",
+        "rechnungs-nr",
+        "beleg-nr",
+        "nummer"
+      ],
+      "fr": [
+        "numéro de facture",
+        "n° facture",
+        "numéro",
+        "n°"
+      ],
+      "ru": [
+        "номер",
+        "№",
+        "счет №"
+      ]
+    },
+    "tarih": {
+      "tr": [
+        "tarih",
+        "düzenleme tarihi",
+        "fatura tarihi",
+        "işlem tarihi",
+        "tarihi"
+      ],
+      "en": [
+        "date",
+        "invoice date",
+        "issue date",
+        "transaction date"
+      ],
+      "de": [
+        "datum",
+        "rechnungsdatum",
+        "belegdatum"
+      ],
+      "fr": [
+        "date",
+        "date de facture",
+        "date d'émission"
+      ],
+      "ru": [
+        "дата",
+        "дата составления"
+      ]
+    },
+    "karsi_taraf": {
+      "tr": [
+        "sayın",
+        "müşteri",
+        "alıcı",
+        "satıcı",
+        "unvan",
+        "firma",
+        "ad soyad",
+        "mal/hizmet sunan",
+        "sayin"
+      ],
+      "en": [
+        "bill to",
+        "sold to",
+        "customer",
+        "client",
+        "supplier",
+        "vendor",
+        "received from"
+      ],
+      "de": [
+        "kunde",
+        "lieferant",
+        "empfänger",
+        "rechnungsempfänger"
+      ],
+      "fr": [
+        "client",
+        "fournisseur",
+        "destinataire"
+      ],
+      "ru": [
+        "принято от",
+        "плательщик",
+        "поставщик",
+        "покупатель",
+        "заказчик"
+      ]
+    },
+    "vergi_no": {
+      "tr": [
+        "vkn",
+        "tckn",
+        "vergi no",
+        "vergi kimlik no",
+        "vergi dairesi",
+        "tc kimlik",
+        "vergi nu",
+        "vergi numarası"
+      ],
+      "en": [
+        "tax id",
+        "vat no",
+        "vat number",
+        "ein",
+        "tin"
+      ],
+      "de": [
+        "ust-idnr",
+        "steuernummer",
+        "umsatzsteuer-identifikationsnummer"
+      ],
+      "fr": [
+        "n° tva",
+        "numéro de tva",
+        "siret"
+      ],
+      "ru": [
+        "инн",
+        "кпп",
+        "огрн"
+      ]
+    },
+    "matrah": {
+      "tr": [
+        "matrah",
+        "mal hizmet toplam tutarı",
+        "ara toplam",
+        "kdv matrahı",
+        "brüt tutar",
+        "net tutar",
+        "toplam tutar",
+        "tutar"
+      ],
+      "en": [
+        "subtotal",
+        "net amount",
+        "taxable amount",
+        "amount before tax"
+      ],
+      "de": [
+        "nettobetrag",
+        "zwischensumme",
+        "bemessungsgrundlage"
+      ],
+      "fr": [
+        "montant ht",
+        "total ht",
+        "base imposable"
+      ],
+      "ru": [
+        "сумма без ндс",
+        "налоговая база",
+        "итого без ндс"
+      ]
+    },
+    "vergi_tutari": {
+      "tr": [
+        "kdv",
+        "hesaplanan kdv",
+        "kdv tutarı",
+        "otv",
+        "özel tüketim vergisi",
+        "tevkifat",
+        "stopaj"
+      ],
+      "en": [
+        "vat",
+        "tax",
+        "sales tax",
+        "tax amount",
+        "withholding"
+      ],
+      "de": [
+        "mwst",
+        "umsatzsteuer",
+        "ust",
+        "mehrwertsteuer"
+      ],
+      "fr": [
+        "tva",
+        "montant tva"
+      ],
+      "ru": [
+        "ндс",
+        "сумма ндс"
+      ]
+    },
+    "tevkifat": {
+      "tr": [
+        "tevkifat",
+        "tevkifata tabi",
+        "tevkifata tabi kdv",
+        "tevkif edilen kdv",
+        "sorumlu sıfatıyla"
+      ],
+      "en": [
+        "withholding",
+        "withheld vat",
+        "reverse charge"
+      ],
+      "de": [
+        "abzugsteuer"
+      ],
+      "fr": [
+        "autoliquidation"
+      ],
+      "ru": [
+        "удержанный ндс"
+      ]
+    },
+    "vergi_orani": {
+      "tr": [
+        "kdv oranı",
+        "oran",
+        "%"
+      ],
+      "en": [
+        "vat rate",
+        "tax rate",
+        "rate"
+      ],
+      "de": [
+        "steuersatz",
+        "mwst-satz"
+      ],
+      "fr": [
+        "taux de tva",
+        "taux"
+      ],
+      "ru": [
+        "ставка ндс",
+        "ставка"
+      ]
+    },
+    "toplam": {
+      "tr": [
+        "genel toplam",
+        "ödenecek tutar",
+        "toplam",
+        "vergiler dahil toplam tutar",
+        "net ödenen"
+      ],
+      "en": [
+        "total",
+        "grand total",
+        "amount due",
+        "total amount",
+        "balance due"
+      ],
+      "de": [
+        "gesamtbetrag",
+        "bruttobetrag",
+        "summe",
+        "zu zahlen"
+      ],
+      "fr": [
+        "total ttc",
+        "montant total",
+        "net à payer"
+      ],
+      "ru": [
+        "итого",
+        "всего",
+        "сумма",
+        "к оплате"
+      ]
+    },
+    "tutar_yaziyla": {
+      "tr": [
+        "yalnız",
+        "yazıyla",
+        "yalnız yazıyla"
+      ],
+      "en": [
+        "amount in words",
+        "say",
+        "in words"
+      ],
+      "de": [
+        "in worten",
+        "betrag in worten"
+      ],
+      "fr": [
+        "montant en lettres",
+        "arrêté à la somme de"
+      ],
+      "ru": [
+        "прописью",
+        "сумма прописью"
+      ]
+    },
+    "aciklama": {
+      "tr": [
+        "açıklama",
+        "konu",
+        "mal/hizmet",
+        "dayanak"
+      ],
+      "en": [
+        "description",
+        "details",
+        "memo",
+        "for",
+        "particulars"
+      ],
+      "de": [
+        "beschreibung",
+        "verwendungszweck",
+        "betreff"
+      ],
+      "fr": [
+        "description",
+        "objet",
+        "désignation"
+      ],
+      "ru": [
+        "основание",
+        "назначение платежа",
+        "наименование"
+      ]
+    },
+    "iban": {
+      "tr": [
+        "iban",
+        "hesap no",
+        "hesap numarası"
+      ],
+      "en": [
+        "iban",
+        "account no",
+        "account number"
+      ],
+      "de": [
+        "iban",
+        "kontonummer"
+      ],
+      "fr": [
+        "iban",
+        "numéro de compte"
+      ],
+      "ru": [
+        "расчетный счет",
+        "р/с",
+        "счет"
+      ]
+    }
+  }
+}

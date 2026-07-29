@@ -1,0 +1,9 @@
+[package]
+name = "domain"
+version = "0.1.0"
+edition = "2021"
+description = "Audit-Liners muhasebe çekirdeği — bağımlılıksız saf domain (ledger kuralları)"
+
+# ÇEKİRDEK İLKE: bu crate harici bağımlılık almaz (std only).
+# Her modül buna bağlanır; bu hiçbir şeye bağlanmaz (hexagonal merkez).
+[dependencies]

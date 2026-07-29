@@ -1,0 +1,10 @@
+{
+  "surum": 1,
+  "aciklama": "Departman içi HİYERARŞİ → izinli İŞLEMLER (işlem derinliği ekseni) + onay tutar eşiği. Maker-checker-approver + SoD: kaydı GİREN ≠ KESİNLEŞTİREN (Y3 kesinleştirmede kontrol). islemler: taslak_gir · kesinlestir · iptal (VUK 217) · donem_kapat · kullanici_yonet; ['*']=tümü. onay_esigi_kurus: kesinleştirebileceği azami fiş tutarı (0 = sınırsız). Tasarım: docs/tasarim/yetkilendirme-departman-hiyerarsi.md",
+  "kademeler": [
+    { "kod": "ELEMAN", "ad": "Eleman (maker)", "seviye": 1, "islemler": ["taslak_gir"], "onay_esigi_kurus": 0, "aciklama": "Taslak fiş girer/düzeltir; kesinleştiremez. Kaydın giren tarafı (SoD maker)." },
+    { "kod": "SORUMLU", "ad": "Sorumlu (checker)", "seviye": 2, "islemler": ["taslak_gir", "kesinlestir"], "onay_esigi_kurus": 50000000, "aciklama": "Taslağı kontrol edip KESİNLEŞTİRİR (500.000 TL'ye kadar). Kendi girdiğini onaylayamaz (SoD)." },
+    { "kod": "MUDUR", "ad": "Müdür (approver)", "seviye": 3, "islemler": ["taslak_gir", "kesinlestir", "iptal", "donem_kapat"], "onay_esigi_kurus": 0, "aciklama": "Sınırsız kesinleştirme + VUK 217 iptal + dönem kapatma." },
+    { "kod": "YONETICI", "ad": "Yönetici (admin)", "seviye": 4, "islemler": ["*"], "onay_esigi_kurus": 0, "aciklama": "Tüm işlemler + kullanıcı/departman/yetki yönetimi." }
+  ]
+}

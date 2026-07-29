@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/arda/Desktop/Audit-Liners/web"],
+      "port": 5174,
+      "autoPort": true
+    }
+  ]
+}
