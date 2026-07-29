@@ -77,13 +77,24 @@ pub fn anlam_coz(baslik: &str) -> String {
     let sade = sade.trim();
     if sade.is_empty() { return String::new(); }
 
+    // DİL BİLGİSİ KATMANI: sözlük KÖKÜ tutar, belge ÇEKİMLİ yazar.
+    // "MİKTARI", "TUTARLARI", "BİRİM FİYATI", "UNIT PRICES" — hepsi köke indirgenir.
+    // Çekimli biçimleri sözlüğe elle yazmak hem büyür hem görülmemiş çekimi kaçırır.
+    let mut adaylar: Vec<String> = vec![sade.to_string()];
+    for d in ["tr", "en"] {
+        for k in crate::dilbilgisi::kokler(sade, d) {
+            if !adaylar.contains(&k) { adaylar.push(k); }
+        }
+    }
+
     let mut en_iyi = (String::new(), 0usize);
     let Some(tablo) = sozluk()["sutun_basliklari"].as_object() else { return String::new() };
     for (anlam, diller) in tablo {
         for (_dil, liste) in diller.as_object().into_iter().flatten() {
             for a in liste.as_array().into_iter().flatten() {
                 let Some(t) = a.as_str() else { continue };
-                if t.is_empty() || !sade.contains(t) { continue; }
+                if t.is_empty() { continue; }
+                if !adaylar.iter().any(|c| c.contains(t)) { continue; }
                 if t.len() > en_iyi.1 { en_iyi = (anlam.clone(), t.len()); }
             }
         }
@@ -172,6 +183,31 @@ mod testler {
         assert_eq!(anlam_coz("KDV TUTARI"), "KDV_TUTARI");
     }
 
+    /// **DİL BİLGİSİ KATMANI.** Sözlükte yalnız KÖK var (`miktar`, `tutar`, `birim fiyat`);
+    /// belge çekimli yazıyor. Bu biçimlerin hiçbiri sözlükte YOK — kural üretiyor.
+    #[test]
+    fn cekimli_basliklar_kuralla_cozulur() {
+        assert_eq!(anlam_coz("MİKTARI"), "MIKTAR");
+        assert_eq!(anlam_coz("MİKTARLARI"), "MIKTAR");
+        assert_eq!(anlam_coz("BİRİMİ"), "BIRIM");
+        assert_eq!(anlam_coz("BİRİM FİYATI"), "BIRIM_FIYAT");
+        assert_eq!(anlam_coz("TUTARI"), "TUTAR");
+        assert_eq!(anlam_coz("TUTARLARI"), "TUTAR");
+        assert_eq!(anlam_coz("KDV ORANI"), "KDV_ORANI");
+        assert_eq!(anlam_coz("ADEDİ"), "MIKTAR", "ünsüz yumuşaması: adedi → aded → adet");
+        // İngilizce çoğul
+        assert_eq!(anlam_coz("QUANTITIES"), "MIKTAR");
+        assert_eq!(anlam_coz("UNIT PRICES"), "BIRIM_FIYAT");
+    }
+
+    /// Çekim kuralı ALAKASIZ sözcüğü eşleştirmemeli — aşırı soyma tehlikesi.
+    #[test]
+    fn cekim_kurali_alakasiz_esleme_uretmez() {
+        assert_eq!(anlam_coz("TARİH"), "");
+        assert_eq!(anlam_coz("SAYIN"), "");
+        assert_eq!(anlam_coz("ADRES"), "");
+    }
+
     /// Aynı belge İngilizce gelirse de çözülmeli — Türkçe ve İngilizce eşit öncelikli.
     #[test]
     fn ingilizce_baslik_cozulur() {
@@ -220,5 +256,38 @@ mod testler {
     fn celiskili_baslik_reddedilir() {
         let g = iz(&[&["TUTAR", "TUTAR", "MİKTAR"]]);
         assert!(basliklari_bul(&g).is_none(), "çelişkili başlık kabul edildi");
+    }
+}
+
+#[cfg(test)]
+mod kod_testleri {
+    /// Ölçümden doğdu: 22 taramanın 15'inde fatura numarası kayboluyordu, sebebi tek
+    /// karakterdi — OCR `GIB20090000000001` kodundaki `I`'yi `l` okuyor.
+    #[test]
+    fn ocr_kodundaki_kucuk_l_buyuk_i_olur() {
+        use crate::belge_oku::kod_normalize;
+        assert_eq!(kod_normalize("GlB20090000000001"), "GIB20090000000001");
+        assert_eq!(kod_normalize("ETU2012000594626"), "ETU2012000594626");
+        // Harflerin ÇOĞUNLUĞU büyük değilse kod sayılmaz — sınır bilerek burada.
+        assert_eq!(kod_normalize("eGe2026000123"), "eGe2026000123");
+    }
+
+    /// **Normal metne DOKUNULMAZ.** Aksi halde mal adı bozulurdu.
+    #[test]
+    fn normal_metin_bozulmaz() {
+        use crate::belge_oku::kod_normalize;
+        assert_eq!(kod_normalize("Elektrik"), "Elektrik");           // rakam yok
+        assert_eq!(kod_normalize("Bilgisayarli tomografiler"), "Bilgisayarli tomografiler"); // boşluk
+        assert_eq!(kod_normalize("kalem 3 adet"), "kalem 3 adet");   // boşluk + küçük harf
+        assert_eq!(kod_normalize("A1"), "A1");                       // çok kısa
+        assert_eq!(kod_normalize("elektrik2026faturasi"), "elektrik2026faturasi"); // büyük harf yok
+    }
+
+    /// **O ↔ 0 ayrımına DOKUNULMAZ** — ikisi de o konumda geçerlidir, motor uydurmaz.
+    #[test]
+    fn belirsiz_karakter_uydurulmaz() {
+        use crate::belge_oku::kod_normalize;
+        assert_eq!(kod_normalize("AB0C123"), "AB0C123");
+        assert_eq!(kod_normalize("ABOC123"), "ABOC123");
     }
 }

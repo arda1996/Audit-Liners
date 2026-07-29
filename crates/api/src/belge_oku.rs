@@ -32,6 +32,54 @@ const SOZLUK: &str =
 
 fn sozluk() -> serde_json::Value { serde_json::from_str(SOZLUK).unwrap_or(serde_json::Value::Null) }
 
+/// BELGE KODU NORMALİZASYONU — fatura no, seri, ETTN gibi harf+rakam kodları için.
+///
+/// ## Ölçülen sorun
+///
+/// 22 belgelik temiz (200 dpi) tarama örnekleminde **15'inde fatura numarası kaybediliyordu.**
+/// Sebep tek bir karakterdi: OCR `GIB20090000000001` kodundaki büyük `I` harfini küçük `l`
+/// okuyor (`GlB2009...`). Aynı hata `ETU...`, `EGE...` gibi tüm kodlarda tekrarlıyor.
+///
+/// ## Kural — tahmin değil, ÇIKARIM
+///
+/// Belge kodları büyük harf + rakamdan oluşur. **Böyle bir kodun içinde küçük `l`
+/// bulunamaz** — küçük harf orada zaten geçersizdir. Dolayısıyla `l`'yi `I` yapmak bir
+/// tahmin değil, geçersiz bir okumayı geçerli tek karşılığına indirgemektir.
+///
+/// Aynı gerekçeyle: küçük `o` → `O`. Ama `O` ↔ `0` ayrımına **DOKUNULMAZ** — ikisi de o
+/// konumda geçerlidir, hangisi olduğu belgeden çıkmaz ve motor bilmediğini uydurmaz.
+///
+/// ## Ne zaman uygulanır
+///
+/// Yalnız **kod görünümlü** dizgilerde: en az 5 karakter, hem harf hem rakam içeriyor ve
+/// harflerin çoğunluğu zaten büyük. Bu koşullar olmadan normal metne dokunulmaz — yoksa
+/// "Elektrik" gibi bir mal adı "EIektrik" olurdu.
+///
+/// **İz bırakır:** çağıran, değişiklik olup olmadığını dönen dizgiyi karşılaştırarak anlar
+/// ve kullanıcıya bildirir. Sessiz düzeltme, denetimde kabul edilemez (VUK 219).
+pub fn kod_normalize(ham: &str) -> String {
+    let t = ham.trim();
+    let n = t.chars().count();
+    if n < 5 { return ham.to_string(); }
+
+    let harf = t.chars().filter(|c| c.is_alphabetic()).count();
+    let rakam = t.chars().filter(|c| c.is_ascii_digit()).count();
+    if harf == 0 || rakam == 0 { return ham.to_string(); }
+    // Harflerin çoğunluğu büyük olmalı — bu bir KOD, cümle değil.
+    let buyuk = t.chars().filter(|c| c.is_uppercase()).count();
+    if buyuk * 2 < harf { return ham.to_string(); }
+    // Boşluk içeren dizgi kod değildir.
+    if t.chars().any(|c| c.is_whitespace()) { return ham.to_string(); }
+
+    t.chars().map(|c| match c {
+        // Küçük harf bu bağlamda GEÇERSİZ — tek geçerli karşılığına indirgenir.
+        'l' => 'I',
+        'o' => 'O',
+        // 'O' ↔ '0' ve 'S' ↔ '5' ayrımına dokunulmaz: ikisi de geçerlidir, uydurulmaz.
+        _ => c.to_uppercase().next().unwrap_or(c),
+    }).collect()
+}
+
 /// Karşılaştırma için sadeleştirme: küçük harf + aksan düşürme + noktalama temizliği.
 /// Türkçe İ/ı özel: `to_lowercase()` "İ" → "i̇" (birleşik nokta) üretir, eşleşmeyi bozar.
 pub fn sadelestir(s: &str) -> String {

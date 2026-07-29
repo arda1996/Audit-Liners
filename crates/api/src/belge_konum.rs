@@ -271,9 +271,63 @@ pub fn izgara(kelimeler: &[Kelime]) -> Vec<Vec<String>> {
     for s in sayfalar {
         let sayfa_kelimeleri: Vec<Kelime> =
             kelimeler.iter().filter(|k| k.sayfa == s).cloned().collect();
-        let koridorlar = sutun_koridorlari(&sayfa_kelimeleri);
-        cikti.extend(satirlar(&sayfa_kelimeleri).iter().map(|r| hucreler(r, &koridorlar)));
+        for bant in bantlar(&satirlar(&sayfa_kelimeleri)) {
+            // KORİDOR BANDIN KENDİ İÇİNDEN hesaplanır — sayfa genelinden değil.
+            let bant_kelimeleri: Vec<Kelime> =
+                bant.iter().flat_map(|r| r.kelimeler.iter().cloned()).collect();
+            let koridorlar = sutun_koridorlari(&bant_kelimeleri);
+            cikti.extend(bant.iter().map(|r| hucreler(r, &koridorlar)));
+        }
     }
+    cikti
+}
+
+/// Satırları YATAY BANTLARA böler — XY-cut'ın yatay kesimi.
+///
+/// ## Neden zorunlu
+///
+/// **Bir sayfa tek ızgara değildir.** Tipik faturada üç ayrı blok vardır ve sütun
+/// yapıları birbirinden bağımsızdır:
+///
+/// ```text
+/// ── başlık bloğu ───  solda ünvan/VKN, sağda fatura no/tarih        → 2 sütun
+/// ── kalem tablosu ──  CİNSİ · BİRİM · MİKTAR · FİYAT · KDV · TUTAR  → 6 sütun
+/// ── toplam bloğu ───  sağda etiket + değer                          → 2 sütun
+/// ```
+///
+/// Koridorlar sayfa genelinde hesaplanınca bloklar birbirini yok eder. Ölçülen gerçek
+/// vaka: kalem tablosunun 235 ve 290'daki iç sınırları, sayfa genelinde boş olan
+/// 180–330 aralığının içinde kaldı ve **tek koridora eridi**; 6 sütunlu tablo 3 hücreye
+/// düştü, `BİRİM FİYAT` ile `MİKTAR` aynı hücrede birleşti ve sütun adlandırması
+/// yanlış eşleşti. Toplam bloğundaki `360` ve `480` sütunları da kalem tablosunun
+/// `420`/`465` koridorlarını dolduruyordu.
+///
+/// ## Kesme ölçütü
+///
+/// Ardışık satırlar arasındaki dikey boşluk, medyan satır aralığının belirgin katına
+/// çıkarsa orası blok sınırıdır. Ölçüt **oransal**: sabit piksel değeri farklı punto ve
+/// farklı çözünürlükte (110 dpi tarama ile 72 pt PDF) çalışmaz.
+pub fn bantlar(satirlar: &[Satir]) -> Vec<Vec<Satir>> {
+    if satirlar.len() < 2 { return vec![satirlar.to_vec()]; }
+
+    let mut araliklar: Vec<f32> = satirlar.windows(2)
+        .map(|p| (p[1].y - p[0].y).abs())
+        .filter(|d| *d > 0.0).collect();
+    if araliklar.is_empty() { return vec![satirlar.to_vec()]; }
+    araliklar.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+    let medyan = araliklar[araliklar.len() / 2];
+    // 1.8 kat: bir boş satır bırakmak blok ayırmaya yeter, satır aralığı dalgalanması yetmez.
+    let esik = medyan * 1.8;
+
+    let mut cikti: Vec<Vec<Satir>> = Vec::new();
+    let mut bant: Vec<Satir> = vec![satirlar[0].clone()];
+    for p in satirlar.windows(2) {
+        if (p[1].y - p[0].y).abs() > esik {
+            cikti.push(std::mem::take(&mut bant));
+        }
+        bant.push(p[1].clone());
+    }
+    if !bant.is_empty() { cikti.push(bant); }
     cikti
 }
 

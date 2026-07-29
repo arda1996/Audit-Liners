@@ -771,7 +771,6 @@
     },
     "BIRIM": {
       "tr": [
-        "birimi",
         "birim",
         "olcu birimi",
         "olcu"
@@ -795,9 +794,7 @@
     },
     "MIKTAR": {
       "tr": [
-        "miktari",
         "miktar",
-        "adedi",
         "adet",
         "mik"
       ],
@@ -821,11 +818,9 @@
     },
     "BIRIM_FIYAT": {
       "tr": [
-        "birim fiyati",
         "birim fiyat",
         "b fiyat",
         "bfiyat",
-        "fiyati",
         "fiyat"
       ],
       "en": [
@@ -869,7 +864,6 @@
     },
     "KDV_ORANI": {
       "tr": [
-        "kdv orani",
         "kdv oran",
         "vergi orani",
         "kdv"
@@ -915,7 +909,6 @@
     "TUTAR": {
       "tr": [
         "mal hizmet tutari",
-        "tutari",
         "tutar",
         "satir toplami",
         "toplam"
@@ -938,6 +931,7 @@
         "сумма",
         "итого"
       ]
-    }
+    },
+    "_not": "Yalnız KÖK biçim yazılır. Çekimli biçimleri (MİKTARI, TUTARLARI, BİRİM FİYATI, UNIT PRICES) crates/api/src/dilbilgisi.rs çözer — ünlü uyumu sınanarak. Listeye çekim EKLEME: kural listeden üstündür."
   }
 }
