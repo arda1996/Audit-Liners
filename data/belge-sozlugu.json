@@ -703,5 +703,241 @@
         "счет"
       ]
     }
+  },
+  "_sutun_notu": "KALEM TABLOSU SÜTUN BAŞLIKLARI. Sütunun NEREDE olduğunu geometri bulur (dikey boşluk koridoru, şablon gerekmez); NE OLDUĞUNU bu tablo söyler. İkisi ayrı problemdir: konum her belgede vardır, anlam öğrenilir/tanınır. Türkçe önce yazılır — eşleştirme sadeleştirilmiş metin üzerinde ve en UZUN eşleşme kazanacak şekilde yapılır ('kdv orani' > 'kdv', 'birim fiyat' > 'birim').",
+  "sutun_basliklari": {
+    "SIRA": {
+      "tr": [
+        "sira no",
+        "sira",
+        "s.no",
+        "sno",
+        "no"
+      ],
+      "en": [
+        "line no",
+        "item no",
+        "no",
+        "#"
+      ],
+      "de": [
+        "pos",
+        "nr"
+      ],
+      "fr": [
+        "no"
+      ],
+      "ru": [
+        "№"
+      ]
+    },
+    "MAL_ADI": {
+      "tr": [
+        "malin cinsi",
+        "mal cinsi",
+        "mal hizmet cinsi",
+        "mal/hizmet",
+        "cinsi",
+        "cins",
+        "aciklama",
+        "urun adi",
+        "urun",
+        "hizmet",
+        "mal veya hizmet cinsi",
+        "tanim"
+      ],
+      "en": [
+        "description",
+        "item description",
+        "item",
+        "product",
+        "goods",
+        "service"
+      ],
+      "de": [
+        "bezeichnung",
+        "artikel",
+        "beschreibung"
+      ],
+      "fr": [
+        "designation",
+        "description",
+        "article"
+      ],
+      "ru": [
+        "наименование",
+        "товар"
+      ]
+    },
+    "BIRIM": {
+      "tr": [
+        "birimi",
+        "birim",
+        "olcu birimi",
+        "olcu"
+      ],
+      "en": [
+        "unit",
+        "uom",
+        "unit of measure"
+      ],
+      "de": [
+        "einheit",
+        "me"
+      ],
+      "fr": [
+        "unite"
+      ],
+      "ru": [
+        "ед изм",
+        "единица"
+      ]
+    },
+    "MIKTAR": {
+      "tr": [
+        "miktari",
+        "miktar",
+        "adedi",
+        "adet",
+        "mik"
+      ],
+      "en": [
+        "quantity",
+        "qty",
+        "amount qty"
+      ],
+      "de": [
+        "menge",
+        "anzahl"
+      ],
+      "fr": [
+        "quantite",
+        "qte"
+      ],
+      "ru": [
+        "количество",
+        "кол во"
+      ]
+    },
+    "BIRIM_FIYAT": {
+      "tr": [
+        "birim fiyati",
+        "birim fiyat",
+        "b fiyat",
+        "bfiyat",
+        "fiyati",
+        "fiyat"
+      ],
+      "en": [
+        "unit price",
+        "price",
+        "rate"
+      ],
+      "de": [
+        "einzelpreis",
+        "preis"
+      ],
+      "fr": [
+        "prix unitaire",
+        "prix"
+      ],
+      "ru": [
+        "цена"
+      ]
+    },
+    "ISKONTO": {
+      "tr": [
+        "iskonto orani",
+        "iskonto tutari",
+        "iskonto",
+        "isk",
+        "indirim"
+      ],
+      "en": [
+        "discount",
+        "disc"
+      ],
+      "de": [
+        "rabatt"
+      ],
+      "fr": [
+        "remise"
+      ],
+      "ru": [
+        "скидка"
+      ]
+    },
+    "KDV_ORANI": {
+      "tr": [
+        "kdv orani",
+        "kdv oran",
+        "vergi orani",
+        "kdv"
+      ],
+      "en": [
+        "vat rate",
+        "tax rate",
+        "vat",
+        "tax"
+      ],
+      "de": [
+        "mwst satz",
+        "ust"
+      ],
+      "fr": [
+        "taux tva",
+        "tva"
+      ],
+      "ru": [
+        "ставка ндс"
+      ]
+    },
+    "KDV_TUTARI": {
+      "tr": [
+        "kdv tutari",
+        "hesaplanan kdv",
+        "vergi tutari"
+      ],
+      "en": [
+        "vat amount",
+        "tax amount"
+      ],
+      "de": [
+        "mwst betrag"
+      ],
+      "fr": [
+        "montant tva"
+      ],
+      "ru": [
+        "сумма ндс"
+      ]
+    },
+    "TUTAR": {
+      "tr": [
+        "mal hizmet tutari",
+        "tutari",
+        "tutar",
+        "satir toplami",
+        "toplam"
+      ],
+      "en": [
+        "line total",
+        "amount",
+        "total",
+        "net amount"
+      ],
+      "de": [
+        "betrag",
+        "gesamt"
+      ],
+      "fr": [
+        "montant",
+        "total"
+      ],
+      "ru": [
+        "сумма",
+        "итого"
+      ]
+    }
   }
 }

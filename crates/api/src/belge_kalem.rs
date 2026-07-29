@@ -157,6 +157,101 @@ pub fn kalemleri_bul(satirlar: &[&str], dil: &str, matrah: Option<i64>) -> Kalem
     KalemSonuc { kalemler, toplam, matrahla_tutuyor, not }
 }
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BAŞLIK DESTEKLİ ÇIKARIM — sütunun anlamı biliniyorsa tahmine gerek yok
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Hücre ızgarasından kalemleri çıkarır; sütun başlıkları tanınırsa ONLARI kullanır.
+///
+/// ## Neden aritmetiğe ek olarak buna da ihtiyaç var
+///
+/// `satir_kalem` aritmetikle çalışır ve düzenden bağımsız olduğu için güçlüdür. Ama:
+///
+/// - **Çarpma değişmelidir.** `100 × 80` ile `80 × 100` aynı sonucu verir; miktar ile
+///   birim fiyatı ayırt etmek için soldan-sağa konum kuralı kullanılıyordu. Sütun sırası
+///   farklı olan bir faturada (fiyat solda, miktar sağda) bu kural yanlış eşler.
+/// - **Aritmetiği olmayan sütun görünmez.** Mal adı, birim, iskonto, KDV oranı hiç
+///   okunmuyordu — kullanıcının "mal cinsi, mal adeti gibi kolonlar yok" şikâyeti buydu.
+///
+/// Başlık tanınırsa ikisi de çözülür: miktar hangi sütunsa odur.
+///
+/// ## Doktrin: başlık ÖNERİR, aritmetik KARAR VERİR
+///
+/// Başlığa göre okunan her satır yine `miktar × birim fiyat = tutar` sınamasından geçer.
+/// Tutmuyorsa o satır kalem sayılmaz — başlık yanlış haritalanmış olabilir. Tanıma bir
+/// ipucudur, kanıt değildir.
+pub fn kalemleri_izgaradan_bul(
+    izgara: &[Vec<String>], dil: &str, matrah: Option<i64>,
+) -> KalemSonuc {
+    let Some(b) = crate::belge_sutun::basliklari_bul(izgara) else {
+        // Başlık yok — eski yola düş. Bu bir hata değil: elle doldurulmuş belgede
+        // başlık olmayabilir, aritmetik yine de çalışır.
+        let satirlar: Vec<String> = izgara.iter().map(|r| r.join("   ")).collect();
+        let refs: Vec<&str> = satirlar.iter().map(|s| s.as_str()).collect();
+        let mut s = kalemleri_bul(&refs, dil, matrah);
+        s.not = format!("{} (sütun başlığı tanınamadı, aritmetikle bulundu)", s.not);
+        return s;
+    };
+
+    let (Some(i_mik), Some(i_fiy), Some(i_tut)) =
+        (b.sutun("MIKTAR"), b.sutun("BIRIM_FIYAT"), b.sutun("TUTAR")) else {
+        // Üç sayısal sütunun üçü birden tanınmadıysa aritmetik daha güvenilir.
+        let satirlar: Vec<String> = izgara.iter().map(|r| r.join("   ")).collect();
+        let refs: Vec<&str> = satirlar.iter().map(|s| s.as_str()).collect();
+        let mut s = kalemleri_bul(&refs, dil, matrah);
+        s.not = format!("{} (başlıkta miktar/fiyat/tutar üçlüsü eksik)", s.not);
+        return s;
+    };
+    let i_ad = b.sutun("MAL_ADI");
+    let i_birim = b.sutun("BIRIM");
+
+    let hucre = |r: &Vec<String>, i: usize| -> String {
+        r.get(i).map(|x| x.trim().to_string()).unwrap_or_default()
+    };
+    let mut kalemler = Vec::new();
+    for (n, r) in izgara.iter().enumerate().skip(b.satir + 1) {
+        if r.len() <= i_tut { continue; }
+        let (Some(miktar_k), Some(fiyat), Some(tutar)) = (
+            crate::belge_oku::sayi_ayristir(&hucre(r, i_mik), dil),
+            crate::belge_oku::sayi_ayristir(&hucre(r, i_fiy), dil),
+            crate::belge_oku::sayi_ayristir(&hucre(r, i_tut), dil),
+        ) else { continue };
+        if tutar <= 0 || fiyat <= 0 || miktar_k <= 0 { continue; }
+
+        // ARİTMETİK HAKEM — başlık doğru haritalandıysa bu tutar.
+        let miktar = miktar_k as f64 / 100.0;
+        if (miktar * fiyat as f64 - tutar as f64).abs() > 1.0 { continue; }
+
+        let ad = i_ad.map(|i| hucre(r, i)).unwrap_or_default();
+        if ad.chars().filter(|c| c.is_alphabetic()).count() < 2 { continue; }
+        let birim = i_birim.map(|i| hucre(r, i).to_lowercase()).unwrap_or_default();
+        let birim = if BIRIMLER.contains(&birim.as_str()) { birim } else { String::new() };
+
+        kalemler.push(Kalem { ad, miktar, birim, birim_fiyat: fiyat, tutar, satir: n });
+    }
+
+    let toplam: i64 = kalemler.iter().map(|k| k.tutar).sum();
+    let matrahla_tutuyor = matrah.map(|m| m == toplam);
+    let basliklar: Vec<String> = b.sutunlar.iter()
+        .map(|s| if s.anlam.is_empty() { format!("{}=?", s.ham) }
+                 else { format!("{}={}", s.ham, s.anlam) })
+        .collect();
+    let not = match (kalemler.is_empty(), matrahla_tutuyor) {
+        (true, _) => format!("Sütun başlığı tanındı ({}/{}) ama hiçbir satır \
+            miktar × birim fiyat = tutar sınamasını geçmedi — başlık yanlış haritalanmış olabilir. \
+            Başlıklar: {}", b.taninan, b.sutunlar.len(), basliklar.join(" · ")),
+        (false, Some(true)) => format!("{} kalem BAŞLIĞA GÖRE okundu ve toplamı matrahla TUTUYOR. \
+            Başlıklar: {}", kalemler.len(), basliklar.join(" · ")),
+        (false, Some(false)) => format!("{} kalem başlığa göre okundu ama toplamı ({}) matrahla \
+            uyuşmuyor — bir satır eksik/fazla okunmuş olabilir. Başlıklar: {}",
+            kalemler.len(), toplam / 100, basliklar.join(" · ")),
+        (false, None) => format!("{} kalem başlığa göre okundu; matrah verilmediği için \
+            doğrulanamadı. Başlıklar: {}", kalemler.len(), basliklar.join(" · ")),
+    };
+    KalemSonuc { kalemler, toplam, matrahla_tutuyor, not }
+}
+
 #[cfg(test)]
 mod testler {
     use super::*;
@@ -234,5 +329,72 @@ mod testler {
     fn adsiz_satir_kalem_sayilmaz() {
         // Mal adı olmayan satır (yalnız sayılar) kalem değildir — yanlış pozitif koruması.
         assert!(satir_kalem("  1   2   2  ", 0, "tr").is_none());
+    }
+}
+
+#[cfg(test)]
+mod izgara_testleri {
+    use super::*;
+
+    fn iz(s: &[&[&str]]) -> Vec<Vec<String>> {
+        s.iter().map(|r| r.iter().map(|x| x.to_string()).collect()).collect()
+    }
+
+    /// **Kullanıcının şikâyeti buydu:** "mal cinsi, mal adeti gibi kolonlar bizim
+    /// alanlar bölümümüzde yok". Başlık tanınınca hepsi adlandırılmış olarak geliyor.
+    #[test]
+    fn baslikla_kalem_ve_birim_dogru_okunur() {
+        let g = iz(&[
+            &["CİNSİ", "BİRİM", "MİKTAR", "BİRİM FİYAT", "KDV %", "TUTAR"],
+            &["ÇORAP", "ADET", "200", "2,50", "8", "500,00"],
+            &["BAYAN PANTOLON", "ADET", "30", "50,00", "8", "1.500,00"],
+            &["BAYAN CEKET", "ADET", "20", "60,00", "8", "1.200,00"],
+        ]);
+        let s = kalemleri_izgaradan_bul(&g, "tr", Some(320_000));
+        assert_eq!(s.kalemler.len(), 3, "{}", s.not);
+        assert_eq!(s.matrahla_tutuyor, Some(true), "{}", s.not);
+        // Birim mal adına YAPIŞMAMALI — eski satır tabanlı yolda "ÇORAP ADET" geliyordu.
+        assert_eq!(s.kalemler[0].ad, "ÇORAP");
+        assert_eq!(s.kalemler[0].birim, "adet");
+        assert_eq!(s.kalemler[0].miktar, 200.0);
+        assert_eq!(s.kalemler[0].birim_fiyat, 250);
+    }
+
+    /// **Çarpmanın değişmeliliği başlıkla çözülür.** Fiyat sütunu miktarın SOLUNDA
+    /// olsa bile doğru eşlenmeli — aritmetik tek başına bunu ayırt edemez.
+    #[test]
+    fn ters_sutun_sirasi_baslikla_cozulur() {
+        let g = iz(&[
+            &["CİNSİ", "BİRİM FİYAT", "MİKTAR", "TUTAR"],
+            &["ÇORAP", "2,50", "200", "500,00"],
+        ]);
+        let s = kalemleri_izgaradan_bul(&g, "tr", None);
+        assert_eq!(s.kalemler.len(), 1, "{}", s.not);
+        assert_eq!(s.kalemler[0].miktar, 200.0, "miktar ile fiyat ters eşlendi: {:?}", s.kalemler[0]);
+        assert_eq!(s.kalemler[0].birim_fiyat, 250);
+    }
+
+    /// **Başlık ÖNERİR, aritmetik KARAR VERİR.** Başlık doğru ama satırın çarpımı
+    /// tutmuyorsa o satır kalem sayılmaz.
+    #[test]
+    fn aritmetigi_tutmayan_satir_baslik_dogru_olsa_da_alinmaz() {
+        let g = iz(&[
+            &["CİNSİ", "MİKTAR", "BİRİM FİYAT", "TUTAR"],
+            &["ÇORAP", "200", "2,50", "500,00"],
+            &["HATALI", "10", "5,00", "999,00"],   // 10 × 5 = 50 ≠ 999
+        ]);
+        let s = kalemleri_izgaradan_bul(&g, "tr", None);
+        assert_eq!(s.kalemler.len(), 1, "aritmetiği tutmayan satır kalem sayıldı: {:?}", s.kalemler);
+        assert_eq!(s.kalemler[0].ad, "ÇORAP");
+    }
+
+    /// Başlık yoksa eski aritmetik yola düşer — bu bir hata değil, elle doldurulmuş
+    /// belgede başlık olmayabilir.
+    #[test]
+    fn baslik_yoksa_aritmetige_duser() {
+        let g = iz(&[&["ÇORAP", "200", "2,50", "500,00"]]);
+        let s = kalemleri_izgaradan_bul(&g, "tr", None);
+        assert!(s.not.contains("aritmetikle") || s.not.contains("başlıkta"), "not: {}", s.not);
+        assert_eq!(s.kalemler.len(), 1, "{}", s.not);
     }
 }

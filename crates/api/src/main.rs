@@ -28,6 +28,7 @@ mod belge_ogren; // Yaşayan okuma katmanı — çok strateji + denklemle ayırt
 mod belge_konum; // Konum motoru — koordinatlı kelime okuma (bbox), sütun ve font boyutu duyarlı.
 mod belge_kalem; // Kalem satırları — mal cinsi, miktar, birim fiyat, tutar (aritmetikle bulunur).
 mod belge_oku;  // Belge okuma — okunan metni sayıya çevirir, belgenin kendi aritmetiğiyle doğrular.
+mod belge_sutun; // Sütun ADLANDIRMA — koridor nerede olduğunu, başlık ne olduğunu söyler.
 mod duzelt;     // Terim düzeltme — bozuk okunan finans terimini sözlükteki karşılığına bağlar.
 mod eslestir;   // Kapalı küme eşleştirme — bulmaca modeli: eler, tahmin etmez (cari ünvanı).
 mod gider;      // Gider hesapları — 7/A · 7/B seçimi, sektörel uygunluk, KKEG ayrımı.

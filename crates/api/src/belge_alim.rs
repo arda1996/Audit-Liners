@@ -837,10 +837,18 @@ pub async fn alim_fis_taslagi(Json(g): Json<OnayGirdi>) -> Json<serde_json::Valu
     // KALEMLER — mal cinsi / miktar / birim fiyat / satır tutarı.
     // Fişi değiştirmezler (matraha toplanırlar) ama stok, KDV oran kırılımı ve denetim
     // örneklemesi satır düzeyinde çalışır; ayrıca Σtutar = matrah bağımsız bir kanıttır.
+    //
+    // IZGARAYA GÖRE okunur: `izgaradan_metin` hücreleri üç boşlukla ayırdığı için metin
+    // geri ızgaraya çevrilebilir ve sütun BAŞLIKLARI tanınabilir. Başlık tanınırsa
+    // miktar/fiyat/tutar tahmin edilmez, adıyla okunur; mal adı ve birim de artık
+    // ayrı ayrı gelir (eskiden "ÇORAP ADET" diye yapışıyordu).
     let kalem_sonuc = {
-        let satirlar: Vec<&str> = o.metin.lines().collect();
+        let izgara: Vec<Vec<String>> = o.metin.lines()
+            .map(|s| s.split("   ").map(|h| h.trim().to_string())
+                      .filter(|h| !h.is_empty()).collect())
+            .collect();
         let matrah = o.alanlar.iter().find(|a| a.kod == "matrah").and_then(|a| a.deger);
-        crate::belge_kalem::kalemleri_bul(&satirlar, &o.dil, matrah)
+        crate::belge_kalem::kalemleri_izgaradan_bul(&izgara, &o.dil, matrah)
     };
 
     let (denklem, tutan, toplam_d) = denklem_kontrol(o);
