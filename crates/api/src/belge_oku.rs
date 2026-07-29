@@ -174,7 +174,34 @@ pub fn sayi_ayristir(ham: &str, dil: &str) -> Option<i64> {
     // "102.177,36" yazılmıştı — ondalık virgül yerel, ama binlik nokta değil boşluk olmalıydı).
     let yalniz_rakam = |s: &str| s.chars().filter(|c| c.is_ascii_digit()).collect::<String>();
 
-    let (tam, kesir) = if !ondalik.is_empty() && t.contains(&ondalik) {
+    // ── ÖLÇEK ÇAPASI — dilden BAĞIMSIZ ────────────────────────────────────────
+    //
+    // NEDEN VAR: `matrah + KDV = toplam` **DOĞRUSALDIR**. Üç terim de aynı katsayıyla
+    // bozulursa denklem HÂLÂ TUTAR. Yani ondalık ayraç yanlış çözülürse motor 100 kat
+    // büyük tutarı "belgenin kendi aritmetiğiyle kanıtlandı" diye onaylar ve otomatik
+    // doldurur. Ölçek, denklemin sabitleyemediği tek büyüklüktür — burada sabitlenir.
+    //
+    // KURAL: binlik ayracından sonra **her zaman tam 3 hane** gelir. Bir sayının son
+    // grubu 1-2 haneliyse o ayraç binlik OLAMAZ, ondalıktır. Bu bir tahmin değil,
+    // basamak gruplamasının tanımı — hangi dil olursa olsun geçerli.
+    //
+    // İki gerçek hatayı birden kapatır:
+    //   "8.000.00"  TR bağlamında  → 800.000 TL yerine 8.000,00 TL   (OCR virgülü nokta okudu)
+    //   "8,000.00"  TR bağlamında  → 800.000 TL yerine 8.000,00 TL   (İngiliz biçimi TR belgede)
+    let gruplar: Vec<&str> = t.split(['.', ',']).collect();
+    let olcek_capasi = gruplar.len() > 1 && {
+        let son = gruplar[gruplar.len() - 1];
+        (son.len() == 1 || son.len() == 2)
+            && son.chars().all(|c| c.is_ascii_digit())
+            && gruplar[1..gruplar.len() - 1].iter().all(|g| g.len() == 3)
+            && !gruplar[0].is_empty() && gruplar[0].len() <= 3
+            && gruplar.iter().all(|g| g.chars().all(|c| c.is_ascii_digit()))
+    };
+
+    let (tam, kesir) = if olcek_capasi {
+        let i = t.rfind(['.', ','])?;
+        (yalniz_rakam(&t[..i]), t[i + 1..].to_string())
+    } else if !ondalik.is_empty() && t.contains(&ondalik) {
         // Yerel ondalık ayracının SONUNCUSU gerçek ayraçtır; öncekiler binliktir.
         let i = t.rfind(&ondalik)?;
         let (a, b) = t.split_at(i);

@@ -470,7 +470,7 @@ async fn belgede_fatura_yaziyorsa_makbuz_secimi_uyari_verir() {
     let d = basla("MAKBUZ", "SECIMLI", metin, "ALM-A12").await;
     let u = coz(&d, "/tur_uyari");
     assert!(!u.is_null(), "tür uyuşmazlığı sessiz geçti: {d:?}");
-    assert_eq!(u["kod"], "A12");
+    assert_eq!(u["kod"], "A14");
     assert_eq!(u["sezilen"], "FATURA", "belgede FATURA yazıyor: {u:?}");
     assert_eq!(u["secilen"], "MAKBUZ");
     // Uyarı, NEYİN kaçırıldığını söylemeli — yoksa kullanıcı önemini anlamaz.
@@ -494,4 +494,45 @@ async fn uyari_verse_de_tur_kendiliginden_degismez() {
     assert!(!coz(&d, "/tur_uyari").is_null());
     assert_eq!(coz(&d, "/oturum/belge_turu"), "MAKBUZ",
         "motor kullanıcıya sormadan türü değiştirdi — doktrin ihlali");
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// B-01 — DENKLEMİN KÖR NOKTASI: doğrusal denklem ölçek hatasını yakalayamaz
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// **Doktrine yönelik en ağır itiraz.** Motorun tek güvencesi denklemdir. Ama
+/// `matrah + KDV = toplam` DOĞRUSALDIR: her üç terim de aynı katsayıyla bozulursa
+/// denklem HÂLÂ TUTAR. Yani ondalık ayraç yanlış çözülürse (OCR virgülü nokta okur,
+/// ya da dil yanlış sezilir) bütün tutarlar 100 kat büyür ve motor bunu
+/// "belgenin kendi aritmetiğiyle kanıtlandı" diye onaylar.
+///
+/// Kör nokta ÖLÇÜLDÜ ve gerçekti: motor 8.000,00 TL'yi 800.000 TL okuyup
+/// `doldurma: YAPILDI` dedi. Çare `belge_oku`'daki ÖLÇEK ÇAPASI: binlik ayracından
+/// sonra her zaman tam 3 hane gelir, son grup 1-2 haneliyse o ayraç ondalıktır.
+/// Bu test o çapayı korur — regresyonu buradan yakalarız.
+#[tokio::test]
+async fn olcek_capasi_yanlis_ayraci_duzeltir() {
+    // Ondalık ayraç NOKTA okunmuş: "8.000,00" yerine "8.000.00"
+    let metin = "FATURA\nMatrah        8.000.00\nKDV           1.600.00\nGenel Toplam  9.600.00";
+    let d = basla("FATURA", "OTOMATIK", metin, "ALM-B01").await;
+    let oto = coz(&d, "/otomatik");
+    let alanlar = coz(&d, "/oturum/alanlar");
+
+    let matrah = alanlar.as_array().unwrap().iter()
+        .find(|a| a["kod"] == "matrah").and_then(|a| a["deger"].as_i64());
+
+    // Gerçek matrah 8.000,00 TL = 800_000 kuruş. Ölçek hatası olsaydı 80_000_000 olurdu.
+    assert_eq!(matrah, Some(800_000),
+        "ölçek çapası tutmadı — denklem doğrusal olduğu için hata 'kanıtlandı' \
+         damgasıyla geçer. doldurma={:?}", oto["doldurma"]);
+}
+
+/// Aynı kör nokta İNGİLİZ biçiminin Türkçe belgede geçmesiyle de doğuyor.
+#[tokio::test]
+async fn ingiliz_bicimi_turkce_belgede_olcegi_bozmaz() {
+    let metin = "FATURA\nMatrah        8,000.00\nKDV           1,600.00\nGenel Toplam  9,600.00";
+    let d = basla("FATURA", "OTOMATIK", metin, "ALM-B01-EN").await;
+    let matrah = coz(&d, "/oturum/alanlar").as_array().unwrap().iter()
+        .find(|a| a["kod"] == "matrah").and_then(|a| a["deger"].as_i64());
+    assert_eq!(matrah, Some(800_000), "İngiliz biçimi 100 kat büyük okundu");
 }

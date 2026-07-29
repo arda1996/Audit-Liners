@@ -286,7 +286,7 @@ fn tur_uyarisi(metin: &str, dil: &str, secilen: &str) -> serde_json::Value {
         .filter_map(|p| p["ad"].as_str().map(|x| x.to_string()))
         .collect();
     serde_json::json!({
-        "kod": "A12",
+        "kod": "A14",
         "secilen": secilen,
         "sezilen": sezilen,
         "sezilen_ad": s["ad"],
