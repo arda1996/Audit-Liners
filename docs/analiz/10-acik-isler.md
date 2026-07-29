@@ -85,6 +85,66 @@ Gerçek belge + beklenen değer çifti olmadan **isabet oranı ölçülemez**.
 
 ---
 
+## A-EK. DÜŞMAN DENETİMDEN KALANLAR (29.07.2026)
+
+`belge-motor-denetci` 12 bulgu çıkardı. **Altısı kapatıldı**: ölçek çapası (B-01),
+denklem kapısı (B-02), fiş geri çekme (B-07), rakam↔yazı (B-08), takvim (B-10),
+sayfa koridoru (B-06). Ayrıca oturum id çakışması ve A12 kod çakışması.
+
+Kalanlar:
+
+### AE1. KDV muavini yürürlük süzmesi yok ⛔
+`hesaplama::muavin_kodu(oran)` `gecerli` bayrağını süzmüyor ve fatura tarihini hiç almıyor.
+Karma oranlı faturada (8.000@%20 + 2.000@%10) türetilen oran **18** çıkıyor →
+`muavin_kodu(18) = "05"` → boş değil → **A30 uyarısı hiç çıkmıyor** → satır `191.05`/`391.05`
+olarak, "İndirilecek KDV %18" açıklamasıyla yazılıyor.
+
+%18 oranı **10.07.2023'te kalktı**. 2026 tarihli fişte kalkmış muavin kullanılıyor ve
+KDV1'in oran kırılımı yanlış doldurulup iki gerçek oranın hiçbiri deftere yansımıyor.
+`hesaplama::kdv_hesapla` aynı durumda "YÜRÜRLÜKTE DEĞİL" uyarısı veriyor — **belge yolu bu
+korumayı atlıyor.**
+
+**Yapılacak:** `muavin_kodu`'ya tarih geçir + geçerliliği süz; kalemlerden birden çok oran
+tespit edilirse tek orana indirgemek yerine ENGEL üret.
+
+### AE2. Taranmış çok sayfalı PDF'te yalnız 1. sayfa okunuyor
+`belge_dosya.rs` `pdftoppm -f 1 -l 1` ile tek sayfa alıyor. Uyarı "N kelime okundu" diyor,
+**"yalnız 1. sayfa" demiyor**. Ayrıca `sayfa_sayisi` form-feed sayısından türüyor ve
+`izgaradan_metin` form-feed üretmediği için **dijital PDF'te de daima 1**.
+
+6 sayfalık taranmış ekstrede zincir eksik veriyle kuruluyor ve kullanıcı belgenin tamamının
+okunduğunu sanıyor.
+
+### AE3. Eksi işareti belirteçten düşüyor
+`belge_ogren::belirtecler` `if !h[i].is_ascii_digit() { continue }` ile başlıyor; `-` ve `(`
+atlanıyor. `sayi_ayristir` eksiyi okuyabiliyor ama belirteç onu hiç taşımıyor.
+
+Sonuç: negatif bakiyeli ekstrede otomatik mod hiç çalışmıyor; kullanıcı doğru değeri
+(`-12.500,00`) elle girince **sahte çelişki uyarısı** çıkıyor. MUTABAKAT'ta denklem
+`mutlak:true` olduğu için işaret kaybı + mutlak karşılaştırma birleşiyor ve **borç/alacak
+yönü yapısal olarak doğrulanamıyor**: 45.000/12.500 ile 12.500/45.000 aynı "doğrulandı"
+sonucunu veriyor.
+
+### AE4. Öğrenme: itibar okunmuyor, çapa değeri içeriyor
+Üç ayrı kusur:
+- `uygula()` `isabet`/`deneme` alanlarını **hiç okumuyor**; puan sabit 200.
+- Tek yanlış onay `*k = Kural{…}` ile doğru kuralı **tamamen eziyor**, itibar sıfırlanıyor.
+- Çapa değerin bulunduğu satırdan üretiliyor: `"SAYIN: EGE TEKSTİL A.Ş."` → çapa
+  `"sayin ege tekstil a s"` — **müşteri adı çapanın içinde**, farklı müşterili bir sonraki
+  faturada kural hiç eşleşmiyor.
+- `next_back()` "Matrah 8.000,00 KDV 1.600,00" satırında **KDV'yi matrah alanına** aday yapıyor.
+
+### AE5. `etiket_gecer` ölü kod
+`grep` yalnız tanımı buluyor. Belgelenen "bozuk glif toleransı" **devrede değil**;
+`bozuk_glifli_etiket_yine_de_bulunur` testi başka sebeple geçiyor (sözlükteki kısa
+eşanlamlı `"kdv"` tam alt dizi olarak tuttuğu için).
+
+Eşanlamlısı olmayan alanlarda (`borc_bakiye`, `alacak_bakiye`, `acilis`, `giris`, `cikis`,
+`stopaj` — eşleme tablosunda **yoklar**) tek bozuk karakter etiketi tamamen kaçırıyor;
+aday listesi boşalınca `denklemle_sec` denklemi **hiç denemeden atlıyor**.
+
+---
+
 ## B. MUHASEBE DOĞRULUĞU — denetimden kalan açık bulgular
 
 Bunlar üç ajanlı denetimde bulunup **düzeltilmeyen** maddeler. Beşi düzeltildi
