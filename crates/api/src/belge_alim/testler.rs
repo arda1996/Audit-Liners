@@ -536,3 +536,61 @@ async fn ingiliz_bicimi_turkce_belgede_olcegi_bozmaz() {
         .find(|a| a["kod"] == "matrah").and_then(|a| a["deger"].as_i64());
     assert_eq!(matrah, Some(800_000), "İngiliz biçimi 100 kat büyük okundu");
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// B-02 / B-07 / B-08 — "motor hayır diyor ama çıktısını geri çekmiyor"
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// MAKBUZ'un aritmetik özdeşliği yoktur; doğrulanabilir tek bağıntısı rakam↔yazıdır.
+/// Bu denklem TOPLAMA denkleminden yapısal olarak farklıdır: doğrusal DEĞİLDİR, yani
+/// ölçeği mutlak sabitler. Eskiden alım akışında hiç çağrılmıyordu.
+#[tokio::test]
+async fn makbuzda_rakam_yazi_celiskisi_yakalanir() {
+    let d = basla("MAKBUZ", "MANUEL", "", "ALM-MKB-CELISKI").await;
+    let _ = d;
+    for (k, v) in [("unvan", "ÖRNEK TEKSTİL"), ("tarih", "01.02.2026"),
+                   ("toplam", "1.000,00"), ("yaziyla", "Yalnız onbin lira")] {
+        deger("ALM-MKB-CELISKI", k, v, "MANUEL").await;
+        onayla("ALM-MKB-CELISKI", k).await;
+    }
+    let t = tamamla("ALM-MKB-CELISKI").await;
+    let b = coz(&t, "/bulgular");
+    assert!(b.as_array().unwrap().iter().any(|x| x["onem"] == "ENGEL"
+                && x["mesaj"].as_str().unwrap_or("").contains("TUTMUYOR")),
+        "rakam 1.000,00 iken yazıyla 'onbin' — çelişki yakalanmadı: {b:?}");
+    assert_eq!(coz(&t, "/tamamlandi"), false);
+}
+
+/// Rakam ile yazı örtüşüyorsa makbuz DOĞRULANMIŞ sayılır.
+#[tokio::test]
+async fn makbuzda_rakam_yazi_ortusurse_dogrulanir() {
+    basla("MAKBUZ", "MANUEL", "", "ALM-MKB-OK").await;
+    for (k, v) in [("unvan", "ÖRNEK TEKSTİL"), ("tarih", "01.02.2026"),
+                   ("toplam", "1.000,00"), ("yaziyla", "Yalnız bin lira")] {
+        deger("ALM-MKB-OK", k, v, "MANUEL").await;
+        onayla("ALM-MKB-OK", k).await;
+    }
+    let t = tamamla("ALM-MKB-OK").await;
+    assert_eq!(coz(&t, "/dogrulama"), "DOGRULANDI", "{:?}", coz(&t, "/bulgular"));
+    assert_eq!(coz(&t, "/denklem_tutan"), 1);
+}
+
+/// **Motor yapmadığı şeyi YAPTIM DEMEZ.** Denklemi sınanamayan belge "denklemler
+/// tutuyor" diye raporlanamaz — doğrulanmamış belge doğrulanmış gibi görünürdü.
+#[tokio::test]
+async fn sinanamayan_denklem_dogrulandi_diye_raporlanmaz() {
+    // DEKONT: yalnız tarih ve kapanış zorunlu; zincir (açılış+giriş−çıkış) sınanamaz.
+    basla("DEKONT", "MANUEL", "", "ALM-DKT").await;
+    for (k, v) in [("tarih", "01.02.2026"), ("kapanis", "5.000,00")] {
+        deger("ALM-DKT", k, v, "MANUEL").await;
+        onayla("ALM-DKT", k).await;
+    }
+    let t = tamamla("ALM-DKT").await;
+    assert_eq!(coz(&t, "/denklem_tutan"), 0, "zincir sınanamamalıydı");
+    assert_eq!(coz(&t, "/dogrulama"), "DOGRULANMADI");
+    let not = coz(&t, "/not");
+    assert!(!not.as_str().unwrap_or("").contains("denklemler tutuyor"),
+        "sınanmamış denklem 'tutuyor' diye raporlandı: {not}");
+    assert!(coz(&t, "/bulgular").as_array().unwrap().iter().any(|x| x["kod"] == "A24"),
+        "doğrulanmadı uyarısı yok");
+}

@@ -132,6 +132,9 @@ fn denklem_kontrol(o: &Oturum) -> (Vec<AlimBulgu>, usize, usize) {
     let deger = |kod: &str| -> Option<i64> {
         o.alanlar.iter().find(|a| a.kod == kod).and_then(|a| a.deger)
     };
+    let ham = |kod: &str| -> String {
+        o.alanlar.iter().find(|a| a.kod == kod).map(|a| a.ham.clone()).unwrap_or_default()
+    };
 
     for d in tur["denklemler"].as_array().into_iter().flatten() {
         toplam += 1;
@@ -142,6 +145,48 @@ fn denklem_kontrol(o: &Oturum) -> (Vec<AlimBulgu>, usize, usize) {
                 "Alan doldurulunca denklem kendiliğinden sınanır."));
             continue;
         };
+
+        // ── RAKAM ↔ YAZI — toplama denkleminden YAPISAL OLARAK farklı ────────────
+        //
+        // Toplama denklemleri DOĞRUSALDIR: her terim aynı katsayıyla bozulursa denklem
+        // hâlâ tutar (bkz. belge_oku ölçek çapası). Yazıyla yazılan tutar ise ölçeği
+        // MUTLAK olarak sabitler — "Üçbindörtyüzellialtı" 345.600 okunamaz.
+        //
+        // Bu yüzden makbuzun tek denklemi budur ve aynı zamanda faturada da en güçlü
+        // ikinci kanıttır. Daha önce yalnız `belge_oku::coz` içinde çağrılıyordu; alım
+        // akışı bu korumadan tamamen yoksundu ve `yaziyla` alanı METIN olduğu için
+        // hiçbir sınamadan geçmeden onaylanıyordu.
+        if d["tur"].as_str() == Some("YAZIYLA") {
+            let kaynak_kod = d["kaynak"].as_str().unwrap_or("");
+            let h = ham(kaynak_kod);
+            if h.trim().is_empty() {
+                b.push(bulgu("A20", "BILGI", format!("{ad} — '{kaynak_kod}' henüz girilmedi, doğrulanamadı."),
+                    "Alan doldurulunca denklem kendiliğinden sınanır."));
+                continue;
+            }
+            // BİRİM: `yaziyla_ayristir` LİRA döndürür ("bin lira" → 1000), alan değerleri
+            // ise KURUŞ'tur. `belge_oku::coz` de aynı dönüşümü yapıyor (`x * 100`).
+            // Yazıyla kuruş yazımı ("... lira elli kuruş") bu yolda ÇÖZÜLMEZ — o durumda
+            // denklem tutmaz ve kullanıcı uyarılır; sessizce yanlış eşleşmektense doğrudur.
+            match crate::belge_oku::yaziyla_ayristir(&h, &o.dil).and_then(|x| x.checked_mul(100)) {
+                None => b.push(bulgu("A23", "UYARI",
+                    format!("{ad} — yazıyla yazılan tutar çözülemedi: \"{}\".", h.trim()),
+                    "Yazı okunamadığı için rakamla çapraz doğrulama YAPILAMADI. Belgedeki \
+                     yazıyı olduğu gibi girdiğinden emin ol; çözülemezse bu belge \
+                     doğrulanmamış sayılır.")),
+                Some(y) if y != hedef => b.push(bulgu("A21", "ENGEL",
+                    format!("{ad} TUTMUYOR: yazıyla {} ≠ rakamla {}.", tl(y), tl(hedef)),
+                    "Rakam ile yazı çelişiyor. Bu, tahrifatın ve okuma hatasının en güçlü \
+                     göstergesidir — hangisinin doğru olduğu belgeden kontrol edilmeli."),),
+                Some(_) => {
+                    tutan += 1;
+                    b.push(bulgu("A00", "BILGI",
+                        format!("{ad} doğrulandı ({}).", tl(hedef)),
+                        "Yazı ile rakam örtüşüyor — ölçek mutlak olarak sabitlendi."));
+                }
+            }
+            continue;
+        }
         let mut sol = 0i64;
         let mut eksik = false;
         for t in d["terimler"].as_array().into_iter().flatten() {
@@ -665,6 +710,28 @@ pub async fn alim_tamamla(Json(g): Json<OnayGirdi>) -> Json<serde_json::Value> {
     let (denklem, tutan, toplam) = denklem_kontrol(o);
     bulgular.extend(denklem);
 
+    // ── DOĞRULAMA DURUMU — motor yapmadığı şeyi YAPTIM DEMEZ ──────────────────
+    //
+    // Eskiden `tamamlandi = !engel` idi ve yanıt her durumda "denklemler tutuyor"
+    // diyordu. Oysa eksik terim ENGEL değil BILGI üretir: bir DEKONT'ta yalnız kapanış
+    // bakiyesi girilirse zincir hiç sınanmaz, MAKBUZ'da ise denklem hiç tanımlı değildi.
+    // Her iki durumda da motor `denklem_tutan: 0` olduğu halde "denklemler tutuyor"
+    // yazıyordu — doğrulanmamış belge doğrulanmış gibi görünüyordu.
+    //
+    // TAMAMLANMAYI ENGELLEMİYORUZ: elle giriş kullanıcının beyanıdır ve makbuz gibi
+    // türlerde aritmetik özdeşlik gerçekten yoktur. Ama durum AÇIKÇA işaretlenir ki
+    // hem kullanıcı hem denetim izi neyin kanıtlandığını, neyin kanıtlanmadığını görsün.
+    let dogrulama = if toplam == 0 { "DOGRULANMADI" }
+                    else if tutan == toplam { "DOGRULANDI" }
+                    else if tutan == 0 { "DOGRULANMADI" }
+                    else { "KISMEN" };
+    if dogrulama != "DOGRULANDI" {
+        bulgular.push(bulgu("A24", "UYARI",
+            format!("Bu belge DOĞRULANMADI: {tutan}/{toplam} denklem sınandı."),
+            "Belge kayda alınabilir ama aritmetik kanıtı yoktur — değerler yalnız \
+             kullanıcı beyanına dayanır. Fişte ve denetim izinde bu şekilde görünür."));
+    }
+
     let engel = bulgular.iter().any(|x| x.onem == "ENGEL");
     o.tamamlandi = !engel;
 
@@ -696,10 +763,18 @@ pub async fn alim_tamamla(Json(g): Json<OnayGirdi>) -> Json<serde_json::Value> {
             } else if o.tamamlandi { "Bu düzen zaten biliniyordu; kurallar tazelendi." }
             else { "Oturum tamamlanmadığı için öğrenme yapılmadı." } },
         "denklem_tutan": tutan, "denklem_toplam": toplam,
+        "dogrulama": dogrulama,
         "alanlar": o.alanlar,
         "bulgular": bulgular,
         "not": if engel { "Belge kayda alınamaz — ENGEL bulgusu var." }
-               else { "Tüm alanlar onaylı ve denklemler tutuyor; fiş taslağı üretilebilir." },
+               else if dogrulama == "DOGRULANDI" {
+                   "Tüm alanlar onaylı ve denklemler tutuyor; fiş taslağı üretilebilir." }
+               else if dogrulama == "KISMEN" {
+                   "Alanlar onaylı ama denklemlerin bir kısmı sınanamadı — fiş taslağı \
+                    üretilebilir, ancak belge KISMEN doğrulanmıştır." }
+               else {
+                   "Alanlar onaylı ama HİÇBİR denklem sınanamadı — bu belgenin aritmetik \
+                    kanıtı yoktur, değerler yalnız kullanıcı beyanına dayanır." },
     }))
 }
 
@@ -835,6 +910,26 @@ pub async fn alim_fis_taslagi(Json(g): Json<OnayGirdi>) -> Json<serde_json::Valu
     // Tarih yyyyaagg olarak saklı; fiş ucu gg.aa.yyyy bekliyor.
     let t = sayi("tarih").to_string();
     let tarih = if t.len() == 8 { format!("{}.{}.{}", &t[6..8], &t[4..6], &t[0..4]) } else { String::new() };
+
+    // ── ENGEL VARSA FİŞ ÜRETİLMEZ ─────────────────────────────────────────────
+    //
+    // Eskiden A31 (fiş dengesiz) ve A32 (tevkifat > KDV) ENGEL üretiyor ama fonksiyon
+    // fişi YİNE DE döndürüyordu — üstelik "Taslak. Deftere yazmak için /api/fis ucuna
+    // gönderilir" notuyla. `bulgular` dizisini süzmeyen bir istemci dengesiz fişi
+    // doğrudan deftere yollayabiliyordu.
+    //
+    // Motor "hayır" diyorsa çıktısını da geri çekmeli: ENGEL varken `fis` alanı hiç
+    // üretilmez. Bulgular yine döner ki kullanıcı neyin yanlış olduğunu görsün.
+    if uyarilar.iter().any(|x| x.onem == "ENGEL") {
+        return Json(serde_json::json!({
+            "hata": "Fiş üretilemedi — ENGEL bulgusu var.",
+            "fis": serde_json::Value::Null,
+            "denge": { "borc": b, "alacak": a, "denk": b == a },
+            "bulgular": uyarilar,
+            "not": "ENGEL giderilmeden bu belgeden fiş üretilemez; taslak bilerek \
+                    döndürülmemiştir (VUK 219 — hatalı kayıt deftere girmemelidir).",
+        }));
+    }
 
     Json(serde_json::json!({
         "fis": {

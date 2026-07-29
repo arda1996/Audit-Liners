@@ -1,7 +1,6 @@
 {
   "_not": "Belge alım parametreleri — kullanıcıdan hangi alanın HANGİ SIRAYLA isteneceği ve o alanların birbirini nasıl doğrulayacağı. Arayüz bu dosyadan beslenir; yeni belge türü eklemek kod değişikliği gerektirmez.",
   "_ilke": "Her belge türü kendi DENKLEMLERİNİ taşır. Denklem, alanların birbirini doğrulamasıdır: borç − alacak = net, matrah + KDV = toplam. Kullanıcı ister seçsin ister elle yazsın, denklem tutmuyorsa kayıt açılmaz. Doğruluk, kullanıcının dikkatine değil belgenin aritmetiğine dayanır.",
-
   "modlar": {
     "OTOMATIK": {
       "ad": "Otomatik okuma (metin katmanlı PDF)",
@@ -19,92 +18,375 @@
       "kanit_zorunlu": false
     }
   },
-
   "belge_turleri": {
     "MUTABAKAT": {
       "ad": "Cari mutabakat / bakiye bildirimi",
       "parametreler": [
-        { "kod": "unvan",        "ad": "Şirket ünvanı", "tip": "METIN", "sira": 1, "zorunlu": true,  "ipucu": "Belgenin başındaki firma adını seç" },
-        { "kod": "vkn",          "ad": "VKN / TCKN",    "tip": "VKN",   "sira": 2, "zorunlu": false, "ipucu": "10 haneli VKN veya 11 haneli TCKN" },
-        { "kod": "borc_bakiye",  "ad": "Borç bakiye",   "tip": "TUTAR", "sira": 3, "zorunlu": true,  "ipucu": "Borç sütunu toplamı" },
-        { "kod": "alacak_bakiye","ad": "Alacak bakiye", "tip": "TUTAR", "sira": 4, "zorunlu": true,  "ipucu": "Alacak sütunu toplamı" },
-        { "kod": "net_bakiye",   "ad": "Net bakiye",    "tip": "TUTAR", "sira": 5, "zorunlu": true,  "ipucu": "Bakiye satırı" },
-        { "kod": "tarih",        "ad": "Tarih",         "tip": "TARIH", "sira": 6, "zorunlu": true,  "ipucu": "Mutabakat tarihi" }
+        {
+          "kod": "unvan",
+          "ad": "Şirket ünvanı",
+          "tip": "METIN",
+          "sira": 1,
+          "zorunlu": true,
+          "ipucu": "Belgenin başındaki firma adını seç"
+        },
+        {
+          "kod": "vkn",
+          "ad": "VKN / TCKN",
+          "tip": "VKN",
+          "sira": 2,
+          "zorunlu": false,
+          "ipucu": "10 haneli VKN veya 11 haneli TCKN"
+        },
+        {
+          "kod": "borc_bakiye",
+          "ad": "Borç bakiye",
+          "tip": "TUTAR",
+          "sira": 3,
+          "zorunlu": true,
+          "ipucu": "Borç sütunu toplamı"
+        },
+        {
+          "kod": "alacak_bakiye",
+          "ad": "Alacak bakiye",
+          "tip": "TUTAR",
+          "sira": 4,
+          "zorunlu": true,
+          "ipucu": "Alacak sütunu toplamı"
+        },
+        {
+          "kod": "net_bakiye",
+          "ad": "Net bakiye",
+          "tip": "TUTAR",
+          "sira": 5,
+          "zorunlu": true,
+          "ipucu": "Bakiye satırı"
+        },
+        {
+          "kod": "tarih",
+          "ad": "Tarih",
+          "tip": "TARIH",
+          "sira": 6,
+          "zorunlu": true,
+          "ipucu": "Mutabakat tarihi"
+        }
       ],
       "denklemler": [
-        { "ad": "Borç − Alacak = Net bakiye",
-          "terimler": [{ "kod": "borc_bakiye", "isaret": 1 }, { "kod": "alacak_bakiye", "isaret": -1 }],
+        {
+          "ad": "Borç − Alacak = Net bakiye",
+          "terimler": [
+            {
+              "kod": "borc_bakiye",
+              "isaret": 1
+            },
+            {
+              "kod": "alacak_bakiye",
+              "isaret": -1
+            }
+          ],
           "hedef": "net_bakiye",
           "mutlak": true,
-          "not": "Mutabakat belgesinde net bakiye borç ya da alacak yönlü olabilir; işaret farkı yön farkıdır, tutar aynıdır." }
+          "not": "Mutabakat belgesinde net bakiye borç ya da alacak yönlü olabilir; işaret farkı yön farkıdır, tutar aynıdır."
+        }
       ]
     },
-
     "FATURA": {
       "ad": "Fatura",
       "parametreler": [
-        { "kod": "yon",     "ad": "Fatura yönü",        "tip": "SECENEK", "sira": 1, "zorunlu": true, "ipucu": "Bu fatura bize mi kesildi (ALIŞ), biz mi kestik (SATIŞ)?", "secenekler": ["SATIS", "ALIS"] },
-        { "kod": "unvan",   "ad": "Karşı taraf ünvanı", "tip": "METIN", "sira": 2, "zorunlu": true,  "ipucu": "Sayın / Alıcı satırı" },
-        { "kod": "vkn",     "ad": "VKN / TCKN",         "tip": "VKN",   "sira": 3, "zorunlu": false, "ipucu": "Vergi kimlik numarası" },
-        { "kod": "belge_no","ad": "Fatura no",          "tip": "METIN", "sira": 4, "zorunlu": true,  "ipucu": "Seri-sıra numarası" },
-        { "kod": "tarih",   "ad": "Fatura tarihi",      "tip": "TARIH", "sira": 5, "zorunlu": true,  "ipucu": "Düzenleme tarihi" },
-        { "kod": "matrah",  "ad": "Matrah",             "tip": "TUTAR", "sira": 6, "zorunlu": true,  "ipucu": "Mal/hizmet toplam tutarı" },
-        { "kod": "kdv",     "ad": "KDV tutarı",         "tip": "TUTAR", "sira": 7, "zorunlu": true,  "ipucu": "Hesaplanan KDV" },
-        { "kod": "toplam",  "ad": "Genel toplam",       "tip": "TUTAR", "sira": 8, "zorunlu": true,  "ipucu": "Vergiler dahil toplam tutar" },
-        { "kod": "tevkifat","ad": "Tevkifata tabi KDV",  "tip": "TUTAR", "sira": 9, "zorunlu": false, "ipucu": "Alıcının sorumlu sıfatıyla beyan edeceği KDV payı. Tevkifat yoksa 0 bırak (KDVK 9)." }
+        {
+          "kod": "yon",
+          "ad": "Fatura yönü",
+          "tip": "SECENEK",
+          "sira": 1,
+          "zorunlu": true,
+          "ipucu": "Bu fatura bize mi kesildi (ALIŞ), biz mi kestik (SATIŞ)?",
+          "secenekler": [
+            "SATIS",
+            "ALIS"
+          ]
+        },
+        {
+          "kod": "unvan",
+          "ad": "Karşı taraf ünvanı",
+          "tip": "METIN",
+          "sira": 2,
+          "zorunlu": true,
+          "ipucu": "Sayın / Alıcı satırı"
+        },
+        {
+          "kod": "vkn",
+          "ad": "VKN / TCKN",
+          "tip": "VKN",
+          "sira": 3,
+          "zorunlu": false,
+          "ipucu": "Vergi kimlik numarası"
+        },
+        {
+          "kod": "belge_no",
+          "ad": "Fatura no",
+          "tip": "METIN",
+          "sira": 4,
+          "zorunlu": true,
+          "ipucu": "Seri-sıra numarası"
+        },
+        {
+          "kod": "tarih",
+          "ad": "Fatura tarihi",
+          "tip": "TARIH",
+          "sira": 5,
+          "zorunlu": true,
+          "ipucu": "Düzenleme tarihi"
+        },
+        {
+          "kod": "matrah",
+          "ad": "Matrah",
+          "tip": "TUTAR",
+          "sira": 6,
+          "zorunlu": true,
+          "ipucu": "Mal/hizmet toplam tutarı"
+        },
+        {
+          "kod": "kdv",
+          "ad": "KDV tutarı",
+          "tip": "TUTAR",
+          "sira": 7,
+          "zorunlu": true,
+          "ipucu": "Hesaplanan KDV"
+        },
+        {
+          "kod": "toplam",
+          "ad": "Genel toplam",
+          "tip": "TUTAR",
+          "sira": 8,
+          "zorunlu": true,
+          "ipucu": "Vergiler dahil toplam tutar"
+        },
+        {
+          "kod": "tevkifat",
+          "ad": "Tevkifata tabi KDV",
+          "tip": "TUTAR",
+          "sira": 9,
+          "zorunlu": false,
+          "ipucu": "Alıcının sorumlu sıfatıyla beyan edeceği KDV payı. Tevkifat yoksa 0 bırak (KDVK 9)."
+        }
       ],
       "denklemler": [
-        { "ad": "Matrah + KDV = Genel toplam",
-          "terimler": [{ "kod": "matrah", "isaret": 1 }, { "kod": "kdv", "isaret": 1 }],
-          "hedef": "toplam", "mutlak": false,
-          "not": "Tevkifat veya iskonto varsa fark buradan görünür; motor farkı bildirir, kendiliğinden kapatmaz." }
+        {
+          "ad": "Matrah + KDV = Genel toplam",
+          "terimler": [
+            {
+              "kod": "matrah",
+              "isaret": 1
+            },
+            {
+              "kod": "kdv",
+              "isaret": 1
+            }
+          ],
+          "hedef": "toplam",
+          "mutlak": false,
+          "not": "Tevkifat veya iskonto varsa fark buradan görünür; motor farkı bildirir, kendiliğinden kapatmaz."
+        }
       ]
     },
-
     "MAKBUZ": {
       "ad": "Tahsilat / tediye makbuzu",
       "parametreler": [
-        { "kod": "unvan",  "ad": "Ödeyen / tahsil eden", "tip": "METIN", "sira": 1, "zorunlu": true,  "ipucu": "Kimden alındı / kime ödendi" },
-        { "kod": "tarih",  "ad": "Tarih",                "tip": "TARIH", "sira": 2, "zorunlu": true,  "ipucu": "Makbuz tarihi" },
-        { "kod": "toplam", "ad": "Tutar (rakamla)",      "tip": "TUTAR", "sira": 3, "zorunlu": true,  "ipucu": "Rakamla yazılı tutar" },
-        { "kod": "yaziyla","ad": "Tutar (yazıyla)",      "tip": "METIN", "sira": 4, "zorunlu": true,  "ipucu": "'Yalnız ...' satırı" }
+        {
+          "kod": "unvan",
+          "ad": "Ödeyen / tahsil eden",
+          "tip": "METIN",
+          "sira": 1,
+          "zorunlu": true,
+          "ipucu": "Kimden alındı / kime ödendi"
+        },
+        {
+          "kod": "tarih",
+          "ad": "Tarih",
+          "tip": "TARIH",
+          "sira": 2,
+          "zorunlu": true,
+          "ipucu": "Makbuz tarihi"
+        },
+        {
+          "kod": "toplam",
+          "ad": "Tutar (rakamla)",
+          "tip": "TUTAR",
+          "sira": 3,
+          "zorunlu": true,
+          "ipucu": "Rakamla yazılı tutar"
+        },
+        {
+          "kod": "yaziyla",
+          "ad": "Tutar (yazıyla)",
+          "tip": "METIN",
+          "sira": 4,
+          "zorunlu": true,
+          "ipucu": "'Yalnız ...' satırı"
+        }
       ],
-      "denklemler": []
+      "denklemler": [
+        {
+          "ad": "Yazıyla yazılan tutar = rakamla yazılan tutar",
+          "tur": "YAZIYLA",
+          "kaynak": "yaziyla",
+          "hedef": "toplam",
+          "not": "Makbuzun aritmetik özdeşliği yoktur; doğrulanabilir tek bağıntısı budur. Ayrıca bu denklem DOĞRUSAL DEĞİLDİR: 'Üçbindörtyüzellialtı' ölçeği mutlak olarak sabitler, dolayısıyla toplama denklemlerinin kör olduğu 100 kat hatasını da yakalar."
+        }
+      ]
     },
-
     "DEKONT": {
       "ad": "Banka dekontu / hesap ekstresi",
       "parametreler": [
-        { "kod": "unvan",   "ad": "Karşı taraf",     "tip": "METIN", "sira": 1, "zorunlu": false, "ipucu": "Gönderen / alıcı ünvanı (yoksa boş bırak)" },
-        { "kod": "iban",    "ad": "IBAN / hesap no", "tip": "METIN", "sira": 2, "zorunlu": false, "ipucu": "Hesap numarası" },
-        { "kod": "tarih",   "ad": "İşlem tarihi",    "tip": "TARIH", "sira": 3, "zorunlu": true,  "ipucu": "Valör / işlem tarihi" },
-        { "kod": "acilis",  "ad": "Açılış bakiyesi", "tip": "TUTAR", "sira": 4, "zorunlu": false, "ipucu": "Devreden bakiye" },
-        { "kod": "giris",   "ad": "Toplam giriş",    "tip": "TUTAR", "sira": 5, "zorunlu": false, "ipucu": "Alacak toplamı" },
-        { "kod": "cikis",   "ad": "Toplam çıkış",    "tip": "TUTAR", "sira": 6, "zorunlu": false, "ipucu": "Borç toplamı" },
-        { "kod": "kapanis", "ad": "Kapanış bakiyesi","tip": "TUTAR", "sira": 7, "zorunlu": true,  "ipucu": "Son bakiye" }
+        {
+          "kod": "unvan",
+          "ad": "Karşı taraf",
+          "tip": "METIN",
+          "sira": 1,
+          "zorunlu": false,
+          "ipucu": "Gönderen / alıcı ünvanı (yoksa boş bırak)"
+        },
+        {
+          "kod": "iban",
+          "ad": "IBAN / hesap no",
+          "tip": "METIN",
+          "sira": 2,
+          "zorunlu": false,
+          "ipucu": "Hesap numarası"
+        },
+        {
+          "kod": "tarih",
+          "ad": "İşlem tarihi",
+          "tip": "TARIH",
+          "sira": 3,
+          "zorunlu": true,
+          "ipucu": "Valör / işlem tarihi"
+        },
+        {
+          "kod": "acilis",
+          "ad": "Açılış bakiyesi",
+          "tip": "TUTAR",
+          "sira": 4,
+          "zorunlu": false,
+          "ipucu": "Devreden bakiye"
+        },
+        {
+          "kod": "giris",
+          "ad": "Toplam giriş",
+          "tip": "TUTAR",
+          "sira": 5,
+          "zorunlu": false,
+          "ipucu": "Alacak toplamı"
+        },
+        {
+          "kod": "cikis",
+          "ad": "Toplam çıkış",
+          "tip": "TUTAR",
+          "sira": 6,
+          "zorunlu": false,
+          "ipucu": "Borç toplamı"
+        },
+        {
+          "kod": "kapanis",
+          "ad": "Kapanış bakiyesi",
+          "tip": "TUTAR",
+          "sira": 7,
+          "zorunlu": true,
+          "ipucu": "Son bakiye"
+        }
       ],
       "denklemler": [
-        { "ad": "Açılış + Giriş − Çıkış = Kapanış",
-          "terimler": [{ "kod": "acilis", "isaret": 1 }, { "kod": "giris", "isaret": 1 }, { "kod": "cikis", "isaret": -1 }],
-          "hedef": "kapanis", "mutlak": false,
-          "not": "Ekstre zinciri kapanmıyorsa satır atlanmış ya da yanlış okunmuştur." }
+        {
+          "ad": "Açılış + Giriş − Çıkış = Kapanış",
+          "terimler": [
+            {
+              "kod": "acilis",
+              "isaret": 1
+            },
+            {
+              "kod": "giris",
+              "isaret": 1
+            },
+            {
+              "kod": "cikis",
+              "isaret": -1
+            }
+          ],
+          "hedef": "kapanis",
+          "mutlak": false,
+          "not": "Ekstre zinciri kapanmıyorsa satır atlanmış ya da yanlış okunmuştur."
+        }
       ]
     },
-
     "GIDER_PUSULASI": {
       "ad": "Gider pusulası",
       "parametreler": [
-        { "kod": "unvan",  "ad": "Mal/hizmet sunan", "tip": "METIN", "sira": 1, "zorunlu": true, "ipucu": "Ad soyad" },
-        { "kod": "vkn",    "ad": "TCKN",             "tip": "VKN",   "sira": 2, "zorunlu": true, "ipucu": "11 haneli TC kimlik no" },
-        { "kod": "tarih",  "ad": "Tarih",            "tip": "TARIH", "sira": 3, "zorunlu": true, "ipucu": "Düzenleme tarihi" },
-        { "kod": "brut",   "ad": "Brüt tutar",       "tip": "TUTAR", "sira": 4, "zorunlu": true, "ipucu": "Stopaj öncesi tutar" },
-        { "kod": "stopaj", "ad": "Stopaj",           "tip": "TUTAR", "sira": 5, "zorunlu": true, "ipucu": "Gelir vergisi kesintisi" },
-        { "kod": "net",    "ad": "Net ödenen",       "tip": "TUTAR", "sira": 6, "zorunlu": true, "ipucu": "Elden ödenen tutar" }
+        {
+          "kod": "unvan",
+          "ad": "Mal/hizmet sunan",
+          "tip": "METIN",
+          "sira": 1,
+          "zorunlu": true,
+          "ipucu": "Ad soyad"
+        },
+        {
+          "kod": "vkn",
+          "ad": "TCKN",
+          "tip": "VKN",
+          "sira": 2,
+          "zorunlu": true,
+          "ipucu": "11 haneli TC kimlik no"
+        },
+        {
+          "kod": "tarih",
+          "ad": "Tarih",
+          "tip": "TARIH",
+          "sira": 3,
+          "zorunlu": true,
+          "ipucu": "Düzenleme tarihi"
+        },
+        {
+          "kod": "brut",
+          "ad": "Brüt tutar",
+          "tip": "TUTAR",
+          "sira": 4,
+          "zorunlu": true,
+          "ipucu": "Stopaj öncesi tutar"
+        },
+        {
+          "kod": "stopaj",
+          "ad": "Stopaj",
+          "tip": "TUTAR",
+          "sira": 5,
+          "zorunlu": true,
+          "ipucu": "Gelir vergisi kesintisi"
+        },
+        {
+          "kod": "net",
+          "ad": "Net ödenen",
+          "tip": "TUTAR",
+          "sira": 6,
+          "zorunlu": true,
+          "ipucu": "Elden ödenen tutar"
+        }
       ],
       "denklemler": [
-        { "ad": "Brüt − Stopaj = Net ödenen",
-          "terimler": [{ "kod": "brut", "isaret": 1 }, { "kod": "stopaj", "isaret": -1 }],
-          "hedef": "net", "mutlak": false, "not": "" }
+        {
+          "ad": "Brüt − Stopaj = Net ödenen",
+          "terimler": [
+            {
+              "kod": "brut",
+              "isaret": 1
+            },
+            {
+              "kod": "stopaj",
+              "isaret": -1
+            }
+          ],
+          "hedef": "net",
+          "mutlak": false,
+          "not": ""
+        }
       ]
     }
   }
