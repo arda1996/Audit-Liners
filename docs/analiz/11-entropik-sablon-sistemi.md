@@ -210,6 +210,128 @@ nokta tahmini küçük n'de anlamsızdır, posterior anlamlıdır.
 
 ---
 
+## 3½. Bağlamla tamamlama — bulmaca modeli
+
+> Sözlük "hangi **harfler** mümkün"ü belirler. Bu bölüm "hangi **kelime** mümkün"ü.
+
+### Doğrulanmış ölçüm — kullandığımız sözlük Çince için
+
+| Sözlük | TR karakter | Satır | Not |
+|---|---|---|---|
+| `ppocr_keys_v1.txt` ← **şu an bu** | **2/12** (ü Ü) | ~5.000 | Ağırlıklı **Hanzi + kana** |
+| `latin_dict.txt` (v3/v4) | 6/12 | 193 | Ç ğ Ğ İ ş Ş yok |
+| **`ppocrv5_latin_dict.txt`** | **12/12** ✅ | 1.358 | Hedef |
+
+`ş` yanlış okunmuyor — **aranmıyor bile.**
+
+### Çekirdek fikir: bulmaca TAHMİN ETMEZ, ELER
+
+Bir kare bulmacada harfleri, uzunluğu ve kesişmeleri bilirsen genelde **tek** cevap kalır.
+Bu bir tahmin değil, bir **çıkarımdır**. İki cevap kalıyorsa çözen kişi birini seçmez —
+başka bir ipucu bekler.
+
+Bu, denklem hakeminin ta kendisi. Aynı doktrin, farklı veri türü:
+
+| | Eleme aracı | Karar |
+|---|---|---|
+| **Sayı** | Aritmetik denklem | Tek aday kalırsa kabul |
+| **Metin** | Kapalı küme + karışım sınıfı + bağlam | Tek aday kalırsa kabul |
+
+İkisinde de kural aynı: **birden fazla aday kalıyorsa doldurmayız, sorarız.**
+
+### Asıl yapısal sonuç: kritik alanların aday kümesi KAPALIDIR
+
+| Alan | Aday kümesi | Bağlamla tamamlama |
+|---|---|---|
+| Etiketler (Fatura, Matrah, KDV, Tevkifat) | **Kapalı** — sözlükte ~200 terim | ✅ Neredeyse kesin |
+| **Cari ünvanı** | **Kapalı** — defterdeki cari listesi | ✅ Tahmin değil **eşleştirme** |
+| **VKN** | **Kapalı + checksum** | ✅ Doğrulanır, tahmine gerek yok |
+| Mal/hizmet adı | Yarı açık — stok kartları | ⚠️ Orta güven, onaylı |
+| Serbest açıklama | Açık | ⚠️ Düşük risk (muhasebeyi sürüklemez) |
+| **Tutar / tarih / VKN hanesi** | — | ⛔ **ASLA tahmin edilmez** |
+
+**Bir alan muhasebe için ne kadar kritikse, aday kümesi o kadar kapalıdır.**
+Yani neredeyse hiç *tahmin etmemize* gerek yok — *elememiz* yeterli.
+
+`ŞELALE` örneği bunu gösteriyor: defterde kayıtlı bir cari ise bu bir dil modeli problemi
+değil, **50 kayıtlık bir listede arama** problemidir. Ve cevabı kullanıcıya gösterilebilir:
+"bu cari mi?" — bir kez onaylanır, kalıcı olur.
+
+### Mekanizma: eksik harf değil, KARIŞIM SINIFI
+
+Gerçekte OCR "?" döndürmez — yanlış harfi **kendinden emin** döndürür. Yani boşluk
+işaretli gelmez. Boşluğu biz üretiriz:
+
+```
+okunan:  S E L A L E
+maske:  [SŞ][EÉ][L][AÂ][L][EÉ]     ← her harf kendi karışım sınıfına genişletilir
+                │
+        cari listesinde bu maskeye uyan kaç kayıt var?
+                │
+        tek kayıt → kabul (izli)      birden fazla → sor      hiç → yeni cari
+```
+
+Karışım tablosu zaten var: `data/finans-sozlugu.json` → 17 görsel + 6 aksan çifti.
+Aynı tablo parmak izi normalizasyonunda da kullanılıyor — tek tanım, iki kullanım.
+
+### Bağlam: kendi bigramlarımız genel dil modelini yener
+
+Genel bir Türkçe dil modeli **gazete Türkçesi** bilir. Fatura kendi lehçesini konuşur:
+
+```
+"Fatura"   → {Tarihi, No, Seri, Sıra}          "Vergi"    → {Dairesi, No, Kimlik}
+"İrsaliye" → {Tarihi, No}                       "Genel"    → {Toplam}
+"Tevkifata"→ {tabi}                             "Yalnız"   → <yazıyla tutar>
+```
+
+Bu minik bigram tablosu `belge-sozlugu.json` ve `belge-evreni.json`'dan **türetilebilir** —
+eğitim gerekmez, 400 MB model gerekmez, halüsinasyon riski yoktur.
+
+Ve elimizde metin modelinde olmayan bir bağlam daha var: **konum.** "Sayın" sol üstte,
+"Genel Toplam" sağ altta, kalem tablosu ortada durur. Koordinat zaten elimizde — bu
+iki boyutlu bir bağlam ve düz metin modeli bunu göremez.
+
+### Nerede zehir
+
+Denetimde **makul bir uydurma, bariz bir bozukluktan daha tehlikelidir.**
+`SELALE` gözle yakalanır; "Şelale Tekstil A.Ş." diye uydurulmuş bir ünvan Ba/Bs
+mutabakatına sessizce girer ve kimse fark etmez.
+
+Bu yüzden üç sert kural:
+
+1. **Cari ünvanı asla sessizce düzeltilmez.** Kapalı kümede tek eşleşme bulunsa bile
+   ilk seferinde kullanıcıya gösterilir; onaydan sonra kalıcılaşır.
+2. **Tutar, tarih, VKN hanesi bağlamla tamamlanmaz.** Onların hakemi denklem ve checksum.
+3. **Her düzeltme izlidir** — ne okundu, ne yapıldı, hangi kuralla. VUK 219 açısından
+   defterdeki bir adın nereden geldiği açıklanabilir olmalıdır.
+
+### Şu an atılan sinyal
+
+`tools/goruntu-oku.py` her kelime için `guven` üretiyor. `belge_konum::Kelime` bu alanı
+**taşımıyor** — sinyal Rust sınırında düşüyor.
+
+Hangi kelimeden şüpheleneceğimizi söyleyen tek veri bu. Bulmacanın "hangi kareler boş"
+sorusunun cevabı. Taşınması birkaç satır.
+
+> **Sınır:** RapidOCR güveni **satır düzeyinde** verir, karakter düzeyinde değil. Yani
+> "hangi kelime şüpheli"yi öğreniriz, "hangi harf şüpheli"yi öğrenemeyiz. Harf düzeyi için
+> ham CTC olasılıkları gerekir — sarmalayıcı onları veriyor mu, **DOĞRULANMADI**.
+> Karışım sınıfı yaklaşımı bu yüzden daha sağlam: güven skoruna muhtaç değil.
+
+### Uygulama sırası
+
+| # | İş | Süre | Bağımlılık |
+|---|---|---|---|
+| a | `guven` alanını `Kelime`'ye taşı | 1 saat | yok |
+| b | Karışım-sınıfı maskesi + kapalı küme araması | ½ gün | mevcut `karisir()` |
+| c | Cari listesini aday kümesi olarak bağla | ½ gün | b |
+| d | Etiket bigramları (sözlükten türet) | ½ gün | yok |
+| e | Konum önceliği (etiket nerede durur) | ½ gün | mevcut koordinatlar |
+
+Hiçbiri model indirmiyor, hiçbiri eğitim gerektirmiyor, hepsi açıklanabilir.
+
+---
+
 ## 4. Ölçüm paneli (A10)
 
 | Metrik | Ne söyler |
