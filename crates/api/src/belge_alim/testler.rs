@@ -453,3 +453,45 @@ async fn tevkifat_kdvden_buyuk_olamaz() {
     assert!(b.as_array().unwrap().iter().any(|x| x["kod"] == "A32" && x["onem"] == "ENGEL"),
         "tevkifat KDV'yi aşıyor, yakalanmadı: {b:?}");
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// A12 — BELGE TÜRÜ UYUŞMAZLIĞI
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Gerçek vakadan doğdu: kullanıcı bir FATURA yükledi, alım MAKBUZ olarak açıldı ve
+/// motor hiç ses çıkarmadı. Makbuzun alan kümesi (unvan/tarih/toplam/yazıyla) faturanınkinden
+/// dar olduğu için **VKN, belge no, matrah, KDV hiç sorulmadı** — yani `matrah + KDV = toplam`
+/// denklemi kurulamadı ve belge doğrulanmadan ilerledi.
+#[tokio::test]
+async fn belgede_fatura_yaziyorsa_makbuz_secimi_uyari_verir() {
+    let metin = "ÖRNEK TEKSTİL\nFATURA\nSeri : A\nSıra 32450\n\
+                 Tarihi : 10.02.2006\nTOPLAM   3.200,00\nKDV % 8   256,00\n\
+                 GENEL TOPLAM   3.456,00";
+    let d = basla("MAKBUZ", "SECIMLI", metin, "ALM-A12").await;
+    let u = coz(&d, "/tur_uyari");
+    assert!(!u.is_null(), "tür uyuşmazlığı sessiz geçti: {d:?}");
+    assert_eq!(u["kod"], "A12");
+    assert_eq!(u["sezilen"], "FATURA", "belgede FATURA yazıyor: {u:?}");
+    assert_eq!(u["secilen"], "MAKBUZ");
+    // Uyarı, NEYİN kaçırıldığını söylemeli — yoksa kullanıcı önemini anlamaz.
+    let eksik = u["sorulmayan_zorunlu_alanlar"].as_array().cloned().unwrap_or_default();
+    assert!(!eksik.is_empty(), "hangi zorunlu alanların sorulmadığı söylenmiyor: {u:?}");
+}
+
+/// Tür doğruysa uyarı ÇIKMAMALI — yanlış alarm, gerçek alarmı değersizleştirir.
+#[tokio::test]
+async fn tur_dogruysa_uyari_cikmaz() {
+    let metin = "FATURA\nSıra 32450\nTOPLAM 3.200,00\nKDV 256,00\nGENEL TOPLAM 3.456,00";
+    let d = basla("FATURA", "SECIMLI", metin, "ALM-A12-OK").await;
+    assert!(coz(&d, "/tur_uyari").is_null(), "gereksiz uyarı: {:?}", coz(&d, "/tur_uyari"));
+}
+
+/// Motor türü KENDİLİĞİNDEN DEĞİŞTİRMEZ — alan kümesini değiştirmek kullanıcının kararıdır.
+#[tokio::test]
+async fn uyari_verse_de_tur_kendiliginden_degismez() {
+    let metin = "FATURA\nSıra 32450\nGENEL TOPLAM 3.456,00";
+    let d = basla("MAKBUZ", "SECIMLI", metin, "ALM-A12-SABIT").await;
+    assert!(!coz(&d, "/tur_uyari").is_null());
+    assert_eq!(coz(&d, "/oturum/belge_turu"), "MAKBUZ",
+        "motor kullanıcıya sormadan türü değiştirdi — doktrin ihlali");
+}

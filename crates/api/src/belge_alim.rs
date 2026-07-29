@@ -218,9 +218,8 @@ pub async fn alim_basla(Json(g): Json<BaslaGirdi>) -> Json<serde_json::Value> {
     }).collect();
     alanlar.sort_by_key(|a| a.sira); // kullanıcı SIRAYLA seçecek — sıra sözleşmenin parçası
 
-    let id = if g.oturum_id.is_empty() {
-        format!("ALM-{:x}", g.metin.len() * 31 + g.belge_turu.len())
-    } else { g.oturum_id.clone() };
+    let id = if g.oturum_id.is_empty() { oturum_id(&g.metin, &g.belge_turu) }
+             else { g.oturum_id.clone() };
 
     let mod_ = if g.mod_.is_empty() { "SECIMLI".to_string() } else { g.mod_.clone() };
     let mut o = Oturum {
@@ -241,7 +240,64 @@ pub async fn alim_basla(Json(g): Json<BaslaGirdi>) -> Json<serde_json::Value> {
         "tarama_bulunan": bulunan,
         "otomatik": otomatik_sonuc,
         "mod_bilgi": parametreler()["modlar"][&mod_],
+        "tur_uyari": tur_uyarisi(&g.metin, &o.dil, &g.belge_turu),
     }))
+}
+
+/// Oturum kimliği — belgenin İÇERİĞİNDEN ve türünden türer.
+///
+/// Eskiden `metin.len() * 31 + belge_turu.len()` idi ve iki yönden çakışıyordu:
+/// tür adları aynı uzunlukta olabiliyor ("MAKBUZ" ve "FATURA" ikisi de 6 harf), metin
+/// uzunluğu da içeriği ayırt etmiyor. Sonuç: aynı belgeyi farklı türle açmak **eski
+/// oturumun üstüne yazıyordu** — kullanıcı türü düzeltmek isterse onayları sessizce
+/// kayboluyordu. İçeriği karıştırmak bu ailenin tamamını kapatır.
+fn oturum_id(metin: &str, tur: &str) -> String {
+    use std::hash::{Hash, Hasher};
+    let mut h = std::collections::hash_map::DefaultHasher::new();
+    metin.hash(&mut h);
+    0u8.hash(&mut h); // ayraç: "ab"+"c" ile "a"+"bc" aynı özeti vermesin
+    tur.hash(&mut h);
+    format!("ALM-{:x}", h.finish())
+}
+
+/// **A12 — BELGE TÜRÜ UYUŞMAZLIĞI.**
+///
+/// `belge_turu` istemciden gelir; motor onu doğru varsayardı. Oysa belgenin kendisi ne
+/// olduğunu SÖYLÜYOR ve `belge_oku::belge_turu()` bunu zaten okuyabiliyordu — iki bilgi
+/// hiç karşılaştırılmıyordu.
+///
+/// Sonucu ağırdı: kullanıcı MAKBUZ açtığında belgede kocaman "FATURA" yazsa bile alan
+/// kümesi makbuzunki oluyordu (unvan/tarih/toplam/yazıyla). Fatura için zorunlu olan
+/// **VKN, belge no, matrah, KDV** alanları hiç sorulmuyor, `matrah + KDV = toplam`
+/// denklemi hiç kurulamıyor ve belge doğrulanmamış halde kayda gidiyordu.
+///
+/// **Sessizce DÜZELTMEZ, uyarır.** Tür değişimi alan kümesini değiştirir; bu kullanıcının
+/// kararıdır (motor karar vermez doktrini). Ayrıca tespit de yanılabilir: "fatura" sözcüğü
+/// bir irsaliyenin ya da dekontun içinde de geçebilir.
+fn tur_uyarisi(metin: &str, dil: &str, secilen: &str) -> serde_json::Value {
+    if metin.trim().is_empty() { return serde_json::Value::Null; }
+    let sezilen = crate::belge_oku::belge_turu(metin, dil);
+    if sezilen.is_empty() || sezilen == secilen { return serde_json::Value::Null; }
+    let s = &parametreler()["belge_turleri"][&sezilen];
+    if s.is_null() { return serde_json::Value::Null; }
+
+    let eksik: Vec<String> = s["parametreler"].as_array().into_iter().flatten()
+        .filter(|p| p["zorunlu"].as_bool().unwrap_or(false))
+        .filter_map(|p| p["ad"].as_str().map(|x| x.to_string()))
+        .collect();
+    serde_json::json!({
+        "kod": "A12",
+        "secilen": secilen,
+        "sezilen": sezilen,
+        "sezilen_ad": s["ad"],
+        "sorulmayan_zorunlu_alanlar": eksik,
+        "mesaj": format!(
+            "Belgede \"{}\" yazıyor ama alım \"{}\" olarak açıldı. Alan kümesi yanlış olabilir \
+             — tür değiştirilmezse bu belgenin zorunlu alanları hiç sorulmaz ve denklemi kurulamaz.",
+            s["ad"].as_str().unwrap_or(&sezilen), secilen),
+        "not": "Motor türü kendiliğinden DEĞİŞTİRMEZ: alan kümesini değiştirmek kullanıcının \
+                kararıdır ve tespit de yanılabilir (bir irsaliyenin içinde de 'fatura' geçebilir).",
+    })
 }
 
 /// Sırada onay bekleyen ilk alan — arayüz kullanıcıyı buna yönlendirir.
