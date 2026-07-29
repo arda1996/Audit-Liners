@@ -29,6 +29,7 @@ mod belge_konum; // Konum motoru — koordinatlı kelime okuma (bbox), sütun ve
 mod belge_kalem; // Kalem satırları — mal cinsi, miktar, birim fiyat, tutar (aritmetikle bulunur).
 mod belge_oku;  // Belge okuma — okunan metni sayıya çevirir, belgenin kendi aritmetiğiyle doğrular.
 mod duzelt;     // Terim düzeltme — bozuk okunan finans terimini sözlükteki karşılığına bağlar.
+mod eslestir;   // Kapalı küme eşleştirme — bulmaca modeli: eler, tahmin etmez (cari ünvanı).
 mod gider;      // Gider hesapları — 7/A · 7/B seçimi, sektörel uygunluk, KKEG ayrımı.
 mod hesaplama;
 mod kontrol;    // Güvenlik katmanı — numaralı ön kontrol (K) + değişmez denetimi (D).  // Hesap makinesi — KDV/tevkifat/stopaj/damga; oranlar parametre dosyasından.
@@ -5373,6 +5374,7 @@ async fn main() {
         .route("/api/belge/diller", get(belge_oku::belge_diller))
         .route("/api/belge/duzelt", get(duzelt::terim_duzelt))
         .route("/api/belge/terimler", get(duzelt::terim_listesi))
+        .route("/api/belge/cari-oner", post(eslestir::cari_oner))
         .route("/api/belge/alim/sablonlar", get(belge_alim::alim_sablonlar))
         .route("/api/belge/alim/basla", post(belge_alim::alim_basla))
         .route("/api/belge/alim/deger", post(belge_alim::alim_deger))

@@ -81,6 +81,18 @@ fn karisir(a: char, b: char) -> Option<f32> {
     karisma_tablosu().get(&(a, b)).copied()
 }
 
+/// Bir karakterin karışabildiği TÜM harfler — `eslestir` modülünün maske katmanı için.
+///
+/// `karisir` iki karakteri karşılaştırır (DP döngüsünde kullanılır); bu ise bir karakterin
+/// sınıfını verir (bulmaca maskesi kurulurken kullanılır). Aynı tablo, iki farklı soru:
+/// "bunlar karışır mı" ve "bu neyle karışabilir".
+pub fn karisim_ortaklari(c: char) -> Vec<char> {
+    karisma_tablosu().keys()
+        .filter(|(a, _)| *a == c)
+        .map(|(_, b)| *b)
+        .collect()
+}
+
 /// Türkçe çekim ekleri (aksan sadeleştirmesinden SONRAKİ yüzey biçimleriyle: ı→i, ü→u, ö→o).
 /// Uzundan kısaya sıralı — soyma en uzun ekten başlamalı, yoksa "larin" için önce "in" soyulur.
 ///
