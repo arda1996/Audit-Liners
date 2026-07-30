@@ -5379,6 +5379,7 @@ async fn main() {
         .route("/api/belge/duzelt", get(duzelt::terim_duzelt))
         .route("/api/belge/terimler", get(duzelt::terim_listesi))
         .route("/api/belge/cari-oner", post(eslestir::cari_oner))
+        .route("/api/belge/kirli-kurallar", get(belge_ogren::kirli_kural_raporu))
         .route("/api/belge/alim/sablonlar", get(belge_alim::alim_sablonlar))
         .route("/api/belge/alim/basla", post(belge_alim::alim_basla))
         .route("/api/belge/alim/deger", post(belge_alim::alim_deger))

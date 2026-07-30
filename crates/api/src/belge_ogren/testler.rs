@@ -184,3 +184,104 @@ Matrah                                   8.000,00";
         "öğrenilen kural farklı müşteride eşleşmedi — çapa değeri içeriyor. bulunan: {bulunan:?}, tüm: {c:?}");
     unut(id);
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// KİRLİ KURAL: silinmez, okunur
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// **Wilson alt sınırı: az gözlem yüksek güven vermez.**
+/// Nokta tahmini 1/1 ile 50/50'yi aynı gösterir; ilki hiçbir şey kanıtlamaz.
+#[test]
+fn guven_az_gozlemde_yuksek_cikmaz() {
+    let k = |i, d| Kural { alan: "x".into(), strateji: "s".into(), capa: "c".into(),
+        onek: String::new(), isabet: i, deneme: d, durum: "AKTIF".into(),
+        karsi_ornek: String::new(), emekli_neden: String::new() };
+    let g1 = guven(&k(1, 1));
+    let g10 = guven(&k(10, 10));
+    assert!(g1 < 0.35, "1/1 fazla güvenli çıktı: {g1:.2}");
+    assert!(g10 > g1, "10/10 ({g10:.2}) 1/1'den ({g1:.2}) yüksek olmalı");
+    assert!(guven(&k(1, 2)) < 0.2, "1 isabet 1 hata düşük olmalı");
+    assert_eq!(guven(&k(0, 0)), 0.0);
+}
+
+/// **KİRLİ KURAL SİLİNMEZ.** Denklem reddedince kural emekli olur ama bellekte kalır,
+/// ne ürettiği (`karsi_ornek`) ve neden emekli olduğu yazılır.
+#[test]
+fn reddedilen_kural_emekli_olur_ama_silinmez() {
+    let id = "TEST-KIRLI".to_string();
+    let unut = |i: String| { let _ = futures::executor::block_on(sablon_unut(axum::extract::Path(i))); };
+    unut(id.clone());
+
+    let metin = "FATURA\nSAYIN: EGE TEKSTİL A.Ş.\nMatrah   1.000,00";
+    ogren(&id, "EGE", "FATURA", metin,
+        &[("unvan".to_string(), "EGE TEKSTİL A.Ş.".to_string())]);
+
+    // Hakem üç kez reddediyor → emekli. (Emekli olduktan sonraki çağrı AKTİF kural
+    // bulamaz ve false döner — doğru davranış; bu yüzden dönüşler biriktirilir.)
+    let mut emekli = false;
+    for _ in 0..3 { emekli |= kural_geri_besle(&id, "unvan", false, "EGE TEKSTİL A.Ş. Vergi No"); }
+    assert!(emekli, "3 redde rağmen emekli olmadı");
+
+    // SİLİNMEDİ: bellekte duruyor ve karşı örneği taşıyor.
+    let b = bellek().lock().unwrap();
+    let k = b.sablonlar[&id].kurallar.iter().find(|k| k.alan == "unvan").expect("kural SİLİNDİ");
+    assert_eq!(k.durum, "EMEKLI");
+    assert!(k.karsi_ornek.contains("Vergi No"), "karşı örnek kaydedilmedi: {:?}", k.karsi_ornek);
+    assert!(!k.emekli_neden.is_empty(), "emekli gerekçesi yok");
+    drop(b);
+    unut(id);
+}
+
+/// **Emekli kural değer ÜRETMEZ** ama **aynı kural yeniden ÖĞRENİLMEZ** de —
+/// yoksa her belge aynı yanlışı yazar, motor hiç ilerlemez.
+#[test]
+fn emekli_kural_ne_uygulanir_ne_yeniden_ogrenilir() {
+    let id = "TEST-KIRLI2".to_string();
+    let unut = |i: String| { let _ = futures::executor::block_on(sablon_unut(axum::extract::Path(i))); };
+    unut(id.clone());
+
+    let metin = "FATURA\nSAYIN: EGE TEKSTİL A.Ş.\nMatrah   1.000,00";
+    ogren(&id, "EGE", "FATURA", metin, &[("unvan".to_string(), "EGE TEKSTİL A.Ş.".to_string())]);
+    for _ in 0..3 { kural_geri_besle(&id, "unvan", false, "kirli değer"); }
+
+    // 1) Uygulanmıyor
+    let satirlar: Vec<&str> = metin.lines().collect();
+    let c = uygula(&id, &satirlar, &[("unvan".to_string(), "METIN".to_string())]);
+    assert!(c.get("unvan").is_none(), "emekli kural yine de değer üretti: {c:?}");
+
+    // 2) Yeniden öğrenilmiyor — aynı belge tekrar onaylansa bile
+    let onceki = { bellek().lock().unwrap().sablonlar[&id].kurallar.len() };
+    ogren(&id, "EGE", "FATURA", metin, &[("unvan".to_string(), "EGE TEKSTİL A.Ş.".to_string())]);
+    let sonraki = { bellek().lock().unwrap().sablonlar[&id].kurallar.len() };
+    assert_eq!(onceki, sonraki, "emekli kural yeniden öğrenildi — sonsuz döngü");
+    let hala_emekli = { bellek().lock().unwrap().sablonlar[&id]
+        .kurallar.iter().any(|k| k.alan == "unvan" && k.durum == "EMEKLI") };
+    assert!(hala_emekli, "emekli kural dirildi");
+    unut(id);
+}
+
+/// **Yeni kural eskisini EZMEZ** — yan yana dururlar, en güvenilir olan kazanır.
+/// Eskiden tek yanlış onay, kanıtlanmış bir kuralı yok ediyor ve itibarı sıfırlıyordu.
+#[test]
+fn yeni_kural_kanitlanmis_kurali_ezmez() {
+    let id = "TEST-EZME".to_string();
+    let unut = |i: String| { let _ = futures::executor::block_on(sablon_unut(axum::extract::Path(i))); };
+    unut(id.clone());
+
+    let m1 = "FATURA\nSAYIN: EGE TEKSTİL A.Ş.\nMatrah   1.000,00";
+    for _ in 0..4 { ogren(&id, "EGE", "FATURA", m1, &[("unvan".to_string(), "EGE TEKSTİL A.Ş.".to_string())]); }
+
+    // Başka çapalı bir belge aynı alanı öğretiyor.
+    let m2 = "FATURA\nAlıcı Ünvanı: MARMARA LOJİSTİK\nMatrah   2.000,00";
+    ogren(&id, "MARMARA", "FATURA", m2, &[("unvan".to_string(), "MARMARA LOJİSTİK".to_string())]);
+
+    let b = bellek().lock().unwrap();
+    let unvan_kurallari: Vec<_> = b.sablonlar[&id].kurallar.iter().filter(|k| k.alan == "unvan").collect();
+    assert!(unvan_kurallari.len() >= 2,
+        "yeni kural eskisini ezdi — {} kural kaldı", unvan_kurallari.len());
+    let en_iyi = unvan_kurallari.iter().max_by(|a, b|
+        guven(a).partial_cmp(&guven(b)).unwrap()).unwrap();
+    assert!(en_iyi.deneme >= 4, "kanıtlanmış kural (4 deneme) kaybedildi: {en_iyi:?}");
+    drop(b);
+    unut(id);
+}

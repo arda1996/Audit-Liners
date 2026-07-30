@@ -261,7 +261,55 @@ pub struct Kural {
     /// Kaç kez doğru çıktı / kaç kez denendi. Güvenilirliği buradan ölçülür.
     pub isabet: u32,
     pub deneme: u32,
+
+    // ── KİRLİ KURAL SİLİNMEZ ─────────────────────────────────────────────────
+    //
+    // Denklemin reddettiği bir kural, motoru geliştirmek için elimizdeki EN DEĞERLİ
+    // veridir. Gerçek belgelerde yer gerçeğimiz yok; ama hakemin reddettiği her kural
+    // **bedava üretilmiş, etiketli bir olumsuz örnektir**: "bu şablonda, bu alan için,
+    // bu çapa+strateji ikilisi yanlış değer üretiyor."
+    //
+    // Silmek üç şeyi birden kaybettirir:
+    //   1. Aynı yanlış kural bir sonraki belgede YENİDEN öğrenilir — sonsuz döngü.
+    //   2. Motorun SİSTEMLİ zaafı görünmez olur (hangi strateji hangi alanda çürük).
+    //   3. Denetim izi kopar: motor fikrini neden değiştirdi, açıklanamaz (VUK 219).
+    //
+    // Bu yüzden emekli kural bellekte KALIR, yalnız uygulanmaz.
+    /// AKTIF · EMEKLI — emekli kural uygulanmaz ama silinmez.
+    #[serde(default = "aktif")]
+    pub durum: String,
+    /// Kural yanlışken ÜRETTİĞİ değer. Karşı örnek: "şu çapa şunu veriyordu."
+    #[serde(default)]
+    pub karsi_ornek: String,
+    /// Neden emekli edildi — insan okusun diye.
+    #[serde(default)]
+    pub emekli_neden: String,
 }
+
+fn aktif() -> String { "AKTIF".into() }
+
+/// Kuralın **güven alt sınırı** — Wilson skoru.
+///
+/// Nokta tahmini (`isabet/deneme`) küçük örneklemde yanıltıcıdır: 1/1 = %100 ile
+/// 50/50 = %100 aynı görünür, oysa ilki hiçbir şey kanıtlamaz. Wilson alt sınırı
+/// örneklem büyüklüğünü hesaba katar ve **güvenli tarafta** kalır: az gözlemli kural
+/// düşük skor alır, çok gözlemli ve isabetli kural yükselir.
+///
+/// 1/1 → 0,21 · 3/3 → 0,44 · 5/5 → 0,57 · 10/10 → 0,72 · 1 isabet 1 hata → 0,09
+pub fn guven(k: &Kural) -> f32 {
+    let n = k.deneme as f32;
+    if n <= 0.0 { return 0.0; }
+    let p = k.isabet as f32 / n;
+    let z = 1.96f32;
+    let payda = 1.0 + z * z / n;
+    let pay = p + z * z / (2.0 * n) - z * ((p * (1.0 - p) / n + z * z / (4.0 * n * n)).sqrt());
+    (pay / payda).max(0.0)
+}
+
+/// Bu güvenin altındaki kural UYGULANMAZ — ama silinmez, emekli olur.
+pub const EMEKLI_ESIGI: f32 = 0.20;
+/// Bu güvenin üstündeki kural otomatik uygulanabilir.
+pub const GUVEN_ESIGI: f32 = 0.40;
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
 pub struct Sablon {
@@ -319,7 +367,12 @@ pub fn uygula(sablon_id: &str, satirlar: &[&str], alanlar: &[(String, String)]) 
     let Some(s) = b.sablonlar.get(sablon_id) else { return HashMap::new() };
     let mut cikti = HashMap::new();
     for (kod, tip) in alanlar {
-        let Some(k) = s.kurallar.iter().find(|k| &k.alan == kod) else { continue };
+        // EN GÜVENİLİR kural seçilir — ilk eşleşen değil. Emekli kurallar atlanır:
+        // bellekte dururlar (olumsuz kanıt olarak) ama değer üretmezler.
+        let Some(k) = s.kurallar.iter()
+            .filter(|k| &k.alan == kod && k.durum != "EMEKLI" && guven(k) >= EMEKLI_ESIGI)
+            .max_by(|a, b| guven(a).partial_cmp(&guven(b)).unwrap_or(std::cmp::Ordering::Equal))
+            else { continue };
         // Çapa satırını içerikten bul — satır numarasına güvenmiyoruz.
         for (i, ham) in satirlar.iter().enumerate() {
             if !crate::belge_oku::sadelestir(ham).contains(&k.capa) { continue; }
@@ -398,20 +451,145 @@ pub fn ogren(sablon_id: &str, ad: &str, belge_turu: &str, metin: &str, onaylar: 
         let capa = capa.split_whitespace().collect::<Vec<_>>().join(" ");
         if capa.chars().count() < 4 { continue; }
 
-        match s.kurallar.iter_mut().find(|k| &k.alan == kod) {
-            Some(k) => {
-                k.deneme += 1;
-                if k.capa == capa && k.strateji == capa_kaynak.1.ad() { k.isabet += 1; }
-                else { *k = Kural { alan: kod.clone(), strateji: capa_kaynak.1.ad().into(), capa, onek: onek.clone(), isabet: 1, deneme: k.deneme }; }
-            }
+        let strateji_ad = capa_kaynak.1.ad().to_string();
+
+        // ── KİRLİ KURALI OKU: aynı hatayı TEKRAR öğrenme ─────────────────────
+        // Bu (alan, çapa, strateji) üçlüsü daha önce denendi ve denklem reddettiyse,
+        // yeniden öğrenmek sonsuz döngüdür: her belge aynı yanlış kuralı yazar, her
+        // belgede yine reddedilir, motor hiç ilerlemez. Emekli kayıt tam da bunu
+        // engellemek için saklanıyor.
+        if s.kurallar.iter().any(|k| k.alan == *kod && k.capa == capa
+                                  && k.strateji == strateji_ad && k.durum == "EMEKLI") {
+            continue;
+        }
+
+        match s.kurallar.iter_mut()
+            .find(|k| &k.alan == kod && k.capa == capa && k.strateji == strateji_ad)
+        {
+            // Aynı kural yeniden doğrulandı — itibarı artar.
+            Some(k) => { k.deneme += 1; k.isabet += 1; }
             None => {
-                s.kurallar.push(Kural { alan: kod.clone(), strateji: capa_kaynak.1.ad().into(), capa, onek: onek.clone(), isabet: 1, deneme: 1 });
+                // Aynı alan için BAŞKA çapalı kural varsa onu EZMİYORUZ: yan yana
+                // dururlar ve `uygula` aralarından en güvenilirini seçer. Eskiden
+                // yeni kural eskisini `*k = ...` ile eziyor ve itibar sıfırlanıyordu;
+                // tek yanlış onay, kanıtlanmış bir kuralı yok ediyordu.
+                s.kurallar.push(Kural {
+                    alan: kod.clone(), strateji: strateji_ad, capa, onek: onek.clone(),
+                    isabet: 1, deneme: 1, durum: aktif(),
+                    karsi_ornek: String::new(), emekli_neden: String::new(),
+                });
                 ogrenilen += 1;
             }
         }
     }
     kaydet(&b);
     ogrenilen
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GERİ BESLEME — hakem konuşur, kural dinler
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Bir kuralın ürettiği değer **denklem tarafından** doğrulandı ya da reddedildi.
+///
+/// ## Sinyal kaynağı kullanıcı onayı DEĞİL, aritmetik hakemdir
+///
+/// Kullanıcı onayı da bir sinyaldir ama yorgunluk, acele ve alışkanlık taşır; üstelik
+/// motorun doktrini "kanıtı belge verir" diyor. Kural itibarının kaynağı da aynı yerden
+/// gelmeli: denklem tuttuysa kural işe yaradı, tutmadıysa yaramadı. Böylece öğrenme
+/// katmanı doğrulama katmanının **altında** kalır, önüne geçmez.
+///
+/// ## Reddedilen kural SİLİNMEZ
+///
+/// Emekli edilir ama bellekte kalır ve `karsi_ornek` alanına ne ürettiği yazılır.
+/// Bu kayıt üç iş görür: aynı kuralın yeniden öğrenilmesini engeller, motorun sistemli
+/// zaafını `kirli_kural_raporu` üzerinden görünür kılar, ve "motor neden fikir değiştirdi"
+/// sorusunu yanıtlanabilir tutar (VUK 219).
+pub fn kural_geri_besle(sablon_id: &str, alan: &str, dogru_mu: bool, uretilen: &str) -> bool {
+    let mut b = bellek().lock().unwrap();
+    let Some(s) = b.sablonlar.get_mut(sablon_id) else { return false };
+
+    // `uygula` ile AYNI seçim: geri besleme, değeri gerçekten üreten kurala gitmeli.
+    let Some(k) = s.kurallar.iter_mut()
+        .filter(|k| k.alan == alan && k.durum != "EMEKLI")
+        .max_by(|a, b| guven(a).partial_cmp(&guven(b)).unwrap_or(std::cmp::Ordering::Equal))
+        else { return false };
+
+    k.deneme += 1;
+    if dogru_mu {
+        k.isabet += 1;
+    } else {
+        k.karsi_ornek = uretilen.chars().take(120).collect();
+        // Tek hatada emekli edilmez: OCR gürültüsü tek belgede kuralı haksız yere
+        // suçlayabilir. En az 3 deneme sonra, güven eşiğin altındaysa emekli olur.
+        if k.deneme >= 3 && guven(k) < EMEKLI_ESIGI {
+            k.durum = "EMEKLI".into();
+            k.emekli_neden = format!(
+                "{} denemede {} isabet (güven {:.2}) — denklem reddetti. Son ürettiği: {:?}",
+                k.deneme, k.isabet, guven(k), k.karsi_ornek);
+        }
+    }
+    let emekli = k.durum == "EMEKLI";
+    kaydet(&b);
+    emekli
+}
+
+/// GET /api/belge/kirli-kurallar — **motorun kendi hata veri seti.**
+///
+/// Gerçek belgelerde yer gerçeğimiz yok; ama hakemin reddettiği her kural bedava
+/// üretilmiş, etiketli bir olumsuz örnektir. Tek tek bakınca gürültü, **toplanınca
+/// motorun sistemli zaafı**:
+///
+/// - Bir STRATEJİ belirli bir alanda sürekli çürüyorsa (ör. "satırın sağı" ünvanda),
+///   o alan için strateji önceliği değişmeli.
+/// - Bir ALAN her stratejide çürüyorsa, sorun öğrenmede değil **etiket sözlüğünde**.
+/// - Bir ŞABLON tümüyle çürükse, parmak izi farklı belgeleri aynı aileye topluyordur.
+///
+/// Yani bu uç bir hata listesi değil, **geliştirme yol haritasının veri kaynağıdır**.
+pub async fn kirli_kural_raporu() -> axum::Json<serde_json::Value> {
+    let b = bellek().lock().unwrap();
+    // (strateji, alan) → (emekli, aktif, güven toplamı)
+    let mut kova: HashMap<(String, String), (u32, u32, f32)> = HashMap::new();
+    let mut ornekler: Vec<serde_json::Value> = Vec::new();
+
+    for s in b.sablonlar.values() {
+        for k in &s.kurallar {
+            let e = kova.entry((k.strateji.clone(), k.alan.clone())).or_insert((0, 0, 0.0));
+            if k.durum == "EMEKLI" { e.0 += 1; } else { e.1 += 1; }
+            e.2 += guven(k);
+            if k.durum == "EMEKLI" || !k.karsi_ornek.is_empty() {
+                ornekler.push(serde_json::json!({
+                    "sablon": s.id, "sablon_ad": s.ad, "alan": k.alan,
+                    "strateji": k.strateji, "capa": k.capa,
+                    "isabet": k.isabet, "deneme": k.deneme,
+                    "guven": (guven(k) * 100.0).round() / 100.0,
+                    "karsi_ornek": k.karsi_ornek, "neden": k.emekli_neden,
+                }));
+            }
+        }
+    }
+
+    let mut zaaf: Vec<serde_json::Value> = kova.into_iter().map(|((st, alan), (e, a, g))| {
+        let n = (e + a).max(1);
+        serde_json::json!({
+            "strateji": st, "alan": alan,
+            "emekli": e, "aktif": a,
+            "curume_orani": (e as f32 * 100.0 / n as f32 * 10.0).round() / 10.0,
+            "ortalama_guven": (g / n as f32 * 100.0).round() / 100.0,
+        })
+    }).collect();
+    // En çok çürüyen önce — geliştirme sırası buradan okunur.
+    zaaf.sort_by(|a, b| b["curume_orani"].as_f64().partial_cmp(&a["curume_orani"].as_f64()).unwrap());
+
+    axum::Json(serde_json::json!({
+        "zaaf_haritasi": zaaf,
+        "kirli_kurallar": ornekler,
+        "aciklama": "Denklemin reddettiği kurallar SİLİNMEZ. Tek tek gürültü, toplanınca \
+                     motorun sistemli zaafı: bir strateji belirli bir alanda sürekli çürüyorsa \
+                     o alanın strateji önceliği değişmeli; bir alan HER stratejide çürüyorsa \
+                     sorun öğrenmede değil etiket sözlüğündedir.",
+        "esikler": { "emekli_altinda": EMEKLI_ESIGI, "otomatik_ustunde": GUVEN_ESIGI },
+    }))
 }
 
 /// GET /api/belge/sablonlar — öğrenilmiş şablonlar (arayüzde görünür olmalı:
