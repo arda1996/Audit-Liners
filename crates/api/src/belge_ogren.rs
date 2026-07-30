@@ -373,11 +373,23 @@ pub fn ogren(sablon_id: &str, ad: &str, belge_turu: &str, metin: &str, onaylar: 
         // Değerin ÖNÜNDEKİ metni sakla — uygulama sırasında kesilecek.
         let onek = satirlar[i].find(d).map(|p| satirlar[i][..p].trim_end().to_string())
             .unwrap_or_default();
-        // Çapa: değerin bulunduğu satırın harf kısmı; boşsa BİR ÜST satır (etiket üstte olabilir).
+        // ── ÇAPA: DEĞERİN ÖNCESİ, satırın tamamı DEĞİL ───────────────────────────
+        //
+        // Çapa satırın tamamından kurulunca **değerin kendisi çapaya giriyordu**:
+        // `"SAYIN: EGE TEKSTİL A.Ş."` → çapa `"sayin ege tekstil a s"`. Müşteri adı
+        // çapanın parçası olduğu için, aynı şablonun FARKLI MÜŞTERİLİ bir sonraki
+        // faturasında kural hiç eşleşmiyordu. Şablon öğrenmenin pratikte birikmemesinin
+        // başlıca sebebi buydu: her fatura yeni kural yazıyor, hiçbiri tekrar kullanılmıyor.
+        //
+        // Doğru çapa **etikettir** ve etiket zaten `onek` içinde duruyor — değerden
+        // önceki metin. `"SAYIN:"` → çapa `"sayin"`, ve bu her faturada tekrar eder.
+        //
+        // Önek yetersizse (değer satırın başındaysa) bir ÜST satıra bakılır: etiket
+        // üstte, değer altta olabilir.
         let capa_kaynak = {
-            let harf: String = crate::belge_oku::sadelestir(satirlar[i])
+            let onek_harf: String = crate::belge_oku::sadelestir(&onek)
                 .chars().filter(|c| c.is_alphabetic() || *c == ' ').collect();
-            if harf.trim().chars().count() >= 4 { (satirlar[i], strateji.clone()) }
+            if onek_harf.trim().chars().count() >= 4 { (onek.as_str(), strateji.clone()) }
             else if i > 0 { (satirlar[i - 1], Strateji::AltSatir) }
             else { continue }
         };

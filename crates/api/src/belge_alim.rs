@@ -205,8 +205,10 @@ fn denklem_kontrol(o: &Oturum) -> (Vec<AlimBulgu>, usize, usize) {
         }
         let mut sol = 0i64;
         let mut eksik = false;
+        let mut terim_sayisi = 0i64;
         for t in d["terimler"].as_array().into_iter().flatten() {
             let kod = t["kod"].as_str().unwrap_or("");
+            terim_sayisi += 1;
             match deger(kod) {
                 Some(v) => sol += v * t["isaret"].as_i64().unwrap_or(1),
                 None => { eksik = true; break; }
@@ -217,18 +219,36 @@ fn denklem_kontrol(o: &Oturum) -> (Vec<AlimBulgu>, usize, usize) {
                 "Kalan alanları doldur."));
             continue;
         }
+        // ── YUVARLAMA TOLERANSI — sert eşitlik yanlış alarm üretiyordu ───────────
+        //
+        // Belgedeki tutarlar kuruşa yuvarlanmış olarak yazılır. Her terim kendi
+        // yuvarlamasını taşır: çok kalemli ya da çok oranlı bir faturada KDV satır
+        // bazında hesaplanıp yuvarlanır, iskonto kalemlere eşit dağılmaz ve toplam
+        // birkaç kuruş şaşar. Sert eşitlik bunu "TUTMUYOR" sayıp **doğru okumaları
+        // eliyordu** ve kullanıcıyı gereksiz yere seçimli moda düşürüyordu.
+        //
+        // Tolerans terim sayısına bağlıdır: her terim en çok yarım kuruş şaşabilir,
+        // hedefin kendi yuvarlaması da bir o kadar. `terim + 1` kuruş, en az 2 kuruş.
+        //
+        // **Bilerek DAR tutuldu.** Referans uygulama (arXiv 2512.09666, Apache-2.0)
+        // mutlak tolerans olarak 1 birim (= 1 TL) kullanıyor; bu bir denetim ürünü için
+        // fazla gevşektir — 1 TL'lik fark gerçek bir okuma hatası olabilir ve yutulmamalı.
+        // Birkaç kuruş yuvarlamayı affeder, gerçek hatayı affetmez.
+        let tolerans = (terim_sayisi + 1).max(2);
         // `mutlak`: yön farkı önemli değil, tutar aynı olmalı (mutabakatta net bakiye
         // borç ya da alacak yönlü yazılabilir).
-        let uyar = if d["mutlak"].as_bool().unwrap_or(false) { sol.abs() != hedef.abs() } else { sol != hedef };
-        if uyar {
+        let fark = if d["mutlak"].as_bool().unwrap_or(false) { sol.abs() - hedef.abs() } else { sol - hedef };
+        if fark.abs() > tolerans {
             b.push(bulgu("A21", "ENGEL",
-                format!("{ad} TUTMUYOR: hesaplanan {} ≠ belgedeki {} (fark {}).",
-                    tl(sol), tl(hedef), tl(sol - hedef)),
+                format!("{ad} TUTMUYOR: hesaplanan {} ≠ belgedeki {} (fark {}, tolerans {} kuruş).",
+                    tl(sol), tl(hedef), tl(fark), tolerans),
                 "Alanlardan biri yanlış okunmuş veya yanlış seçilmiş. Belgeye dönüp \
                  farkı veren alanı düzelt — denklem tutmadan kayıt açılmaz."));
         } else {
             tutan += 1;
-            b.push(bulgu("A00", "BILGI", format!("{ad} doğrulandı ({}).", tl(hedef)),
+            let not = if fark == 0 { String::new() }
+                      else { format!(" — {} kuruş yuvarlama farkı tolere edildi", fark.abs()) };
+            b.push(bulgu("A00", "BILGI", format!("{ad} doğrulandı ({}){}.", tl(hedef), not),
                 "Bu alan takımı belgenin kendi aritmetiğiyle kanıtlandı."));
         }
     }

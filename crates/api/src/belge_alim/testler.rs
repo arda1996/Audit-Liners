@@ -612,3 +612,42 @@ async fn gecersiz_tarih_kabul_edilmez() {
     assert!(!coz(&d, "/bulgular").as_array().map(|x| x.iter().any(|y| y["onem"] == "ENGEL")).unwrap_or(false),
         "29.02.2024 artık yıldır, reddedilmemeliydi");
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// YUVARLAMA TOLERANSI — dar ama sıfır değil
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Çok kalemli/çok oranlı faturada KDV satır bazında yuvarlanır ve toplam birkaç kuruş
+/// şaşar. Sert eşitlik bunu "TUTMUYOR" sayıp DOĞRU okumaları eliyordu.
+#[tokio::test]
+async fn kurus_yuvarlama_farki_tolere_edilir() {
+    basla("FATURA", "MANUEL", "", "ALM-TOL").await;
+    // 1.000,00 + 200,01 = 1.200,01 ama belgede 1.200,00 yazıyor → 1 kuruş fark
+    for (k, v) in [("yon", "SATIS"), ("unvan", "ÖRNEK A.Ş."), ("belge_no", "F1"),
+                   ("tarih", "01.02.2026"), ("matrah", "1.000,00"),
+                   ("kdv", "200,01"), ("toplam", "1.200,00")] {
+        deger("ALM-TOL", k, v, "MANUEL").await;
+        onayla("ALM-TOL", k).await;
+    }
+    let t = tamamla("ALM-TOL").await;
+    assert_eq!(coz(&t, "/dogrulama"), "DOGRULANDI",
+        "1 kuruş yuvarlama farkı reddedildi: {:?}", coz(&t, "/bulgular"));
+}
+
+/// **TOLERANS DAR OLMALI.** Gerçek bir okuma hatası yutulmamalı — referans uygulamanın
+/// kullandığı 1 TL'lik tolerans denetim ürünü için fazla gevşektir.
+#[tokio::test]
+async fn gercek_okuma_hatasi_tolerans_altina_saklanmaz() {
+    basla("FATURA", "MANUEL", "", "ALM-TOL2").await;
+    // 1.000,00 + 200,00 = 1.200,00 ama belgede 1.201,00 → 1 TL fark, GERÇEK hata
+    for (k, v) in [("yon", "SATIS"), ("unvan", "ÖRNEK A.Ş."), ("belge_no", "F2"),
+                   ("tarih", "01.02.2026"), ("matrah", "1.000,00"),
+                   ("kdv", "200,00"), ("toplam", "1.201,00")] {
+        deger("ALM-TOL2", k, v, "MANUEL").await;
+        onayla("ALM-TOL2", k).await;
+    }
+    let t = tamamla("ALM-TOL2").await;
+    let b = coz(&t, "/bulgular");
+    assert!(b.as_array().unwrap().iter().any(|x| x["kod"] == "A21" && x["onem"] == "ENGEL"),
+        "1 TL'lik gerçek fark tolerans altına saklandı: {b:?}");
+}

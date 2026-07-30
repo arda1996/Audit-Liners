@@ -150,3 +150,37 @@ fn tarama_toplam_satirlari_okunur() {
     assert!(k.iter().any(|x| x.deger == "256,00"),
         "kdv bulunamadı: {:?}", k.iter().map(|x| (&x.deger, &x.strateji)).collect::<Vec<_>>());
 }
+
+/// **ÇAPA DEĞERİN KENDİSİNİ İÇERMEMELİ.**
+///
+/// Çapa satırın tamamından kurulunca değer de çapaya giriyordu:
+/// `"SAYIN: EGE TEKSTİL A.Ş."` → çapa `"sayin ege tekstil a s"`. Müşteri adı çapanın
+/// parçası olduğu için, aynı şablonun **farklı müşterili** bir sonraki faturasında kural
+/// hiç eşleşmiyordu — her fatura yeni kural yazıyor, hiçbiri tekrar kullanılmıyordu.
+/// Şablon öğrenmenin pratikte birikmemesinin başlıca sebebi buydu.
+#[test]
+fn capa_degeri_icermez_farkli_musteride_de_eslesir() {
+    let id = "TEST-CAPA".to_string();
+    let unut = |i: String| { let _ = futures::executor::block_on(sablon_unut(axum::extract::Path(i))); };
+    unut(id.clone());
+
+    let birinci = "\
+ABC TİCARET A.Ş.                         e-FATURA
+SAYIN: EGE TEKSTİL SANAYİ A.Ş.
+Fatura No                                ABC2026000000777
+Matrah                                   8.000,00";
+    let n = ogren(&id, "EGE TEKSTİL SANAYİ A.Ş.", "FATURA", birinci,
+        &[("unvan".to_string(), "EGE TEKSTİL SANAYİ A.Ş.".to_string())]);
+    assert!(n >= 1, "kural öğrenilmedi ({n})");
+
+    // AYNI şablon, BAŞKA müşteri. Çapa "sayin" olmalı ki bu belgede de tutsun.
+    let ikinci = birinci.replace("EGE TEKSTİL SANAYİ A.Ş.", "MARMARA LOJİSTİK LTD.");
+    let satirlar: Vec<&str> = ikinci.lines().collect();
+    let alanlar = vec![("unvan".to_string(), "METIN".to_string())];
+    let c = uygula(&id, &satirlar, &alanlar);
+
+    let bulunan = c.get("unvan").map(|s| s.as_str()).unwrap_or("");
+    assert!(bulunan.contains("MARMARA"),
+        "öğrenilen kural farklı müşteride eşleşmedi — çapa değeri içeriyor. bulunan: {bulunan:?}, tüm: {c:?}");
+    unut(id);
+}
