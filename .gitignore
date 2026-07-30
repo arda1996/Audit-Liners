@@ -32,3 +32,6 @@ data/ornek-belgeler/*
 .claude/sessions/
 .claude/completions/
 .claude/settings.local.json
+
+# OCR modeli — ikili, kaynağından indirilir (bash scripts/model-getir.sh)
+tools/modeller/

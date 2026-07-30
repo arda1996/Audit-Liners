@@ -42,6 +42,20 @@ Kullanım:  goruntu-oku.py <görüntü-yolu> [--ham]
 """
 import json
 import sys
+from pathlib import Path
+
+# ── TANIMA MODELİ ────────────────────────────────────────────────────────────
+# Varsayılan RapidOCR modeli ÇİNCE sözlük taşıyor (`ppocr_keys_v1.txt`): 12 Türkçe
+# karakterden yalnız 2'sini içeriyor. `ŞELALE` yanlış okunmuyor — `ş` çıktı alfabesinde
+# YOK, üretmesi fiziksel olarak imkânsız. Kayıp %100 ve deterministik.
+#
+# Latin PP-OCRv5 modeli sözlüğü ONNX META VERİSİNİN İÇİNDE taşıyor (502 girdi,
+# Türkçe 12/12 — doğrulandı). Ayrı sözlük dosyası gerekmiyor; kurulu sürüm (1.2.3)
+# zaten meta verideki `character` alanını okuyor ve `rec_keys_path`'i yok sayıyor.
+#
+# Model yoksa varsayılana düşülür — kurulum zorunlu değil, ama Türkçe metin bozuk gelir.
+# Kurulum: bash scripts/model-getir.sh
+MODEL = Path(__file__).resolve().parent / "modeller" / "latin_PP-OCRv5_rec_mobile.onnx"
 
 # Eğiklik bu eşiğin altındaysa döndürme YAPILMAZ — gereksiz yeniden örnekleme
 # karakter kenarlarını yumuşatır, fayda yerine zarar verir.
@@ -180,7 +194,9 @@ def main() -> int:
     girdi = yol if hazir is None else hazir
 
     try:
-        sonuc, _ = RapidOCR()(girdi)
+        # Latin tanıma modeli varsa onu kullan — Türkçe karakterler ancak böyle çıkar.
+        ocr = RapidOCR(rec_model_path=str(MODEL)) if MODEL.exists() else RapidOCR()
+        sonuc, _ = ocr(girdi)
     except Exception as e:  # bozuk/okunamayan görüntü
         print(f"görüntü okunamadı: {e}", file=sys.stderr)
         return 2
