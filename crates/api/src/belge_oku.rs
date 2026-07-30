@@ -163,10 +163,55 @@ pub fn alan_esanlamlilari(alan_kodu: &str, dil: &str) -> Vec<String> {
         "toplam" | "net" | "kapanis" => "toplam",
         "yaziyla" => "tutar_yaziyla",
         "iban" => "iban",
+        // Ekstre / mutabakat / gider pusulası alanları. Bunlar `belge-parametreleri.json`'da
+        // TANIMLIYDI ama etiket karşılıkları yoktu: tarama bu alanları hiç aramıyor, aday
+        // listesi boş kalıyor ve `denklemle_sec` denklemi HİÇ DENEMEDEN atlıyordu. Yani
+        // DEKONT zinciri ve MUTABAKAT yön denklemi kâğıt üzerinde vardı, fiilen çalışmıyordu.
+        // `sozluk_denetim::her_parametre_alaninin_etiketi_var` bu boşluğu artık test ediyor.
+        "acilis" => "acilis",
+        "giris" => "giris",
+        "cikis" => "cikis",
+        "stopaj" => "stopaj",
+        "borc_bakiye" => "borc_bakiye",
+        "alacak_bakiye" => "alacak_bakiye",
+        "net_bakiye" => "net_bakiye",
+        "iskonto" => "iskonto",
+        "otv" => "otv",
+        "vade" => "vade",
+        "para_birimi" => "para_birimi",
+        "vergi_dairesi" => "vergi_dairesi",
+        "seri" => "seri",
+        "sira" => "sira",
+        "irsaliye_no" => "irsaliye_no",
+        "sevk_tarihi" => "sevk_tarihi",
+        "odeme_sekli" => "odeme_sekli",
+        "banka_adi" => "banka_adi",
+        "hesap_no" => "hesap_no",
+        "ettn" => "ettn",
         _ => return Vec::new(),
     };
-    sozluk()["alan_etiketleri"][anahtar][dil].as_array().into_iter().flatten()
-        .filter_map(|x| x.as_str().map(String::from)).collect()
+    // ── SINIRDA SADELEŞTİRME ─────────────────────────────────────────────────
+    //
+    // Çağıran taraf etiketi **sadeleştirilmiş** metinde arıyor (`sade.contains(e)`).
+    // Sözlük ise doğal yazımda tutuluyor. İkisi eşleşmiyordu ve sonuç sessiz kayıptı:
+    // ölçüldüğünde 221 girdinin **48'i (%22) hiç eşleşemiyordu** — "seri sıra no",
+    // "düzenleme tarihi", "numéro de facture", "rechnungs-nr", "счет №" gibi Türkçe
+    // karakter, aksan veya noktalama içeren her girdi ölüydü.
+    //
+    // Sadeleştirme burada, TEK YERDE yapılır. Böylece sözlük her dilde **doğal yazımıyla**
+    // yazılabilir (ünlü aksanı, ß, kiril, tire, °) ve yazan kişinin kodlama kuralını
+    // bilmesi gerekmez. Bütünlük testi (`sozluk_butunlugu`) bu sözleşmeyi korur.
+    let mut cikti: Vec<String> = sozluk()["alan_etiketleri"][anahtar][dil].as_array()
+        .into_iter().flatten()
+        .filter_map(|x| x.as_str().map(sadelestir))
+        .filter(|s| s.chars().count() >= 2) // "n°" → "n": tek harf her yere uyar, elenir
+        .collect();
+    // UZUNDAN KISAYA: "fatura tarihi" ile "tarih" ikisi de uyuyorsa daha ÖZGÜL olan
+    // önce gelmeli. Sıraya güvenmeyen çağıran da var (`max_by_key`), ama güvenen için
+    // doğru sıra budur.
+    cikti.sort_by(|a, b| b.chars().count().cmp(&a.chars().count()).then(a.cmp(b)));
+    cikti.dedup();
+    cikti
 }
 
 /// Belge türünü anahtar kelimelerden çözer. Bulunamazsa boş döner — uydurulmaz.

@@ -335,6 +335,481 @@
         "tarih",
         "tutar"
       ]
+    },
+    "EARSIV": {
+      "ad": "e-Arşiv Fatura",
+      "anahtar": {
+        "tr": [
+          "e-arşiv",
+          "earşiv",
+          "e-arşiv fatura"
+        ],
+        "en": [
+          "e-archive invoice"
+        ],
+        "de": [],
+        "fr": [],
+        "ru": []
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
+    },
+    "IRSALIYE": {
+      "ad": "İrsaliye",
+      "anahtar": {
+        "tr": [
+          "irsaliye",
+          "sevk irsaliyesi",
+          "e-irsaliye",
+          "taşıma irsaliyesi"
+        ],
+        "en": [
+          "despatch advice",
+          "delivery note",
+          "waybill",
+          "packing slip"
+        ],
+        "de": [
+          "lieferschein"
+        ],
+        "fr": [
+          "bon de livraison"
+        ],
+        "ru": [
+          "товарная накладная",
+          "накладная"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "sevk_tarihi"
+      ]
+    },
+    "SERBEST_MESLEK_MAKBUZU": {
+      "ad": "Serbest Meslek Makbuzu",
+      "anahtar": {
+        "tr": [
+          "serbest meslek makbuzu",
+          "e-smm",
+          "smm makbuzu"
+        ],
+        "en": [
+          "professional service receipt"
+        ],
+        "de": [],
+        "fr": [],
+        "ru": []
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "brut",
+        "stopaj",
+        "net"
+      ]
+    },
+    "MUSTAHSIL_MAKBUZU": {
+      "ad": "Müstahsil Makbuzu",
+      "anahtar": {
+        "tr": [
+          "müstahsil makbuzu",
+          "e-müstahsil"
+        ],
+        "en": [
+          "producer receipt",
+          "farmer receipt"
+        ],
+        "de": [],
+        "fr": [],
+        "ru": []
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "brut",
+        "stopaj",
+        "net"
+      ]
+    },
+    "PERAKENDE_FIS": {
+      "ad": "Perakende Satış Fişi",
+      "anahtar": {
+        "tr": [
+          "perakende satış fişi",
+          "yazarkasa fişi",
+          "ödeme kaydedici cihaz fişi",
+          "satış fişi",
+          "fiş"
+        ],
+        "en": [
+          "retail receipt",
+          "cash register receipt",
+          "sales slip",
+          "receipt"
+        ],
+        "de": [
+          "kassenbon",
+          "kassenzettel"
+        ],
+        "fr": [
+          "ticket de caisse"
+        ],
+        "ru": [
+          "кассовый чек",
+          "чек"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
+    },
+    "EKSTRE": {
+      "ad": "Hesap Ekstresi",
+      "anahtar": {
+        "tr": [
+          "hesap ekstresi",
+          "ekstre",
+          "hesap özeti",
+          "banka ekstresi",
+          "hesap hareketleri"
+        ],
+        "en": [
+          "account statement",
+          "bank statement",
+          "statement of account"
+        ],
+        "de": [
+          "kontoauszug"
+        ],
+        "fr": [
+          "relevé de compte",
+          "relevé bancaire"
+        ],
+        "ru": [
+          "выписка по счету",
+          "банковская выписка"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "kapanis"
+      ]
+    },
+    "MUTABAKAT": {
+      "ad": "Mutabakat Mektubu",
+      "anahtar": {
+        "tr": [
+          "mutabakat",
+          "cari mutabakat",
+          "mutabakat mektubu",
+          "bakiye mutabakatı",
+          "ba bs mutabakat"
+        ],
+        "en": [
+          "reconciliation",
+          "balance confirmation",
+          "statement reconciliation"
+        ],
+        "de": [
+          "saldenbestätigung",
+          "abstimmung"
+        ],
+        "fr": [
+          "lettre de circularisation",
+          "rapprochement"
+        ],
+        "ru": [
+          "акт сверки",
+          "сверка"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "net_bakiye"
+      ]
+    },
+    "PROFORMA": {
+      "ad": "Proforma Fatura",
+      "anahtar": {
+        "tr": [
+          "proforma",
+          "proforma fatura",
+          "ön fatura",
+          "teklif"
+        ],
+        "en": [
+          "proforma invoice",
+          "pro forma",
+          "quotation",
+          "quote"
+        ],
+        "de": [
+          "proformarechnung",
+          "angebot"
+        ],
+        "fr": [
+          "facture proforma",
+          "devis"
+        ],
+        "ru": [
+          "счет на оплату",
+          "проформа"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
+    },
+    "IADE_FATURASI": {
+      "ad": "İade Faturası",
+      "anahtar": {
+        "tr": [
+          "iade faturası",
+          "satıştan iade",
+          "alıştan iade",
+          "iade"
+        ],
+        "en": [
+          "credit note",
+          "return invoice",
+          "refund invoice"
+        ],
+        "de": [
+          "gutschrift",
+          "stornorechnung"
+        ],
+        "fr": [
+          "avoir",
+          "facture d'avoir"
+        ],
+        "ru": [
+          "корректировочный счет-фактура",
+          "возврат"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "matrah",
+        "kdv",
+        "toplam"
+      ]
+    },
+    "TAHSILAT_MAKBUZU": {
+      "ad": "Tahsilat Makbuzu",
+      "anahtar": {
+        "tr": [
+          "tahsilat makbuzu",
+          "tahsilat",
+          "kasa tahsil fişi",
+          "tahsil makbuzu"
+        ],
+        "en": [
+          "collection receipt",
+          "payment received",
+          "cash receipt"
+        ],
+        "de": [
+          "quittung",
+          "zahlungseingang"
+        ],
+        "fr": [
+          "reçu",
+          "quittance"
+        ],
+        "ru": [
+          "приходный кассовый ордер",
+          "приходный ордер"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
+    },
+    "TEDIYE_MAKBUZU": {
+      "ad": "Tediye Makbuzu",
+      "anahtar": {
+        "tr": [
+          "tediye makbuzu",
+          "tediye",
+          "kasa tediye fişi",
+          "ödeme makbuzu"
+        ],
+        "en": [
+          "payment voucher",
+          "disbursement receipt",
+          "payment made"
+        ],
+        "de": [
+          "auszahlungsbeleg"
+        ],
+        "fr": [
+          "bon de paiement"
+        ],
+        "ru": [
+          "расходный кассовый ордер",
+          "расходный ордер"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
+    },
+    "CEK": {
+      "ad": "Çek",
+      "anahtar": {
+        "tr": [
+          "çek",
+          "müşteri çeki",
+          "keşide"
+        ],
+        "en": [
+          "cheque",
+          "check"
+        ],
+        "de": [
+          "scheck"
+        ],
+        "fr": [
+          "chèque"
+        ],
+        "ru": [
+          "чек"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
+    },
+    "SENET": {
+      "ad": "Senet",
+      "anahtar": {
+        "tr": [
+          "senet",
+          "bono",
+          "emre muharrer senet",
+          "müşteri senedi"
+        ],
+        "en": [
+          "promissory note",
+          "bill of exchange",
+          "note payable"
+        ],
+        "de": [
+          "wechsel",
+          "schuldschein"
+        ],
+        "fr": [
+          "billet à ordre",
+          "lettre de change"
+        ],
+        "ru": [
+          "вексель"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam",
+        "vade"
+      ]
+    },
+    "BORDRO": {
+      "ad": "Ücret Bordrosu",
+      "anahtar": {
+        "tr": [
+          "bordro",
+          "ücret bordrosu",
+          "maaş bordrosu",
+          "puantaj"
+        ],
+        "en": [
+          "payroll",
+          "pay slip",
+          "payslip",
+          "salary statement"
+        ],
+        "de": [
+          "lohnabrechnung",
+          "gehaltsabrechnung"
+        ],
+        "fr": [
+          "bulletin de paie",
+          "fiche de paie"
+        ],
+        "ru": [
+          "расчетный листок",
+          "ведомость"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "brut",
+        "net"
+      ]
+    },
+    "TEMINAT_MEKTUBU": {
+      "ad": "Teminat Mektubu",
+      "anahtar": {
+        "tr": [
+          "teminat mektubu",
+          "kesin teminat",
+          "geçici teminat",
+          "banka teminatı"
+        ],
+        "en": [
+          "letter of guarantee",
+          "bank guarantee",
+          "performance bond"
+        ],
+        "de": [
+          "bankbürgschaft",
+          "garantieerklärung"
+        ],
+        "fr": [
+          "garantie bancaire",
+          "caution"
+        ],
+        "ru": [
+          "банковская гарантия"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
+    },
+    "SIGORTA_POLICESI": {
+      "ad": "Sigorta Poliçesi",
+      "anahtar": {
+        "tr": [
+          "sigorta poliçesi",
+          "poliçe",
+          "zeyilname",
+          "sigorta"
+        ],
+        "en": [
+          "insurance policy",
+          "policy",
+          "endorsement"
+        ],
+        "de": [
+          "versicherungspolice"
+        ],
+        "fr": [
+          "police d'assurance"
+        ],
+        "ru": [
+          "страховой полис"
+        ]
+      },
+      "zorunlu_alanlar": [
+        "tarih",
+        "toplam"
+      ]
     }
   },
   "alan_etiketleri": {
@@ -346,9 +821,10 @@
         "makbuz no",
         "no",
         "sıra",
-        "sira",
         "seri sıra",
-        "seri sira no"
+        "fiş no",
+        "evrak no",
+        "belge numarası"
       ],
       "en": [
         "invoice no",
@@ -356,24 +832,33 @@
         "document no",
         "receipt no",
         "ref",
-        "reference"
+        "reference",
+        "bill no",
+        "reference no",
+        "voucher no"
       ],
       "de": [
         "rechnungsnummer",
         "rechnungs-nr",
         "beleg-nr",
-        "nummer"
+        "nummer",
+        "belegnummer",
+        "dokumentnummer"
       ],
       "fr": [
         "numéro de facture",
         "n° facture",
         "numéro",
-        "n°"
+        "numéro de pièce",
+        "facture numéro",
+        "référence"
       ],
       "ru": [
         "номер",
-        "№",
-        "счет №"
+        "счет №",
+        "номер счета",
+        "номер документа",
+        "номер накладной"
       ]
     },
     "tarih": {
@@ -382,27 +867,37 @@
         "düzenleme tarihi",
         "fatura tarihi",
         "işlem tarihi",
-        "tarihi"
+        "tarihi",
+        "belge tarihi",
+        "kayıt tarihi"
       ],
       "en": [
         "date",
         "invoice date",
         "issue date",
-        "transaction date"
+        "transaction date",
+        "document date",
+        "posting date"
       ],
       "de": [
         "datum",
         "rechnungsdatum",
-        "belegdatum"
+        "belegdatum",
+        "ausstellungsdatum",
+        "buchungsdatum"
       ],
       "fr": [
         "date",
         "date de facture",
-        "date d'émission"
+        "date d'émission",
+        "date de pièce"
       ],
       "ru": [
         "дата",
-        "дата составления"
+        "дата составления",
+        "дата счета",
+        "дата документа",
+        "дата операции"
       ]
     },
     "karsi_taraf": {
@@ -415,7 +910,14 @@
         "firma",
         "ad soyad",
         "mal/hizmet sunan",
-        "sayin"
+        "tedarikçi",
+        "cari",
+        "cari unvan",
+        "firma adı",
+        "müşteri adı",
+        "kime",
+        "kimden",
+        "mükellef"
       ],
       "en": [
         "bill to",
@@ -424,25 +926,43 @@
         "client",
         "supplier",
         "vendor",
-        "received from"
+        "received from",
+        "ship to",
+        "company",
+        "company name",
+        "account name",
+        "name",
+        "payee",
+        "payer",
+        "issued to"
       ],
       "de": [
         "kunde",
         "lieferant",
         "empfänger",
-        "rechnungsempfänger"
+        "rechnungsempfänger",
+        "firma",
+        "firmenname",
+        "name"
       ],
       "fr": [
         "client",
         "fournisseur",
-        "destinataire"
+        "destinataire",
+        "société",
+        "raison sociale",
+        "nom"
       ],
       "ru": [
         "принято от",
         "плательщик",
         "поставщик",
         "покупатель",
-        "заказчик"
+        "заказчик",
+        "клиент",
+        "организация",
+        "наименование",
+        "контрагент"
       ]
     },
     "vergi_no": {
@@ -454,29 +974,40 @@
         "vergi dairesi",
         "tc kimlik",
         "vergi nu",
-        "vergi numarası"
+        "vergi numarası",
+        "tc kimlik no",
+        "kimlik no",
+        "mersis no"
       ],
       "en": [
         "tax id",
         "vat no",
         "vat number",
         "ein",
-        "tin"
+        "tin",
+        "tax number",
+        "tax registration no",
+        "company reg no"
       ],
       "de": [
         "ust-idnr",
         "steuernummer",
-        "umsatzsteuer-identifikationsnummer"
+        "umsatzsteuer-identifikationsnummer",
+        "handelsregisternummer"
       ],
       "fr": [
         "n° tva",
         "numéro de tva",
-        "siret"
+        "siret",
+        "numéro fiscal",
+        "siren",
+        "tva intracommunautaire"
       ],
       "ru": [
         "инн",
         "кпп",
-        "огрн"
+        "огрн",
+        "налоговый номер"
       ]
     },
     "matrah": {
@@ -488,28 +1019,37 @@
         "brüt tutar",
         "net tutar",
         "toplam tutar",
-        "tutar"
+        "tutar",
+        "vergiye tabi tutar"
       ],
       "en": [
         "subtotal",
         "net amount",
         "taxable amount",
-        "amount before tax"
+        "amount before tax",
+        "net total",
+        "taxable base",
+        "goods total"
       ],
       "de": [
         "nettobetrag",
         "zwischensumme",
-        "bemessungsgrundlage"
+        "bemessungsgrundlage",
+        "warenwert",
+        "nettosumme"
       ],
       "fr": [
         "montant ht",
         "total ht",
-        "base imposable"
+        "base imposable",
+        "sous-total",
+        "montant hors taxes"
       ],
       "ru": [
         "сумма без ндс",
         "налоговая база",
-        "итого без ндс"
+        "итого без ндс",
+        "подытог"
       ]
     },
     "vergi_tutari": {
@@ -520,28 +1060,38 @@
         "otv",
         "özel tüketim vergisi",
         "tevkifat",
-        "stopaj"
+        "stopaj",
+        "katma değer vergisi",
+        "vergi tutarı"
       ],
       "en": [
         "vat",
         "tax",
         "sales tax",
         "tax amount",
-        "withholding"
+        "withholding",
+        "vat amount",
+        "gst amount",
+        "total tax"
       ],
       "de": [
         "mwst",
         "umsatzsteuer",
         "ust",
-        "mehrwertsteuer"
+        "mehrwertsteuer",
+        "mwst betrag",
+        "steuerbetrag"
       ],
       "fr": [
         "tva",
-        "montant tva"
+        "montant tva",
+        "taxe sur la valeur ajoutée",
+        "montant de la taxe"
       ],
       "ru": [
         "ндс",
-        "сумма ндс"
+        "сумма ндс",
+        "налог на добавленную стоимость"
       ]
     },
     "tevkifat": {
@@ -550,45 +1100,62 @@
         "tevkifata tabi",
         "tevkifata tabi kdv",
         "tevkif edilen kdv",
-        "sorumlu sıfatıyla"
+        "sorumlu sıfatıyla",
+        "kdv tevkifatı",
+        "tevkifat tutarı",
+        "sorumlu sıfatıyla kdv"
       ],
       "en": [
         "withholding",
         "withheld vat",
-        "reverse charge"
+        "reverse charge",
+        "vat withholding",
+        "withheld tax"
       ],
       "de": [
-        "abzugsteuer"
+        "abzugsteuer",
+        "steuerabzug",
+        "reverse charge",
+        "einbehaltene steuer"
       ],
       "fr": [
-        "autoliquidation"
+        "autoliquidation",
+        "retenue à la source",
+        "retenue"
       ],
       "ru": [
-        "удержанный ндс"
+        "удержанный ндс",
+        "удержание налога",
+        "налоговый агент"
       ]
     },
     "vergi_orani": {
       "tr": [
         "kdv oranı",
         "oran",
-        "%"
+        "kdv oran",
+        "vergi oranı"
       ],
       "en": [
         "vat rate",
         "tax rate",
-        "rate"
+        "rate",
+        "vat percent"
       ],
       "de": [
         "steuersatz",
-        "mwst-satz"
+        "mwst-satz",
+        "ust satz"
       ],
       "fr": [
         "taux de tva",
-        "taux"
+        "taux",
+        "taux d'imposition"
       ],
       "ru": [
         "ставка ндс",
-        "ставка"
+        "ставка",
+        "ставка налога"
       ]
     },
     "toplam": {
@@ -597,43 +1164,66 @@
         "ödenecek tutar",
         "toplam",
         "vergiler dahil toplam tutar",
-        "net ödenen"
+        "net ödenen",
+        "vergiler dahil toplam",
+        "kdv dahil toplam",
+        "fatura toplamı",
+        "kapanış bakiyesi",
+        "son bakiye",
+        "tahsil edilen"
       ],
       "en": [
         "total",
         "grand total",
         "amount due",
         "total amount",
-        "balance due"
+        "balance due",
+        "total due",
+        "total incl vat",
+        "closing balance",
+        "payable amount"
       ],
       "de": [
         "gesamtbetrag",
         "bruttobetrag",
         "summe",
-        "zu zahlen"
+        "zu zahlen",
+        "gesamtsumme",
+        "rechnungsbetrag",
+        "endsaldo",
+        "schlusssaldo"
       ],
       "fr": [
         "total ttc",
         "montant total",
-        "net à payer"
+        "net à payer",
+        "total général",
+        "solde final"
       ],
       "ru": [
         "итого",
         "всего",
         "сумма",
-        "к оплате"
+        "к оплате",
+        "всего к оплате",
+        "общая сумма",
+        "итоговая сумма",
+        "конечное сальдо"
       ]
     },
     "tutar_yaziyla": {
       "tr": [
         "yalnız",
         "yazıyla",
-        "yalnız yazıyla"
+        "yalnız yazıyla",
+        "yazı ile",
+        "tutarı yazıyla"
       ],
       "en": [
         "amount in words",
         "say",
-        "in words"
+        "in words",
+        "total in words"
       ],
       "de": [
         "in worten",
@@ -641,7 +1231,8 @@
       ],
       "fr": [
         "montant en lettres",
-        "arrêté à la somme de"
+        "arrêté à la somme de",
+        "arrêté la présente facture à la somme de"
       ],
       "ru": [
         "прописью",
@@ -653,54 +1244,647 @@
         "açıklama",
         "konu",
         "mal/hizmet",
-        "dayanak"
+        "dayanak",
+        "not",
+        "izahat",
+        "işlem açıklaması",
+        "referans"
       ],
       "en": [
         "description",
         "details",
         "memo",
         "for",
-        "particulars"
+        "particulars",
+        "note",
+        "remarks",
+        "narrative",
+        "reference"
       ],
       "de": [
         "beschreibung",
         "verwendungszweck",
-        "betreff"
+        "betreff",
+        "bemerkung",
+        "hinweis"
       ],
       "fr": [
         "description",
         "objet",
-        "désignation"
+        "désignation",
+        "observation",
+        "libellé",
+        "référence"
       ],
       "ru": [
         "основание",
         "назначение платежа",
-        "наименование"
+        "наименование",
+        "описание",
+        "примечание"
       ]
     },
     "iban": {
       "tr": [
         "iban",
         "hesap no",
-        "hesap numarası"
+        "hesap numarası",
+        "banka hesabı"
       ],
       "en": [
         "iban",
         "account no",
-        "account number"
+        "account number",
+        "bank account",
+        "swift",
+        "bic"
       ],
       "de": [
         "iban",
-        "kontonummer"
+        "kontonummer",
+        "bankverbindung",
+        "bic"
       ],
       "fr": [
         "iban",
-        "numéro de compte"
+        "numéro de compte",
+        "rib",
+        "bic"
       ],
       "ru": [
         "расчетный счет",
         "р/с",
-        "счет"
+        "счет",
+        "иban",
+        "номер счета",
+        "бик"
+      ]
+    },
+    "acilis": {
+      "tr": [
+        "açılış bakiyesi",
+        "devir",
+        "devreden bakiye",
+        "önceki bakiye",
+        "başlangıç bakiyesi",
+        "nakil yekun"
+      ],
+      "en": [
+        "opening balance",
+        "brought forward",
+        "previous balance",
+        "balance b/f",
+        "beginning balance"
+      ],
+      "de": [
+        "anfangssaldo",
+        "übertrag",
+        "vortrag",
+        "eröffnungssaldo"
+      ],
+      "fr": [
+        "solde initial",
+        "report",
+        "solde à nouveau",
+        "solde précédent"
+      ],
+      "ru": [
+        "входящее сальдо",
+        "остаток на начало",
+        "сальдо на начало"
+      ]
+    },
+    "giris": {
+      "tr": [
+        "giriş",
+        "alacak",
+        "gelen",
+        "tahsilat",
+        "yatan",
+        "alacak tutarı",
+        "borç azalışı"
+      ],
+      "en": [
+        "credit",
+        "deposit",
+        "incoming",
+        "receipts",
+        "money in",
+        "credits"
+      ],
+      "de": [
+        "haben",
+        "eingang",
+        "gutschrift",
+        "einzahlung"
+      ],
+      "fr": [
+        "crédit",
+        "entrée",
+        "encaissement",
+        "versement"
+      ],
+      "ru": [
+        "кредит",
+        "приход",
+        "поступление",
+        "зачисление"
+      ]
+    },
+    "cikis": {
+      "tr": [
+        "çıkış",
+        "borç",
+        "giden",
+        "ödeme",
+        "çekilen",
+        "borç tutarı"
+      ],
+      "en": [
+        "debit",
+        "withdrawal",
+        "outgoing",
+        "payments",
+        "money out",
+        "debits"
+      ],
+      "de": [
+        "soll",
+        "ausgang",
+        "lastschrift",
+        "auszahlung",
+        "belastung"
+      ],
+      "fr": [
+        "débit",
+        "sortie",
+        "décaissement",
+        "prélèvement"
+      ],
+      "ru": [
+        "дебет",
+        "расход",
+        "списание",
+        "выплата"
+      ]
+    },
+    "stopaj": {
+      "tr": [
+        "stopaj",
+        "gelir vergisi stopajı",
+        "gv stopajı",
+        "kesinti",
+        "vergi kesintisi",
+        "stopaj tutarı"
+      ],
+      "en": [
+        "withholding tax",
+        "income tax withheld",
+        "deduction",
+        "tax deducted at source"
+      ],
+      "de": [
+        "quellensteuer",
+        "lohnsteuer",
+        "abzug",
+        "einbehalt"
+      ],
+      "fr": [
+        "retenue à la source",
+        "prélèvement",
+        "impôt retenu"
+      ],
+      "ru": [
+        "подоходный налог",
+        "удержанный налог",
+        "вычет"
+      ]
+    },
+    "borc_bakiye": {
+      "tr": [
+        "borç bakiye",
+        "borç bakiyesi",
+        "borç toplamı",
+        "borçlu bakiye"
+      ],
+      "en": [
+        "debit balance",
+        "total debit",
+        "debit total"
+      ],
+      "de": [
+        "sollsaldo",
+        "summe soll"
+      ],
+      "fr": [
+        "solde débiteur",
+        "total débit"
+      ],
+      "ru": [
+        "дебетовое сальдо",
+        "итого дебет"
+      ]
+    },
+    "alacak_bakiye": {
+      "tr": [
+        "alacak bakiye",
+        "alacak bakiyesi",
+        "alacak toplamı",
+        "alacaklı bakiye"
+      ],
+      "en": [
+        "credit balance",
+        "total credit",
+        "credit total"
+      ],
+      "de": [
+        "habensaldo",
+        "summe haben"
+      ],
+      "fr": [
+        "solde créditeur",
+        "total crédit"
+      ],
+      "ru": [
+        "кредитовое сальдо",
+        "итого кредит"
+      ]
+    },
+    "net_bakiye": {
+      "tr": [
+        "net bakiye",
+        "bakiye",
+        "mutabakat bakiyesi",
+        "cari bakiye",
+        "kalan"
+      ],
+      "en": [
+        "net balance",
+        "balance",
+        "outstanding balance",
+        "statement balance"
+      ],
+      "de": [
+        "saldo",
+        "nettosaldo",
+        "offener saldo"
+      ],
+      "fr": [
+        "solde",
+        "solde net",
+        "solde restant"
+      ],
+      "ru": [
+        "сальдо",
+        "остаток",
+        "чистое сальдо"
+      ]
+    },
+    "iskonto": {
+      "tr": [
+        "iskonto",
+        "indirim",
+        "iskonto tutarı",
+        "ticari iskonto",
+        "indirim tutarı"
+      ],
+      "en": [
+        "discount",
+        "discount amount",
+        "rebate",
+        "allowance",
+        "trade discount"
+      ],
+      "de": [
+        "rabatt",
+        "skonto",
+        "nachlass",
+        "abschlag"
+      ],
+      "fr": [
+        "remise",
+        "escompte",
+        "rabais",
+        "ristourne"
+      ],
+      "ru": [
+        "скидка",
+        "сумма скидки"
+      ]
+    },
+    "otv": {
+      "tr": [
+        "ötv",
+        "özel tüketim vergisi",
+        "ötv tutarı"
+      ],
+      "en": [
+        "excise duty",
+        "excise tax",
+        "special consumption tax"
+      ],
+      "de": [
+        "verbrauchsteuer"
+      ],
+      "fr": [
+        "accise",
+        "droit d'accise"
+      ],
+      "ru": [
+        "акциз"
+      ]
+    },
+    "vade": {
+      "tr": [
+        "vade",
+        "vade tarihi",
+        "son ödeme tarihi",
+        "ödeme tarihi",
+        "valör"
+      ],
+      "en": [
+        "due date",
+        "payment due",
+        "maturity date",
+        "value date",
+        "terms"
+      ],
+      "de": [
+        "fälligkeitsdatum",
+        "fällig am",
+        "zahlungsziel",
+        "valuta"
+      ],
+      "fr": [
+        "date d'échéance",
+        "échéance",
+        "date de valeur"
+      ],
+      "ru": [
+        "срок оплаты",
+        "дата платежа",
+        "дата валютирования"
+      ]
+    },
+    "para_birimi": {
+      "tr": [
+        "para birimi",
+        "döviz cinsi",
+        "kur",
+        "döviz kuru"
+      ],
+      "en": [
+        "currency",
+        "exchange rate",
+        "fx rate",
+        "curr"
+      ],
+      "de": [
+        "währung",
+        "wechselkurs"
+      ],
+      "fr": [
+        "devise",
+        "taux de change"
+      ],
+      "ru": [
+        "валюта",
+        "курс"
+      ]
+    },
+    "vergi_dairesi": {
+      "tr": [
+        "vergi dairesi",
+        "vd",
+        "bağlı olduğu vergi dairesi"
+      ],
+      "en": [
+        "tax office",
+        "tax authority"
+      ],
+      "de": [
+        "finanzamt"
+      ],
+      "fr": [
+        "centre des impôts",
+        "service des impôts"
+      ],
+      "ru": [
+        "налоговая инспекция"
+      ]
+    },
+    "seri": {
+      "tr": [
+        "seri",
+        "seri no",
+        "fatura serisi"
+      ],
+      "en": [
+        "series",
+        "serial",
+        "prefix"
+      ],
+      "de": [
+        "serie"
+      ],
+      "fr": [
+        "série"
+      ],
+      "ru": [
+        "серия"
+      ]
+    },
+    "sira": {
+      "tr": [
+        "sıra",
+        "sıra no",
+        "müteselsil no"
+      ],
+      "en": [
+        "sequence",
+        "sequence no",
+        "serial no"
+      ],
+      "de": [
+        "laufende nummer",
+        "lfd nr"
+      ],
+      "fr": [
+        "numéro d'ordre"
+      ],
+      "ru": [
+        "порядковый номер"
+      ]
+    },
+    "irsaliye_no": {
+      "tr": [
+        "irsaliye no",
+        "sevk irsaliyesi no",
+        "irsaliye numarası"
+      ],
+      "en": [
+        "despatch note no",
+        "delivery note no",
+        "waybill no",
+        "packing slip no"
+      ],
+      "de": [
+        "lieferscheinnummer"
+      ],
+      "fr": [
+        "numéro de bon de livraison"
+      ],
+      "ru": [
+        "номер накладной"
+      ]
+    },
+    "sevk_tarihi": {
+      "tr": [
+        "sevk tarihi",
+        "irsaliye tarihi",
+        "teslim tarihi",
+        "fiili sevk tarihi"
+      ],
+      "en": [
+        "despatch date",
+        "delivery date",
+        "shipment date",
+        "ship date"
+      ],
+      "de": [
+        "lieferdatum",
+        "versanddatum"
+      ],
+      "fr": [
+        "date de livraison",
+        "date d'expédition"
+      ],
+      "ru": [
+        "дата отгрузки",
+        "дата поставки"
+      ]
+    },
+    "odeme_sekli": {
+      "tr": [
+        "ödeme şekli",
+        "ödeme türü",
+        "tahsilat şekli",
+        "nakit",
+        "kredi kartı",
+        "havale",
+        "eft",
+        "çek",
+        "senet"
+      ],
+      "en": [
+        "payment method",
+        "payment type",
+        "terms of payment",
+        "cash",
+        "credit card",
+        "bank transfer",
+        "cheque"
+      ],
+      "de": [
+        "zahlungsart",
+        "zahlungsbedingungen",
+        "bar",
+        "überweisung",
+        "scheck"
+      ],
+      "fr": [
+        "mode de paiement",
+        "conditions de paiement",
+        "espèces",
+        "virement",
+        "chèque"
+      ],
+      "ru": [
+        "способ оплаты",
+        "наличные",
+        "банковский перевод",
+        "чек"
+      ]
+    },
+    "banka_adi": {
+      "tr": [
+        "banka",
+        "banka adı",
+        "şube",
+        "şube adı",
+        "şube kodu"
+      ],
+      "en": [
+        "bank",
+        "bank name",
+        "branch",
+        "branch code",
+        "sort code"
+      ],
+      "de": [
+        "bank",
+        "bankname",
+        "filiale",
+        "blz"
+      ],
+      "fr": [
+        "banque",
+        "agence",
+        "code guichet"
+      ],
+      "ru": [
+        "банк",
+        "отделение",
+        "филиал"
+      ]
+    },
+    "hesap_no": {
+      "tr": [
+        "hesap no",
+        "hesap numarası",
+        "müşteri no",
+        "cari hesap no"
+      ],
+      "en": [
+        "account no",
+        "account number",
+        "customer no",
+        "account id"
+      ],
+      "de": [
+        "kontonummer",
+        "kundennummer"
+      ],
+      "fr": [
+        "numéro de compte",
+        "numéro client"
+      ],
+      "ru": [
+        "номер счета",
+        "лицевой счет"
+      ]
+    },
+    "ettn": {
+      "tr": [
+        "ettn",
+        "evrensel tekil tanımlama numarası",
+        "uuid"
+      ],
+      "en": [
+        "ettn",
+        "uuid",
+        "unique identifier"
+      ],
+      "de": [
+        "uuid"
+      ],
+      "fr": [
+        "uuid",
+        "identifiant unique"
+      ],
+      "ru": [
+        "uuid",
+        "уникальный идентификатор"
       ]
     }
   },
@@ -708,43 +1892,51 @@
   "sutun_basliklari": {
     "SIRA": {
       "tr": [
-        "sira no",
-        "sira",
+        "sıra no",
+        "sıra",
         "s.no",
         "sno",
-        "no"
+        "no",
+        "kalem no"
       ],
       "en": [
         "line no",
         "item no",
         "no",
-        "#"
+        "line",
+        "seq",
+        "pos"
       ],
       "de": [
         "pos",
-        "nr"
+        "nr",
+        "position"
       ],
       "fr": [
-        "no"
+        "no",
+        "ligne",
+        "n° ordre"
       ],
       "ru": [
-        "№"
+        "№ п/п",
+        "номер"
       ]
     },
     "MAL_ADI": {
       "tr": [
-        "malin cinsi",
+        "malın cinsi",
         "mal cinsi",
         "mal hizmet cinsi",
         "mal/hizmet",
-        "cinsi",
         "cins",
-        "aciklama",
-        "urun adi",
-        "urun",
+        "açıklama",
+        "ürün adı",
+        "ürün",
         "hizmet",
         "mal veya hizmet cinsi",
-        "tanim"
+        "tanım",
+        "emtia",
+        "kalem"
       ],
       "en": [
         "description",
@@ -752,40 +1944,51 @@
         "item",
         "product",
         "goods",
-        "service"
+        "service",
+        "particulars",
+        "details"
       ],
       "de": [
         "bezeichnung",
         "artikel",
-        "beschreibung"
+        "beschreibung",
+        "leistung",
+        "warenbezeichnung"
       ],
       "fr": [
-        "designation",
+        "désignation",
         "description",
-        "article"
+        "article",
+        "libellé",
+        "prestation"
       ],
       "ru": [
         "наименование",
-        "товар"
+        "товар",
+        "описание",
+        "услуга"
       ]
     },
     "BIRIM": {
       "tr": [
         "birim",
-        "olcu birimi",
-        "olcu"
+        "ölçü birimi",
+        "ölçü",
+        "br"
       ],
       "en": [
         "unit",
         "uom",
-        "unit of measure"
+        "unit of measure",
+        "measure"
       ],
       "de": [
         "einheit",
-        "me"
+        "me",
+        "mengeneinheit"
       ],
       "fr": [
-        "unite"
+        "unité"
       ],
       "ru": [
         "ед изм",
@@ -796,91 +1999,136 @@
       "tr": [
         "miktar",
         "adet",
-        "mik"
+        "mik.",
+        "kantite"
       ],
       "en": [
         "quantity",
-        "qty",
-        "amount qty"
+        "qty.",
+        "amount qty",
+        "count",
+        "units",
+        "volume"
       ],
       "de": [
         "menge",
-        "anzahl"
+        "anzahl",
+        "stück",
+        "stk"
       ],
       "fr": [
-        "quantite",
-        "qte"
+        "quantité",
+        "qté",
+        "nombre"
       ],
       "ru": [
         "количество",
-        "кол во"
+        "кол-во",
+        "число"
       ]
     },
     "BIRIM_FIYAT": {
       "tr": [
         "birim fiyat",
-        "b fiyat",
+        "b.fiyat",
         "bfiyat",
-        "fiyat"
+        "fiyat",
+        "birim bedel",
+        "birim ücret"
       ],
       "en": [
         "unit price",
         "price",
-        "rate"
+        "rate",
+        "unit cost",
+        "price per unit"
       ],
       "de": [
         "einzelpreis",
-        "preis"
+        "preis",
+        "stückpreis",
+        "e-preis"
       ],
       "fr": [
         "prix unitaire",
-        "prix"
+        "prix",
+        "p.u.",
+        "tarif"
       ],
       "ru": [
-        "цена"
+        "цена",
+        "цена за единицу",
+        "тариф"
       ]
     },
     "ISKONTO": {
       "tr": [
-        "iskonto orani",
-        "iskonto tutari",
-        "iskonto",
+        "iskonto tutarı",
+        "ıskonto",
         "isk",
         "indirim"
       ],
       "en": [
         "discount",
-        "disc"
+        "disc",
+        "rebate",
+        "allowance"
       ],
       "de": [
-        "rabatt"
+        "rabatt",
+        "skonto",
+        "nachlass"
       ],
       "fr": [
-        "remise"
+        "remise",
+        "rabais",
+        "escompte"
       ],
       "ru": [
         "скидка"
       ]
     },
+    "ISKONTO_ORANI": {
+      "tr": [
+        "iskonto oranı",
+        "indirim oranı"
+      ],
+      "en": [
+        "discount rate"
+      ],
+      "de": [
+        "rabattsatz"
+      ],
+      "fr": [
+        "taux de remise"
+      ],
+      "ru": []
+    },
     "KDV_ORANI": {
       "tr": [
         "kdv oran",
-        "vergi orani",
-        "kdv"
+        "vergi oranı",
+        "kdv",
+        "kdv oranı",
+        "katma değer vergisi oranı"
       ],
       "en": [
         "vat rate",
         "tax rate",
         "vat",
-        "tax"
+        "tax",
+        "gst rate"
       ],
       "de": [
         "mwst satz",
-        "ust"
+        "ust",
+        "ust satz",
+        "steuersatz"
       ],
       "fr": [
         "taux tva",
-        "tva"
+        "tva",
+        "taux de taxe"
       ],
       "ru": [
         "ставка ндс"
@@ -888,48 +2136,220 @@
     },
     "KDV_TUTARI": {
       "tr": [
-        "kdv tutari",
+        "kdv tutarı",
         "hesaplanan kdv",
-        "vergi tutari"
+        "vergi tutarı",
+        "kdv bedeli"
       ],
       "en": [
         "vat amount",
-        "tax amount"
+        "tax amount",
+        "gst amount"
       ],
       "de": [
-        "mwst betrag"
+        "mwst betrag",
+        "steuerbetrag",
+        "ust betrag"
       ],
       "fr": [
-        "montant tva"
+        "montant tva",
+        "montant taxe"
       ],
       "ru": [
         "сумма ндс"
       ]
     },
+    "OTV": {
+      "tr": [
+        "ötv",
+        "özel tüketim vergisi",
+        "ötv tutarı",
+        "ötv oranı"
+      ],
+      "en": [
+        "excise",
+        "excise duty",
+        "excise tax"
+      ],
+      "de": [
+        "verbrauchsteuer"
+      ],
+      "fr": [
+        "accise"
+      ],
+      "ru": [
+        "акциз"
+      ]
+    },
+    "TEVKIFAT_SUTUN": {
+      "tr": [
+        "tevkifat",
+        "tevkifat tutarı",
+        "tevkifat oranı",
+        "tevkifata tabi"
+      ],
+      "en": [
+        "withholding",
+        "withheld",
+        "reverse charge"
+      ],
+      "de": [
+        "steuerabzug",
+        "reverse charge"
+      ],
+      "fr": [
+        "retenue",
+        "autoliquidation"
+      ],
+      "ru": [
+        "удержание"
+      ]
+    },
     "TUTAR": {
       "tr": [
-        "mal hizmet tutari",
+        "mal hizmet tutarı",
         "tutar",
-        "satir toplami",
-        "toplam"
+        "satır toplamı",
+        "toplam",
+        "bedel",
+        "tutarı"
       ],
       "en": [
         "line total",
         "amount",
         "total",
-        "net amount"
+        "net amount",
+        "line amount",
+        "extended price",
+        "value"
       ],
       "de": [
         "betrag",
-        "gesamt"
+        "gesamt",
+        "summe",
+        "zeilensumme",
+        "gesamtpreis"
       ],
       "fr": [
         "montant",
-        "total"
+        "total",
+        "montant ht",
+        "valeur"
       ],
       "ru": [
         "сумма",
-        "итого"
+        "итого",
+        "стоимость"
+      ]
+    },
+    "DOVIZ_TUTARI": {
+      "tr": [
+        "döviz tutarı",
+        "döviz karşılığı",
+        "yabancı para tutarı"
+      ],
+      "en": [
+        "foreign amount",
+        "fx amount",
+        "currency amount"
+      ],
+      "de": [
+        "währungsbetrag"
+      ],
+      "fr": [
+        "montant devise"
+      ],
+      "ru": [
+        "сумма в валюте"
+      ]
+    },
+    "PARA_BIRIMI": {
+      "tr": [
+        "para birimi",
+        "döviz cinsi",
+        "döviz"
+      ],
+      "en": [
+        "currency",
+        "curr",
+        "ccy"
+      ],
+      "de": [
+        "währung"
+      ],
+      "fr": [
+        "devise"
+      ],
+      "ru": [
+        "валюта"
+      ]
+    },
+    "KUR": {
+      "tr": [
+        "kur",
+        "döviz kuru",
+        "çevrim kuru"
+      ],
+      "en": [
+        "exchange rate",
+        "fx rate",
+        "conversion rate"
+      ],
+      "de": [
+        "wechselkurs",
+        "umrechnungskurs"
+      ],
+      "fr": [
+        "taux de change"
+      ],
+      "ru": [
+        "курс"
+      ]
+    },
+    "GTIP": {
+      "tr": [
+        "gtip",
+        "gtip no",
+        "gümrük tarife istatistik pozisyonu"
+      ],
+      "en": [
+        "hs code",
+        "tariff code",
+        "commodity code"
+      ],
+      "de": [
+        "zolltarifnummer",
+        "warennummer"
+      ],
+      "fr": [
+        "code douanier",
+        "nomenclature"
+      ],
+      "ru": [
+        "код тн вэд"
+      ]
+    },
+    "VADE_SUTUN": {
+      "tr": [
+        "vade",
+        "vade tarihi",
+        "son ödeme"
+      ],
+      "en": [
+        "due date",
+        "maturity",
+        "payment due"
+      ],
+      "de": [
+        "fälligkeit",
+        "fällig am"
+      ],
+      "fr": [
+        "échéance",
+        "date échéance"
+      ],
+      "ru": [
+        "срок оплаты"
       ]
     },
     "_not": "Yalnız KÖK biçim yazılır. Çekimli biçimleri (MİKTARI, TUTARLARI, BİRİM FİYATI, UNIT PRICES) crates/api/src/dilbilgisi.rs çözer — ünlü uyumu sınanarak. Listeye çekim EKLEME: kural listeden üstündür."

@@ -1,235 +1,3129 @@
 {
   "_not": "Finans/muhasebe terim sözlüğü — el yazısı okumalarında BOZUK OKUNAN TERİMİ düzeltmek için. Terimler kapalı bir kümeden gelir (fatura, matrah, tevkifat…), bu yüzden düzeltilebilir. Özel isimler ve SAYILAR bu kümeden gelmez; onlara ASLA dokunulmaz.",
   "_ilke": "Sistem sessizce değiştirmez. Öneri üretir, uzaklığı ve gerekçeyi söyler, kararı muhasebeciye bırakır. Eşit yakınlıkta iki aday varsa hiç öneri vermez — tahmin, yanlış düzeltmeden beterdir.",
-
   "_karistirma_ciftleri": {
     "_not": "El yazısında gerçekten karışan çiftler. Bunlar arasındaki mesafe UCUZ sayılır (1 yerine 0.4), böylece 'Tutur→Tutar' düzelirken 'Kasa→Kesa' gibi uzak eşleşmeler önerilmez.",
-    "gorsel": [["o","0"],["l","1"],["i","1"],["i","l"],["s","5"],["b","8"],["z","2"],["g","9"],["g","6"],["q","g"],["u","v"],["n","r"],["m","n"],["c","e"],["a","o"],["t","f"],["y","g"]],
-    "turkce_aksan": [["i","ı"],["s","ş"],["g","ğ"],["u","ü"],["o","ö"],["c","ç"]],
+    "gorsel": [
+      [
+        "o",
+        "0"
+      ],
+      [
+        "l",
+        "1"
+      ],
+      [
+        "i",
+        "1"
+      ],
+      [
+        "i",
+        "l"
+      ],
+      [
+        "s",
+        "5"
+      ],
+      [
+        "b",
+        "8"
+      ],
+      [
+        "z",
+        "2"
+      ],
+      [
+        "g",
+        "9"
+      ],
+      [
+        "g",
+        "6"
+      ],
+      [
+        "q",
+        "g"
+      ],
+      [
+        "u",
+        "v"
+      ],
+      [
+        "n",
+        "r"
+      ],
+      [
+        "m",
+        "n"
+      ],
+      [
+        "c",
+        "e"
+      ],
+      [
+        "a",
+        "o"
+      ],
+      [
+        "t",
+        "f"
+      ],
+      [
+        "y",
+        "g"
+      ]
+    ],
+    "turkce_aksan": [
+      [
+        "i",
+        "ı"
+      ],
+      [
+        "s",
+        "ş"
+      ],
+      [
+        "g",
+        "ğ"
+      ],
+      [
+        "u",
+        "ü"
+      ],
+      [
+        "o",
+        "ö"
+      ],
+      [
+        "c",
+        "ç"
+      ]
+    ],
     "_aksan_not": "Elle doldurulan belgede yazan kişi aksanı atlar, okuyan da öyle. 'Odenecek' ile 'Ödenecek' aynı sözcüktür — bu fark hiç ceza almamalı."
   },
-
   "_korunan_not": "TERİM DEĞİL ama belgede MEŞRU olarak bulunan sözcükler. Bir okuma bunlardan birine terimden daha yakın (veya eşit) ise düzeltme YAPILMAZ. Ölçümde yakalandı: 'nakliye'→'Bakiye' ve 'masa'→'Kasa' önerilmişti; ikisi de gerçek fatura sözcüğüdür ve düzeltilmeleri hasar verir. Liste, ölçümün gösterdiği çarpışmalarla büyütülür.",
   "korunan": {
-    "tr": ["nakliye","danışmanlık","temizlik","güvenlik","bakım","onarım","kira","yakıt","kargo","ambalaj","montaj","eğitim","reklam","yemek","konaklama","masa","sandalye","kalem","kağıt","kablo","vida","civata","boya","yazılım","lisans","abonelik","işçilik","hammadde","malzeme","personel","sigorta","noter","avukatlık","muhasebe","denetim","numune","irsaliye","sipariş","teklif","sözleşme","proje","etüt","harç","ceza","aidat","bağış"],
-    "en": ["freight","shipping","consulting","cleaning","security","maintenance","repair","rent","fuel","cargo","packaging","assembly","training","advertising","catering","lodging","desk","chair","pencil","paper","cable","screw","paint","software","license","subscription","labour","materials","staff","insurance","notary","legal","audit","sample","order","quote","contract","project","fee","penalty","donation","lotion","senna"],
-    "de": ["fracht","beratung","reinigung","wartung","miete","kraftstoff","schulung","werbung","material","personal","versicherung","vertrag","projekt"],
-    "fr": ["fret","conseil","nettoyage","entretien","loyer","carburant","formation","publicité","matériel","personnel","assurance","contrat","projet"],
-    "ru": ["доставка","консультация","уборка","обслуживание","аренда","топливо","обучение","реклама","материалы","персонал","страхование","договор","проект"]
-  },
-
-  "terimler": {
     "tr": [
-      { "t": "Fatura", "ba": ["FATURA"] },
-      { "t": "Fatura No", "ba": ["FATURA"] },
-      { "t": "Fatura Tarihi", "ba": ["FATURA"] },
-      { "t": "Düzenleme Tarihi", "ba": ["FATURA","MAKBUZ","GIDER_PUSULASI"] },
-      { "t": "Seri Sıra No", "ba": ["FATURA"] },
-      { "t": "Sayın", "ba": ["FATURA"] },
-      { "t": "Alıcı", "ba": ["FATURA"] },
-      { "t": "Satıcı", "ba": ["FATURA"] },
-      { "t": "Ünvan", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "Vergi Dairesi", "ba": ["FATURA"] },
-      { "t": "Vergi Kimlik No", "ba": ["FATURA"] },
-      { "t": "TC Kimlik No", "ba": ["FATURA","GIDER_PUSULASI"] },
-      { "t": "Mal Hizmet Cinsi", "ba": ["FATURA"] },
-      { "t": "Miktar", "ba": ["FATURA"] },
-      { "t": "Birim Fiyat", "ba": ["FATURA"] },
-      { "t": "İskonto", "ba": ["FATURA"], "hesap": "611" },
-      { "t": "Tarih", "ba": ["FATURA","MAKBUZ","GIDER_PUSULASI","DEKONT"] },
-      { "t": "Tutar", "ba": ["FATURA","MAKBUZ","GIDER_PUSULASI","DEKONT"] },
-      { "t": "Toplam", "ba": ["FATURA","MAKBUZ","DEKONT"] },
-      { "t": "Ara Toplam", "ba": ["FATURA"] },
-      { "t": "Matrah", "ba": ["FATURA"] },
-      { "t": "Mal Hizmet Toplam Tutarı", "ba": ["FATURA"] },
-      { "t": "Hesaplanan KDV", "ba": ["FATURA"], "hesap": "391" },
-      { "t": "İndirilecek KDV", "ba": ["FATURA"], "hesap": "191" },
-      { "t": "KDV Oranı", "ba": ["FATURA"] },
-      { "t": "KDV Tutarı", "ba": ["FATURA"] },
-      { "t": "Tevkifat", "ba": ["FATURA"], "hesap": "391" },
-      { "t": "Tevkifata Tabi İşlem", "ba": ["FATURA"] },
-      { "t": "Özel Tüketim Vergisi", "ba": ["FATURA"] },
-      { "t": "Stopaj", "ba": ["FATURA","GIDER_PUSULASI"], "hesap": "360" },
-      { "t": "Gelir Vergisi Stopajı", "ba": ["GIDER_PUSULASI"], "hesap": "360" },
-      { "t": "Damga Vergisi", "ba": ["FATURA","MAKBUZ"], "hesap": "360" },
-      { "t": "Vergiler Dahil Toplam Tutar", "ba": ["FATURA"] },
-      { "t": "Genel Toplam", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "Ödenecek Tutar", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "Yalnız", "ba": ["MAKBUZ","GIDER_PUSULASI"] },
-      { "t": "Yazıyla", "ba": ["MAKBUZ","GIDER_PUSULASI"] },
-      { "t": "İstisna", "ba": ["FATURA"] },
-      { "t": "İhracat", "ba": ["FATURA"], "hesap": "601" },
-      { "t": "Tahsilat Makbuzu", "ba": ["MAKBUZ"] },
-      { "t": "Tediye Makbuzu", "ba": ["MAKBUZ"] },
-      { "t": "Serbest Meslek Makbuzu", "ba": ["MAKBUZ"] },
-      { "t": "Gider Pusulası", "ba": ["GIDER_PUSULASI"] },
-      { "t": "Brüt Tutar", "ba": ["GIDER_PUSULASI"] },
-      { "t": "Net Ödenen", "ba": ["GIDER_PUSULASI","MAKBUZ"] },
-      { "t": "Tahsil Edildi", "ba": ["MAKBUZ"] },
-      { "t": "Nakden", "ba": ["MAKBUZ"] },
-      { "t": "Havale", "ba": ["MAKBUZ","DEKONT"] },
-      { "t": "Çek", "ba": ["MAKBUZ","DEKONT"], "hesap": "101" },
-      { "t": "Senet", "ba": ["MAKBUZ","DEKONT"], "hesap": "121" },
-      { "t": "Dekont", "ba": ["DEKONT"] },
-      { "t": "Hesap Ekstresi", "ba": ["DEKONT"] },
-      { "t": "Hesap Özeti", "ba": ["DEKONT"] },
-      { "t": "Açıklama", "ba": ["FATURA","MAKBUZ","DEKONT"] },
-      { "t": "Bakiye", "ba": ["DEKONT"] },
-      { "t": "Devreden Bakiye", "ba": ["DEKONT"] },
-      { "t": "Alacak", "ba": ["DEKONT"] },
-      { "t": "Borç", "ba": ["DEKONT"] },
-      { "t": "Valör", "ba": ["DEKONT"] },
-      { "t": "Gelen Transfer", "ba": ["DEKONT"] },
-      { "t": "Giden Transfer", "ba": ["DEKONT"] },
-      { "t": "Masraf", "ba": ["DEKONT"] },
-      { "t": "Komisyon", "ba": ["DEKONT"] },
-      { "t": "Kasa", "ba": ["MAKBUZ"], "hesap": "100" },
-      { "t": "Banka", "ba": ["DEKONT"], "hesap": "102" },
-      { "t": "Alıcılar", "ba": ["FATURA"], "hesap": "120" },
-      { "t": "Satıcılar", "ba": ["FATURA"], "hesap": "320" },
-      { "t": "Ticari Mallar", "ba": ["FATURA"], "hesap": "153" },
-      { "t": "Yurtiçi Satışlar", "ba": ["FATURA"], "hesap": "600" },
-      { "t": "Satıştan İadeler", "ba": ["FATURA"], "hesap": "610" },
-      { "t": "İmza", "ba": ["FATURA","MAKBUZ","GIDER_PUSULASI"] },
-      { "t": "Kaşe", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "Adres", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "Telefon", "ba": ["FATURA"] },
-      { "t": "IBAN", "ba": ["FATURA","DEKONT"] }
+      "nakliye",
+      "danışmanlık",
+      "temizlik",
+      "güvenlik",
+      "bakım",
+      "onarım",
+      "kira",
+      "yakıt",
+      "kargo",
+      "ambalaj",
+      "montaj",
+      "eğitim",
+      "reklam",
+      "yemek",
+      "konaklama",
+      "masa",
+      "sandalye",
+      "kalem",
+      "kağıt",
+      "kablo",
+      "vida",
+      "civata",
+      "boya",
+      "yazılım",
+      "lisans",
+      "abonelik",
+      "işçilik",
+      "hammadde",
+      "malzeme",
+      "personel",
+      "sigorta",
+      "noter",
+      "avukatlık",
+      "muhasebe",
+      "denetim",
+      "numune",
+      "irsaliye",
+      "sipariş",
+      "teklif",
+      "sözleşme",
+      "proje",
+      "etüt",
+      "harç",
+      "ceza",
+      "aidat",
+      "bağış"
     ],
     "en": [
-      { "t": "Date", "ba": ["FATURA","MAKBUZ","DEKONT"] },
-      { "t": "Amount", "ba": ["FATURA","MAKBUZ","DEKONT"] },
-      { "t": "Invoice", "ba": ["FATURA"] },
-      { "t": "Invoice No", "ba": ["FATURA"] },
-      { "t": "Invoice Date", "ba": ["FATURA"] },
-      { "t": "Bill To", "ba": ["FATURA"] },
-      { "t": "Sold To", "ba": ["FATURA"] },
-      { "t": "Customer", "ba": ["FATURA"] },
-      { "t": "Supplier", "ba": ["FATURA"] },
-      { "t": "Description", "ba": ["FATURA","DEKONT"] },
-      { "t": "Quantity", "ba": ["FATURA"] },
-      { "t": "Unit Price", "ba": ["FATURA"] },
-      { "t": "Discount", "ba": ["FATURA"] },
-      { "t": "Subtotal", "ba": ["FATURA"] },
-      { "t": "Net Amount", "ba": ["FATURA"] },
-      { "t": "Taxable Amount", "ba": ["FATURA"] },
-      { "t": "VAT", "ba": ["FATURA"] },
-      { "t": "VAT Rate", "ba": ["FATURA"] },
-      { "t": "Sales Tax", "ba": ["FATURA"] },
-      { "t": "Withholding", "ba": ["FATURA"] },
-      { "t": "Total", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "Grand Total", "ba": ["FATURA"] },
-      { "t": "Amount Due", "ba": ["FATURA"] },
-      { "t": "Balance Due", "ba": ["FATURA","DEKONT"] },
-      { "t": "Paid", "ba": ["MAKBUZ"] },
-      { "t": "Received From", "ba": ["MAKBUZ"] },
-      { "t": "Receipt", "ba": ["MAKBUZ"] },
-      { "t": "Cash Receipt", "ba": ["MAKBUZ"] },
-      { "t": "Amount in Words", "ba": ["MAKBUZ"] },
-      { "t": "Settled", "ba": ["MAKBUZ"] },
-      { "t": "Bought of", "ba": ["FATURA"] },
-      { "t": "Carried Forward", "ba": ["FATURA","DEKONT"] },
-      { "t": "Brought Forward", "ba": ["FATURA","DEKONT"] },
-      { "t": "Forward", "ba": ["FATURA","DEKONT"] },
-      { "t": "Statement", "ba": ["DEKONT"] },
-      { "t": "Bank Statement", "ba": ["DEKONT"] },
-      { "t": "Opening Balance", "ba": ["DEKONT"] },
-      { "t": "Closing Balance", "ba": ["DEKONT"] },
-      { "t": "Balance", "ba": ["DEKONT"] },
-      { "t": "Debit", "ba": ["DEKONT"] },
-      { "t": "Credit", "ba": ["DEKONT"] },
-      { "t": "Value Date", "ba": ["DEKONT"] },
-      { "t": "Transfer", "ba": ["DEKONT"] },
-      { "t": "Charges", "ba": ["DEKONT"] },
-      { "t": "Commission", "ba": ["DEKONT"] },
-      { "t": "Interest", "ba": ["DEKONT"] },
-      { "t": "Expenses", "ba": ["FATURA"] },
-      { "t": "Sundry Expenses", "ba": ["FATURA"] },
-      { "t": "Labor", "ba": ["FATURA"] },
-      { "t": "Signature", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "Tax ID", "ba": ["FATURA"] },
-      { "t": "Address", "ba": ["FATURA","MAKBUZ"] }
+      "freight",
+      "shipping",
+      "consulting",
+      "cleaning",
+      "security",
+      "maintenance",
+      "repair",
+      "rent",
+      "fuel",
+      "cargo",
+      "packaging",
+      "assembly",
+      "training",
+      "advertising",
+      "catering",
+      "lodging",
+      "desk",
+      "chair",
+      "pencil",
+      "paper",
+      "cable",
+      "screw",
+      "paint",
+      "software",
+      "license",
+      "subscription",
+      "labour",
+      "materials",
+      "staff",
+      "insurance",
+      "notary",
+      "legal",
+      "audit",
+      "sample",
+      "order",
+      "quote",
+      "contract",
+      "project",
+      "fee",
+      "penalty",
+      "donation",
+      "lotion",
+      "senna"
     ],
     "de": [
-      { "t": "Rechnung", "ba": ["FATURA"] },
-      { "t": "Rechnungsnummer", "ba": ["FATURA"] },
-      { "t": "Rechnungsdatum", "ba": ["FATURA"] },
-      { "t": "Kunde", "ba": ["FATURA"] },
-      { "t": "Lieferant", "ba": ["FATURA"] },
-      { "t": "Menge", "ba": ["FATURA"] },
-      { "t": "Einzelpreis", "ba": ["FATURA"] },
-      { "t": "Nettobetrag", "ba": ["FATURA"] },
-      { "t": "Zwischensumme", "ba": ["FATURA"] },
-      { "t": "Mehrwertsteuer", "ba": ["FATURA"] },
-      { "t": "Umsatzsteuer", "ba": ["FATURA"] },
-      { "t": "Steuersatz", "ba": ["FATURA"] },
-      { "t": "Gesamtbetrag", "ba": ["FATURA"] },
-      { "t": "Bruttobetrag", "ba": ["FATURA"] },
-      { "t": "Zu Zahlen", "ba": ["FATURA"] },
-      { "t": "Quittung", "ba": ["MAKBUZ"] },
-      { "t": "In Worten", "ba": ["MAKBUZ"] },
-      { "t": "Kontoauszug", "ba": ["DEKONT"] },
-      { "t": "Kontonummer", "ba": ["DEKONT"] },
-      { "t": "Saldo", "ba": ["DEKONT"] },
-      { "t": "Soll", "ba": ["DEKONT"] },
-      { "t": "Haben", "ba": ["DEKONT"] },
-      { "t": "Überweisung", "ba": ["DEKONT"] },
-      { "t": "Verwendungszweck", "ba": ["DEKONT"] },
-      { "t": "Unterschrift", "ba": ["FATURA","MAKBUZ"] }
+      "fracht",
+      "beratung",
+      "reinigung",
+      "wartung",
+      "miete",
+      "kraftstoff",
+      "schulung",
+      "werbung",
+      "material",
+      "personal",
+      "versicherung",
+      "vertrag",
+      "projekt"
     ],
     "fr": [
-      { "t": "Facture", "ba": ["FATURA"] },
-      { "t": "Numéro de Facture", "ba": ["FATURA"] },
-      { "t": "Date de Facture", "ba": ["FATURA"] },
-      { "t": "Client", "ba": ["FATURA"] },
-      { "t": "Fournisseur", "ba": ["FATURA"] },
-      { "t": "Quantité", "ba": ["FATURA"] },
-      { "t": "Prix Unitaire", "ba": ["FATURA"] },
-      { "t": "Désignation", "ba": ["FATURA"] },
-      { "t": "Remise", "ba": ["FATURA"] },
-      { "t": "Montant HT", "ba": ["FATURA"] },
-      { "t": "Base Imposable", "ba": ["FATURA"] },
-      { "t": "TVA", "ba": ["FATURA"] },
-      { "t": "Taux de TVA", "ba": ["FATURA"] },
-      { "t": "Total TTC", "ba": ["FATURA"] },
-      { "t": "Net à Payer", "ba": ["FATURA"] },
-      { "t": "Reçu", "ba": ["MAKBUZ"] },
-      { "t": "Quittance", "ba": ["MAKBUZ"] },
-      { "t": "Montant en Lettres", "ba": ["MAKBUZ"] },
-      { "t": "Relevé de Compte", "ba": ["DEKONT"] },
-      { "t": "Solde", "ba": ["DEKONT"] },
-      { "t": "Débit", "ba": ["DEKONT"] },
-      { "t": "Crédit", "ba": ["DEKONT"] },
-      { "t": "Virement", "ba": ["DEKONT"] },
-      { "t": "Frais", "ba": ["DEKONT"] },
-      { "t": "Signature", "ba": ["FATURA","MAKBUZ"] }
+      "fret",
+      "conseil",
+      "nettoyage",
+      "entretien",
+      "loyer",
+      "carburant",
+      "formation",
+      "publicité",
+      "matériel",
+      "personnel",
+      "assurance",
+      "contrat",
+      "projet"
     ],
     "ru": [
-      { "t": "Счет-фактура", "ba": ["FATURA"] },
-      { "t": "Накладная", "ba": ["FATURA"] },
-      { "t": "Покупатель", "ba": ["FATURA"] },
-      { "t": "Поставщик", "ba": ["FATURA"] },
-      { "t": "Количество", "ba": ["FATURA"] },
-      { "t": "Цена", "ba": ["FATURA"] },
-      { "t": "Наименование", "ba": ["FATURA"] },
-      { "t": "Сумма", "ba": ["FATURA","MAKBUZ"] },
-      { "t": "НДС", "ba": ["FATURA"] },
-      { "t": "Ставка НДС", "ba": ["FATURA"] },
-      { "t": "Итого", "ba": ["FATURA"] },
-      { "t": "Всего к оплате", "ba": ["FATURA"] },
-      { "t": "Квитанция", "ba": ["MAKBUZ"] },
-      { "t": "Приходный кассовый ордер", "ba": ["MAKBUZ"] },
-      { "t": "Расходный кассовый ордер", "ba": ["MAKBUZ"] },
-      { "t": "Принято от", "ba": ["MAKBUZ"] },
-      { "t": "Основание", "ba": ["MAKBUZ"] },
-      { "t": "Сумма прописью", "ba": ["MAKBUZ"] },
-      { "t": "Главный бухгалтер", "ba": ["MAKBUZ","FATURA"] },
-      { "t": "Кассир", "ba": ["MAKBUZ"] },
-      { "t": "Выписка", "ba": ["DEKONT"] },
-      { "t": "Остаток", "ba": ["DEKONT"] },
-      { "t": "Дебет", "ba": ["DEKONT"] },
-      { "t": "Кредит", "ba": ["DEKONT"] },
-      { "t": "Подпись", "ba": ["FATURA","MAKBUZ"] }
+      "доставка",
+      "консультация",
+      "уборка",
+      "обслуживание",
+      "аренда",
+      "топливо",
+      "обучение",
+      "реклама",
+      "материалы",
+      "персонал",
+      "страхование",
+      "договор",
+      "проект"
     ]
-  }
+  },
+  "terimler": {
+    "tr": [
+      {
+        "t": "Fatura",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Fatura No",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Fatura Tarihi",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Düzenleme Tarihi",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "GIDER_PUSULASI"
+        ]
+      },
+      {
+        "t": "Seri Sıra No",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Sayın",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Alıcı",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Satıcı",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Ünvan",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Vergi Dairesi",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Vergi Kimlik No",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "TC Kimlik No",
+        "ba": [
+          "FATURA",
+          "GIDER_PUSULASI"
+        ]
+      },
+      {
+        "t": "Mal Hizmet Cinsi",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Miktar",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Birim Fiyat",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "İskonto",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "611"
+      },
+      {
+        "t": "Tarih",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "GIDER_PUSULASI",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Tutar",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "GIDER_PUSULASI",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Toplam",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Ara Toplam",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Matrah",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Mal Hizmet Toplam Tutarı",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Hesaplanan KDV",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "391"
+      },
+      {
+        "t": "İndirilecek KDV",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "191"
+      },
+      {
+        "t": "KDV Oranı",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "KDV Tutarı",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Tevkifat",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "391"
+      },
+      {
+        "t": "Tevkifata Tabi İşlem",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Özel Tüketim Vergisi",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Stopaj",
+        "ba": [
+          "FATURA",
+          "GIDER_PUSULASI"
+        ],
+        "hesap": "360"
+      },
+      {
+        "t": "Gelir Vergisi Stopajı",
+        "ba": [
+          "GIDER_PUSULASI"
+        ],
+        "hesap": "360"
+      },
+      {
+        "t": "Damga Vergisi",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ],
+        "hesap": "360"
+      },
+      {
+        "t": "Vergiler Dahil Toplam Tutar",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Genel Toplam",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Ödenecek Tutar",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Yalnız",
+        "ba": [
+          "MAKBUZ",
+          "GIDER_PUSULASI"
+        ]
+      },
+      {
+        "t": "Yazıyla",
+        "ba": [
+          "MAKBUZ",
+          "GIDER_PUSULASI"
+        ]
+      },
+      {
+        "t": "İstisna",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "İhracat",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "601"
+      },
+      {
+        "t": "Tahsilat Makbuzu",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Tediye Makbuzu",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Serbest Meslek Makbuzu",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Gider Pusulası",
+        "ba": [
+          "GIDER_PUSULASI"
+        ]
+      },
+      {
+        "t": "Brüt Tutar",
+        "ba": [
+          "GIDER_PUSULASI"
+        ]
+      },
+      {
+        "t": "Net Ödenen",
+        "ba": [
+          "GIDER_PUSULASI",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Tahsil Edildi",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Nakden",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Havale",
+        "ba": [
+          "MAKBUZ",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Çek",
+        "ba": [
+          "MAKBUZ",
+          "DEKONT"
+        ],
+        "hesap": "101"
+      },
+      {
+        "t": "Senet",
+        "ba": [
+          "MAKBUZ",
+          "DEKONT"
+        ],
+        "hesap": "121"
+      },
+      {
+        "t": "Dekont",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Hesap Ekstresi",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Hesap Özeti",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Açıklama",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Bakiye",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Devreden Bakiye",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Alacak",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Borç",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Valör",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Gelen Transfer",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Giden Transfer",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Masraf",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Komisyon",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Kasa",
+        "ba": [
+          "MAKBUZ"
+        ],
+        "hesap": "100"
+      },
+      {
+        "t": "Banka",
+        "ba": [
+          "DEKONT"
+        ],
+        "hesap": "102"
+      },
+      {
+        "t": "Alıcılar",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "120"
+      },
+      {
+        "t": "Satıcılar",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "320"
+      },
+      {
+        "t": "Ticari Mallar",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "153"
+      },
+      {
+        "t": "Yurtiçi Satışlar",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "600"
+      },
+      {
+        "t": "Satıştan İadeler",
+        "ba": [
+          "FATURA"
+        ],
+        "hesap": "610"
+      },
+      {
+        "t": "İmza",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "GIDER_PUSULASI"
+        ]
+      },
+      {
+        "t": "Kaşe",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Adres",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Telefon",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "IBAN",
+        "ba": [
+          "FATURA",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Yevmiye",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Yevmiye Maddesi",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Defteri Kebir",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Mizan",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Muavin",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Fiş",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Mahsup Fişi",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Tahsil Fişi",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Tediye Fişi",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Açılış Fişi",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Kapanış Fişi",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Hesap Planı",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Hesap Kodu",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Masraf Yeri",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Dönem",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Devir",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Storno",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Ters Kayıt",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Bilanço",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Gelir Tablosu",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Nakit Akış Tablosu",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Dönen Varlıklar",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Duran Varlıklar",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Öz Kaynaklar",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Kısa Vadeli Yükümlülükler",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Uzun Vadeli Yükümlülükler",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Brüt Satışlar",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Net Satışlar",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Satışların Maliyeti",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Brüt Kâr",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Faaliyet Kârı",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Dönem Net Kârı",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Zarar",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Amortisman",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Karşılık",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Reeskont",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Şüpheli Alacak",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Katma Değer Vergisi",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Gelir Vergisi",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Kurumlar Vergisi",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Geçici Vergi",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Muhtasar Beyanname",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "KDV Beyannamesi",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Beyanname",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Devreden KDV",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Ödenecek KDV",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Kanunen Kabul Edilmeyen Gider",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Mükellef",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "EFT",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Virman",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Faiz",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Kredi",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Taksit",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Vade",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Teminat",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "İpotek",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Rehin",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Portföy",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Karşılıksız",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Protesto",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Bloke",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Nakit",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Bağımsız Denetim",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Denetim Raporu",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Görüş",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Olumlu Görüş",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Şartlı Görüş",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Olumsuz Görüş",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Önemlilik",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Örneklem",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Kanıt",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Çalışma Kâğıdı",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "İç Kontrol",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Risk Değerlendirmesi",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Mutabakat",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Teyit Mektubu",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Envanter",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Sayım",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Cari Hesap",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Avans",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Depozito",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "İrsaliye",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Sipariş",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Teklif",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Sözleşme",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Stok",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Ticari Mal",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Hammadde",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Mamul",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Yarı Mamul",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Maliyet",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Vade Farkı",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Kur Farkı",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Navlun",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Gümrük",
+        "ba": [
+          "TICARI"
+        ]
+      }
+    ],
+    "en": [
+      {
+        "t": "Date",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Amount",
+        "ba": [
+          "FATURA",
+          "MAKBUZ",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Invoice",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Invoice No",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Invoice Date",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Bill To",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Sold To",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Customer",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Supplier",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Description",
+        "ba": [
+          "FATURA",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Quantity",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Unit Price",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Discount",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Subtotal",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Net Amount",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Taxable Amount",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "VAT",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "VAT Rate",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Sales Tax",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Withholding",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Total",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Grand Total",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Amount Due",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Balance Due",
+        "ba": [
+          "FATURA",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Paid",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Received From",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Receipt",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Cash Receipt",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Amount in Words",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Settled",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Bought of",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Carried Forward",
+        "ba": [
+          "FATURA",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Brought Forward",
+        "ba": [
+          "FATURA",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Forward",
+        "ba": [
+          "FATURA",
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Statement",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Bank Statement",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Opening Balance",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Closing Balance",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Balance",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Debit",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Credit",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Value Date",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Transfer",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Charges",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Commission",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Interest",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Expenses",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Sundry Expenses",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Labor",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Signature",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Tax ID",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Address",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Journal",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Journal Entry",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "General Ledger",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Trial Balance",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Subledger",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Voucher",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Chart of Accounts",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Account Code",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Cost Center",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Period",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Reversal",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Opening Entry",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Closing Entry",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Accrual",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Balance Sheet",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Income Statement",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Profit and Loss",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Cash Flow Statement",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Current Assets",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Fixed Assets",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Equity",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Liabilities",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Gross Sales",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Net Sales",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Cost of Goods Sold",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Gross Profit",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Operating Profit",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Net Income",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Depreciation",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Amortization",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Provision",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Doubtful Receivable",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Retained Earnings",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Value Added Tax",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Excise Duty",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Stamp Duty",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Income Tax",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Corporate Tax",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Withholding Tax",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Tax Return",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Input VAT",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Output VAT",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Taxable Base",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Tax Office",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Taxpayer",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Exemption",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Reverse Charge",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Wire Transfer",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Bank Transfer",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Advice",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Loan",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Installment",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Maturity",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Collateral",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Mortgage",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Cheque",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Promissory Note",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Overdraft",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Petty Cash",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "External Audit",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Audit Report",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Opinion",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Unqualified Opinion",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Qualified Opinion",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Adverse Opinion",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Materiality",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Sampling",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Audit Evidence",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Working Paper",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Internal Control",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Risk Assessment",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Reconciliation",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Confirmation Letter",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Physical Count",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Accounts Receivable",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Accounts Payable",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Advance Payment",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Deposit",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Purchase Order",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Contract",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Inventory",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Raw Material",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Finished Goods",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Work in Progress",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Exchange Difference",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Freight",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Customs",
+        "ba": [
+          "TICARI"
+        ]
+      }
+    ],
+    "de": [
+      {
+        "t": "Rechnung",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Rechnungsnummer",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Rechnungsdatum",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Kunde",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Lieferant",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Menge",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Einzelpreis",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Nettobetrag",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Zwischensumme",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Mehrwertsteuer",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Umsatzsteuer",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Steuersatz",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Gesamtbetrag",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Bruttobetrag",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Zu Zahlen",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Quittung",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "In Worten",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Kontoauszug",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Kontonummer",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Saldo",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Soll",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Haben",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Überweisung",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Verwendungszweck",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Unterschrift",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Buchung",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Hauptbuch",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Saldenliste",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Beleg",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Kontenplan",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Bilanz",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Gewinn und Verlustrechnung",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Umlaufvermögen",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Anlagevermögen",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Eigenkapital",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Verbindlichkeiten",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Abschreibung",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Rückstellung",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Vorsteuer",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Einkommensteuer",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Körperschaftsteuer",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Steuererklärung",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Finanzamt",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Zinsen",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Darlehen",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Bürgschaft",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Wirtschaftsprüfung",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Prüfbericht",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Wesentlichkeit",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Forderungen",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Vorräte",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Anzahlung",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Skonto",
+        "ba": [
+          "TICARI"
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "t": "Facture",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Numéro de Facture",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Date de Facture",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Client",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Fournisseur",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Quantité",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Prix Unitaire",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Désignation",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Remise",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Montant HT",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Base Imposable",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "TVA",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Taux de TVA",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Total TTC",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Net à Payer",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Reçu",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Quittance",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Montant en Lettres",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Relevé de Compte",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Solde",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Débit",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Crédit",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Virement",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Frais",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Signature",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Écriture",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Grand Livre",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Balance",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Pièce Comptable",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Plan Comptable",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Bilan",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Compte de Résultat",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Actif Circulant",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Immobilisations",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Capitaux Propres",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Dettes",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Amortissement",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Provision",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Taxe sur la Valeur Ajoutée",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "TVA Déductible",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "TVA Collectée",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Impôt sur les Sociétés",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Déclaration Fiscale",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Intérêts",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Emprunt",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Caution",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Commissariat aux Comptes",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Rapport d'Audit",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Seuil de Signification",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Créances",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Stocks",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Acompte",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Escompte",
+        "ba": [
+          "TICARI"
+        ]
+      }
+    ],
+    "ru": [
+      {
+        "t": "Счет-фактура",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Накладная",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Покупатель",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Поставщик",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Количество",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Цена",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Наименование",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Сумма",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "НДС",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Ставка НДС",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Итого",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Всего к оплате",
+        "ba": [
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Квитанция",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Приходный кассовый ордер",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Расходный кассовый ордер",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Принято от",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Основание",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Сумма прописью",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Главный бухгалтер",
+        "ba": [
+          "MAKBUZ",
+          "FATURA"
+        ]
+      },
+      {
+        "t": "Кассир",
+        "ba": [
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Выписка",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Остаток",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Дебет",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Кредит",
+        "ba": [
+          "DEKONT"
+        ]
+      },
+      {
+        "t": "Подпись",
+        "ba": [
+          "FATURA",
+          "MAKBUZ"
+        ]
+      },
+      {
+        "t": "Проводка",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Главная книга",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Оборотная ведомость",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Сальдо",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "План счетов",
+        "ba": [
+          "DEFTER"
+        ]
+      },
+      {
+        "t": "Баланс",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Отчет о прибылях и убытках",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Оборотные активы",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Внеоборотные активы",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Собственный капитал",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Обязательства",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Амортизация",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Резерв",
+        "ba": [
+          "TABLO"
+        ]
+      },
+      {
+        "t": "Налог на добавленную стоимость",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Налог на прибыль",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Налоговая декларация",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Налоговая инспекция",
+        "ba": [
+          "VERGI"
+        ]
+      },
+      {
+        "t": "Банковский перевод",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Проценты",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Кредит банка",
+        "ba": [
+          "BANKA"
+        ]
+      },
+      {
+        "t": "Аудиторское заключение",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Существенность",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Аудиторские доказательства",
+        "ba": [
+          "DENETIM"
+        ]
+      },
+      {
+        "t": "Дебиторская задолженность",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Кредиторская задолженность",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Запасы",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Аванс",
+        "ba": [
+          "TICARI"
+        ]
+      },
+      {
+        "t": "Скидка",
+        "ba": [
+          "TICARI"
+        ]
+      }
+    ]
+  },
+  "_kapsam": "Terimler kategorilere göre: DEFTER (yevmiye/kebir/mizan), TABLO (bilanço/gelir tablosu), VERGI (KDV/ÖTV/beyanname), BANKA (havale/çek/senet), DENETIM (BDS kavramları), TICARI (cari/stok/maliyet). Türkçe ve İngilizce TAM kapsam; Almanca/Fransızca/Rusça ikinci halka — ANA DİLDE DOĞRULANMADI, çeviri düzeyinde tutuldu."
 }

@@ -80,10 +80,17 @@ pub fn anlam_coz(baslik: &str) -> String {
     // DİL BİLGİSİ KATMANI: sözlük KÖKÜ tutar, belge ÇEKİMLİ yazar.
     // "MİKTARI", "TUTARLARI", "BİRİM FİYATI", "UNIT PRICES" — hepsi köke indirgenir.
     // Çekimli biçimleri sözlüğe elle yazmak hem büyür hem görülmemiş çekimi kaçırır.
+    //
+    // **ÇÖZÜMLEME HAM YAZIMDA YAPILIR, sadeleştirilmiş metinde DEĞİL.** Sadeleştirme
+    // `ı → i` katlaması yapıyor ve bu, ünlü uyumu bilgisini YOK EDİYOR: "miktarları"
+    // sadeleşince "miktarlari" olur, ek ünlüsü ince görünür, gövde ise kalındır ve
+    // uyum sınaması başarısız olur — ek soyulamaz, "MİKTARLARI" hiç tanınmaz.
+    // Kök önce ham yazımda bulunur, SONRA sadeleştirilir.
     let mut adaylar: Vec<String> = vec![sade.to_string()];
     for d in ["tr", "en"] {
-        for k in crate::dilbilgisi::kokler(sade, d) {
-            if !adaylar.contains(&k) { adaylar.push(k); }
+        for k in crate::dilbilgisi::kokler(baslik.trim(), d) {
+            let ks = crate::belge_oku::sadelestir(&k);
+            if !ks.is_empty() && !adaylar.contains(&ks) { adaylar.push(ks); }
         }
     }
 
@@ -93,13 +100,32 @@ pub fn anlam_coz(baslik: &str) -> String {
         for (_dil, liste) in diller.as_object().into_iter().flatten() {
             for a in liste.as_array().into_iter().flatten() {
                 let Some(t) = a.as_str() else { continue };
-                if t.is_empty() { continue; }
-                if !adaylar.iter().any(|c| c.contains(t)) { continue; }
-                if t.len() > en_iyi.1 { en_iyi = (anlam.clone(), t.len()); }
+                // SINIRDA SADELEŞTİRME: sözlük her dilde DOĞAL yazımıyla tutulur
+                // ("KDV Oranı", "Menge", "Quantité", "Количество"); kodlama kuralını
+                // yazan kişinin bilmesi gerekmez. `alan_esanlamlilari` ile aynı sözleşme.
+                let t = crate::belge_oku::sadelestir(t);
+                if t.chars().count() < 2 { continue; }
+                // TAM SÖZCÜK eşleşmesi — alt dizi DEĞİL.
+                //
+                // Alt dizi araması sessiz yanlış eşleşme üretiyordu: "SAYIN" (her Türk
+                // faturasındaki alıcı hitabı) sadeleşince "sayin" olur ve MIKTAR sözlüğündeki
+                // "sayı" → "sayi" onun İÇİNDE geçer. Yani alıcı hitabı miktar sütunu
+                // sanılıyordu. Sözcük sınırı aranınca bu sınıfın tamamı kapanır.
+                if !adaylar.iter().any(|c| sozcuk_icerir(c, &t)) { continue; }
+                if t.chars().count() > en_iyi.1 { en_iyi = (anlam.clone(), t.chars().count()); }
             }
         }
     }
     en_iyi.0
+}
+
+/// `metin` içinde `terim` TAM SÖZCÜK (ya da tam sözcük dizisi) olarak geçiyor mu?
+///
+/// İkisi de sadeleştirilmiş olmalı. Boşlukla çevreleyip aramak yeterli ve ucuzdur:
+/// " sayin " içinde " sayi " geçmez, ama " birim fiyat " içinde " birim " geçer —
+/// istenen davranış tam olarak budur.
+fn sozcuk_icerir(metin: &str, terim: &str) -> bool {
+    format!(" {metin} ").contains(&format!(" {terim} "))
 }
 
 /// Bir hücre sayısal mı? (tutar, miktar, oran — başlık satırı ayırt etmek için)

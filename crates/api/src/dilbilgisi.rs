@@ -44,6 +44,30 @@
 //! Bu modül bir kelimenin olası köklerini **çoğaltır**, hangisinin doğru olduğuna karar
 //! vermez. Çağıran, adayları sözlükte arar; hiçbiri tutmazsa eşleşme yoktur — uydurma yok.
 
+/// TÜRKÇE'YE ÖZGÜ KÜÇÜK HARFE ÇEVİRME.
+///
+/// Türkçede i/I çifti diğer dillerden farklıdır: **İ → i** ve **I → ı**. Rust'ın
+/// `to_lowercase()` Unicode varsayılanını uygular ve `"İ"` için **birleşik noktalı**
+/// `i` + U+0307 üretir. Bu iki şeyi birden bozar:
+///
+/// 1. Fazladan birleşen karakter, ünlü sınamasını başarısız kılar — "CİNSİ" çözümlenemez.
+/// 2. `I → i` katlaması **kalın ünlüyü ince gösterir** ve ünlü uyumu sınaması çöker:
+///    "MİKTARLARI" → yanlış küçültmede "miktarlari" olur, ek ünlüsü ince görünür,
+///    gövde kalındır, uyum tutmaz ve ek soyulamaz.
+///
+/// Ünlü uyumu bu katmanın ayırt edici bilgisi olduğu için katlama BURADA yapılamaz.
+fn tr_kucult(s: &str) -> String {
+    let mut o = String::with_capacity(s.len());
+    for c in s.chars() {
+        match c {
+            'İ' => o.push('i'),
+            'I' => o.push('ı'),
+            _ => o.extend(c.to_lowercase()),
+        }
+    }
+    o
+}
+
 /// Türkçe ünlüler, kalınlık/incelik ve düzlük/yuvarlaklık ile.
 fn unlu(c: char) -> Option<(bool, bool)> {
     // (kalin, yuvarlak)
@@ -93,7 +117,7 @@ const EN_KISA_KOK: usize = 3;
 /// Aynı sözcükten birden çok kök çıkabilir (`tutarları` → `tutarlar`, `tutar`);
 /// hepsi aday olarak döner, seçimi çağıran yapar.
 pub fn tr_kokler(kelime: &str) -> Vec<String> {
-    let k = kelime.to_lowercase();
+    let k = tr_kucult(kelime);
     let mut cikti = vec![k.clone()];
     let mut katman = vec![k];
 
@@ -274,5 +298,30 @@ mod testler {
         assert!(var(&en_kokler("prices"), "price"));
         assert!(var(&en_kokler("boxes"), "box"));
         assert!(var(&kokler("unit prices", "en"), "unit price"));
+    }
+}
+
+#[cfg(test)]
+mod tr_kucultme_testleri {
+    use super::*;
+    fn var(v: &[String], s: &str) -> bool { v.iter().any(|x| x == s) }
+
+    /// **Türkçe i/I çifti.** `to_lowercase()` "İ" için birleşik noktalı karakter üretir
+    /// ve "I"yı "i" yapar — ikisi de ünlü uyumu sınamasını çökertir.
+    #[test]
+    fn buyuk_harfli_baslik_cozulur() {
+        assert!(var(&tr_kokler("CİNSİ"), "cins"), "{:?}", tr_kokler("CİNSİ"));
+        assert!(var(&tr_kokler("MİKTARLARI"), "miktar"), "{:?}", tr_kokler("MİKTARLARI"));
+        assert!(var(&tr_kokler("TUTARI"), "tutar"));
+        assert!(var(&tr_kokler("BİRİMİ"), "birim"));
+        assert!(var(&tr_kokler("ADEDİ"), "adet"), "{:?}", tr_kokler("ADEDİ"));
+    }
+
+    /// Büyük harfte de ünlü uyumu KORUNUR: "I" kalın, "İ" incedir.
+    #[test]
+    fn buyuk_harfte_de_uyum_sinanir() {
+        // "TUTARI" (kalın gövde + kalın ek) çözülür; "TUTARİ" bir çekim DEĞİLDİR.
+        assert!(var(&tr_kokler("TUTARI"), "tutar"));
+        assert!(!var(&tr_kokler("TUTARİ"), "tutar"), "uyuma aykırı ek soyuldu");
     }
 }

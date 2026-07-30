@@ -38,6 +38,7 @@ mod hesaplama;
 mod kontrol;    // Güvenlik katmanı — numaralı ön kontrol (K) + değişmez denetimi (D).  // Hesap makinesi — KDV/tevkifat/stopaj/damga; oranlar parametre dosyasından.
 #[cfg(test)]
 mod veri_setleri; // 10 senaryo veri seti — tahsis motorunu üreteçten bağımsız sınar.
+mod sozluk_denetim; // Sözlük bütünlüğü — büyürken sessizce çürümesin.
 mod simulasyon; // İzole kapsamlı simülasyon — 5000 kayıt, dengeli, banka/nakit/çek/senet enstrümanlı.
 
 const TDHP: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/../../data/tdhp.csv"));

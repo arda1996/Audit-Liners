@@ -210,7 +210,20 @@ fn turkce_ekli_etiketler_taninir() {
 // AYAR TARAMASI — eşiği ve marjı veriyle seç, hisle değil
 // ─────────────────────────────────────────────────────────────────────────────
 
+/// **AYAR ARACI — normal koşuda ATLANIR.**
+///
+/// Bu bir regresyon koruması değil, bir *parametre taraması*: 20 ızgara noktasının her
+/// birinde tüm terim külliyatını bozup ölçüyor. Koruma görevini
+/// `olculen_isabet_taban_degerlerin_altina_dusmez` yapıyor; bu test yalnız `ESIK_CARPANI`
+/// ve `MARJ` seçilirken gerekiyor.
+///
+/// Sözlük büyüdükçe maliyeti doğrudan artıyor: terim sayısı 202 → 468 olunca tam takım
+/// süresi **140 s → 631 s** çıktı ve bunun neredeyse tamamı bu taramaydı. Ayar aracının
+/// her derlemede koşması, sözlüğü büyütmenin bedelini gereksiz yere yükseltir.
+///
+/// Koşmak için:  `cargo test -p api ayar_taramasi -- --ignored --nocapture`
 #[test]
+#[ignore = "ayar taraması — 20 ızgara noktası × tüm külliyat; --ignored ile koşulur"]
 fn ayar_taramasi_ve_secilen_nokta_en_iyisi() {
     let siddetler = [1u32, 2];
     let mut satirlar: Vec<(f32, f32, Skor)> = Vec::new();
