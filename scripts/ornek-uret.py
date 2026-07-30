@@ -171,13 +171,26 @@ DUZENLER = [
 ]
 
 
+# BELGEYE ÇİZİLEN AD İLE BEKLENEN AD AYNI OLMALI.
+# Uzun ünvanlar sayfaya sığmadığı için kesiliyor; beklenen değere tam adı yazmak
+# sabit değeri belgeyle TUTARSIZ yapıyordu ve motor haksız yere "bulamadı" sayılıyordu.
+# Ölçüm, belgede gerçekten YAZAN şeyi aramalı — yoksa kendi üreticimizin kusurunu
+# motorun kusuru sanırız.
+def gosterilen_alici(f):
+    return (f["alici"] or "ÖRNEK ALICI")[:40].strip()
+
+
+def gosterilen_satici(f):
+    return (f["satici"] or "ÖRNEK FİRMA")[:44].strip()
+
+
 def tl(k):
     return f"{k // 100:,}".replace(",", ".") + f",{k % 100:02d}"
 
 
 def fatura_ciz(f, duzen):
     o, y = [], 60
-    o.append((45, y, 15, True, f["satici"][:44] or "ÖRNEK FİRMA"))
+    o.append((45, y, 15, True, gosterilen_satici(f)))
     o.append((420, y, 17, True, "FATURA"))
     y += 18
     o.append((45, y, 8, False, f"VKN: {f['satici_vkn']}"))
@@ -188,7 +201,7 @@ def fatura_ciz(f, duzen):
     o.append((45, y, 9, True, "SAYIN"))
     o.append((330, y, 9, False, f"Vergi No : {f['alici_vkn']}"))
     y += 13
-    o.append((45, y, 10, False, f["alici"][:40] or "ÖRNEK ALICI"))
+    o.append((45, y, 10, False, gosterilen_alici(f)))
 
     # ── kalem tablosu ──
     y += 34
@@ -264,7 +277,8 @@ def main():
             "lisans": "GİB resmî şema paketi (FSEK m.31 · mevzuat eki)",
             "anonim": True, "duzen": duzen["ad"], "dil": duzen["dil"],
             "beklenen": {k: v for k, v in {
-                "unvan": f["alici"] or f["satici"], "belge_no": f["belge_no"],
+                "unvan": gosterilen_alici(f) if f["alici"] else gosterilen_satici(f),
+                "belge_no": f["belge_no"],
                 "matrah": f["matrah"], "kdv": f["kdv"], "toplam": f["toplam"],
             }.items() if v},
             "sutunlar": [{"MİKTAR": "MIKTAR", "MİKTARI": "MIKTAR", "QTY": "MIKTAR",
