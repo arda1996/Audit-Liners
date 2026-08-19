@@ -1,0 +1,81 @@
+name: iOS uygulamasını derle
+
+# Bu depoda Mac yok — derleme GitHub'ın macOS runner'ında yapılır.
+# Depo public olduğu için standart runner'lar ücretsizdir.
+# Çıktı: imzasız NeonKacis.ipa. Telefona kurulurken kendi Apple ID'nle imzalanır.
+
+on:
+  push:
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ios-build.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ios-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: SwiftPM → .ipa
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ortamı yaz
+        run: |
+          echo "Xcode: $(xcodebuild -version | tr '\n' ' ')"
+          echo "Swift: $(swift --version 2>&1 | head -1)"
+          xcodebuild -showsdks | grep -i ios || true
+
+      - name: Paketi çözümle
+        working-directory: ios/NeonKacis.swiftpm
+        run: |
+          # Şemayı ve hedefleri gör: .swiftpm'i xcodebuild'in nasıl gördüğünü
+          # doğrulamadan derlemeye geçmiyoruz.
+          xcodebuild -list -project NeonKacis.swiftpm 2>&1 || \
+          xcodebuild -list 2>&1 || true
+
+      - name: Derle (imzasız)
+        working-directory: ios/NeonKacis.swiftpm
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project NeonKacis.swiftpm \
+            -scheme NeonKacis \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$RUNNER_TEMP/dd" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ENABLE_BITCODE=NO \
+            build 2>&1 | tail -120
+
+      - name: .ipa paketle
+        run: |
+          set -euo pipefail
+          APP=$(find "$RUNNER_TEMP/dd/Build/Products" -maxdepth 2 -name '*.app' -type d | head -1)
+          if [ -z "$APP" ]; then
+            echo "::error::.app bulunamadı — derleme çıktısı beklenen yerde değil"
+            find "$RUNNER_TEMP/dd/Build/Products" -maxdepth 3 || true
+            exit 1
+          fi
+          echo "Uygulama: $APP"
+          mkdir -p "$RUNNER_TEMP/Payload"
+          cp -R "$APP" "$RUNNER_TEMP/Payload/"
+          cd "$RUNNER_TEMP"
+          zip -qry NeonKacis.ipa Payload
+          ls -lh NeonKacis.ipa
+          echo "IPA_PATH=$RUNNER_TEMP/NeonKacis.ipa" >> "$GITHUB_ENV"
+
+      - name: .ipa'yı yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: NeonKacis-imzasiz-ipa
+          path: ${{ env.IPA_PATH }}
+          if-no-files-found: error
+          retention-days: 30
