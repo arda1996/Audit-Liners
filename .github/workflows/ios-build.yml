@@ -33,27 +33,41 @@ jobs:
       - name: Paketi çözümle
         working-directory: ios/NeonKacis.swiftpm
         run: |
-          # Şemayı ve hedefleri gör: .swiftpm'i xcodebuild'in nasıl gördüğünü
-          # doğrulamadan derlemeye geçmiyoruz.
-          xcodebuild -list -project NeonKacis.swiftpm 2>&1 || \
-          xcodebuild -list 2>&1 || true
+          # Paketin İÇİNDEN çağrılır; .swiftpm bir çalışma alanı gibi ele alınır,
+          # bu yüzden -project verilmez.
+          xcodebuild -list
 
       - name: Derle (imzasız)
         working-directory: ios/NeonKacis.swiftpm
         run: |
           set -o pipefail
+          LOG="$RUNNER_TEMP/build.log"
           xcodebuild \
-            -project NeonKacis.swiftpm \
             -scheme NeonKacis \
             -configuration Release \
-            -sdk iphoneos \
             -destination 'generic/platform=iOS' \
             -derivedDataPath "$RUNNER_TEMP/dd" \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            ENABLE_BITCODE=NO \
-            build 2>&1 | tail -120
+            build > "$LOG" 2>&1 || true
+
+          if grep -q "BUILD SUCCEEDED" "$LOG"; then
+            echo "Derleme başarılı."
+            grep -c "warning:" "$LOG" | xargs -I{} echo "Uyarı sayısı: {}"
+            exit 0
+          fi
+
+          # Başarısızsa hatayı görünür kıl — tail bir işe yaramıyor, asıl
+          # satırlar logun ortasında kalıyor.
+          echo "::group::Derleyici hataları"
+          grep -n "error:" "$LOG" | head -60 || echo "(error: satırı yok)"
+          echo "::endgroup::"
+          echo "::group::Son 150 satır"
+          tail -150 "$LOG"
+          echo "::endgroup::"
+          echo "::error::Derleme başarısız"
+          exit 1
 
       - name: .ipa paketle
         run: |
