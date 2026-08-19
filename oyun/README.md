@@ -89,7 +89,13 @@ Bu yolda çevrimdışı önbellek yoktur; skorlar yine `localStorage`'da tutulur
 - **Başarım koruması:** kare süresi üst üste iki ölçüm penceresinde yüksek çıkarsa
   parlama (`shadowBlur`) ve parçacık sayısı otomatik kısılır.
 - **Ses** WebAudio ile sentezlenir, ses dosyası yoktur. iOS'ta ses ilk dokunuşta açılır.
+- **Yazı tipleri** Google Fonts'tan gelir (Chakra Petch + JetBrains Mono, ikisi de
+  `latin-ext` alt kümesiyle Ğ/İ/Ş/ı dahil Türkçe'yi tam kapsar). Çevrimdışıyken
+  `display=swap` sayesinde sistem yığınına düşer — düzen bozulmaz, oyun etkilenmez.
+  Yazı tipleri de service worker önbelleğine girer, ilk açılıştan sonra çevrimdışı gelir.
 - **Güvenli alan:** çentik ve ana ekran çubuğu için `env(safe-area-inset-*)` kullanılır.
+- `prefers-reduced-motion` tercihine saygı gösterilir: arayüz animasyonları kapanır
+  (oyunun kendi hareketi devam eder). Klavye odağı görünür.
 - Uygulama arka plana alınınca (`visibilitychange`) oyun otomatik duraklar,
   dönünce 3-2-1 geri sayımla devam eder.
 - `?debug` parametresiyle açılırsa durum nesnesi `window.__neon` altında görünür

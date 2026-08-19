@@ -1,6 +1,8 @@
 <title>Neon Kaçış</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
 :root{
   --safe-t: env(safe-area-inset-top, 0px);
   --safe-b: env(safe-area-inset-bottom, 0px);
@@ -10,8 +12,9 @@
   --ink:#eaf6ff;
   --muted:#7f8fae;
   --line:rgba(140,180,255,.16);
-  --num: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-  --ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  /* Çevrimdışıyken yazı tipleri sessizce sistem yığınına düşer; düzen bozulmaz. */
+  --num: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --ui: "Chakra Petch", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -70,6 +73,7 @@ body{
   transition:transform .1s ease, background .15s ease, opacity .15s ease;
 }
 .icon:active{ transform:scale(.9); background:rgba(255,255,255,.12); }
+.icon:focus-visible, .btn:focus-visible{ outline:2px solid #7fe9ff; outline-offset:3px; }
 .icon.off{ opacity:.35; }
 
 .scoreWrap{
@@ -78,7 +82,8 @@ body{
   text-shadow:0 0 24px currentColor;
 }
 #score{
-  font:700 48px/1 var(--num);
+  font:700 46px/1 var(--num);
+  font-variant-numeric:tabular-nums;
   letter-spacing:-.02em;
   font-variant-numeric:tabular-nums;
 }
@@ -122,8 +127,9 @@ body{
 @keyframes rise{ from{ opacity:0; transform:translateY(16px) } to{ opacity:1; transform:none } }
 
 .title{
-  font:800 34px/1.05 var(--ui);
-  letter-spacing:.14em;
+  font:700 36px/1.02 var(--ui);
+  letter-spacing:.16em;
+  text-transform:uppercase;
   text-shadow:0 0 30px currentColor;
 }
 .sub{ font:500 14px/1.55 var(--ui); color:var(--muted); max-width:300px; }
@@ -189,6 +195,12 @@ body{
 }
 .key i{ font-style:normal; font-size:17px; width:22px; text-align:center; flex:0 0 22px; }
 .key b{ color:var(--ink); font-weight:700; }
+
+@media (prefers-reduced-motion: reduce){
+  .ov.on, .card{ animation:none; }
+  .badge{ animation:none; }
+  .icon, .btn{ transition:none; }
+}
 
 @media (max-height: 620px){
   .title{ font-size:27px } .big{ font-size:52px }
